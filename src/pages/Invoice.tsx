@@ -3,6 +3,7 @@ import InvoiceForm from "@/components/InvoiceForm";
 import InvoicePreview from "@/components/InvoicePreview";
 import { Button } from "@/components/ui/button";
 import { FileDown, Plus, Settings } from "lucide-react";
+import { Link } from "react-router-dom";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
@@ -143,10 +144,12 @@ const Invoice = () => {
               <span className="text-sm text-muted-foreground">Professional invoices in minutes</span>
             </div>
             <div className="flex items-center space-x-3">
-              <Button variant="outline" size="sm">
-                <Settings className="w-4 h-4 mr-2" />
-                Templates
-              </Button>
+              <Link to="/templates">
+                <Button variant="outline" size="sm">
+                  <Settings className="w-4 h-4 mr-2" />
+                  Templates
+                </Button>
+              </Link>
               <Button onClick={downloadPDF} className="bg-invoice-brand hover:bg-invoice-brand/90">
                 <FileDown className="w-4 h-4 mr-2" />
                 Download PDF
