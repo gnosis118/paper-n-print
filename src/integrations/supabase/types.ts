@@ -567,6 +567,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      can_access_estimate_with_token: {
+        Args: { _sharing_token: string }
+        Returns: boolean
+      }
       get_user_credit_balance: {
         Args: { p_user_id?: string }
         Returns: {
