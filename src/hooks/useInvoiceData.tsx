@@ -3,7 +3,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
 
-interface InvoiceData {
+export interface InvoiceData {
   business: {
     name: string;
     email: string;
@@ -33,6 +33,9 @@ interface InvoiceData {
     taxRate: number;
     discount: number;
     shipping: number;
+    subtotal?: number;
+    taxAmount?: number;
+    total?: number;
   };
   notes: string;
   template: "Clean" | "Modern" | "Trades";
