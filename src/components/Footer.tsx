@@ -47,10 +47,10 @@ const Footer = () => {
               </div>
               <div>
                 <a 
-                  href="mailto:gavin@currencytocurrency.app" 
+                  href="mailto:gavin@proinvoice.app" 
                   className="hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded"
                 >
-                  gavin@currencytocurrency.app
+                  gavin@proinvoice.app
                 </a>
               </div>
               <div>
@@ -131,10 +131,10 @@ const Footer = () => {
             </p>
             <div className="flex items-center gap-4 text-sm text-muted-foreground">
               <a 
-                href="mailto:gavin@currencytocurrency.app"
+                href="mailto:gavin@proinvoice.app"
                 className="hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded"
               >
-                gavin@currencytocurrency.app
+                gavin@proinvoice.app
               </a>
               <span>•</span>
               <a 
@@ -162,7 +162,7 @@ const Footer = () => {
               "@type": "ContactPoint",
               "telephone": "+1-916-969-3705",
               "contactType": "customer service",
-              "email": "gavin@currencytocurrency.app"
+              "email": "gavin@proinvoice.app"
             },
             "address": {
               "@type": "PostalAddress",

@@ -29,10 +29,10 @@ export default function Contact() {
                 </CardHeader>
                 <CardContent className="text-center">
                   <a 
-                    href="mailto:gavin@currencytocurrency.app"
+                    href="mailto:gavin@proinvoice.app"
                     className="text-primary hover:underline"
                   >
-                    gavin@currencytocurrency.app
+                    gavin@proinvoice.app
                   </a>
                   <p className="text-sm text-muted-foreground mt-2">
                     Send us an email anytime

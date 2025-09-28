@@ -28,7 +28,7 @@ const DoNotSell = () => {
             <h2 className="text-xl font-semibold mb-4">Submit Your Request</h2>
             <p className="mb-4">To opt out of the sale or sharing of your personal information, contact us:</p>
             <ul className="space-y-2">
-              <li><strong>Email:</strong> <a href="mailto:gavin@currencytocurrency.app" className="text-primary hover:underline">gavin@currencytocurrency.app</a></li>
+              <li><strong>Email:</strong> <a href="mailto:gavin@proinvoice.app" className="text-primary hover:underline">gavin@proinvoice.app</a></li>
               <li><strong>Phone:</strong> <a href="tel:916-969-3705" className="text-primary hover:underline">916-969-3705</a></li>
             </ul>
           </div>

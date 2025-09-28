@@ -54,8 +54,8 @@ export default function About() {
                     </div>
                     <div>
                       <strong>Email:</strong> 
-                      <a href="mailto:gavin@currencytocurrency.app" className="ml-2 text-primary hover:underline">
-                        gavin@currencytocurrency.app
+                      <a href="mailto:gavin@proinvoice.app" className="ml-2 text-primary hover:underline">
+                        gavin@proinvoice.app
                       </a>
                     </div>
                     <div>
