@@ -22,12 +22,29 @@ export default function SubscriptionManagement() {
   } = useSubscription();
 
   const handleManageSubscription = async () => {
+    if (!subscribed) {
+      toast.error("You need an active subscription to access the customer portal. Please upgrade your plan first.");
+      return;
+    }
+
     try {
       await openCustomerPortal();
       toast.success("Opening Stripe Customer Portal...");
     } catch (error) {
       toast.error("Failed to open subscription management. Please try again.");
     }
+  };
+
+  const handleUpgradePlan = () => {
+    toast.success("Redirecting to pricing page...");
+  };
+
+  const handleContactSupport = () => {
+    toast.success("Redirecting to contact page...");
+  };
+
+  const handleViewDocs = () => {
+    toast.success("Redirecting to documentation...");
   };
 
   const planDetails = {
@@ -163,7 +180,7 @@ export default function SubscriptionManagement() {
                   </Button>
                 </div>
               ) : (
-                <Button asChild className="flex items-center gap-2">
+                <Button asChild className="flex items-center gap-2" onClick={handleUpgradePlan}>
                   <Link to="/pricing">
                     <Crown className="h-4 w-4" />
                     Upgrade to Premium
@@ -210,7 +227,7 @@ export default function SubscriptionManagement() {
               </ul>
               <Button 
                 onClick={handleManageSubscription}
-                disabled={loading || !subscribed}
+                disabled={loading}
                 className="w-full"
               >
                 Open Customer Portal
@@ -238,7 +255,7 @@ export default function SubscriptionManagement() {
                 <li>• No watermarks on paid plans</li>
                 <li>• Priority support included</li>
               </ul>
-              <Button asChild variant="outline" className="w-full">
+              <Button asChild variant="outline" className="w-full" onClick={handleUpgradePlan}>
                 <Link to="/pricing">
                   View All Plans
                 </Link>
@@ -257,10 +274,10 @@ export default function SubscriptionManagement() {
           </CardHeader>
           <CardContent>
             <div className="flex flex-wrap gap-3">
-              <Button asChild variant="outline">
+              <Button asChild variant="outline" onClick={handleContactSupport}>
                 <Link to="/contact">Contact Support</Link>
               </Button>
-              <Button asChild variant="ghost">
+              <Button asChild variant="ghost" onClick={handleViewDocs}>
                 <Link to="/docs">View Documentation</Link>
               </Button>
             </div>
