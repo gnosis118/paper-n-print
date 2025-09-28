@@ -37,14 +37,14 @@ const plans = [
     description: "Perfect for freelancers and small businesses", 
     price: 7,
     yearlyPrice: 70,
-    credits: 25,
-    effectivePrice: 0.28,
+    credits: 30,
+    effectivePrice: 0.23,
     lookupKey: "starter",
     icon: Building,
     stripeMonthlyId: "price_1SCH0VGpz30x93KjiBeySJs6",
     stripeYearlyId: "price_1SCH2dGpz30x93KjB0D7HLle",
     features: [
-      "25 invoices per month",
+      "30 invoices per month",
       "All professional templates", 
       "Custom branding & logo",
       "PDF export without watermark",
@@ -133,7 +133,7 @@ export default function Pricing() {
   return (
     <PageLayout
       title="Pricing Plans - Free & Premium Invoice Generator | InvoicePro"
-      description="Start free with 3 invoices/month. Upgrade to Starter (25 invoices, $7/mo) or Pro (unlimited invoices, $14/mo) for no watermarks. Benchmarked against Zoho Invoice, Wave, and Invoice Simple."
+      description="Start free with 3 invoices/month. Upgrade to Starter (30 invoices, $7/mo) or Pro (unlimited invoices, $14/mo) for no watermarks. Benchmarked against Zoho Invoice, Wave, and Invoice Simple."
     >
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-12">
@@ -141,7 +141,7 @@ export default function Pricing() {
             Choose Your Plan
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Start free with 3 invoices per month. Upgrade to Starter (25 invoices) or Pro (unlimited invoices), no watermarks, and premium features.
+            Start free with 3 invoices per month. Upgrade to Starter (30 invoices) or Pro (unlimited invoices), no watermarks, and premium features.
           </p>
           
           <div className="flex items-center justify-center gap-4 mt-8">
