@@ -9,21 +9,8 @@ import { Separator } from "@/components/ui/separator";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, Lock, User, Chrome, Github, Twitter } from "lucide-react";
+import { enhancedAuthSchema, sanitizeInput } from "@/lib/validation";
 import { z } from "zod";
-
-const authSchema = z.object({
-  email: z.string().email("Invalid email address").max(255),
-  password: z.string().min(6, "Password must be at least 6 characters").max(100),
-  confirmPassword: z.string().optional(),
-}).refine((data) => {
-  if (data.confirmPassword !== undefined) {
-    return data.password === data.confirmPassword;
-  }
-  return true;
-}, {
-  message: "Passwords don't match",
-  path: ["confirmPassword"],
-});
 
 export default function Auth() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -62,11 +49,15 @@ export default function Auth() {
 
   const validateForm = () => {
     try {
-      const data = isSignUp 
-        ? { email, password, confirmPassword }
-        : { email, password };
+      // Sanitize inputs before validation
+      const sanitizedEmail = sanitizeInput.email(email);
+      const sanitizedPassword = password; // Don't sanitize password, just validate
       
-      authSchema.parse(data);
+      const data = isSignUp 
+        ? { email: sanitizedEmail, password: sanitizedPassword, confirmPassword }
+        : { email: sanitizedEmail, password: sanitizedPassword };
+      
+      enhancedAuthSchema.parse(data);
       setErrors({});
       return true;
     } catch (error) {
@@ -92,8 +83,10 @@ export default function Auth() {
 
     try {
       if (isSignUp) {
+        // Use sanitized email for sign up
+        const sanitizedEmail = sanitizeInput.email(email);
         const { error } = await supabase.auth.signUp({
-          email: email.trim(),
+          email: sanitizedEmail,
           password,
           options: {
             emailRedirectTo: `${window.location.origin}/`
@@ -118,8 +111,10 @@ export default function Auth() {
           });
         }
       } else {
+        // Use sanitized email for sign in
+        const sanitizedEmail = sanitizeInput.email(email);
         const { error } = await supabase.auth.signInWithPassword({
-          email: email.trim(),
+          email: sanitizedEmail,
           password,
         });
 
@@ -200,6 +195,8 @@ export default function Auth() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className="pl-10"
+                      maxLength={255}
+                      autoComplete="email"
                       required
                     />
                   </div>
@@ -217,6 +214,9 @@ export default function Auth() {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       className="pl-10"
+                      maxLength={128}
+                      minLength={8}
+                      autoComplete="current-password"
                       required
                     />
                   </div>
@@ -242,6 +242,8 @@ export default function Auth() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className="pl-10"
+                      maxLength={255}
+                      autoComplete="email"
                       required
                     />
                   </div>
@@ -255,10 +257,13 @@ export default function Auth() {
                     <Input
                       id="signup-password"
                       type="password"
-                      placeholder="Choose a password"
+                      placeholder="Choose a password (min 8 characters, letters + numbers)"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       className="pl-10"
+                      maxLength={128}
+                      minLength={8}
+                      autoComplete="new-password"
                       required
                     />
                   </div>
@@ -276,6 +281,9 @@ export default function Auth() {
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       className="pl-10"
+                      maxLength={128}
+                      minLength={8}
+                      autoComplete="new-password"
                       required
                     />
                   </div>

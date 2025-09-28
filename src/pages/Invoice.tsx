@@ -1,6 +1,6 @@
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import InvoiceForm from "../components/InvoiceForm";
+import ValidatedInvoiceForm from "../components/ValidatedInvoiceForm";
 import InvoicePreview from "../components/InvoicePreview";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -142,7 +142,7 @@ const Invoice = () => {
         {/* Form Section */}
         <div className="w-full lg:w-1/2 p-6">
           <div className="bg-card border border-border rounded-lg p-6 shadow-soft">
-            <InvoiceForm
+            <ValidatedInvoiceForm
               data={invoiceData}
               onUpdate={updateInvoiceData}
             />
