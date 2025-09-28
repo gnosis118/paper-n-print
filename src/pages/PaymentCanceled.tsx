@@ -8,7 +8,7 @@ const PaymentCanceled = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <div className="max-w-2xl mx-auto px-6 py-12 pt-20">
+      <div className="max-w-2xl mx-auto px-6 py-12" style={{paddingTop: '5rem'}}>
         <Card className="text-center shadow-medium">
           <CardHeader className="pb-4">
             <div className="w-16 h-16 bg-destructive/10 rounded-full flex items-center justify-center mx-auto mb-4">
