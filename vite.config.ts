@@ -17,13 +17,7 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     target: 'esnext',
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
+    minify: mode === 'production' ? 'esbuild' : false,
     rollupOptions: {
       output: {
         manualChunks: {
@@ -36,7 +30,7 @@ export default defineConfig(({ mode }) => ({
       },
     },
     chunkSizeWarningLimit: 1000,
-    sourcemap: false,
+    sourcemap: mode === 'development',
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom'],
