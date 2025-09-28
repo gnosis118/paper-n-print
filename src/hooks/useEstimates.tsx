@@ -95,6 +95,7 @@ export const useEstimates = () => {
         terms: estimateData.terms,
         user_id: user.id,
         sharing_enabled: true,
+        public_slug: `est-${Date.now()}-${Math.random().toString(36).substr(2, 6)}`, // Temporary until types update
       };
 
       const { data, error } = await supabase

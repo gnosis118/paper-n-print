@@ -153,7 +153,7 @@ export type Database = {
           items: Json | null
           number: string
           payment_intent_id: string | null
-          public_slug: string
+          public_slug: string | null
           sharing_enabled: boolean | null
           sharing_expires_at: string | null
           sharing_token: string | null
@@ -179,7 +179,7 @@ export type Database = {
           items?: Json | null
           number: string
           payment_intent_id?: string | null
-          public_slug: string
+          public_slug?: string | null
           sharing_enabled?: boolean | null
           sharing_expires_at?: string | null
           sharing_token?: string | null
@@ -205,7 +205,7 @@ export type Database = {
           items?: Json | null
           number?: string
           payment_intent_id?: string | null
-          public_slug?: string
+          public_slug?: string | null
           sharing_enabled?: boolean | null
           sharing_expires_at?: string | null
           sharing_token?: string | null
