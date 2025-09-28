@@ -33,13 +33,13 @@ const plans = [
     isFree: true
   },
   {
-    name: "Basic",
-    description: "Perfect for freelancers getting started", 
+    name: "Starter",
+    description: "Perfect for freelancers and small businesses", 
     price: 7,
     yearlyPrice: 70,
     credits: 25,
     effectivePrice: 0.28,
-    lookupKey: "basic",
+    lookupKey: "starter",
     icon: Building,
     stripeMonthlyId: "price_1SCH0VGpz30x93KjiBeySJs6",
     stripeYearlyId: "price_1SCH2dGpz30x93KjB0D7HLle",
@@ -49,17 +49,19 @@ const plans = [
       "Custom branding & logo",
       "PDF export without watermark",
       "Priority email support",
-      "Client management"
-    ]
+      "Client management",
+      "Payment tracking"
+    ],
+    comparison: "vs Zoho Invoice ($10/mo), Wave (limited features)"
   },
   {
-    name: "Professional",
-    description: "Perfect for growing businesses",
+    name: "Pro",
+    description: "Perfect for growing businesses and agencies",
     price: 14,
     yearlyPrice: 140,  
     credits: 100,
     effectivePrice: 0.14,
-    lookupKey: "professional",
+    lookupKey: "pro",
     icon: Crown,
     popular: true,
     stripeMonthlyId: "price_1SCH1IGpz30x93KjBDXYrvZC",
@@ -70,31 +72,11 @@ const plans = [
       "Advanced customization",
       "White-label invoices",
       "Priority phone support",
-      "Team collaboration (up to 3 users)",
-      "Payment reminders"
-    ]
-  },
-  {
-    name: "Enterprise",
-    description: "Perfect for agencies and large teams",
-    price: 29,
-    yearlyPrice: 290,
-    credits: 500,
-    effectivePrice: 0.06,
-    lookupKey: "enterprise", 
-    icon: Users,
-    stripeMonthlyId: "price_1SCH2KGpz30x93KjW45WMMPs",
-    stripeYearlyId: "price_1SCH69Gpz30x93Kj0MusZMkz",
-    features: [
-      "500 invoices per month",
-      "Unlimited templates",
-      "Complete white-label solution",
-      "Unlimited team members",
-      "API access",
-      "Dedicated account manager",
-      "Custom integrations",
+      "Team collaboration (up to 5 users)",
+      "Payment reminders",
       "Advanced analytics"
-    ]
+    ],
+    comparison: "vs Invoice Simple ($15/mo), competitors charge $20+"
   }
 ];
 
@@ -187,7 +169,7 @@ export default function Pricing() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto mb-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
           {plans.map((plan) => {
             const Icon = plan.icon;
             const displayPrice = isYearly ? plan.yearlyPrice : plan.price;
@@ -238,6 +220,11 @@ export default function Pricing() {
                   </div>
                   <div className="text-sm text-muted-foreground">
                     {plan.credits} invoices {plan.isFree ? '' : `• $${plan.effectivePrice.toFixed(2)} per invoice`}
+                    {plan.comparison && (
+                      <div className="text-xs mt-1 text-green-600 dark:text-green-400">
+                        💰 {plan.comparison}
+                      </div>
+                    )}
                   </div>
                 </CardHeader>
                 
@@ -276,7 +263,153 @@ export default function Pricing() {
           })}
         </div>
 
-        {/* Value Proposition */}
+        {/* Competitor Comparison */}
+        <div className="bg-muted/30 rounded-2xl p-8 mb-12">
+          <h2 className="text-2xl font-bold mb-6 text-center">How We Compare</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b">
+                  <th className="text-left py-3 px-4 font-semibold">Feature</th>
+                  <th className="text-center py-3 px-4 font-semibold text-primary">InvoicePro</th>
+                  <th className="text-center py-3 px-4 font-semibold text-muted-foreground">Zoho Invoice</th>
+                  <th className="text-center py-3 px-4 font-semibold text-muted-foreground">Wave</th>
+                  <th className="text-center py-3 px-4 font-semibold text-muted-foreground">Invoice Simple</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y">
+                <tr>
+                  <td className="py-3 px-4 font-medium">Starter Plan Price</td>
+                  <td className="py-3 px-4 text-center text-primary font-bold">$7/mo</td>
+                  <td className="py-3 px-4 text-center text-muted-foreground">$10/mo</td>
+                  <td className="py-3 px-4 text-center text-muted-foreground">Free*</td>
+                  <td className="py-3 px-4 text-center text-muted-foreground">$15/mo</td>
+                </tr>
+                <tr className="bg-muted/20">
+                  <td className="py-3 px-4 font-medium">2-Click Payments</td>
+                  <td className="py-3 px-4 text-center"><Check className="w-4 h-4 text-primary mx-auto" /></td>
+                  <td className="py-3 px-4 text-center text-muted-foreground">Manual setup</td>
+                  <td className="py-3 px-4 text-center text-muted-foreground">Limited</td>
+                  <td className="py-3 px-4 text-center text-muted-foreground">No</td>
+                </tr>
+                <tr>
+                  <td className="py-3 px-4 font-medium">White-label Invoices</td>
+                  <td className="py-3 px-4 text-center"><Check className="w-4 h-4 text-primary mx-auto" /></td>
+                  <td className="py-3 px-4 text-center text-muted-foreground">Premium only</td>
+                  <td className="py-3 px-4 text-center text-muted-foreground">No</td>
+                  <td className="py-3 px-4 text-center text-muted-foreground">Pro only</td>
+                </tr>
+                <tr className="bg-muted/20">
+                  <td className="py-3 px-4 font-medium">Invoice Creation Speed</td>
+                  <td className="py-3 px-4 text-center text-primary font-bold">30 seconds</td>
+                  <td className="py-3 px-4 text-center text-muted-foreground">2-3 minutes</td>
+                  <td className="py-3 px-4 text-center text-muted-foreground">2-3 minutes</td>
+                  <td className="py-3 px-4 text-center text-muted-foreground">1-2 minutes</td>
+                </tr>
+                <tr>
+                  <td className="py-3 px-4 font-medium">Team Collaboration</td>
+                  <td className="py-3 px-4 text-center"><Check className="w-4 h-4 text-primary mx-auto" /></td>
+                  <td className="py-3 px-4 text-center text-muted-foreground">$20+/mo</td>
+                  <td className="py-3 px-4 text-center text-muted-foreground">No</td>
+                  <td className="py-3 px-4 text-center text-muted-foreground">$25+/mo</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="mt-4 text-xs text-muted-foreground text-center">
+            * Wave is free but lacks advanced payment features and requires complex setup
+          </div>
+        </div>
+
+        {/* Template Pack Add-ons */}
+        <div className="bg-gradient-to-r from-accent/10 to-accent/5 rounded-2xl p-8 mb-12">
+          <h2 className="text-2xl font-bold mb-6 text-center">Template Pack Add-ons</h2>
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <Card className="text-center">
+              <CardContent className="p-6">
+                <div className="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Building className="w-6 h-6 text-accent" />
+                </div>
+                <h3 className="font-semibold mb-2">Construction Pack</h3>
+                <p className="text-sm text-muted-foreground mb-4">5 specialized templates for contractors, builders, and trades</p>
+                <div className="text-2xl font-bold text-accent mb-4">$9.99</div>
+                <Button variant="outline" size="sm" className="w-full">
+                  Add to Plan
+                </Button>
+              </CardContent>
+            </Card>
+            
+            <Card className="text-center">
+              <CardContent className="p-6">
+                <div className="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Crown className="w-6 h-6 text-accent" />
+                </div>
+                <h3 className="font-semibold mb-2">Creative Pack</h3>
+                <p className="text-sm text-muted-foreground mb-4">5 designer templates for agencies, photographers, and creatives</p>
+                <div className="text-2xl font-bold text-accent mb-4">$9.99</div>
+                <Button variant="outline" size="sm" className="w-full">
+                  Add to Plan
+                </Button>
+              </CardContent>
+            </Card>
+            
+            <Card className="text-center">
+              <CardContent className="p-6">
+                <div className="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Users className="w-6 h-6 text-accent" />
+                </div>
+                <h3 className="font-semibold mb-2">Service Pack</h3>
+                <p className="text-sm text-muted-foreground mb-4">5 templates for consultants, lawyers, and service providers</p>
+                <div className="text-2xl font-bold text-accent mb-4">$9.99</div>
+                <Button variant="outline" size="sm" className="w-full">
+                  Add to Plan
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* Trust & Security */}
+        <div className="bg-primary/5 rounded-2xl p-8 mb-12">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold mb-4">Trusted & Secure</h2>
+            <p className="text-muted-foreground">Your data and payments are protected by industry-leading security</p>
+          </div>
+          
+          <div className="grid md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                <img src="https://stripe.com/img/v3/home/twitter.png" alt="Stripe" className="w-8 h-8" />
+              </div>
+              <h3 className="font-semibold text-sm">Powered by Stripe</h3>
+              <p className="text-xs text-muted-foreground mt-1">Industry-leading payment processing</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-2xl">🔒</span>
+              </div>
+              <h3 className="font-semibold text-sm">SSL Encrypted</h3>
+              <p className="text-xs text-muted-foreground mt-1">256-bit SSL encryption</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-2xl">🛡️</span>
+              </div>
+              <h3 className="font-semibold text-sm">SOC 2 Compliant</h3>
+              <p className="text-xs text-muted-foreground mt-1">Enterprise-grade security</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-2xl">🏆</span>
+              </div>
+              <h3 className="font-semibold text-sm">99.9% Uptime</h3>
+              <p className="text-xs text-muted-foreground mt-1">Reliable service guarantee</p>
+            </div>
+          </div>
+        </div>
         <div className="bg-gradient-to-r from-primary/10 to-primary/5 rounded-2xl p-8 mb-12 text-center">
           <h2 className="text-2xl font-bold mb-4">Why Choose InvoicePro?</h2>
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
