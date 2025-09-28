@@ -3,6 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Preconnect to external domains for faster resource loading -->
+    <link rel="preconnect" href="https://storage.googleapis.com" crossorigin>
+    <link rel="dns-prefetch" href="https://storage.googleapis.com">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/src/main.tsx" as="script" crossorigin>
+    
     <title>Professional Invoice Generator - Create Beautiful Invoices</title>
     <meta name="description" content="Create professional invoices in minutes with our free invoice generator. Multiple templates, PDF export, and customizable branding for your business.">
     <meta name="author" content="Invoice Generator" />
