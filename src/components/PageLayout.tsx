@@ -33,7 +33,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
         description={description}
         canonical={canonical}
         noIndex={noIndex}
-        ogImage="https://paper-n-print.lovable.app/og-image.png"
+        ogImage="/og-image.webp"
       />
       
       <div className="min-h-screen flex flex-col">
