@@ -30,7 +30,7 @@ import SubscriptionManagement from "./pages/SubscriptionManagement";
 import EstimateView from './pages/EstimateView';
 import InvoiceView from './pages/InvoiceView';
 import Estimates from './pages/Estimates';
-import NotFound from "./pages/NotFound";
+import NotFound from "@/pages/NotFound";
 import ConstructionInvoiceTemplate from "./pages/templates/Construction";
 import ConsultingInvoiceTemplate from "./pages/templates/Consulting";
 import FreelanceNYCTemplate from "./pages/templates/FreelanceNYC";
