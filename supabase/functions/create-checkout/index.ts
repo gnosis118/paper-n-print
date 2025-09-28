@@ -13,16 +13,16 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-// Price lookup keys mapping
-const PRICE_LOOKUP_KEYS = {
-  lite_monthly: "invoicepro_lite_monthly",
-  lite_annual: "invoicepro_lite_annual", 
-  pro_monthly: "invoicepro_pro_monthly",
-  pro_annual: "invoicepro_pro_annual",
-  agency_monthly: "invoicepro_agency_monthly",
-  agency_annual: "invoicepro_agency_annual",
-  template_onetime: "invoicepro_template_onetime",
-  template_trial: "invoicepro_template_trial"
+// Direct price ID mapping based on existing Stripe prices
+const PRICE_IDS = {
+  lite_monthly: "price_1SCDIjGpz30x93KjADgoYSMS",      // $9/month
+  lite_annual: "price_1SCDIvGpz30x93KjDmPo4w2a",       // $90/year
+  pro_monthly: "price_1SCDJ4Gpz30x93KjNOLCJgNK",       // $19/month
+  pro_annual: "price_1SCDJFGpz30x93KjrppMsUf7",        // $190/year
+  agency_monthly: "price_1SCDKrGpz30x93KjeKGawyGN",     // $39/month
+  agency_annual: "price_1SCDMRGpz30x93KjRMUamIOP",      // $390/year
+  template_onetime: "price_1SCDMZGpz30x93Kj3kh1GXZS",   // $10 one-time
+  template_trial: "price_1SCDMkGpz30x93KjqjZ806yi"      // $5 trial
 } as const;
 
 const logStep = (step: string, details?: any) => {
@@ -106,48 +106,27 @@ const handleCheckout = async (req: Request): Promise<Response> => {
       mode = "subscription"; // Default to subscription for legacy
       logStep("Using legacy priceId", { priceId });
     } else {
-      // New format - use lookup keys
+      // New format - use direct price IDs
       if (product_type === "template") {
-        const lookupKey = plan_type === "trial" ? PRICE_LOOKUP_KEYS.template_trial : PRICE_LOOKUP_KEYS.template_onetime;
+        const priceKey = plan_type === "trial" ? "template_trial" : "template_onetime";
+        finalPriceId = PRICE_IDS[priceKey as keyof typeof PRICE_IDS];
         mode = "payment";
-        
-        // Find price by lookup key
-        const prices = await stripe.prices.search({
-          query: `lookup_key:'${lookupKey}' AND active:'true'`
-        });
-        
-        if (prices.data.length === 0) {
-          throw new Error(`Price not found for lookup key: ${lookupKey}`);
-        }
-        
-        finalPriceId = prices.data[0].id;
-        logStep("Template purchase", { lookupKey, priceId: finalPriceId });
+        logStep("Template purchase", { priceKey, priceId: finalPriceId });
       } else {
         // Subscription plans
         if (!plan_type || !billing_cycle) {
           throw new Error("plan_type and billing_cycle are required for subscriptions");
         }
         
-        const key = `${plan_type}_${billing_cycle}` as keyof typeof PRICE_LOOKUP_KEYS;
-        const lookupKey = PRICE_LOOKUP_KEYS[key];
+        const priceKey = `${plan_type}_${billing_cycle}` as keyof typeof PRICE_IDS;
+        finalPriceId = PRICE_IDS[priceKey];
         
-        if (!lookupKey) {
+        if (!finalPriceId) {
           throw new Error(`Invalid plan combination: ${plan_type} ${billing_cycle}`);
         }
         
         mode = "subscription";
-        
-        // Find price by lookup key
-        const prices = await stripe.prices.search({
-          query: `lookup_key:'${lookupKey}' AND active:'true'`
-        });
-        
-        if (prices.data.length === 0) {
-          throw new Error(`Price not found for lookup key: ${lookupKey}`);
-        }
-        
-        finalPriceId = prices.data[0].id;
-        logStep("Subscription purchase", { lookupKey, priceId: finalPriceId, plan: plan_type, cycle: billing_cycle });
+        logStep("Subscription purchase", { priceKey, priceId: finalPriceId, plan: plan_type, cycle: billing_cycle });
       }
     }
 
