@@ -64,8 +64,25 @@ serve(async (req) => {
       throw new Error("Missing webhook signature or secret");
     }
 
-    const body = await req.text();
-    const event = await stripe.webhooks.constructEventAsync(body, signature, webhookSecret);
+    // Get raw body as ArrayBuffer for proper signature verification
+    const body = await req.arrayBuffer();
+    const bodyText = new TextDecoder().decode(body);
+    
+    let event;
+    try {
+      event = stripe.webhooks.constructEvent(bodyText, signature, webhookSecret);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : String(err);
+      logStep("Webhook signature verification failed", { 
+        error: errorMessage,
+        signatureHeader: signature ? "present" : "missing",
+        webhookSecret: webhookSecret ? "present" : "missing"
+      });
+      return new Response(`Webhook signature verification failed: ${errorMessage}`, { 
+        status: 400,
+        headers: corsHeaders 
+      });
+    }
     
     logStep("Event received", { type: event.type, id: event.id });
 
