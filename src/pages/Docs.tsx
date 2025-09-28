@@ -53,10 +53,10 @@ export default function Docs() {
   ];
 
   const quickLinks = [
-    { title: "Frequently Asked Questions", href: "#faq" },
+    { title: "Frequently Asked Questions", href: "/docs/faq" },
     { title: "Contact Support", href: "/contact" },
-    { title: "Feature Requests", href: "/contact" },
-    { title: "System Status", href: "#status" }
+    { title: "Feature Requests", href: "/docs/feature-requests" },
+    { title: "System Status", href: "/docs/system-status" }
   ];
 
   return (
@@ -89,12 +89,12 @@ export default function Docs() {
                     <ul className="space-y-2">
                       {section.articles.map((article, articleIndex) => (
                         <li key={articleIndex}>
-                          <a 
-                            href="#"
+                          <Link 
+                            to={`/docs/${article.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}`}
                             className="text-sm text-muted-foreground hover:text-primary transition-colors"
                           >
                             {article}
-                          </a>
+                          </Link>
                         </li>
                       ))}
                     </ul>

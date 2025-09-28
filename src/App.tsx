@@ -134,6 +134,16 @@ const App = () => (
               <Route path="/products" element={<Products />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/docs" element={<Docs />} />
+              <Route path="/docs/creating-your-first-invoice" element={<CreatingFirstInvoice />} />
+              <Route path="/docs/understanding-invoice-templates" element={<UnderstandingTemplates />} />
+              <Route path="/docs/adding-line-items-and-calculations" element={<AddingLineItems />} />
+              <Route path="/docs/customizing-invoice-appearance" element={<CustomizingAppearance />} />
+              <Route path="/docs/setting-up-your-business-profile" element={<BusinessProfile />} />
+              <Route path="/docs/setting-up-payment-links" element={<PaymentLinks />} />
+              <Route path="/docs/adding-new-clients" element={<AddingClients />} />
+              <Route path="/docs/faq" element={<FAQ />} />
+              <Route path="/docs/feature-requests" element={<FeatureRequests />} />
+              <Route path="/docs/system-status" element={<SystemStatus />} />
               <Route path="/security" element={<Security />} />
               <Route path="/accessibility" element={<Accessibility />} />
               
