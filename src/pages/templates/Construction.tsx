@@ -12,7 +12,7 @@ export default function ConstructionInvoiceTemplate() {
         <title>Construction Invoice Template - Professional Contractor Invoicing</title>
         <meta name="description" content="Free construction invoice template for contractors, builders, and construction companies. Professional templates with labor, materials, and equipment tracking." />
         <meta name="keywords" content="construction invoice template, contractor invoice, builder invoice, construction billing, trades invoice" />
-        <link rel="canonical" href="https://paper-n-print.lovable.app/templates/construction" />
+        <link rel="canonical" href="https://www.proinvoice.app/templates/construction" />
         
         <script type="application/ld+json">
         {JSON.stringify({
@@ -20,7 +20,7 @@ export default function ConstructionInvoiceTemplate() {
           "@type": "WebPage",
           "name": "Construction Invoice Template",
           "description": "Professional construction invoice template for contractors and builders",
-          "url": "https://paper-n-print.lovable.app/templates/construction",
+          "url": "https://www.proinvoice.app/templates/construction",
           "breadcrumb": {
             "@type": "BreadcrumbList",
             "itemListElement": [
@@ -28,13 +28,13 @@ export default function ConstructionInvoiceTemplate() {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": "https://paper-n-print.lovable.app"
+                "item": "https://www.proinvoice.app"
               },
               {
                 "@type": "ListItem", 
                 "position": 2,
                 "name": "Templates",
-                "item": "https://paper-n-print.lovable.app/templates"
+                "item": "https://www.proinvoice.app/templates"
               },
               {
                 "@type": "ListItem",

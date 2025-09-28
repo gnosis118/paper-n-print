@@ -32,13 +32,13 @@ export default function FreelanceNYCTemplate() {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": "https://paper-n-print.lovable.app"
+                "item": "https://www.proinvoice.app"
               },
               {
-                "@type": "ListItem", 
+                "@type": "ListItem",
                 "position": 2,
                 "name": "Templates",
-                "item": "https://paper-n-print.lovable.app/templates"
+                "item": "https://www.proinvoice.app/templates"
               },
               {
                 "@type": "ListItem",

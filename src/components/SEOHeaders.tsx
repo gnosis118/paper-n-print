@@ -14,7 +14,7 @@ export const SEOHeaders = ({
   title = "InvoicePro - Create & Get Paid in 2 Clicks | Free Invoice Generator",
   description = "Create professional invoices in 30 seconds with embedded Stripe checkout. Get paid 3x faster with smart dunning and auto-reminders. Free plan: 3 invoices/month.",
   canonical,
-  ogImage = "/og-image.webp",
+  ogImage = "https://www.proinvoice.app/og-image.webp",
   ogType = "website",
   structuredData,
   noIndex = false

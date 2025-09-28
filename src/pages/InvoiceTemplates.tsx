@@ -77,7 +77,7 @@ const InvoiceTemplates = () => {
     <PageLayout
       title="Free Invoice Templates by Industry | InvoicePro"
       description="30+ free professional invoice templates for every industry. Construction, plumbing, photography, consulting and more. Download PDF, Word & Excel formats with embedded Stripe payments."
-      canonical="https://paper-n-print.lovable.app/invoice-templates"
+      canonical="https://www.proinvoice.app/invoice-templates"
     >
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-primary-light to-accent-light py-16">

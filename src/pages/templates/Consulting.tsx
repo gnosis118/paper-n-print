@@ -12,7 +12,7 @@ export default function ConsultingInvoiceTemplate() {
         <title>Consulting Invoice Template - Professional Services Billing</title>
         <meta name="description" content="Free consulting invoice template for business consultants, IT consultants, and professional service providers. Track hours, projects, and deliverables." />
         <meta name="keywords" content="consulting invoice template, professional services invoice, consultant billing, hourly invoice template" />
-        <link rel="canonical" href="https://paper-n-print.lovable.app/templates/consulting" />
+        <link rel="canonical" href="https://www.proinvoice.app/templates/consulting" />
         
         <script type="application/ld+json">
         {JSON.stringify({
@@ -20,7 +20,7 @@ export default function ConsultingInvoiceTemplate() {
           "@type": "WebPage",
           "name": "Consulting Invoice Template",
           "description": "Professional consulting invoice template for service providers",
-          "url": "https://paper-n-print.lovable.app/templates/consulting",
+          "url": "https://www.proinvoice.app/templates/consulting",
           "breadcrumb": {
             "@type": "BreadcrumbList",
             "itemListElement": [
@@ -28,13 +28,13 @@ export default function ConsultingInvoiceTemplate() {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": "https://paper-n-print.lovable.app"
+                "item": "https://www.proinvoice.app"
               },
               {
-                "@type": "ListItem", 
+                "@type": "ListItem",
                 "position": 2,
                 "name": "Templates",
-                "item": "https://paper-n-print.lovable.app/templates"
+                "item": "https://www.proinvoice.app/templates"
               },
               {
                 "@type": "ListItem",

@@ -1,45 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Core pages -->
+  <!-- Homepage -->
   <url>
     <loc>https://www.proinvoice.app/</loc>
-    <lastmod>2024-09-28</lastmod>
+    <lastmod>2025-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Core Business Pages -->
   <url>
-    <loc>https://www.proinvoice.app/invoice-generator</loc>
-    <lastmod>2024-09-28</lastmod>
+    <loc>https://www.proinvoice.app/pricing</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.proinvoice.app/invoice-templates</loc>
+    <lastmod>2025-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.proinvoice.app/pricing</loc>
-    <lastmod>2024-09-28</lastmod>
+    <loc>https://www.proinvoice.app/about</loc>
+    <lastmod>2025-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.proinvoice.app/templates</loc>
-    <lastmod>2024-09-28</lastmod>
+    <loc>https://www.proinvoice.app/contact</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.proinvoice.app/products</loc>
+    <lastmod>2025-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://www.proinvoice.app/blog</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.proinvoice.app/docs</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
 
-  <!-- Template detail pages (rename/expand to your real slugs) -->
-  <url><loc>https://www.proinvoice.app/templates/modern</loc><lastmod>2024-09-28</lastmod></url>
-  <url><loc>https://www.proinvoice.app/templates/minimalist</loc><lastmod>2024-09-28</lastmod></url>
-  <url><loc>https://www.proinvoice.app/templates/freelancer</loc><lastmod>2024-09-28</lastmod></url>
-  <url><loc>https://www.proinvoice.app/templates/contractor</loc><lastmod>2024-09-28</lastmod></url>
-  <url><loc>https://www.proinvoice.app/templates/consultant</loc><lastmod>2024-09-28</lastmod></url>
+  <!-- Industry-Specific Invoice Templates -->
+  <url><loc>https://www.proinvoice.app/invoice-template/construction</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/contractor</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/plumber</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/electrician</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/hvac</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/roofing</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/painting</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/handyman</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/landscaping</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/cleaning</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/window-cleaning</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/pest-control</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/auto-repair</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/car-detailing</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/towing</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/moving</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/trucking</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/courier</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/photography</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/videography</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/graphic-design</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/web-design</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/marketing</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/consulting</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/catering</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/event-planner</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/salon</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/massage</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/personal-trainer</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/invoice-template/tutor</loc><lastmod>2025-09-28</lastmod><priority>0.8</priority></url>
 
-  <!-- Content / trust pages -->
-  <url><loc>https://www.proinvoice.app/blog</loc><lastmod>2024-09-28</lastmod><changefreq>weekly</changefreq></url>
-  <!-- Example blog post; duplicate and update for each real post -->
-  <url><loc>https://www.proinvoice.app/blog/how-to-make-an-invoice</loc><lastmod>2024-09-28</lastmod></url>
+  <!-- Legacy Template Pages -->
+  <url><loc>https://www.proinvoice.app/templates/construction</loc><lastmod>2025-09-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://www.proinvoice.app/templates/consulting</loc><lastmod>2025-09-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://www.proinvoice.app/templates/freelance-nyc</loc><lastmod>2025-09-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://www.proinvoice.app/templates/freelance-california</loc><lastmod>2025-09-28</lastmod><priority>0.7</priority></url>
 
-  <url><loc>https://www.proinvoice.app/about</loc><lastmod>2024-09-28</lastmod></url>
-  <url><loc>https://www.proinvoice.app/contact</loc><lastmod>2024-09-28</lastmod></url>
-  <url><loc>https://www.proinvoice.app/privacy</loc><lastmod>2024-09-28</lastmod></url>
-  <url><loc>https://www.proinvoice.app/terms</loc><lastmod>2024-09-28</lastmod></url>
+  <!-- Legal Pages -->
+  <url><loc>https://www.proinvoice.app/privacy</loc><lastmod>2025-09-28</lastmod><priority>0.4</priority></url>
+  <url><loc>https://www.proinvoice.app/terms</loc><lastmod>2025-09-28</lastmod><priority>0.4</priority></url>
+  <url><loc>https://www.proinvoice.app/cookies</loc><lastmod>2025-09-28</lastmod><priority>0.3</priority></url>
+  <url><loc>https://www.proinvoice.app/do-not-sell</loc><lastmod>2025-09-28</lastmod><priority>0.3</priority></url>
+  <url><loc>https://www.proinvoice.app/security</loc><lastmod>2025-09-28</lastmod><priority>0.4</priority></url>
+  <url><loc>https://www.proinvoice.app/accessibility</loc><lastmod>2025-09-28</lastmod><priority>0.4</priority></url>
 </urlset>

@@ -50,12 +50,12 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
     <PageLayout 
       title={pageTitle}
       description={description}
-      canonical={`https://paper-n-print.lovable.app${template.slug}`}
+      canonical={`https://www.proinvoice.app${template.slug}`}
     >
       <SEOHeaders 
         title={pageTitle}
         description={description}
-        canonical={`https://paper-n-print.lovable.app${template.slug}`}
+        canonical={`https://www.proinvoice.app${template.slug}`}
         structuredData={faqSchema}
         ogImage="/og-image.webp"
       />

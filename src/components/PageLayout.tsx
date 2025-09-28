@@ -33,7 +33,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
         description={description}
         canonical={canonical}
         noIndex={noIndex}
-        ogImage="/og-image.webp"
+        ogImage="https://www.proinvoice.app/og-image.webp"
       />
       
       <div className="min-h-screen flex flex-col">
