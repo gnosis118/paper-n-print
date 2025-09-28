@@ -8,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { Mail, Lock, User, Chrome, Github, Twitter } from "lucide-react";
+import { Mail, Lock, User, Chrome } from "lucide-react";
 import { enhancedAuthSchema, sanitizeInput } from "@/lib/validation";
 import { z } from "zod";
 
@@ -142,7 +142,7 @@ export default function Auth() {
     }
   };
 
-  const handleSocialAuth = async (provider: 'google' | 'github' | 'twitter') => {
+  const handleSocialAuth = async (provider: 'google') => {
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider,
@@ -306,30 +306,15 @@ export default function Auth() {
             </div>
           </div>
           
-          <div className="grid grid-cols-3 gap-3">
+          <div className="flex justify-center">
             <Button
               variant="outline"
               size="sm"
               onClick={() => handleSocialAuth('google')}
-              className="w-full"
+              className="w-full max-w-xs"
             >
-              <Chrome className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => handleSocialAuth('github')}
-              className="w-full"
-            >
-              <Github className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => handleSocialAuth('twitter')}
-              className="w-full"
-            >
-              <Twitter className="h-4 w-4" />
+              <Chrome className="h-4 w-4 mr-2" />
+              Continue with Google
             </Button>
           </div>
         </CardContent>

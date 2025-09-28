@@ -17,6 +17,14 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Cookies from "./pages/Cookies";
 import DoNotSell from "./pages/DoNotSell";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Products from "./pages/Products";
+import Blog from "./pages/Blog";
+import Docs from "./pages/Docs";
+import BusinessSettings from "./pages/BusinessSettings";
+import Security from "./pages/Security";
+import Accessibility from "./pages/Accessibility";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,6 +45,13 @@ const App = () => (
               <Route path="/terms" element={<Terms />} />
               <Route path="/cookies" element={<Cookies />} />
               <Route path="/do-not-sell" element={<DoNotSell />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/docs" element={<Docs />} />
+              <Route path="/security" element={<Security />} />
+              <Route path="/accessibility" element={<Accessibility />} />
               <Route path="/" element={
                 <ProtectedRoute>
                   <Index />
@@ -52,7 +67,13 @@ const App = () => (
                   <Templates />
                 </ProtectedRoute>
               } />
+              <Route path="/business-settings" element={
+                <ProtectedRoute>
+                  <BusinessSettings />
+                </ProtectedRoute>
+              } />
               <Route path="/pricing" element={<Pricing />} />
+              <Route path="/get-started" element={<Auth />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
