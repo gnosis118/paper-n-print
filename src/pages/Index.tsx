@@ -8,6 +8,7 @@ import { SubscriptionStatus } from "@/components/SubscriptionStatus";
 import PageLayout from "@/components/PageLayout";
 import { LazyFeatureGrid, LazyTestimonialGrid, LazyComparisonTable } from "@/components/LazyIndex";
 import proInvoiceLogo from '@/assets/proinvoice-logo.png';
+import proInvoiceLogoFull from '@/assets/proinvoice-logo-full.png';
 
 const Index = () => {
   const { user, signOut } = useAuth();
@@ -26,11 +27,22 @@ const Index = () => {
       title="InvoicePro - Create & Get Paid in 2 Clicks | Free Invoice Generator"
       description="Create professional invoices in 30 seconds with embedded Stripe checkout. Get paid 3x faster with smart dunning and auto-reminders. Free plan: 3 invoices/month."
     >
+      {/* Logo Section */}
+      <div className="bg-white py-8 sm:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+          <img 
+            src={proInvoiceLogoFull} 
+            alt="ProInvoice.app - Professional Invoice Generator" 
+            className="mx-auto h-16 sm:h-24 md:h-32"
+          />
+        </div>
+      </div>
+
       {/* Hero Section */}
       <div 
         className="bg-gradient-to-br from-primary-light to-accent-light relative overflow-hidden w-full"
         style={{
-          backgroundImage: `url(${proInvoiceLogo})`,
+          backgroundImage: `url(${proInvoiceLogoFull})`,
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
