@@ -34,6 +34,37 @@ import FreelanceNYCTemplate from "./pages/templates/FreelanceNYC";
 import FreelanceCATemplate from "./pages/templates/FreelanceCA";
 import ProgrammaticSEO from "./pages/templates/ProgrammaticSEO";
 
+// Import niche invoice templates
+import HVACInvoiceTemplate from "./pages/templates/HVACInvoiceTemplate";
+import LawnCareInvoiceTemplate from "./pages/templates/LawnCareInvoiceTemplate";
+import HandymanInvoiceTemplate from "./pages/templates/HandymanInvoiceTemplate";
+import CleaningInvoiceTemplate from "./pages/templates/CleaningInvoiceTemplate";
+import RoofingInvoiceTemplate from "./pages/templates/RoofingInvoiceTemplate";
+import PlumbingInvoiceTemplate from "./pages/templates/PlumbingInvoiceTemplate";
+import ElectricianInvoiceTemplate from "./pages/templates/ElectricianInvoiceTemplate";
+import FreelanceDesignerInvoiceTemplate from "./pages/templates/FreelanceDesignerInvoiceTemplate";
+import PhotographerInvoiceTemplate from "./pages/templates/PhotographerInvoiceTemplate";
+import VideographerInvoiceTemplate from "./pages/templates/VideographerInvoiceTemplate";
+import PersonalTrainerInvoiceTemplate from "./pages/templates/PersonalTrainerInvoiceTemplate";
+import AutoDetailingInvoiceTemplate from "./pages/templates/AutoDetailingInvoiceTemplate";
+import MobileMechanicInvoiceTemplate from "./pages/templates/MobileMechanicInvoiceTemplate";
+import PestControlInvoiceTemplate from "./pages/templates/PestControlInvoiceTemplate";
+import PressureWashingInvoiceTemplate from "./pages/templates/PressureWashingInvoiceTemplate";
+import LandscaperInvoiceTemplate from "./pages/templates/LandscaperInvoiceTemplate";
+import RealEstatePhotographerInvoiceTemplate from "./pages/templates/RealEstatePhotographerInvoiceTemplate";
+import TattooArtistInvoiceTemplate from "./pages/templates/TattooArtistInvoiceTemplate";
+import MakeupArtistInvoiceTemplate from "./pages/templates/MakeupArtistInvoiceTemplate";
+import HairStylistInvoiceTemplate from "./pages/templates/HairStylistInvoiceTemplate";
+import NotaryInvoiceTemplate from "./pages/templates/NotaryInvoiceTemplate";
+import BookkeepingInvoiceTemplate from "./pages/templates/BookkeepingInvoiceTemplate";
+import DJInvoiceTemplate from "./pages/templates/DJInvoiceTemplate";
+import EventPlannerInvoiceTemplate from "./pages/templates/EventPlannerInvoiceTemplate";
+import CatererInvoiceTemplate from "./pages/templates/CatererInvoiceTemplate";
+import SnowRemovalInvoiceTemplate from "./pages/templates/SnowRemovalInvoiceTemplate";
+import WindowCleaningInvoiceTemplate from "./pages/templates/WindowCleaningInvoiceTemplate";
+import MassageTherapistInvoiceTemplate from "./pages/templates/MassageTherapistInvoiceTemplate";
+import CarpetCleanerInvoiceTemplate from "./pages/templates/CarpetCleanerInvoiceTemplate";
+
 // Import all industry-specific invoice templates
 import ConstructionTemplate from "./pages/invoice-templates/Construction";
 import ContractorTemplate from "./pages/invoice-templates/Contractor";
@@ -154,6 +185,38 @@ const App = () => (
               <Route path="/templates/consulting" element={<ConsultingInvoiceTemplate />} />
               <Route path="/templates/freelance-nyc" element={<FreelanceNYCTemplate />} />
               <Route path="/templates/freelance-california" element={<FreelanceCATemplate />} />
+              
+              {/* Niche Template Pages */}
+              <Route path="/templates/hvac-invoice-template" element={<HVACInvoiceTemplate />} />
+              <Route path="/templates/lawn-care-invoice-template" element={<LawnCareInvoiceTemplate />} />
+              <Route path="/templates/handyman-invoice-template" element={<HandymanInvoiceTemplate />} />
+              <Route path="/templates/cleaning-invoice-template" element={<CleaningInvoiceTemplate />} />
+              <Route path="/templates/roofing-invoice-template" element={<RoofingInvoiceTemplate />} />
+              <Route path="/templates/plumber-invoice-template" element={<PlumbingInvoiceTemplate />} />
+              <Route path="/templates/electrician-invoice-template" element={<ElectricianInvoiceTemplate />} />
+              <Route path="/templates/freelance-designer-invoice-template" element={<FreelanceDesignerInvoiceTemplate />} />
+              <Route path="/templates/photographer-invoice-template" element={<PhotographerInvoiceTemplate />} />
+              <Route path="/templates/videographer-invoice-template" element={<VideographerInvoiceTemplate />} />
+              <Route path="/templates/personal-trainer-invoice-template" element={<PersonalTrainerInvoiceTemplate />} />
+              <Route path="/templates/auto-detailing-invoice-template" element={<AutoDetailingInvoiceTemplate />} />
+              <Route path="/templates/mobile-mechanic-invoice-template" element={<MobileMechanicInvoiceTemplate />} />
+              <Route path="/templates/pest-control-invoice-template" element={<PestControlInvoiceTemplate />} />
+              <Route path="/templates/pressure-washing-invoice-template" element={<PressureWashingInvoiceTemplate />} />
+              <Route path="/templates/landscaper-invoice-template" element={<LandscaperInvoiceTemplate />} />
+              <Route path="/templates/real-estate-photographer-invoice-template" element={<RealEstatePhotographerInvoiceTemplate />} />
+              <Route path="/templates/tattoo-artist-invoice-template" element={<TattooArtistInvoiceTemplate />} />
+              <Route path="/templates/makeup-artist-invoice-template" element={<MakeupArtistInvoiceTemplate />} />
+              <Route path="/templates/hair-stylist-invoice-template" element={<HairStylistInvoiceTemplate />} />
+              <Route path="/templates/notary-invoice-template" element={<NotaryInvoiceTemplate />} />
+              <Route path="/templates/bookkeeping-invoice-template" element={<BookkeepingInvoiceTemplate />} />
+              <Route path="/templates/dj-invoice-template" element={<DJInvoiceTemplate />} />
+              <Route path="/templates/event-planner-invoice-template" element={<EventPlannerInvoiceTemplate />} />
+              <Route path="/templates/caterer-invoice-template" element={<CatererInvoiceTemplate />} />
+              <Route path="/templates/snow-removal-invoice-template" element={<SnowRemovalInvoiceTemplate />} />
+              <Route path="/templates/window-cleaning-invoice-template" element={<WindowCleaningInvoiceTemplate />} />
+              <Route path="/templates/massage-therapist-invoice-template" element={<MassageTherapistInvoiceTemplate />} />
+              <Route path="/templates/carpet-cleaner-invoice-template" element={<CarpetCleanerInvoiceTemplate />} />
+              
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/templates/:trade/:location" element={<ProgrammaticSEO />} />
               <Route path="/get-started" element={<Auth />} />
