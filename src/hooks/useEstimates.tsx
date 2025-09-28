@@ -128,7 +128,7 @@ export const useEstimates = () => {
 
   const updateEstimate = async (id: string, updates: Partial<Estimate>): Promise<void> => {
     try {
-      const updateData = { ...updates };
+      const updateData: any = { ...updates };
       if (updates.items) {
         updateData.items = updates.items as any; // Cast to handle Json type
       }
