@@ -115,7 +115,7 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <Routes>
-              <Route path="/e/:slug" element={<EstimateView />} />
+              <Route path="/e/:token" element={<EstimateView />} />
               <Route path="/i/:id" element={<InvoiceView />} />
               <Route path="/estimates" element={
                 <ProtectedRoute>

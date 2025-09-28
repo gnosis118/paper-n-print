@@ -29,16 +29,16 @@ serve(async (req) => {
       { auth: { persistSession: false } }
     );
 
-    const { slug } = await req.json();
-    if (!slug) throw new Error("Estimate slug is required");
+    const { token } = await req.json();
+    if (!token) throw new Error("Estimate sharing token is required");
 
-    logStep("Fetching estimate", { slug });
+    logStep("Fetching estimate", { token });
 
-    // Get estimate by slug
+    // Get estimate by sharing token
     const { data: estimate, error: estimateError } = await supabaseClient
       .from('estimates')
       .select('*')
-      .eq('public_slug', slug)
+      .eq('sharing_token', token)
       .single();
 
     if (estimateError || !estimate) {
@@ -87,11 +87,11 @@ serve(async (req) => {
         },
       ],
       mode: 'payment',
-      success_url: `${req.headers.get("origin")}/e/${slug}?success=true`,
-      cancel_url: `${req.headers.get("origin")}/e/${slug}?canceled=true`,
+      success_url: `${req.headers.get("origin")}/e/${token}?success=true`,
+      cancel_url: `${req.headers.get("origin")}/e/${token}?canceled=true`,
       metadata: {
         estimate_id: estimate.id,
-        estimate_slug: slug,
+        estimate_token: token,
       },
     });
 

@@ -33,7 +33,7 @@ interface Estimate {
 }
 
 const EstimateView: React.FC = () => {
-  const { slug } = useParams<{ slug: string }>();
+  const { token } = useParams<{ token: string }>();
   const [searchParams] = useSearchParams();
   const [estimate, setEstimate] = useState<Estimate | null>(null);
   const [loading, setLoading] = useState(true);
@@ -45,14 +45,14 @@ const EstimateView: React.FC = () => {
   const canceled = searchParams.get('canceled') === 'true';
 
   useEffect(() => {
-    if (!slug) return;
+    if (!token) return;
 
     const fetchEstimate = async () => {
       try {
         const { data, error } = await supabase
           .from('estimates')
           .select('*')
-          .eq('public_slug', slug)
+          .eq('sharing_token', token)
           .single();
 
         if (error) throw error;
@@ -73,7 +73,7 @@ const EstimateView: React.FC = () => {
     };
 
     fetchEstimate();
-  }, [slug]);
+  }, [token]);
 
   const handleAcceptAndPay = async () => {
     if (!estimate || !termsAccepted) return;
@@ -81,7 +81,7 @@ const EstimateView: React.FC = () => {
     setProcessing(true);
     try {
       const { data, error } = await supabase.functions.invoke('estimate-checkout', {
-        body: { slug },
+        body: { token },
       });
 
       if (error) throw error;

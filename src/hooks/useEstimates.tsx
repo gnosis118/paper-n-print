@@ -23,7 +23,9 @@ export interface Estimate {
   deposit_type: 'percent' | 'fixed';
   deposit_value: number;
   status: 'draft' | 'sent' | 'accepted' | 'invoiced';
-  public_slug: string;
+  sharing_token: string;
+  sharing_enabled: boolean;
+  sharing_expires_at?: string;
   terms?: string;
   created_at: string;
   updated_at: string;
@@ -80,9 +82,6 @@ export const useEstimates = () => {
     if (!user) throw new Error('User not authenticated');
 
     try {
-      // Generate a unique slug
-      const slug = `est-${Date.now()}-${Math.random().toString(36).substr(2, 6)}`;
-      
       const insertData = {
         number: estimateData.number || `EST-${new Date().getFullYear()}-${String(Date.now()).slice(-6)}`,
         title: estimateData.title || '',
@@ -95,12 +94,12 @@ export const useEstimates = () => {
         deposit_value: estimateData.deposit_value || 0,
         terms: estimateData.terms,
         user_id: user.id,
-        public_slug: slug,
+        sharing_enabled: true,
       };
 
       const { data, error } = await supabase
         .from('estimates')
-        .insert(insertData)
+        .insert([insertData])
         .select()
         .single();
 

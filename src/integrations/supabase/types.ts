@@ -154,6 +154,9 @@ export type Database = {
           number: string
           payment_intent_id: string | null
           public_slug: string
+          sharing_enabled: boolean | null
+          sharing_expires_at: string | null
+          sharing_token: string | null
           status: string | null
           subtotal: number | null
           tax_amount: number | null
@@ -177,6 +180,9 @@ export type Database = {
           number: string
           payment_intent_id?: string | null
           public_slug: string
+          sharing_enabled?: boolean | null
+          sharing_expires_at?: string | null
+          sharing_token?: string | null
           status?: string | null
           subtotal?: number | null
           tax_amount?: number | null
@@ -200,6 +206,9 @@ export type Database = {
           number?: string
           payment_intent_id?: string | null
           public_slug?: string
+          sharing_enabled?: boolean | null
+          sharing_expires_at?: string | null
+          sharing_token?: string | null
           status?: string | null
           subtotal?: number | null
           tax_amount?: number | null

@@ -144,8 +144,8 @@ const Estimates: React.FC = () => {
     }
   };
 
-  const copyEstimateLink = (slug: string) => {
-    const url = `${window.location.origin}/e/${slug}`;
+  const copyEstimateLink = (token: string) => {
+    const url = `${window.location.origin}/e/${token}`;
     navigator.clipboard.writeText(url);
     toast({ title: "Estimate link copied to clipboard" });
   };
@@ -428,7 +428,7 @@ const Estimates: React.FC = () => {
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => copyEstimateLink(estimate.public_slug)}
+                        onClick={() => copyEstimateLink(estimate.sharing_token)}
                       >
                         <Copy className="w-3 h-3 mr-1" />
                         Copy Link
@@ -437,7 +437,7 @@ const Estimates: React.FC = () => {
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => window.open(`/e/${estimate.public_slug}`, '_blank')}
+                        onClick={() => window.open(`/e/${estimate.sharing_token}`, '_blank')}
                       >
                         <Eye className="w-3 h-3 mr-1" />
                         Preview
