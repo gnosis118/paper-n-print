@@ -78,9 +78,13 @@ export default function Auth() {
   const handleEmailAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!validateForm()) return;
+    if (!validateForm()) {
+      console.log('Form validation failed:', errors);
+      return;
+    }
     
     setLoading(true);
+    console.log('Starting auth process:', { isSignUp, email: email.substring(0, 5) + '...' });
 
     try {
       if (isSignUp) {
@@ -145,6 +149,7 @@ export default function Auth() {
 
   const handleSocialAuth = async (provider: 'google') => {
     try {
+      console.log('Starting Google OAuth...');
       const { error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
@@ -152,7 +157,11 @@ export default function Auth() {
         }
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error('OAuth error:', error);
+        throw error;
+      }
+      console.log('OAuth initiated successfully');
     } catch (error: any) {
       console.error("Social auth error:", error);
       toast({
