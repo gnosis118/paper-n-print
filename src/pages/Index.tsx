@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { SubscriptionStatus } from "@/components/SubscriptionStatus";
+import PageLayout from "@/components/PageLayout";
 
 const Index = () => {
   const { user, signOut } = useAuth();
@@ -19,35 +20,10 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <nav className="flex items-center justify-between p-4 sm:p-6">
-        <div className="flex items-center space-x-2">
-          <FileText className="w-6 sm:w-8 h-6 sm:h-8 text-invoice-brand" />
-          <span className="text-xl sm:text-2xl font-bold">Invoice Pro</span>
-        </div>
-        <div className="flex items-center space-x-2 sm:space-x-4">
-          {user && (
-            <span className="text-xs sm:text-sm text-muted-foreground hidden sm:inline">Welcome, {user.email}</span>
-          )}
-          <Link to="/templates">
-            <Button variant="ghost" size="sm">Templates</Button>
-          </Link>
-          <Link to="/pricing">
-            <Button variant="ghost" size="sm">Pricing</Button>
-          </Link>
-          <Link to="/invoice">
-            <Button size="sm" className="bg-invoice-brand hover:bg-invoice-brand/90">
-              <span className="hidden sm:inline">Create Invoice</span>
-              <span className="sm:hidden">Create</span>
-            </Button>
-          </Link>
-          <Button onClick={handleSignOut} variant="ghost" size="sm">
-            <LogOut className="w-4 h-4 sm:mr-2" />
-            <span className="hidden sm:inline">Sign Out</span>
-          </Button>
-        </div>
-      </nav>
-
+    <PageLayout 
+      title="Professional Invoice Generator - Create Beautiful Invoices"
+      description="Create professional invoices in minutes with our free invoice generator. Multiple templates, PDF export, and customizable branding for your business."
+    >
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-primary-light to-accent-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
@@ -152,7 +128,7 @@ const Index = () => {
           </Link>
         </div>
       </div>
-    </div>
+    </PageLayout>
   );
 };
 
