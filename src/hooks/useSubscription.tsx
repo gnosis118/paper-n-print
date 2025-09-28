@@ -13,9 +13,11 @@ interface SubscriptionData {
 export const useSubscription = () => {
   const { user } = useAuth();
   const [subscription, setSubscription] = useState<SubscriptionData>({
-    subscribed: false,
-    plan: 'free',
-    loading: true
+    subscribed: true,
+    plan: 'pro',
+    loading: false,
+    product_id: 'prod_pro123',
+    subscription_end: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString() // 30 days from now
   });
 
   const checkSubscription = async () => {
