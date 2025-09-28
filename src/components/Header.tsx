@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import proInvoiceLogo from '@/assets/proinvoice-logo.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,14 +37,11 @@ const Header = () => {
       <div className="container flex h-16 items-center justify-between px-4">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2">
-          <div className="h-8 w-8 rounded bg-primary flex items-center justify-center">
-            <img 
-              src="https://storage.googleapis.com/gpt-engineer-file-uploads/UvIMPethhaONUEnwJNzOOknYYqI2/uploads/1759047768005-Favicon for a profes.png" 
-              alt="Invoice Generator" 
-              className="w-6 h-6"
-            />
-          </div>
-          <span className="font-bold text-lg">InvoicePro</span>
+          <img 
+            src={proInvoiceLogo} 
+            alt="ProInvoice.app - Professional Invoice Generator" 
+            className="h-8"
+          />
         </Link>
 
         {/* Desktop Navigation */}
