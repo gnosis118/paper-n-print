@@ -10,12 +10,19 @@ const Header = () => {
 
   const navigation = [
     { name: 'Home', href: '/' },
+    { name: 'Templates', href: '/templates' },
     { name: 'Products', href: '/products' },
     { name: 'Pricing', href: '/pricing' },
     { name: 'Blog', href: '/blog' },
     { name: 'Docs', href: '/docs' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
+  ];
+
+  const legalLinks = [
+    { name: 'Privacy Policy', href: '/privacy' },
+    { name: 'Terms & Conditions', href: '/terms' },
+    { name: 'Security', href: '/security' },
   ];
 
   const isActivePath = (path: string) => {
@@ -107,6 +114,27 @@ const Header = () => {
               </Link>
             ))}
             <div className="pt-4 mt-4 border-t space-y-2">
+              {/* Legal Links */}
+              <div className="mb-3">
+                <div className="flex flex-wrap gap-2 text-xs">
+                  {legalLinks.map((link, index) => (
+                    <React.Fragment key={link.name}>
+                      <Link
+                        to={link.href}
+                        className="text-muted-foreground hover:text-primary transition-colors"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {link.name}
+                      </Link>
+                      {index < legalLinks.length - 1 && (
+                        <span className="text-muted-foreground">•</span>
+                      )}
+                    </React.Fragment>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Auth Buttons */}
               <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
                 <Button variant="ghost" size="sm" className="w-full justify-start">
                   Sign In
