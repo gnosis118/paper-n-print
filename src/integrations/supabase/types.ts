@@ -37,6 +37,7 @@ export type Database = {
       }
       business_profiles: {
         Row: {
+          accent_color: string | null
           address: string | null
           created_at: string
           email: string
@@ -49,6 +50,7 @@ export type Database = {
           website: string | null
         }
         Insert: {
+          accent_color?: string | null
           address?: string | null
           created_at?: string
           email: string
@@ -61,6 +63,7 @@ export type Database = {
           website?: string | null
         }
         Update: {
+          accent_color?: string | null
           address?: string | null
           created_at?: string
           email?: string
