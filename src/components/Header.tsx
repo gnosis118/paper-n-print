@@ -12,7 +12,12 @@ const Header = () => {
   const navigation = [
     { name: 'Templates', href: '/invoice-templates' },
     { name: 'Estimates', href: '/estimate-templates' },
+    { name: 'Products', href: '/products' },
     { name: 'Pricing', href: '/pricing' },
+    { name: 'About', href: '/about' },
+    { name: 'Contact', href: '/contact' },
+    { name: 'Docs', href: '/docs' },
+    { name: 'Blog', href: '/blog' },
   ];
 
   const legalLinks = [
