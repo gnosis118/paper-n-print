@@ -67,6 +67,10 @@ import SnowRemovalInvoiceTemplate from "./pages/templates/SnowRemovalInvoiceTemp
 import WindowCleaningInvoiceTemplate from "./pages/templates/WindowCleaningInvoiceTemplate";
 import MassageTherapistInvoiceTemplate from "./pages/templates/MassageTherapistInvoiceTemplate";
 import CarpetCleanerInvoiceTemplate from "./pages/templates/CarpetCleanerInvoiceTemplate";
+import GetStarted from './pages/GetStarted';
+import EstimateTemplates from './pages/EstimateTemplates';
+import WaveVsProInvoice from './pages/compare/WaveVsProInvoice';
+import InvoiceSimpleVsProInvoice from './pages/compare/InvoiceSimpleVsProInvoice';
 
 // Import all industry-specific invoice templates
 import ConstructionTemplate from "./pages/invoice-templates/Construction";
@@ -229,7 +233,10 @@ const App = () => (
               
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/templates/:trade/:location" element={<ProgrammaticSEO />} />
-              <Route path="/get-started" element={<Auth />} />
+              <Route path="/get-started" element={<GetStarted />} />
+              <Route path="/estimates" element={<EstimateTemplates />} />
+              <Route path="/compare/wave-vs-proinvoice" element={<WaveVsProInvoice />} />
+              <Route path="/compare/invoice-simple-vs-proinvoice" element={<InvoiceSimpleVsProInvoice />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

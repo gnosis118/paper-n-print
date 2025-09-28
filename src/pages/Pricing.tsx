@@ -1,464 +1,227 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button"; 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Check, Zap, Building, Users, Crown } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/hooks/useAuth";
-import { toast } from "sonner";
-import PageLayout from "@/components/PageLayout";
-import { analytics } from "@/lib/analytics";
+import PageLayout from '@/components/PageLayout';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Check, Star, Users } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-const plans = [
-  {
-    name: "Free",
-    description: "Perfect for trying out our service",
-    price: 0,
-    yearlyPrice: 0,
-    credits: 3,
-    effectivePrice: 0,
-    lookupKey: "free",
-    icon: Zap,
-    features: [
-      "3 invoices per month",
-      "All professional templates",
-      "Basic customization",
-      "PDF export with watermark",
-      "Email support"
-    ],
-    limitations: [
-      "Watermark on invoices",
-      "Limited to 3 invoices/month"
-    ],
-    isFree: true
-  },
-  {
-    name: "Starter",
-    description: "Perfect for freelancers and small businesses", 
-    price: 7,
-    yearlyPrice: 70,
-    credits: 30,
-    effectivePrice: 0.23,
-    lookupKey: "starter",
-    icon: Building,
-    stripeMonthlyId: "price_1SCH0VGpz30x93KjiBeySJs6",
-    stripeYearlyId: "price_1SCH2dGpz30x93KjB0D7HLle",
-    features: [
-      "30 invoices per month",
-      "All professional templates", 
-      "Custom branding & logo",
-      "PDF export without watermark",
-      "Priority email support",
-      "Client management",
-      "Payment tracking"
-    ],
-    comparison: "vs Zoho Invoice ($10/mo), Wave (limited features)"
-  },
-  {
-    name: "Pro",
-    description: "Perfect for growing businesses and agencies",
-    price: 14,
-    yearlyPrice: 140,  
-    credits: -1, // Unlimited
-    effectivePrice: 0,
-    lookupKey: "pro",
-    icon: Crown,
-    popular: true,
-    stripeMonthlyId: "price_1SCH1IGpz30x93KjBDXYrvZC",
-    stripeYearlyId: "price_1SCH3PGpz30x93KjDe2eeXcj",
-    features: [
-      "Unlimited invoices",
-      "All templates + premium designs",
-      "Advanced customization",
-      "White-label invoices",
-      "Priority phone support",
-      "Team collaboration (up to 5 users)",
-      "Payment reminders",
-      "Advanced analytics"
-    ],
-    comparison: "vs Invoice Simple ($15/mo), competitors charge $20+"
-  }
-];
-
-export default function Pricing() {
-  const [isLoading, setIsLoading] = useState<string | null>(null);
-  const [isYearly, setIsYearly] = useState(false);
-  const { user } = useAuth();
-
-  const handleSubscribe = async (plan: any, billingCycle: 'monthly' | 'annual') => {
-    if (plan.isFree) {
-      // Handle free plan signup
-      if (!user) {
-        toast.error("Please sign in to start with our free plan");
-        return;
-      }
-      toast.success("You're already on our free plan! Start creating invoices.");
-      return;
-    }
-
-    if (!user) {
-      toast.error("Please sign in to subscribe");
-      return;
-    }
-
-    const planKey = `${plan.lookupKey}_${billingCycle}`;
-    setIsLoading(planKey);
-    
-    try {
-      const priceId = billingCycle === 'annual' ? plan.stripeYearlyId : plan.stripeMonthlyId;
-      
-      const { data, error } = await supabase.functions.invoke('create-checkout', {
-        body: { 
-          price_id: priceId,
-          plan_type: plan.lookupKey,
-          billing_cycle: billingCycle
-        }
-      });
-
-      if (error) throw error;
-
-      if (data?.url) {
-        // Track subscription attempt
-        analytics.trackButtonClick('subscribe', `${plan.name}_${billingCycle}`);
-        window.open(data.url, '_blank');
-      }
-    } catch (error) {
-      console.error('Subscription error:', error);
-      toast.error("Failed to start subscription process");
-    } finally {
-      setIsLoading(null);
-    }
-  };
-
+const Pricing = () => {
   return (
     <PageLayout
-      title="Pricing Plans - Free & Premium Invoice Generator | InvoicePro"
-      description="Start free with 3 invoices/month. Upgrade to Starter (30 invoices, $7/mo) or Pro (unlimited invoices, $14/mo) for no watermarks. Benchmarked against Zoho Invoice, Wave, and Invoice Simple."
+      title="Pricing - ProInvoice"
+      description="Simple, transparent pricing for contractors and service businesses. 7-day free trial, no credit card required. Get paid faster with estimates and invoices."
+      canonical="/pricing"
     >
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 py-12">
+        {/* Hero Section */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-foreground mb-4">
-            Choose Your Plan
+            Simple, Transparent Pricing
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Start free with 3 invoices per month. Upgrade to Starter (30 invoices) or Pro (unlimited invoices), no watermarks, and premium features.
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            Get paid faster with professional estimates and invoices. Start your 7-day free trial today—no credit card required.
           </p>
-          
-          <div className="flex items-center justify-center gap-4 mt-8">
-            <span className={`text-sm ${!isYearly ? 'text-foreground font-medium' : 'text-muted-foreground'}`}>
-              Monthly
-            </span>
-            <button
-              onClick={() => setIsYearly(!isYearly)}
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                isYearly ? 'bg-primary' : 'bg-muted'
-              }`}
-            >
-              <span
-                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                  isYearly ? 'translate-x-6' : 'translate-x-1'
-                }`}
-              />
-            </button>
-            <span className={`text-sm ${isYearly ? 'text-foreground font-medium' : 'text-muted-foreground'}`}>
-              Yearly
-            </span>
-            <Badge variant="secondary" className="ml-2">
-              Save 2 months
-            </Badge>
-          </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
-          {plans.map((plan) => {
-            const Icon = plan.icon;
-            const displayPrice = isYearly ? plan.yearlyPrice : plan.price;
-            const period = isYearly ? '/year' : (plan.isFree ? '' : '/month');
-            const billingCycle = isYearly ? 'annual' : 'monthly';
-            const planKey = `${plan.lookupKey}_${billingCycle}`;
-            
-            return (
-              <Card 
-                key={plan.name} 
-                className={`relative ${
-                  plan.popular 
-                    ? 'border-primary shadow-lg scale-105' 
-                    : plan.isFree
-                    ? 'border-green-500 bg-green-50/50 dark:bg-green-950/20'
-                    : 'border-border'
-                } hover:shadow-xl transition-all duration-300`}
-              >
-                {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <Badge className="bg-primary text-primary-foreground">
-                      Most Popular
-                    </Badge>
-                  </div>
-                )}
-                
-                {plan.isFree && (
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <Badge className="bg-green-600 text-white">
-                      Start Free
-                    </Badge>
-                  </div>
-                )}
-                
-                <CardHeader className="text-center pb-4">
-                  <div className="w-12 h-12 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
-                    <Icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <CardTitle className="text-2xl">{plan.name}</CardTitle>
-                  <CardDescription className="text-sm">
-                    {plan.description}
-                  </CardDescription>
-                  <div className="mt-4">
-                    <span className="text-4xl font-bold text-foreground">
-                      {plan.isFree ? 'Free' : `$${displayPrice}`}
-                    </span>
-                    <span className="text-muted-foreground">{period}</span>
-                  </div>
-                   <div className="text-sm text-muted-foreground">
-                     {plan.credits === -1 ? 'Unlimited invoices' : `${plan.credits} invoices`} 
-                     {plan.isFree || plan.credits === -1 ? '' : ` • $${plan.effectivePrice.toFixed(2)} per invoice`}
-                     {plan.comparison && (
-                       <div className="text-xs mt-1 text-green-600 dark:text-green-400">
-                         💰 {plan.comparison}
-                       </div>
-                     )}
-                   </div>
-                </CardHeader>
-                
-                <CardContent className="px-6 pb-6">
-                  <ul className="space-y-3">
-                    {plan.features.map((feature, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <Check className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                        <span className="text-sm text-muted-foreground">{feature}</span>
-                      </li>
-                    ))}
-                    {plan.limitations?.map((limitation, index) => (
-                      <li key={`limit-${index}`} className="flex items-start gap-3">
-                        <div className="w-5 h-5 mt-0.5 flex-shrink-0 rounded-full bg-amber-100 dark:bg-amber-900/20 flex items-center justify-center">
-                          <span className="text-xs text-amber-600">!</span>
-                        </div>
-                        <span className="text-sm text-amber-600 dark:text-amber-400">{limitation}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-                
-                <CardFooter className="px-6 pb-6">
-                  <Button
-                    className="w-full"
-                    variant={plan.popular ? "default" : plan.isFree ? "secondary" : "outline"}
-                    onClick={() => handleSubscribe(plan, billingCycle)}
-                    disabled={isLoading === planKey}
-                  >
-                    {isLoading === planKey ? "Processing..." : 
-                     plan.isFree ? "Get Started Free" : "Subscribe Now"}
-                  </Button>
-                </CardFooter>
-              </Card>
-            );
-          })}
+        {/* First Invoice Guarantee */}
+        <div className="bg-gradient-to-r from-primary/10 to-primary/5 rounded-lg p-6 mb-12 text-center">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <Star className="w-5 h-5 text-primary fill-primary" />
+            <span className="font-semibold text-primary">First Invoice Guarantee</span>
+            <Star className="w-5 h-5 text-primary fill-primary" />
+          </div>
+          <p className="text-foreground font-medium">
+            If your first invoice doesn't send in 60 seconds, we'll comp your entire first month.
+          </p>
         </div>
 
-        {/* Competitor Comparison */}
-        <div className="bg-muted/30 rounded-2xl p-8 mb-12">
-          <h2 className="text-2xl font-bold mb-6 text-center">How We Compare</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b">
-                  <th className="text-left py-3 px-4 font-semibold">Feature</th>
-                  <th className="text-center py-3 px-4 font-semibold text-primary">InvoicePro</th>
-                  <th className="text-center py-3 px-4 font-semibold text-muted-foreground">Zoho Invoice</th>
-                  <th className="text-center py-3 px-4 font-semibold text-muted-foreground">Wave</th>
-                  <th className="text-center py-3 px-4 font-semibold text-muted-foreground">Invoice Simple</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y">
-                <tr>
-                  <td className="py-3 px-4 font-medium">Starter Plan Price</td>
-                  <td className="py-3 px-4 text-center text-primary font-bold">$7/mo</td>
-                  <td className="py-3 px-4 text-center text-muted-foreground">$10/mo</td>
-                  <td className="py-3 px-4 text-center text-muted-foreground">Free*</td>
-                  <td className="py-3 px-4 text-center text-muted-foreground">$15/mo</td>
-                </tr>
-                <tr className="bg-muted/20">
-                  <td className="py-3 px-4 font-medium">2-Click Payments</td>
-                  <td className="py-3 px-4 text-center"><Check className="w-4 h-4 text-primary mx-auto" /></td>
-                  <td className="py-3 px-4 text-center text-muted-foreground">Manual setup</td>
-                  <td className="py-3 px-4 text-center text-muted-foreground">Limited</td>
-                  <td className="py-3 px-4 text-center text-muted-foreground">No</td>
-                </tr>
-                <tr>
-                  <td className="py-3 px-4 font-medium">White-label Invoices</td>
-                  <td className="py-3 px-4 text-center"><Check className="w-4 h-4 text-primary mx-auto" /></td>
-                  <td className="py-3 px-4 text-center text-muted-foreground">Premium only</td>
-                  <td className="py-3 px-4 text-center text-muted-foreground">No</td>
-                  <td className="py-3 px-4 text-center text-muted-foreground">Pro only</td>
-                </tr>
-                <tr className="bg-muted/20">
-                  <td className="py-3 px-4 font-medium">Invoice Creation Speed</td>
-                  <td className="py-3 px-4 text-center text-primary font-bold">30 seconds</td>
-                  <td className="py-3 px-4 text-center text-muted-foreground">2-3 minutes</td>
-                  <td className="py-3 px-4 text-center text-muted-foreground">2-3 minutes</td>
-                  <td className="py-3 px-4 text-center text-muted-foreground">1-2 minutes</td>
-                </tr>
-                <tr>
-                  <td className="py-3 px-4 font-medium">Team Collaboration</td>
-                  <td className="py-3 px-4 text-center"><Check className="w-4 h-4 text-primary mx-auto" /></td>
-                  <td className="py-3 px-4 text-center text-muted-foreground">$20+/mo</td>
-                  <td className="py-3 px-4 text-center text-muted-foreground">No</td>
-                  <td className="py-3 px-4 text-center text-muted-foreground">$25+/mo</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="mt-4 text-xs text-muted-foreground text-center">
-            * Wave is free but lacks advanced payment features and requires complex setup
-          </div>
-        </div>
-
-        {/* Template Pack Add-ons */}
-        <div className="bg-gradient-to-r from-accent/10 to-accent/5 rounded-2xl p-8 mb-12">
-          <h2 className="text-2xl font-bold mb-6 text-center">Template Pack Add-ons</h2>
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <Card className="text-center">
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Building className="w-6 h-6 text-accent" />
+        {/* Pricing Cards */}
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
+          {/* Monthly Plan */}
+          <Card className="border-2">
+            <CardHeader className="text-center pb-4">
+              <CardTitle className="text-2xl">Monthly</CardTitle>
+              <div className="text-4xl font-bold text-foreground">
+                $19
+                <span className="text-lg font-normal text-muted-foreground">/month</span>
+              </div>
+              <p className="text-muted-foreground">Perfect for getting started</p>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <Button asChild className="w-full" size="lg">
+                <Link to="/get-started">Start 7-Day Free Trial</Link>
+              </Button>
+              <div className="space-y-3 text-sm">
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" />
+                  <span>Unlimited estimates & invoices</span>
                 </div>
-                <h3 className="font-semibold mb-2">Construction Pack</h3>
-                <p className="text-sm text-muted-foreground mb-4">5 specialized templates for contractors, builders, and trades</p>
-                <div className="text-2xl font-bold text-accent mb-4">$9.99</div>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="w-full"
-                  onClick={() => toast.success("Coming soon! Template packs will be available in the next update.")}
-                >
-                  Add to Plan
-                </Button>
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" />
+                  <span>Online deposit collection</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" />
+                  <span>Auto-convert estimates to invoices</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" />
+                  <span>QR code payments</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" />
+                  <span>Stripe, ACH, Apple Pay, Google Pay</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" />
+                  <span>Industry-specific templates</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" />
+                  <span>Mobile-optimized</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" />
+                  <span>Email support</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Annual Plan */}
+          <Card className="border-2 border-primary relative">
+            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+              <Badge className="bg-primary text-primary-foreground px-4 py-1">
+                2 MONTHS FREE
+              </Badge>
+            </div>
+            <CardHeader className="text-center pb-4 pt-6">
+              <CardTitle className="text-2xl">Annual</CardTitle>
+              <div className="text-4xl font-bold text-foreground">
+                $15
+                <span className="text-lg font-normal text-muted-foreground">/month</span>
+              </div>
+              <div className="text-sm text-muted-foreground">
+                Billed annually ($180/year)
+              </div>
+              <div className="text-sm text-green-600 font-medium">
+                Save $68 vs monthly
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <Button asChild className="w-full" size="lg">
+                <Link to="/get-started">Start 7-Day Free Trial</Link>
+              </Button>
+              <div className="space-y-3 text-sm">
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" />
+                  <span>Everything in Monthly</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" />
+                  <span>Priority support</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" />
+                  <span>Advanced analytics</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" />
+                  <span>Custom branding</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Referral Program */}
+        <Card className="mb-12 bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
+          <CardContent className="text-center p-8">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <Users className="w-6 h-6 text-primary" />
+              <h2 className="text-2xl font-bold">Referral Rewards</h2>
+            </div>
+            <p className="text-lg text-muted-foreground mb-4">
+              Refer 3 friends who sign up and get 1 month completely free!
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Available in your account dashboard after signup. Track referrals and claim rewards easily.
+            </p>
+          </CardContent>
+        </Card>
+
+        {/* FAQ */}
+        <div className="max-w-3xl mx-auto mb-12">
+          <h2 className="text-2xl font-bold text-center mb-8">Frequently Asked Questions</h2>
+          <div className="space-y-6">
+            <Card>
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">Is the 7-day free trial really free?</h3>
+                <p className="text-muted-foreground">
+                  Yes, absolutely. No credit card required to start your trial. You can create unlimited estimates and invoices during your trial period.
+                </p>
               </CardContent>
             </Card>
             
-            <Card className="text-center">
+            <Card>
               <CardContent className="p-6">
-                <div className="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Crown className="w-6 h-6 text-accent" />
-                </div>
-                <h3 className="font-semibold mb-2">Creative Pack</h3>
-                <p className="text-sm text-muted-foreground mb-4">5 designer templates for agencies, photographers, and creatives</p>
-                <div className="text-2xl font-bold text-accent mb-4">$9.99</div>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="w-full"
-                  onClick={() => toast.success("Coming soon! Template packs will be available in the next update.")}
-                >
-                  Add to Plan
-                </Button>
+                <h3 className="font-semibold mb-2">What payment methods do you accept?</h3>
+                <p className="text-muted-foreground">
+                  We support all major credit cards, ACH bank transfers, Apple Pay, and Google Pay through our Stripe integration. Your customers can pay however they prefer.
+                </p>
               </CardContent>
             </Card>
-            
-            <Card className="text-center">
+
+            <Card>
               <CardContent className="p-6">
-                <div className="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="w-6 h-6 text-accent" />
-                </div>
-                <h3 className="font-semibold mb-2">Service Pack</h3>
-                <p className="text-sm text-muted-foreground mb-4">5 templates for consultants, lawyers, and service providers</p>
-                <div className="text-2xl font-bold text-accent mb-4">$9.99</div>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="w-full"
-                  onClick={() => toast.success("Coming soon! Template packs will be available in the next update.")}
-                >
-                  Add to Plan
-                </Button>
+                <h3 className="font-semibold mb-2">Can I cancel anytime?</h3>
+                <p className="text-muted-foreground">
+                  Yes, you can cancel your subscription at any time. No long-term contracts or cancellation fees. You'll retain access until the end of your current billing period.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">Do you offer refunds?</h3>
+                <p className="text-muted-foreground">
+                  We offer a 30-day money-back guarantee. If you're not satisfied within your first 30 days, we'll provide a full refund, no questions asked.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">Is my data secure?</h3>
+                <p className="text-muted-foreground">
+                  Absolutely. We use bank-level encryption, secure servers, and follow industry best practices. Your data is regularly backed up and never shared with third parties.
+                </p>
               </CardContent>
             </Card>
           </div>
         </div>
 
-        {/* Trust & Security */}
-        <div className="bg-primary/5 rounded-2xl p-8 mb-12">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold mb-4">Trusted & Secure</h2>
-            <p className="text-muted-foreground">Your data and payments are protected by industry-leading security</p>
+        {/* Bottom CTA */}
+        <div className="text-center bg-primary/5 rounded-lg p-8">
+          <h2 className="text-2xl font-bold mb-4">Ready to Get Paid Faster?</h2>
+          <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+            Join thousands of contractors and service businesses who use ProInvoice to streamline their billing and get paid faster.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button asChild size="lg">
+              <Link to="/get-started">Start 7-Day Free Trial</Link>
+            </Button>
+            <Button variant="outline" size="lg" asChild>
+              <Link to="/templates">View Templates</Link>
+            </Button>
           </div>
-          
-          <div className="grid md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                <img src="https://stripe.com/img/v3/home/twitter.png" alt="Stripe" className="w-8 h-8" />
-              </div>
-              <h3 className="font-semibold text-sm">Powered by Stripe</h3>
-              <p className="text-xs text-muted-foreground mt-1">Industry-leading payment processing</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                <span className="text-2xl">🔒</span>
-              </div>
-              <h3 className="font-semibold text-sm">SSL Encrypted</h3>
-              <p className="text-xs text-muted-foreground mt-1">256-bit SSL encryption</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                <span className="text-2xl">🛡️</span>
-              </div>
-              <h3 className="font-semibold text-sm">SOC 2 Compliant</h3>
-              <p className="text-xs text-muted-foreground mt-1">Enterprise-grade security</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                <span className="text-2xl">🏆</span>
-              </div>
-              <h3 className="font-semibold text-sm">99.9% Uptime</h3>
-              <p className="text-xs text-muted-foreground mt-1">Reliable service guarantee</p>
-            </div>
-          </div>
-        </div>
-        <div className="bg-gradient-to-r from-primary/10 to-primary/5 rounded-2xl p-8 mb-12 text-center">
-          <h2 className="text-2xl font-bold mb-4">Why Choose InvoicePro?</h2>
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="flex flex-col items-center">
-              <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mb-3">
-                <Zap className="w-6 h-6 text-primary" />
-              </div>
-              <h3 className="font-semibold mb-2">30-Second Setup</h3>
-              <p className="text-sm text-muted-foreground">Create professional invoices in seconds, not minutes</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mb-3">
-                <Building className="w-6 h-6 text-primary" />
-              </div>
-              <h3 className="font-semibold mb-2">Get Paid 3x Faster</h3>
-              <p className="text-sm text-muted-foreground">Stripe integration with 2-click payments</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mb-3">
-                <Crown className="w-6 h-6 text-primary" />
-              </div>
-              <h3 className="font-semibold mb-2">Professional Templates</h3>
-              <p className="text-sm text-muted-foreground">Industry-specific designs that impress clients</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="text-center">
-          <p className="text-muted-foreground">
-            All paid plans include a 14-day free trial. Cancel anytime. No contracts.
+          <p className="text-sm text-muted-foreground mt-4">
+            No credit card required • Cancel anytime • 30-day money-back guarantee
           </p>
         </div>
       </div>
     </PageLayout>
   );
-}
+};
+
+export default Pricing;
