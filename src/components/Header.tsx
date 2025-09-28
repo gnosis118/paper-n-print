@@ -10,15 +10,9 @@ const Header = () => {
   const location = useLocation();
 
   const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'Invoice Templates', href: '/invoice-templates' },
-    { name: 'Templates', href: '/templates' },
-    { name: 'Products', href: '/products' },
+    { name: 'Templates', href: '/invoice-templates' },
+    { name: 'Estimates', href: '/estimate-templates' },
     { name: 'Pricing', href: '/pricing' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'Docs', href: '/docs' },
-    { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact' },
   ];
 
   const legalLinks = [

@@ -234,7 +234,7 @@ const App = () => (
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/templates/:trade/:location" element={<ProgrammaticSEO />} />
               <Route path="/get-started" element={<GetStarted />} />
-              <Route path="/estimates" element={<EstimateTemplates />} />
+              <Route path="/estimate-templates" element={<EstimateTemplates />} />
               <Route path="/compare/wave-vs-proinvoice" element={<WaveVsProInvoice />} />
               <Route path="/compare/invoice-simple-vs-proinvoice" element={<InvoiceSimpleVsProInvoice />} />
               <Route path="*" element={<NotFound />} />
