@@ -7,6 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { SubscriptionStatus } from "@/components/SubscriptionStatus";
 import PageLayout from "@/components/PageLayout";
 import { LazyFeatureGrid, LazyTestimonialGrid, LazyComparisonTable } from "@/components/LazyIndex";
+import proInvoiceLogo from '@/assets/proinvoice-logo.png';
 
 const Index = () => {
   const { user, signOut } = useAuth();
@@ -26,7 +27,16 @@ const Index = () => {
       description="Create professional invoices in 30 seconds with embedded Stripe checkout. Get paid 3x faster with smart dunning and auto-reminders. Free plan: 3 invoices/month."
     >
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-primary-light to-accent-light">
+      <div 
+        className="bg-gradient-to-br from-primary-light to-accent-light relative overflow-hidden"
+        style={{
+          backgroundImage: `url(${proInvoiceLogo})`,
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          backgroundColor: 'hsl(var(--primary-light))'
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
           <div className="text-center">
             <div className="inline-flex items-center space-x-2 bg-white/80 rounded-full px-3 sm:px-4 py-2 mb-4 sm:mb-6">
