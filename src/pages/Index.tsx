@@ -30,17 +30,21 @@ const Index = () => {
           <div className="text-center">
             <div className="inline-flex items-center space-x-2 bg-white/80 rounded-full px-3 sm:px-4 py-2 mb-4 sm:mb-6">
               <Star className="w-3 sm:w-4 h-3 sm:h-4 text-accent" />
-              <span className="text-xs sm:text-sm font-medium">Professional Invoice Generator</span>
+              <span className="text-xs sm:text-sm font-medium">Independent Invoice Generator</span>
             </div>
             
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-primary mb-4 sm:mb-6">
-              Create Beautiful Invoices in Minutes
+              Create & Send Invoices in 30 Seconds
             </h1>
             
             <p className="text-base sm:text-xl text-primary/80 mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
-              Professional invoicing made simple. Choose from multiple templates, 
-              customize your branding, and generate PDF invoices instantly.
+              Create compliant invoices with embedded payments and auto-reminders. 
+              Get paid 3x faster with our Stripe-powered invoice system.
             </p>
+            
+            <div className="text-xs sm:text-sm text-primary/60 mb-4">
+              <em>Not affiliated with ProInvoice (.co) or similarly named applications</em>
+            </div>
             
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
               <Link to="/invoice">
@@ -70,10 +74,10 @@ const Index = () => {
 
         <div className="text-center mb-8 sm:mb-16">
           <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-3 sm:mb-4">
-            Everything You Need for Professional Invoicing
+            Why Choose Our Invoice Generator?
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
-            From small businesses to freelancers, our invoice generator has all the features you need.
+            Built for speed, powered by Stripe, trusted by thousands of businesses worldwide.
           </p>
         </div>
 
@@ -82,9 +86,9 @@ const Index = () => {
             <div className="w-10 sm:w-12 h-10 sm:h-12 bg-primary-light rounded-lg flex items-center justify-center mx-auto mb-3 sm:mb-4">
               <Zap className="w-5 sm:w-6 h-5 sm:h-6 text-primary" />
             </div>
-            <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">Lightning Fast</h3>
+            <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">30-Second Creation</h3>
             <p className="text-sm sm:text-base text-muted-foreground">
-              Create professional invoices in under 2 minutes with our intuitive form and live preview.
+              Create professional invoices in 30 seconds with auto-fill and smart templates.
             </p>
           </div>
 
@@ -92,9 +96,9 @@ const Index = () => {
             <div className="w-10 sm:w-12 h-10 sm:h-12 bg-accent-light rounded-lg flex items-center justify-center mx-auto mb-3 sm:mb-4">
               <FileText className="w-5 sm:w-6 h-5 sm:h-6 text-accent" />
             </div>
-            <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">Multiple Templates</h3>
+            <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">2-Click Payments</h3>
             <p className="text-sm sm:text-base text-muted-foreground">
-              Choose from Clean, Modern, or Trades templates. Each designed for different business needs.
+              Stripe-powered payment links embedded in every invoice. Customers pay instantly.
             </p>
           </div>
 
@@ -102,9 +106,9 @@ const Index = () => {
             <div className="w-10 sm:w-12 h-10 sm:h-12 bg-primary-light rounded-lg flex items-center justify-center mx-auto mb-3 sm:mb-4">
               <Download className="w-5 sm:w-6 h-5 sm:h-6 text-primary" />
             </div>
-            <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">PDF Export</h3>
+            <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">Auto Reminders</h3>
             <p className="text-sm sm:text-base text-muted-foreground">
-              Generate high-quality PDF invoices instantly. Perfect formatting for printing or emailing.
+              Automated payment reminders and follow-ups. Never chase payments again.
             </p>
           </div>
         </div>
@@ -114,18 +118,24 @@ const Index = () => {
       <div className="bg-primary text-primary-foreground">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 text-center">
           <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">
-            Ready to Create Your First Invoice?
+            Join 10,000+ Businesses Getting Paid Faster
           </h2>
           <p className="text-lg sm:text-xl mb-6 sm:mb-8 opacity-90 px-4">
-            Join thousands of businesses creating professional invoices every day.
+            Powered by Stripe. Trusted by freelancers and enterprises worldwide.
           </p>
           
-          <Link to="/invoice">
-            <Button size="lg" variant="secondary" className="px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg">
-              <FileText className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
-              Get Started Free
-            </Button>
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
+            <Link to="/invoice">
+              <Button size="lg" variant="secondary" className="px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg">
+                <FileText className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
+                Create Invoice Free
+              </Button>
+            </Link>
+            <div className="flex items-center space-x-2 text-primary-foreground/80">
+              <Shield className="w-4 h-4" />
+              <span className="text-sm">Powered by Stripe</span>
+            </div>
+          </div>
         </div>
       </div>
     </PageLayout>
