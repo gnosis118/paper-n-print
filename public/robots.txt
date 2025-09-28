@@ -1,35 +1,204 @@
+# ProInvoice.app - Professional Invoice Generator
+# Comprehensive robots.txt for optimal SEO
+
+# Googlebot - Allow most content, block sensitive areas
 User-agent: Googlebot
-Disallow: /auth
-Disallow: /business-settings
-Disallow: /invoice
-Disallow: /payment-success
-Disallow: /payment-canceled
 Allow: /
+Allow: /invoice-templates/
+Allow: /templates/
+Allow: /pricing
+Allow: /about
+Allow: /contact
+Allow: /blog
+Allow: /docs
+Allow: /products
+Disallow: /auth*
+Disallow: /business-settings*
+Disallow: /invoice*
+Disallow: /payment-success*
+Disallow: /payment-canceled*
+Disallow: /subscription-management*
+Disallow: /api/
+Disallow: /*?*
+Crawl-delay: 1
 
+# Bingbot - Similar to Googlebot
 User-agent: Bingbot
-Disallow: /auth
-Disallow: /business-settings
-Disallow: /invoice
-Disallow: /payment-success
-Disallow: /payment-canceled
 Allow: /
+Allow: /invoice-templates/
+Allow: /templates/
+Allow: /pricing
+Allow: /about
+Allow: /contact
+Allow: /blog
+Allow: /docs
+Allow: /products
+Disallow: /auth*
+Disallow: /business-settings*
+Disallow: /invoice*
+Disallow: /payment-success*
+Disallow: /payment-canceled*
+Disallow: /subscription-management*
+Disallow: /api/
+Disallow: /*?*
+Crawl-delay: 1
 
+# Social Media Bots - Allow for rich previews
 User-agent: Twitterbot
 Allow: /
+Allow: /invoice-templates/
+Allow: /templates/
+Allow: /pricing
+Allow: /about
+Allow: /contact
+Allow: /blog
+Allow: /docs
+Allow: /products
+Disallow: /auth*
+Disallow: /business-settings*
+Disallow: /invoice*
+Disallow: /payment-success*
+Disallow: /payment-canceled*
+Disallow: /subscription-management*
 
 User-agent: facebookexternalhit
 Allow: /
+Allow: /invoice-templates/
+Allow: /templates/
+Allow: /pricing
+Allow: /about
+Allow: /contact
+Allow: /blog
+Allow: /docs
+Allow: /products
+Disallow: /auth*
+Disallow: /business-settings*
+Disallow: /invoice*
+Disallow: /payment-success*
+Disallow: /payment-canceled*
+Disallow: /subscription-management*
 
 User-agent: LinkedInBot
 Allow: /
+Allow: /invoice-templates/
+Allow: /templates/
+Allow: /pricing
+Allow: /about
+Allow: /contact
+Allow: /blog
+Allow: /docs
+Allow: /products
+Disallow: /auth*
+Disallow: /business-settings*
+Disallow: /invoice*
+Disallow: /payment-success*
+Disallow: /payment-canceled*
+Disallow: /subscription-management*
 
-User-agent: *
-Disallow: /auth
-Disallow: /business-settings
-Disallow: /invoice
-Disallow: /payment-success
-Disallow: /payment-canceled
+# WhatsApp Link Preview
+User-agent: WhatsApp
 Allow: /
+Allow: /invoice-templates/
+Allow: /templates/
+Allow: /pricing
+Allow: /about
+Allow: /contact
+Allow: /blog
+Allow: /docs
+Allow: /products
+Disallow: /auth*
+Disallow: /business-settings*
+Disallow: /invoice*
+Disallow: /payment-success*
+Disallow: /payment-canceled*
+Disallow: /subscription-management*
 
-# Sitemap
+# Slack Bot
+User-agent: Slackbot
+Allow: /
+Allow: /invoice-templates/
+Allow: /templates/
+Allow: /pricing
+Allow: /about
+Allow: /contact
+Disallow: /auth*
+Disallow: /business-settings*
+Disallow: /invoice*
+Disallow: /payment-success*
+Disallow: /payment-canceled*
+Disallow: /subscription-management*
+
+# Aggressive crawlers - Be more restrictive
+User-agent: AhrefsBot
+Crawl-delay: 10
+Disallow: /
+
+User-agent: SemrushBot
+Crawl-delay: 10
+Disallow: /
+
+User-agent: MJ12bot
+Crawl-delay: 10
+Disallow: /
+
+User-agent: DotBot
+Crawl-delay: 10
+Disallow: /
+
+User-agent: BLEXBot
+Crawl-delay: 10
+Disallow: /
+
+# AI Training Bots - Block for content protection
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: YouBot
+Disallow: /
+
+# Default for all other bots
+User-agent: *
+Allow: /
+Allow: /invoice-templates/
+Allow: /templates/
+Allow: /pricing
+Allow: /about
+Allow: /contact
+Allow: /blog
+Allow: /docs
+Allow: /products
+Disallow: /auth*
+Disallow: /business-settings*
+Disallow: /invoice*
+Disallow: /payment-success*
+Disallow: /payment-canceled*
+Disallow: /subscription-management*
+Disallow: /api/
+Disallow: /*?*
+Crawl-delay: 5
+
+# Sitemap location
 Sitemap: https://paper-n-print.lovable.app/sitemap.xml
+
+# Additional directives for better SEO
+# Clean URLs only - block query parameters that don't provide unique content
+Disallow: /*utm_*
+Disallow: /*ref=*
+Disallow: /*source=*
+Disallow: /*campaign=*
+Disallow: /*medium=*
