@@ -98,13 +98,31 @@ export function SubscriptionStatus() {
           )}
           
           {subscribed && (
-            <Button 
-              variant="outline" 
-              onClick={openCustomerPortal}
-              className="flex items-center gap-2"
-            >
-              <Settings className="h-4 w-4" />
-              Manage Subscription
+            <>
+              <Button 
+                variant="outline" 
+                onClick={openCustomerPortal}
+                className="flex items-center gap-2"
+              >
+                <Settings className="h-4 w-4" />
+                Manage Subscription
+              </Button>
+              
+              <Button asChild variant="secondary" className="flex items-center gap-2">
+                <Link to="/subscription">
+                  <Crown className="h-4 w-4" />
+                  View Details
+                </Link>
+              </Button>
+            </>
+          )}
+          
+          {!subscribed && (
+            <Button asChild variant="outline" className="flex items-center gap-2">
+              <Link to="/subscription">
+                <Settings className="h-4 w-4" />
+                Manage Account
+              </Link>
             </Button>
           )}
           

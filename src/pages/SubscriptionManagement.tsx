@@ -1,0 +1,272 @@
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { Crown, Settings, CreditCard, AlertTriangle, RefreshCw, ArrowRight, Check } from "lucide-react";
+import { useSubscription } from "@/hooks/useSubscription";
+import { Link } from "react-router-dom";
+import PageLayout from "@/components/PageLayout";
+import { toast } from "sonner";
+
+export default function SubscriptionManagement() {
+  const { 
+    plan, 
+    subscribed, 
+    subscription_end, 
+    loading, 
+    checkSubscription, 
+    openCustomerPortal,
+    isFree,
+    planConfig,
+    planFeatures
+  } = useSubscription();
+
+  const handleManageSubscription = async () => {
+    try {
+      await openCustomerPortal();
+      toast.success("Opening Stripe Customer Portal...");
+    } catch (error) {
+      toast.error("Failed to open subscription management. Please try again.");
+    }
+  };
+
+  const planDetails = {
+    free: {
+      name: "Free",
+      price: "$0",
+      period: "",
+      color: "secondary" as const,
+      description: "Perfect for trying out our service",
+      limits: "3 invoices per month"
+    },
+    starter: {
+      name: "Starter", 
+      price: "$7",
+      period: "/month",
+      color: "default" as const,
+      description: "Perfect for freelancers and small businesses",
+      limits: "30 invoices per month"
+    },
+    pro: {
+      name: "Pro",
+      price: "$14", 
+      period: "/month",
+      color: "default" as const,
+      description: "Perfect for growing businesses and agencies",
+      limits: "Unlimited invoices"
+    }
+  };
+
+  const currentPlanDetails = planDetails[plan as keyof typeof planDetails] || planDetails.free;
+
+  return (
+    <PageLayout
+      title="Subscription Management - Manage Your Plan | InvoicePro"
+      description="Manage your subscription, update billing information, change plans, or cancel your subscription."
+    >
+      <div className="container mx-auto px-4 py-16 max-w-4xl">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-foreground mb-4">
+            Subscription Management
+          </h1>
+          <p className="text-muted-foreground">
+            Manage your subscription, billing, and account preferences
+          </p>
+        </div>
+
+        {/* Current Plan Status */}
+        <Card className={`mb-8 ${subscribed ? "border-primary bg-primary/5" : ""}`}>
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                {subscribed && <Crown className="h-6 w-6 text-primary" />}
+                <div>
+                  <CardTitle className="text-xl flex items-center gap-2">
+                    Current Plan
+                    <Badge variant={currentPlanDetails.color} className="ml-2">
+                      {currentPlanDetails.name}
+                    </Badge>
+                  </CardTitle>
+                  <CardDescription className="mt-1">
+                    {currentPlanDetails.description}
+                  </CardDescription>
+                </div>
+              </div>
+              <div className="text-right">
+                <div className="text-2xl font-bold text-foreground">
+                  {currentPlanDetails.price}
+                  <span className="text-sm font-normal text-muted-foreground">
+                    {currentPlanDetails.period}
+                  </span>
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  {currentPlanDetails.limits}
+                </div>
+              </div>
+            </div>
+            
+            {subscription_end && (
+              <div className="mt-4 p-3 bg-muted/50 rounded-lg">
+                <div className="flex items-center gap-2 text-sm">
+                  <RefreshCw className="h-4 w-4" />
+                  <span>Next billing date: {new Date(subscription_end).toLocaleDateString()}</span>
+                </div>
+              </div>
+            )}
+          </CardHeader>
+
+          <CardContent className="pt-0">
+            <div className="space-y-2 mb-4">
+              <h4 className="font-medium">Plan Features:</h4>
+              <ul className="space-y-1">
+                {planFeatures.map((feature, index) => (
+                  <li key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Check className="h-4 w-4 text-primary" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <Separator className="my-4" />
+
+            <div className="flex flex-wrap gap-3">
+              {subscribed ? (
+                <div className="flex flex-wrap gap-3 w-full">
+                  <Button 
+                    onClick={handleManageSubscription}
+                    className="flex items-center gap-2"
+                    disabled={loading}
+                  >
+                    <Settings className="h-4 w-4" />
+                    Manage Billing & Payment
+                  </Button>
+                  
+                  <Button 
+                    variant="outline"
+                    onClick={handleManageSubscription}
+                    className="flex items-center gap-2"
+                    disabled={loading}
+                  >
+                    <CreditCard className="h-4 w-4" />
+                    Update Payment Method
+                  </Button>
+                  
+                  <Button 
+                    variant="outline"
+                    onClick={handleManageSubscription}
+                    className="flex items-center gap-2 text-destructive hover:text-destructive"
+                    disabled={loading}
+                  >
+                    <AlertTriangle className="h-4 w-4" />
+                    Cancel Subscription
+                  </Button>
+                </div>
+              ) : (
+                <Button asChild className="flex items-center gap-2">
+                  <Link to="/pricing">
+                    <Crown className="h-4 w-4" />
+                    Upgrade to Premium
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
+              )}
+              
+              <Button 
+                variant="ghost" 
+                onClick={checkSubscription}
+                disabled={loading}
+                className="flex items-center gap-2"
+              >
+                <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
+                Refresh Status
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Subscription Actions */}
+        <div className="grid md:grid-cols-2 gap-6 mb-8">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Settings className="h-5 w-5" />
+                Account Management
+              </CardTitle>
+              <CardDescription>
+                Access Stripe Customer Portal to manage all subscription settings
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground mb-4">
+                The Customer Portal allows you to:
+              </p>
+              <ul className="space-y-1 text-sm text-muted-foreground mb-4">
+                <li>• Update payment methods</li>
+                <li>• Download invoices and receipts</li>
+                <li>• Change billing address</li>
+                <li>• View payment history</li>
+                <li>• Cancel or modify subscriptions</li>
+              </ul>
+              <Button 
+                onClick={handleManageSubscription}
+                disabled={loading || !subscribed}
+                className="w-full"
+              >
+                Open Customer Portal
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Crown className="h-5 w-5" />
+                Plan Upgrades
+              </CardTitle>
+              <CardDescription>
+                Upgrade your plan to unlock more features
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground mb-4">
+                Choose from our flexible pricing plans:
+              </p>
+              <ul className="space-y-1 text-sm text-muted-foreground mb-4">
+                <li>• Starter: 30 invoices/month ($7)</li>
+                <li>• Pro: Unlimited invoices ($14)</li>
+                <li>• No watermarks on paid plans</li>
+                <li>• Priority support included</li>
+              </ul>
+              <Button asChild variant="outline" className="w-full">
+                <Link to="/pricing">
+                  View All Plans
+                </Link>
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Help Section */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Need Help?</CardTitle>
+            <CardDescription>
+              Get support with your subscription or billing questions
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-wrap gap-3">
+              <Button asChild variant="outline">
+                <Link to="/contact">Contact Support</Link>
+              </Button>
+              <Button asChild variant="ghost">
+                <Link to="/docs">View Documentation</Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </PageLayout>
+  );
+}
