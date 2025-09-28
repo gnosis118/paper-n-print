@@ -28,7 +28,7 @@ const Index = () => {
       description="Create professional invoices in 30 seconds with embedded Stripe checkout. Get paid 3x faster with smart dunning and auto-reminders. Free plan: 3 invoices/month."
     >
       {/* Logo Section */}
-      <div className="bg-white py-8 sm:py-12">
+      <div className="bg-gradient-to-br from-primary-light to-accent-light py-8 sm:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
           <img 
             src={proInvoiceLogoFull} 
