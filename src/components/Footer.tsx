@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import proInvoiceLogo from '@/assets/proinvoice-logo-horizontal.png';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -33,10 +34,11 @@ const Footer = () => {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center space-x-2 mb-4">
-              <div className="h-8 w-8 rounded bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-sm">IG</span>
-              </div>
-              <span className="font-bold text-lg">InvoicePro</span>
+              <img 
+                src={proInvoiceLogo} 
+                alt="ProInvoice.app - Professional Invoice Generator" 
+                className="h-8"
+              />
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
               Professional invoice templates and SaaS tools for businesses worldwide.
