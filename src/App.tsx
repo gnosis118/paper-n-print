@@ -72,6 +72,18 @@ import EstimateTemplates from './pages/EstimateTemplates';
 import WaveVsProInvoice from './pages/compare/WaveVsProInvoice';
 import InvoiceSimpleVsProInvoice from './pages/compare/InvoiceSimpleVsProInvoice';
 
+// Import documentation pages
+import CreatingFirstInvoice from './pages/docs/CreatingFirstInvoice';
+import UnderstandingTemplates from './pages/docs/UnderstandingTemplates';
+import AddingLineItems from './pages/docs/AddingLineItems';
+import CustomizingAppearance from './pages/docs/CustomizingAppearance';
+import BusinessProfile from './pages/docs/BusinessProfile';
+import PaymentLinks from './pages/docs/PaymentLinks';
+import AddingClients from './pages/docs/AddingClients';
+import FAQ from './pages/docs/FAQ';
+import FeatureRequests from './pages/docs/FeatureRequests';
+import SystemStatus from './pages/docs/SystemStatus';
+
 // Import all industry-specific invoice templates
 import ConstructionTemplate from "./pages/invoice-templates/Construction";
 import ContractorTemplate from "./pages/invoice-templates/Contractor";
