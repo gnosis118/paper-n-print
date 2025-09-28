@@ -8,7 +8,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { Mail, Lock, User, Chrome } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { Mail, Lock, User, Chrome, LogOut } from "lucide-react";
 import { enhancedAuthSchema, sanitizeInput } from "@/lib/validation";
 import { z } from "zod";
 import Header from "@/components/Header";
@@ -23,6 +24,7 @@ export default function Auth() {
   
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { user, signOut } = useAuth();
 
   useEffect(() => {
     // Check if user is already logged in
@@ -172,16 +174,46 @@ export default function Auth() {
     }
   };
 
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      toast({
+        title: "Signed out",
+        description: "You have been successfully signed out.",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: "Failed to sign out. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <div className="flex items-center justify-center p-4" style={{paddingTop: '5rem'}}>
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">Invoice Pro</CardTitle>
-          <CardDescription>
-            {isSignUp ? "Create your account to start generating professional invoices" : "Sign in to your account"}
-          </CardDescription>
+          <div className="flex items-center justify-between">
+            <div className="flex-1">
+              <CardTitle className="text-2xl font-bold">Invoice Pro</CardTitle>
+              <CardDescription>
+                {isSignUp ? "Create your account to start generating professional invoices" : "Sign in to your account"}
+              </CardDescription>
+            </div>
+            {user && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleSignOut}
+                className="ml-2"
+              >
+                <LogOut className="h-4 w-4" />
+              </Button>
+            )}
+          </div>
         </CardHeader>
         
         <CardContent className="space-y-6">
