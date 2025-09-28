@@ -1,5 +1,11 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.58.0";
+import { 
+  securityMiddleware, 
+  securityLogger, 
+  inputValidator, 
+  SecurityError 
+} from "../_shared/security.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -13,10 +19,14 @@ interface EmailRequest {
   message?: string;
 }
 
-const handler = async (req: Request): Promise<Response> => {
+const handleInvoiceEmail = async (req: Request): Promise<Response> => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
+  }
+
+  if (req.method !== "POST") {
+    throw new SecurityError("Method not allowed", 405);
   }
 
   try {
@@ -40,9 +50,24 @@ const handler = async (req: Request): Promise<Response> => {
       throw new Error('Invalid authentication');
     }
 
-    const { invoiceId, recipientEmail, subject, message }: EmailRequest = await req.json();
+    const requestBody: EmailRequest = await req.json();
+    const { invoiceId, recipientEmail, subject, message } = requestBody;
 
-    // Get invoice data
+    // Enhanced input validation
+    const validatedInvoiceId = inputValidator.validateUUID(invoiceId, 'invoiceId');
+    const validatedRecipientEmail = inputValidator.validateEmail(recipientEmail);
+    const validatedSubject = subject ? inputValidator.validateString(subject, 200, 'subject') : undefined;
+    const validatedMessage = message ? inputValidator.validateString(message, 2000, 'message') : undefined;
+
+    securityLogger.logSecurityEvent('INVOICE_EMAIL_REQUEST', {
+      invoiceId: validatedInvoiceId,
+      recipientEmail: validatedRecipientEmail,
+      hasSubject: !!validatedSubject,
+      hasMessage: !!validatedMessage,
+      userId: user.id
+    });
+
+    // Get invoice data with enhanced security check
     const { data: invoice, error: invoiceError } = await supabase
       .from('invoices')
       .select(`
@@ -51,7 +76,7 @@ const handler = async (req: Request): Promise<Response> => {
         business_profiles(*),
         invoice_items(*)
       `)
-      .eq('id', invoiceId)
+      .eq('id', validatedInvoiceId)
       .eq('user_id', user.id)
       .single();
 
@@ -73,22 +98,29 @@ const handler = async (req: Request): Promise<Response> => {
 
     // For now, we'll just log the email data and return success
     // In a real implementation, you would integrate with a service like Resend
+    securityLogger.logSecurityEvent('INVOICE_EMAIL_SENT', {
+      to: validatedRecipientEmail,
+      subject: validatedSubject || `Invoice ${invoice.invoice_number}`,
+      invoiceNumber: invoice.invoice_number,
+      userId: user.id
+    });
+
     console.log('Email would be sent:', {
-      to: recipientEmail,
-      subject: subject || `Invoice ${invoice.invoice_number}`,
+      to: validatedRecipientEmail,
+      subject: validatedSubject || `Invoice ${invoice.invoice_number}`,
       invoice: {
         number: invoice.invoice_number,
         total: invoice.total,
         dueDate: invoice.due_date,
       },
-      message: message || 'Please find your invoice attached.',
+      message: validatedMessage || 'Please find your invoice attached.',
     });
 
     // Update invoice status to 'sent'
     await supabase
       .from('invoices')
       .update({ status: 'sent' })
-      .eq('id', invoiceId);
+      .eq('id', validatedInvoiceId);
 
     return new Response(
       JSON.stringify({ 
@@ -104,13 +136,25 @@ const handler = async (req: Request): Promise<Response> => {
       }
     );
   } catch (error: any) {
-    console.error('Error sending invoice email:', error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    console.error('Error sending invoice email:', errorMessage);
+    
+    // Log security-related errors
+    if (error instanceof SecurityError) {
+      securityLogger.logSecurityEvent('INVOICE_EMAIL_SECURITY_ERROR', { 
+        message: errorMessage,
+        statusCode: error.statusCode
+      }, 'WARN');
+    } else {
+      securityLogger.logSecurityEvent('INVOICE_EMAIL_ERROR', { message: errorMessage }, 'ERROR');
+    }
+    
     return new Response(
       JSON.stringify({ 
-        error: error.message || 'Failed to send invoice email' 
+        error: errorMessage || 'Failed to send invoice email' 
       }),
       {
-        status: 400,
+        status: error instanceof SecurityError ? error.statusCode : 400,
         headers: { 
           'Content-Type': 'application/json', 
           ...corsHeaders 
@@ -120,4 +164,11 @@ const handler = async (req: Request): Promise<Response> => {
   }
 };
 
-serve(handler);
+// Apply security middleware
+serve(securityMiddleware.withSecurity(handleInvoiceEmail, {
+  maxRequestsPerMinute: 5, // Allow 5 email sends per minute per IP (conservative for email)
+  maxPayloadSize: 10 * 1024, // 10KB max payload (emails can have longer messages)
+  timeoutMs: 30000, // 30 second timeout
+  requireUserAgent: true,
+  allowedOrigins: ['*'] // Allow all origins for now, can be restricted later
+}));

@@ -1,6 +1,11 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import Stripe from "https://esm.sh/stripe@18.5.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
+import { 
+  securityMiddleware, 
+  securityLogger, 
+  SecurityError 
+} from "../_shared/security.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -13,9 +18,13 @@ const logStep = (step: string, details?: any) => {
   console.log(`[CUSTOMER-PORTAL] ${step}${detailsStr}`);
 };
 
-serve(async (req) => {
+const handleCustomerPortal = async (req: Request): Promise<Response> => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
+  }
+
+  if (req.method !== "POST") {
+    throw new SecurityError("Method not allowed", 405);
   }
 
   try {
@@ -64,9 +73,29 @@ serve(async (req) => {
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     logStep("ERROR in customer-portal", { message: errorMessage });
+    
+    // Log security-related errors
+    if (error instanceof SecurityError) {
+      securityLogger.logSecurityEvent('CUSTOMER_PORTAL_SECURITY_ERROR', { 
+        message: errorMessage,
+        statusCode: error.statusCode
+      }, 'WARN');
+    } else {
+      securityLogger.logSecurityEvent('CUSTOMER_PORTAL_ERROR', { message: errorMessage }, 'ERROR');
+    }
+    
     return new Response(JSON.stringify({ error: errorMessage }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 500,
+      status: error instanceof SecurityError ? error.statusCode : 500,
     });
   }
-});
+};
+
+// Apply security middleware
+serve(securityMiddleware.withSecurity(handleCustomerPortal, {
+  maxRequestsPerMinute: 5, // Allow 5 portal requests per minute per IP (conservative)
+  maxPayloadSize: 1024, // 1KB max payload
+  timeoutMs: 20000, // 20 second timeout
+  requireUserAgent: true,
+  allowedOrigins: ['*'] // Allow all origins for now, can be restricted later
+}));

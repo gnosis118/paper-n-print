@@ -1,6 +1,12 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import Stripe from "https://esm.sh/stripe@18.5.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
+import { 
+  securityMiddleware, 
+  securityLogger, 
+  inputValidator, 
+  SecurityError 
+} from "../_shared/security.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -12,7 +18,7 @@ const logStep = (step: string, details?: any) => {
   console.log(`[CREATE-PAYMENT] ${step}${detailsStr}`);
 };
 
-serve(async (req) => {
+const handlePayment = async (req: Request): Promise<Response> => {
   logStep("Function started", { method: req.method });
 
   if (req.method === "OPTIONS") {
@@ -20,7 +26,7 @@ serve(async (req) => {
   }
 
   if (req.method !== "POST") {
-    return new Response("Method not allowed", { status: 405 });
+    throw new SecurityError("Method not allowed", 405);
   }
 
   try {
@@ -45,15 +51,25 @@ serve(async (req) => {
     }
     logStep("User authenticated", { userId: user.id, email: user.email });
 
-    // Parse request body
+    // Parse and validate request body
     const body = await req.json();
     const { invoiceId, amount, description, clientEmail } = body;
     
-    if (!amount || amount <= 0) {
-      throw new Error("Invalid amount provided");
+    // Enhanced input validation
+    const validatedAmount = inputValidator.validateAmount(amount);
+    const validatedInvoiceId = inputValidator.validateString(invoiceId, 100, 'invoiceId');
+    const validatedDescription = inputValidator.validateString(description || '', 500, 'description');
+    
+    if (clientEmail) {
+      inputValidator.validateEmail(clientEmail);
     }
 
-    logStep("Payment request received", { invoiceId, amount, description, clientEmail });
+    logStep("Payment request received", { 
+      invoiceId: validatedInvoiceId, 
+      amount: validatedAmount, 
+      description: validatedDescription,
+      hasClientEmail: !!clientEmail
+    });
 
     // Initialize Stripe
     const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", {
@@ -80,16 +96,16 @@ serve(async (req) => {
               name: `Invoice Payment - ${invoiceId}`,
               description: description || `Payment for Invoice ${invoiceId}`,
             },
-            unit_amount: Math.round(amount * 100), // Convert to cents
+            unit_amount: Math.round(validatedAmount * 100), // Convert to cents
           },
           quantity: 1,
         },
       ],
       mode: "payment",
-      success_url: `${req.headers.get("origin")}/payment-success?invoice_id=${invoiceId}`,
+      success_url: `${req.headers.get("origin")}/payment-success?invoice_id=${validatedInvoiceId}`,
       cancel_url: `${req.headers.get("origin")}/invoice`,
       metadata: {
-        invoice_id: invoiceId,
+        invoice_id: validatedInvoiceId,
         user_id: user.id,
         client_email: clientEmail || '',
         payment_type: 'invoice'
@@ -109,9 +125,28 @@ serve(async (req) => {
     const errorMessage = error instanceof Error ? error.message : String(error);
     logStep("ERROR", { message: errorMessage });
     
+    // Log security-related errors
+    if (error instanceof SecurityError) {
+      securityLogger.logSecurityEvent('PAYMENT_SECURITY_ERROR', { 
+        message: errorMessage,
+        statusCode: error.statusCode
+      }, 'WARN');
+    } else {
+      securityLogger.logSecurityEvent('PAYMENT_ERROR', { message: errorMessage }, 'ERROR');
+    }
+    
     return new Response(JSON.stringify({ error: errorMessage }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 500,
+      status: error instanceof SecurityError ? error.statusCode : 500,
     });
   }
-});
+};
+
+// Apply security middleware
+serve(securityMiddleware.withSecurity(handlePayment, {
+  maxRequestsPerMinute: 10, // Allow 10 payment requests per minute per IP
+  maxPayloadSize: 5 * 1024, // 5KB max payload
+  timeoutMs: 30000, // 30 second timeout
+  requireUserAgent: true,
+  allowedOrigins: ['*'] // Allow all origins for now, can be restricted later
+}));

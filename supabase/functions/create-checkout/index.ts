@@ -1,6 +1,12 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import Stripe from "https://esm.sh/stripe@18.5.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
+import { 
+  securityMiddleware, 
+  securityLogger, 
+  inputValidator, 
+  SecurityError 
+} from "../_shared/security.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -17,14 +23,14 @@ const PRICE_LOOKUP_KEYS = {
   agency_annual: "invoicepro_agency_annual",
   template_onetime: "invoicepro_template_onetime",
   template_trial: "invoicepro_template_trial"
-};
+} as const;
 
 const logStep = (step: string, details?: any) => {
   const detailsStr = details ? ` - ${JSON.stringify(details)}` : '';
   console.log(`[CREATE-CHECKOUT] ${step}${detailsStr}`);
 };
 
-serve(async (req) => {
+const handleCheckout = async (req: Request): Promise<Response> => {
   logStep(`Function started - Method: ${req.method}`);
 
   // Handle CORS preflight requests
@@ -32,13 +38,31 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
+  if (req.method !== "POST") {
+    throw new SecurityError("Method not allowed", 405);
+  }
+
   try {
-    // Parse request body - support both old and new format
+    // Parse and validate request body - support both old and new format
     const requestData = await req.json();
-    logStep("Request data", requestData);
+    logStep("Request data received", { hasKeys: Object.keys(requestData) });
     
     // Handle legacy format (priceId) or new format (plan_type, billing_cycle, product_type)
     const { priceId, plan_type, billing_cycle, product_type } = requestData;
+    
+    // Validate input data
+    if (priceId) {
+      inputValidator.validateString(priceId, 100, 'priceId');
+    }
+    if (plan_type) {
+      inputValidator.validateString(plan_type, 50, 'plan_type');
+    }
+    if (billing_cycle) {
+      inputValidator.validateString(billing_cycle, 20, 'billing_cycle');
+    }
+    if (product_type) {
+      inputValidator.validateString(product_type, 50, 'product_type');
+    }
 
     // Create Supabase client
     const supabaseClient = createClient(
@@ -162,12 +186,33 @@ serve(async (req) => {
     });
 
   } catch (error) {
-    logStep("ERROR", { message: error instanceof Error ? error.message : String(error) });
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    logStep("ERROR", { message: errorMessage });
+    
+    // Log security-related errors
+    if (error instanceof SecurityError) {
+      securityLogger.logSecurityEvent('CHECKOUT_SECURITY_ERROR', { 
+        message: errorMessage,
+        statusCode: error.statusCode
+      }, 'WARN');
+    } else {
+      securityLogger.logSecurityEvent('CHECKOUT_ERROR', { message: errorMessage }, 'ERROR');
+    }
+    
     return new Response(JSON.stringify({ 
-      error: error instanceof Error ? error.message : "Checkout creation failed" 
+      error: error instanceof SecurityError ? errorMessage : "Checkout creation failed" 
     }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 500,
+      status: error instanceof SecurityError ? error.statusCode : 500,
     });
   }
-});
+};
+
+// Apply security middleware
+serve(securityMiddleware.withSecurity(handleCheckout, {
+  maxRequestsPerMinute: 20, // Allow 20 checkout requests per minute per IP
+  maxPayloadSize: 5 * 1024, // 5KB max payload
+  timeoutMs: 45000, // 45 second timeout (Stripe calls can be slow)
+  requireUserAgent: true,
+  allowedOrigins: ['*'] // Allow all origins for now, can be restricted later
+}));

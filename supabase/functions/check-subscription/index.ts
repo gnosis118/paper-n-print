@@ -1,6 +1,11 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import Stripe from "https://esm.sh/stripe@18.5.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
+import { 
+  securityMiddleware, 
+  securityLogger, 
+  SecurityError 
+} from "../_shared/security.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -13,9 +18,13 @@ const logStep = (step: string, details?: any) => {
   console.log(`[CHECK-SUBSCRIPTION] ${step}${detailsStr}`);
 };
 
-serve(async (req) => {
+const handleSubscriptionCheck = async (req: Request): Promise<Response> => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
+  }
+
+  if (req.method !== "GET" && req.method !== "POST") {
+    throw new SecurityError("Method not allowed", 405);
   }
 
   // Create Supabase client with service role for accessing user data
@@ -108,9 +117,29 @@ serve(async (req) => {
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     logStep("ERROR in check-subscription", { message: errorMessage });
+    
+    // Log security-related errors
+    if (error instanceof SecurityError) {
+      securityLogger.logSecurityEvent('SUBSCRIPTION_CHECK_SECURITY_ERROR', { 
+        message: errorMessage,
+        statusCode: error.statusCode
+      }, 'WARN');
+    } else {
+      securityLogger.logSecurityEvent('SUBSCRIPTION_CHECK_ERROR', { message: errorMessage }, 'ERROR');
+    }
+    
     return new Response(JSON.stringify({ error: errorMessage }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 500,
+      status: error instanceof SecurityError ? error.statusCode : 500,
     });
   }
-});
+};
+
+// Apply security middleware
+serve(securityMiddleware.withSecurity(handleSubscriptionCheck, {
+  maxRequestsPerMinute: 60, // Allow frequent subscription checks
+  maxPayloadSize: 1024, // 1KB max payload (minimal data expected)
+  timeoutMs: 15000, // 15 second timeout
+  requireUserAgent: false, // Don't require user agent for subscription checks
+  allowedOrigins: ['*'] // Allow all origins for now, can be restricted later
+}));
