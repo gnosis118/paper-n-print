@@ -1,0 +1,28 @@
+{
+  "name": "InvoicePro - Professional Invoice Generator",
+  "short_name": "InvoicePro",
+  "description": "Create professional invoices in 30 seconds with embedded Stripe checkout. Get paid 3x faster.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#3B82F6",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "categories": ["business", "finance", "productivity"],
+  "screenshots": [
+    {
+      "src": "/og-image.webp",
+      "type": "image/webp",
+      "sizes": "1200x630",
+      "form_factor": "wide"
+    }
+  ]
+}

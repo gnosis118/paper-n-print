@@ -6,6 +6,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { SubscriptionStatus } from "@/components/SubscriptionStatus";
 import PageLayout from "@/components/PageLayout";
+import { LazyFeatureGrid, LazyTestimonialGrid, LazyComparisonTable } from "@/components/LazyIndex";
 
 const Index = () => {
   const { user, signOut } = useAuth();
@@ -98,63 +99,9 @@ const Index = () => {
           </p>
         </div>
 
-        {/* Comparison Table */}
+        {/* Comparison Table - Lazy Loaded */}
         <div className="mb-12 sm:mb-16">
-          <div className="bg-card border border-invoice-border rounded-lg overflow-hidden shadow-soft">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-primary-light">
-                  <tr>
-                    <th className="px-4 py-3 text-left text-sm font-semibold">Feature</th>
-                    <th className="px-4 py-3 text-center text-sm font-semibold">Invoice Generator</th>
-                    <th className="px-4 py-3 text-center text-sm font-semibold text-muted-foreground">Zoho Invoice</th>
-                    <th className="px-4 py-3 text-center text-sm font-semibold text-muted-foreground">Wave</th>
-                    <th className="px-4 py-3 text-center text-sm font-semibold text-muted-foreground">Invoice Simple</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border">
-                  <tr>
-                    <td className="px-4 py-3 text-sm font-medium">Invoice Creation Speed</td>
-                    <td className="px-4 py-3 text-center text-sm"><span className="text-primary font-semibold">30 seconds</span></td>
-                    <td className="px-4 py-3 text-center text-sm text-muted-foreground">2-3 minutes</td>
-                    <td className="px-4 py-3 text-center text-sm text-muted-foreground">2-3 minutes</td>
-                    <td className="px-4 py-3 text-center text-sm text-muted-foreground">1-2 minutes</td>
-                  </tr>
-                  <tr className="bg-muted/20">
-                    <td className="px-4 py-3 text-sm font-medium">Payment Integration</td>
-                    <td className="px-4 py-3 text-center text-sm"><span className="text-primary font-semibold">Stripe Native</span></td>
-                    <td className="px-4 py-3 text-center text-sm text-muted-foreground">External setup</td>
-                    <td className="px-4 py-3 text-center text-sm text-muted-foreground">Limited</td>
-                    <td className="px-4 py-3 text-center text-sm text-muted-foreground">Basic</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3 text-sm font-medium">Customer Payment Clicks</td>
-                    <td className="px-4 py-3 text-center text-sm"><span className="text-primary font-semibold">2 clicks</span></td>
-                    <td className="px-4 py-3 text-center text-sm text-muted-foreground">5+ clicks</td>
-                    <td className="px-4 py-3 text-center text-sm text-muted-foreground">4+ clicks</td>
-                    <td className="px-4 py-3 text-center text-sm text-muted-foreground">Manual setup</td>
-                  </tr>
-                  <tr className="bg-muted/20">
-                    <td className="px-4 py-3 text-sm font-medium">Auto Payment Reminders</td>
-                    <td className="px-4 py-3 text-center text-sm"><Check className="w-4 h-4 text-primary mx-auto" /></td>
-                    <td className="px-4 py-3 text-center text-sm text-muted-foreground">Premium only</td>
-                    <td className="px-4 py-3 text-center text-sm text-muted-foreground">Limited</td>
-                    <td className="px-4 py-3 text-center text-sm text-muted-foreground">No</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3 text-sm font-medium">Free Plan Invoices</td>
-                    <td className="px-4 py-3 text-center text-sm"><span className="text-primary font-semibold">3/month</span></td>
-                    <td className="px-4 py-3 text-center text-sm text-muted-foreground">Unlimited*</td>
-                    <td className="px-4 py-3 text-center text-sm text-muted-foreground">Unlimited*</td>
-                    <td className="px-4 py-3 text-center text-sm text-muted-foreground">5/month</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div className="p-4 bg-muted/10 text-xs text-muted-foreground">
-              * Free competitors require complex setup and lack embedded payment features
-            </div>
-          </div>
+          <LazyComparisonTable />
         </div>
 
         {/* Live Demo Section */}
@@ -209,7 +156,7 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Customer Testimonials */}
+        {/* Customer Testimonials - Lazy Loaded */}
         <div className="mb-12 sm:mb-16">
           <div className="text-center mb-8">
             <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-4">
@@ -220,100 +167,10 @@ const Index = () => {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-card border border-invoice-border rounded-lg p-6 shadow-soft">
-              <div className="flex items-center mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-accent text-accent" />
-                ))}
-              </div>
-              <p className="text-sm text-muted-foreground mb-4">
-                "Switched from Zoho Invoice because this is so much faster. The 2-click payment feature alone saves me hours every month."
-              </p>
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-primary-light rounded-full flex items-center justify-center">
-                  <span className="text-xs font-semibold text-primary">SC</span>
-                </div>
-                <div>
-                  <p className="text-sm font-medium">Sarah Chen</p>
-                  <p className="text-xs text-muted-foreground">Freelance Designer</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="bg-card border border-invoice-border rounded-lg p-6 shadow-soft">
-              <div className="flex items-center mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-accent text-accent" />
-                ))}
-              </div>
-              <p className="text-sm text-muted-foreground mb-4">
-                "Getting paid 3x faster is not just marketing - it's real. Our cash flow improved dramatically since switching."
-              </p>
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-primary-light rounded-full flex items-center justify-center">
-                  <span className="text-xs font-semibold text-primary">MR</span>
-                </div>
-                <div>
-                  <p className="text-sm font-medium">Mike Rodriguez</p>
-                  <p className="text-xs text-muted-foreground">Small Business Owner</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="bg-card border border-invoice-border rounded-lg p-6 shadow-soft">
-              <div className="flex items-center mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-accent text-accent" />
-                ))}
-              </div>
-              <p className="text-sm text-muted-foreground mb-4">
-                "The auto-reminders feature means I never have to chase payments manually. Game changer for my consulting business."
-              </p>
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-primary-light rounded-full flex items-center justify-center">
-                  <span className="text-xs font-semibold text-primary">JL</span>
-                </div>
-                <div>
-                  <p className="text-sm font-medium">Jennifer Liu</p>
-                  <p className="text-xs text-muted-foreground">IT Consultant</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <LazyTestimonialGrid />
         </div>
 
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
-          <div className="text-center p-4 sm:p-6 bg-card border border-invoice-border rounded-lg shadow-soft">
-            <div className="w-10 sm:w-12 h-10 sm:h-12 bg-primary-light rounded-lg flex items-center justify-center mx-auto mb-3 sm:mb-4">
-              <Zap className="w-5 sm:w-6 h-5 sm:h-6 text-primary" />
-            </div>
-            <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">30-Second Creation</h3>
-            <p className="text-sm sm:text-base text-muted-foreground">
-              Create professional invoices in 30 seconds with auto-fill and smart templates.
-            </p>
-          </div>
-
-          <div className="text-center p-4 sm:p-6 bg-card border border-invoice-border rounded-lg shadow-soft">
-            <div className="w-10 sm:w-12 h-10 sm:h-12 bg-accent-light rounded-lg flex items-center justify-center mx-auto mb-3 sm:mb-4">
-              <FileText className="w-5 sm:w-6 h-5 sm:h-6 text-accent" />
-            </div>
-            <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">2-Click Payments</h3>
-            <p className="text-sm sm:text-base text-muted-foreground">
-              Stripe-powered payment links embedded in every invoice. Customers pay instantly.
-            </p>
-          </div>
-
-          <div className="text-center p-4 sm:p-6 bg-card border border-invoice-border rounded-lg shadow-soft sm:col-span-2 md:col-span-1">
-            <div className="w-10 sm:w-12 h-10 sm:h-12 bg-primary-light rounded-lg flex items-center justify-center mx-auto mb-3 sm:mb-4">
-              <Download className="w-5 sm:w-6 h-5 sm:h-6 text-primary" />
-            </div>
-            <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">Auto Reminders</h3>
-            <p className="text-sm sm:text-base text-muted-foreground">
-              Automated payment reminders and follow-ups. Never chase payments again.
-            </p>
-          </div>
-        </div>
+        <LazyFeatureGrid />
       </div>
 
       {/* CTA Section */}
