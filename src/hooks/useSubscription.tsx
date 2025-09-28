@@ -10,14 +10,36 @@ interface SubscriptionData {
   loading: boolean;
 }
 
+// Plan configuration mapping
+const PLAN_CONFIG = {
+  free: {
+    invoiceLimit: 3,
+    hasWatermark: true,
+    features: ['Basic templates', 'PDF export with watermark', 'Email support']
+  },
+  basic: {
+    invoiceLimit: 25, 
+    hasWatermark: false,
+    features: ['All templates', 'No watermark', 'Priority support', 'Custom branding']
+  },
+  professional: {
+    invoiceLimit: 100,
+    hasWatermark: false,
+    features: ['Premium templates', 'Team collaboration', 'Advanced features']
+  },
+  enterprise: {
+    invoiceLimit: 500,
+    hasWatermark: false,
+    features: ['Unlimited features', 'API access', 'Dedicated support']
+  }
+};
+
 export const useSubscription = () => {
   const { user } = useAuth();
   const [subscription, setSubscription] = useState<SubscriptionData>({
-    subscribed: true,
-    plan: 'pro',
-    loading: false,
-    product_id: 'prod_pro123',
-    subscription_end: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString() // 30 days from now
+    subscribed: false,
+    plan: 'free',
+    loading: false
   });
 
   const checkSubscription = async () => {
@@ -93,13 +115,25 @@ export const useSubscription = () => {
     return () => clearInterval(interval);
   }, [user]);
 
+  const currentPlanConfig = PLAN_CONFIG[subscription.plan as keyof typeof PLAN_CONFIG] || PLAN_CONFIG.free;
+
   return {
     ...subscription,  
     checkSubscription,
     openCustomerPortal,
-    isStarter: subscription.plan === 'starter',
-    isPro: subscription.plan === 'pro', 
-    isAgency: subscription.plan === 'agency',
-    isFree: subscription.plan === 'free'
+    // Plan type helpers
+    isFree: subscription.plan === 'free',
+    isBasic: subscription.plan === 'basic', 
+    isProfessional: subscription.plan === 'professional',
+    isEnterprise: subscription.plan === 'enterprise',
+    // Legacy compatibility
+    isStarter: subscription.plan === 'basic',
+    isPro: subscription.plan === 'professional', 
+    isAgency: subscription.plan === 'enterprise',
+    // Plan configuration
+    planConfig: currentPlanConfig,
+    invoiceLimit: currentPlanConfig.invoiceLimit,
+    hasWatermark: currentPlanConfig.hasWatermark,
+    planFeatures: currentPlanConfig.features
   };
 };

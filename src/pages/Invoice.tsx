@@ -11,14 +11,28 @@ import { useAuth } from "@/hooks/useAuth";
 import { useInvoiceData } from "@/hooks/useInvoiceData";
 import { useToast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { UsageLimitBanner } from "@/components/UsageLimitBanner";
+import { useUsageTracking } from "@/hooks/useUsageTracking";
+import { analytics } from "@/lib/analytics";
 
 const Invoice = () => {
   const { user, signOut } = useAuth();
   const { invoiceData, updateInvoiceData, saveInvoice, subscription } = useInvoiceData();
   const { toast } = useToast();
   const isMobile = useIsMobile();
+  const { canCreateInvoice, trackInvoiceCreation } = useUsageTracking();
 
   const downloadPDF = async () => {
+    // Check usage limits for free users
+    if (!canCreateInvoice) {
+      toast({
+        title: "Upgrade Required",
+        description: "You've reached your free invoice limit. Upgrade to download more invoices.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     const invoiceElement = document.getElementById('invoice-preview');
     if (!invoiceElement) return;
 
@@ -42,6 +56,9 @@ const Invoice = () => {
       pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
       pdf.save(`invoice-${invoiceData.meta.number}.pdf`);
 
+      // Track analytics
+      analytics.trackInvoiceDownloaded('pdf');
+
       toast({
         title: "PDF Downloaded",
         description: `Invoice ${invoiceData.meta.number} has been downloaded successfully.`,
@@ -57,9 +74,27 @@ const Invoice = () => {
   };
 
   const handleSaveInvoice = async () => {
+    // Track invoice creation for usage limits
+    const canCreate = await trackInvoiceCreation();
+    if (!canCreate) {
+      toast({
+        title: "Upgrade Required", 
+        description: "You've reached your free invoice limit. Upgrade to create more invoices.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     const savedInvoiceId = await saveInvoice();
     if (savedInvoiceId) {
-      // Optionally redirect to a saved invoices list or show success
+      // Track analytics
+      analytics.trackInvoiceCreated(invoiceData.template);
+      analytics.trackInvoiceSaved();
+      
+      toast({
+        title: "Invoice Saved",
+        description: "Your invoice has been saved successfully.",
+      });
     }
   };
 
@@ -148,6 +183,11 @@ const Invoice = () => {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto">
+        {/* Usage Limit Banner */}
+        <div className="px-4 sm:px-6 pt-4">
+          <UsageLimitBanner />
+        </div>
+
         {isMobile ? (
           /* Mobile: Tabbed Interface */
           <div className="p-4">
