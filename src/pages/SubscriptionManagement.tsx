@@ -22,11 +22,6 @@ export default function SubscriptionManagement() {
   } = useSubscription();
 
   const handleManageSubscription = async () => {
-    if (!subscribed) {
-      toast.error("You need an active subscription to access the customer portal. Please upgrade your plan first.");
-      return;
-    }
-
     try {
       await openCustomerPortal();
       toast.success("Opening Stripe Customer Portal...");
@@ -35,16 +30,13 @@ export default function SubscriptionManagement() {
     }
   };
 
-  const handleUpgradePlan = () => {
-    toast.success("Redirecting to pricing page...");
-  };
-
-  const handleContactSupport = () => {
-    toast.success("Redirecting to contact page...");
-  };
-
-  const handleViewDocs = () => {
-    toast.success("Redirecting to documentation...");
+  const handleRefreshStatus = async () => {
+    try {
+      await checkSubscription();
+      toast.success("Subscription status refreshed!");
+    } catch (error) {
+      toast.error("Failed to refresh subscription status. Please try again.");
+    }
   };
 
   const planDetails = {
@@ -56,21 +48,29 @@ export default function SubscriptionManagement() {
       description: "Perfect for trying out our service",
       limits: "3 invoices per month"
     },
-    starter: {
+    basic: {
       name: "Starter", 
       price: "$7",
       period: "/month",
       color: "default" as const,
       description: "Perfect for freelancers and small businesses",
-      limits: "30 invoices per month"
+      limits: "25 invoices per month"
     },
-    pro: {
+    professional: {
       name: "Pro",
       price: "$14", 
       period: "/month",
       color: "default" as const,
       description: "Perfect for growing businesses and agencies",
-      limits: "Unlimited invoices"
+      limits: "100 invoices per month"
+    },
+    enterprise: {
+      name: "Enterprise",
+      price: "$29", 
+      period: "/month",
+      color: "default" as const,
+      description: "Perfect for large teams and agencies",
+      limits: "500 invoices per month"
     }
   };
 
@@ -180,7 +180,7 @@ export default function SubscriptionManagement() {
                   </Button>
                 </div>
               ) : (
-                <Button asChild className="flex items-center gap-2" onClick={handleUpgradePlan}>
+                <Button asChild className="flex items-center gap-2">
                   <Link to="/pricing">
                     <Crown className="h-4 w-4" />
                     Upgrade to Premium
@@ -191,7 +191,7 @@ export default function SubscriptionManagement() {
               
               <Button 
                 variant="ghost" 
-                onClick={checkSubscription}
+                onClick={handleRefreshStatus}
                 disabled={loading}
                 className="flex items-center gap-2"
               >
@@ -250,12 +250,13 @@ export default function SubscriptionManagement() {
                 Choose from our flexible pricing plans:
               </p>
               <ul className="space-y-1 text-sm text-muted-foreground mb-4">
-                <li>• Starter: 30 invoices/month ($7)</li>
-                <li>• Pro: Unlimited invoices ($14)</li>
+                <li>• Starter: 25 invoices/month ($7)</li>
+                <li>• Pro: 100 invoices/month ($14)</li>
+                <li>• Enterprise: 500 invoices/month ($29)</li>
                 <li>• No watermarks on paid plans</li>
                 <li>• Priority support included</li>
               </ul>
-              <Button asChild variant="outline" className="w-full" onClick={handleUpgradePlan}>
+              <Button asChild variant="outline" className="w-full">
                 <Link to="/pricing">
                   View All Plans
                 </Link>
@@ -274,10 +275,10 @@ export default function SubscriptionManagement() {
           </CardHeader>
           <CardContent>
             <div className="flex flex-wrap gap-3">
-              <Button asChild variant="outline" onClick={handleContactSupport}>
+              <Button asChild variant="outline">
                 <Link to="/contact">Contact Support</Link>
               </Button>
-              <Button asChild variant="ghost" onClick={handleViewDocs}>
+              <Button asChild variant="ghost">
                 <Link to="/docs">View Documentation</Link>
               </Button>
             </div>
