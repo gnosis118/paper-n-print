@@ -30,7 +30,7 @@ const Index = () => {
       {/* Hero Section with Logo */}
       <div className="bg-gradient-to-br from-primary-light to-accent-light">
         {/* Logo Section */}
-        <div className="w-full px-4 sm:px-6 text-center py-8 sm:py-12">
+        <div className="w-full px-4 sm:px-6 text-center">
           <img 
             src={proInvoiceLogoFull} 
             alt="ProInvoice.app - Professional Invoice Generator" 
