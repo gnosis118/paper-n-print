@@ -12,7 +12,7 @@ export default function FreelanceCATemplate() {
         <title>Freelance Invoice Template for California - CA Tax Compliant Invoicing</title>
         <meta name="description" content="Free freelance invoice template for California freelancers. Includes CA state tax requirements, sales tax calculations, and AB5 compliance notes." />
         <meta name="keywords" content="California freelance invoice, CA invoice template, freelance invoice California, CA tax compliant invoice, AB5 invoice" />
-        <link rel="canonical" href="https://paper-n-print.lovable.app/templates/freelance-california" />
+        <link rel="canonical" href="https://www.proinvoice.app/templates/freelance-california" />
         
         <script type="application/ld+json">
         {JSON.stringify({
@@ -20,7 +20,7 @@ export default function FreelanceCATemplate() {
           "@type": "WebPage",
           "name": "Freelance Invoice Template for California",
           "description": "California-compliant freelance invoice template with tax requirements",
-          "url": "https://paper-n-print.lovable.app/templates/freelance-california",
+          "url": "https://www.proinvoice.app/templates/freelance-california",
           "geo": {
             "@type": "Place",
             "name": "California, USA"

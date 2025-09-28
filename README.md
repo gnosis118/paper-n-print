@@ -1,22 +1,18 @@
-# Welcome to your Lovable project
+# InvoicePro - Professional Invoice Generator
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/92156ef3-c072-4965-9722-6f69b3709de8
+A modern, professional invoice generator built with React, TypeScript, and Tailwind CSS.
+
+**URL**: https://www.proinvoice.app
 
 ## How can I edit this code?
 
 There are several ways of editing your application.
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/92156ef3-c072-4965-9722-6f69b3709de8) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
 **Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Clone this repo and push changes to deploy updates.
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -59,15 +55,17 @@ This project is built with:
 - React
 - shadcn-ui
 - Tailwind CSS
+- Supabase
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/92156ef3-c072-4965-9722-6f69b3709de8) and click on Share -> Publish.
+This project can be deployed to any modern hosting platform that supports static sites or Node.js applications.
 
-## Can I connect a custom domain to my Lovable project?
+## Features
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- Professional invoice templates
+- Industry-specific templates
+- PDF generation
+- Email integration
+- Payment processing
+- SEO optimized

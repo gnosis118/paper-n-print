@@ -12,7 +12,7 @@ export default function FreelanceNYCTemplate() {
         <title>Freelance Invoice Template for New York City - NYC Compliant Invoicing</title>
         <meta name="description" content="Free freelance invoice template for NYC freelancers. Compliant with New York City tax requirements and freelance protection laws." />
         <meta name="keywords" content="NYC freelance invoice, New York City invoice template, freelance invoice NYC, NYC tax compliant invoice" />
-        <link rel="canonical" href="https://paper-n-print.lovable.app/templates/freelance-nyc" />
+        <link rel="canonical" href="https://www.proinvoice.app/templates/freelance-nyc" />
         
         <script type="application/ld+json">
         {JSON.stringify({
@@ -20,7 +20,7 @@ export default function FreelanceNYCTemplate() {
           "@type": "WebPage",
           "name": "Freelance Invoice Template for New York City",
           "description": "NYC-compliant freelance invoice template with tax requirements",
-          "url": "https://paper-n-print.lovable.app/templates/freelance-nyc",
+          "url": "https://www.proinvoice.app/templates/freelance-nyc",
           "geo": {
             "@type": "Place",
             "name": "New York City, NY"
