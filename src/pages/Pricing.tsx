@@ -334,7 +334,12 @@ export default function Pricing() {
                 <h3 className="font-semibold mb-2">Construction Pack</h3>
                 <p className="text-sm text-muted-foreground mb-4">5 specialized templates for contractors, builders, and trades</p>
                 <div className="text-2xl font-bold text-accent mb-4">$9.99</div>
-                <Button variant="outline" size="sm" className="w-full">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full"
+                  onClick={() => toast.success("Coming soon! Template packs will be available in the next update.")}
+                >
                   Add to Plan
                 </Button>
               </CardContent>
@@ -348,7 +353,12 @@ export default function Pricing() {
                 <h3 className="font-semibold mb-2">Creative Pack</h3>
                 <p className="text-sm text-muted-foreground mb-4">5 designer templates for agencies, photographers, and creatives</p>
                 <div className="text-2xl font-bold text-accent mb-4">$9.99</div>
-                <Button variant="outline" size="sm" className="w-full">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full"
+                  onClick={() => toast.success("Coming soon! Template packs will be available in the next update.")}
+                >
                   Add to Plan
                 </Button>
               </CardContent>
@@ -362,7 +372,12 @@ export default function Pricing() {
                 <h3 className="font-semibold mb-2">Service Pack</h3>
                 <p className="text-sm text-muted-foreground mb-4">5 templates for consultants, lawyers, and service providers</p>
                 <div className="text-2xl font-bold text-accent mb-4">$9.99</div>
-                <Button variant="outline" size="sm" className="w-full">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full"
+                  onClick={() => toast.success("Coming soon! Template packs will be available in the next update.")}
+                >
                   Add to Plan
                 </Button>
               </CardContent>
