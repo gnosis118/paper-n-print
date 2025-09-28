@@ -94,14 +94,17 @@
     }
     </script>
     
-    <!-- Google Analytics -->
+    <!-- Google Analytics (Google tag - gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-0XY23WYE9B"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       
-      gtag('config', 'G-0XY23WYE9B');
+      gtag('config', 'G-0XY23WYE9B', {
+        page_title: document.title,
+        page_location: window.location.href
+      });
     </script>
     
   <link rel="icon" type="image/x-icon" href="https://storage.googleapis.com/gpt-engineer-file-uploads/UvIMPethhaONUEnwJNzOOknYYqI2/uploads/1759047768005-Favicon for a profes.png">
