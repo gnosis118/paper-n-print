@@ -3,8 +3,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { XCircle, FileText, ArrowLeft, RefreshCw } from "lucide-react";
 import Header from "@/components/Header";
+import { useGoogleAnalytics } from "@/hooks/useGoogleAnalytics";
 
 const PaymentCanceled = () => {
+  // Track page views
+  useGoogleAnalytics();
+  
   return (
     <div className="min-h-screen bg-background">
       <Header />

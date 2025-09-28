@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import Header from './Header';
 import Footer from './Footer';
 import CookieBanner from './CookieBanner';
+import { useGoogleAnalytics } from '@/hooks/useGoogleAnalytics';
 
 interface PageLayoutProps {
   children: React.ReactNode;
@@ -20,6 +21,9 @@ const PageLayout: React.FC<PageLayoutProps> = ({
   noIndex = false,
 }) => {
   const fullTitle = title.includes('Invoice Generator') ? title : `${title} | Invoice Generator`;
+  
+  // Track page views
+  useGoogleAnalytics();
 
   return (
     <>

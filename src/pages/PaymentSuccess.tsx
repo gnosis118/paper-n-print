@@ -4,11 +4,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, FileText, ArrowLeft } from "lucide-react";
 import Header from "@/components/Header";
+import { useGoogleAnalytics } from "@/hooks/useGoogleAnalytics";
 
 const PaymentSuccess = () => {
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get("session_id");
   const [loading, setLoading] = useState(true);
+  
+  // Track page views
+  useGoogleAnalytics();
 
   useEffect(() => {
     // Simulate loading delay for better UX
