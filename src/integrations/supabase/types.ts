@@ -107,6 +107,36 @@ export type Database = {
         }
         Relationships: []
       }
+      credit_ledger: {
+        Row: {
+          created_at: string | null
+          delta: number
+          id: string
+          reason: string
+          stripe_event_id: string | null
+          template_id: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          delta: number
+          id?: string
+          reason: string
+          stripe_event_id?: string | null
+          template_id?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          delta?: number
+          id?: string
+          reason?: string
+          stripe_event_id?: string | null
+          template_id?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       invoice_items: {
         Row: {
           amount: number
@@ -328,39 +358,48 @@ export type Database = {
       user_subscriptions: {
         Row: {
           created_at: string
+          credits_per_month: number | null
           current_period_end: string | null
           current_period_start: string | null
           features: Json
           id: string
+          next_credit_at: string | null
           plan: string
           status: string
           stripe_customer_id: string | null
+          stripe_price_id: string | null
           stripe_subscription_id: string | null
           updated_at: string
           user_id: string
         }
         Insert: {
           created_at?: string
+          credits_per_month?: number | null
           current_period_end?: string | null
           current_period_start?: string | null
           features?: Json
           id?: string
+          next_credit_at?: string | null
           plan?: string
           status?: string
           stripe_customer_id?: string | null
+          stripe_price_id?: string | null
           stripe_subscription_id?: string | null
           updated_at?: string
           user_id: string
         }
         Update: {
           created_at?: string
+          credits_per_month?: number | null
           current_period_end?: string | null
           current_period_start?: string | null
           features?: Json
           id?: string
+          next_credit_at?: string | null
           plan?: string
           status?: string
           stripe_customer_id?: string | null
+          stripe_price_id?: string | null
           stripe_subscription_id?: string | null
           updated_at?: string
           user_id?: string
@@ -369,7 +408,14 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      credit_balance: {
+        Row: {
+          balance: number | null
+          templates_downloaded: number | null
+          user_id: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       invoke_pro_scans: {
