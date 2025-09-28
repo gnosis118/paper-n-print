@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Preconnect to external domains for faster resource loading -->
+    <link rel="preconnect" href="https://storage.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://storage.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/src/main.tsx" as="script" crossorigin>
+    <link rel="modulepreload" href="/src/main.tsx">
+    
+    <!-- Critical CSS optimization -->
+    <style id="critical-css">
+      /* Critical above-the-fold styles to prevent FOUC */
+      body { margin: 0; font-family: Inter, system-ui, sans-serif; }
+      .min-h-screen { min-height: 100vh; }
+      .bg-background { background-color: hsl(248 50% 98%); }
+      .text-primary { color: hsl(220 62% 47%); }
+      .font-bold { font-weight: 700; }
+      .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+      .text-center { text-align: center; }
+      .mb-4 { margin-bottom: 1rem; }
+      .mb-6 { margin-bottom: 1.5rem; }
+      .bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)); }
+      .from-primary-light { --tw-gradient-from: hsl(220 70% 95%); --tw-gradient-to: hsl(220 70% 95% / 0); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+      .to-accent-light { --tw-gradient-to: hsl(210 100% 97%); }
+    </style>
+    
+    <!-- Resource hints for better loading -->
+    <link rel="prefetch" href="/src/pages/Templates.tsx" as="script">
+    <link rel="prefetch" href="/src/pages/Pricing.tsx" as="script">
+    
+    <!-- Load fonts with font-display swap to prevent render blocking -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+    
+    <title>Invoice Generator App – Create & Get Paid Faster</title>
+    <meta name="description" content="Create compliant invoices in 30 seconds, send with embedded payments, and auto-remind late payers. Free to start. Unlimited on Pro.">
+    <meta name="author" content="Invoice Generator App" />
+    <meta name="keywords" content="invoice generator, create invoices, pdf invoices, business invoicing, stripe payments, invoice templates">
+    <link rel="canonical" href="https://paper-n-print.lovable.app/" />
+    
+    <!-- Enhanced Open Graph tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://paper-n-print.lovable.app/" />
+    <meta property="og:title" content="Invoice Generator App – Create & Get Paid Faster" />
+    <meta property="og:description" content="Create compliant invoices in 30 seconds, send with embedded payments, and auto-remind late payers. Free to start. Unlimited on Pro." />
+    <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/UvIMPethhaONUEnwJNzOOknYYqI2/social-images/social-1759047760826-Photorealistic icon .png">
+    <meta property="og:site_name" content="Invoice Generator App" />
+
+    <!-- Enhanced Twitter Card tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@lovable_dev" />
+    <meta name="twitter:title" content="Invoice Generator App – Create & Get Paid Faster" />
+    <meta name="twitter:description" content="Create compliant invoices in 30 seconds, send with embedded payments, and auto-remind late payers. Free to start. Unlimited on Pro." />
+    <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/UvIMPethhaONUEnwJNzOOknYYqI2/social-images/social-1759047760826-Photorealistic icon .png">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Invoice Generator App",
+      "description": "Create compliant invoices in 30 seconds, send with embedded payments, and auto-remind late payers. Free to start. Unlimited on Pro.",
+      "url": "https://paper-n-print.lovable.app/",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "description": "Free plan available with premium upgrades"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "Invoice Generator App",
+        "url": "https://paper-n-print.lovable.app/"
+      },
+      "featureList": [
+        "30-second invoice creation",
+        "PDF export",
+        "Stripe payment integration",
+        "Multiple professional templates",
+        "Auto payment reminders",
+        "Custom branding"
+      ]
+    }
+    </script>
+    
+    <!-- Google Analytics (Google tag - gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0XY23WYE9B"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      gtag('config', 'G-0XY23WYE9B', {
+        page_title: document.title,
+        page_location: window.location.href
+      });
+    </script>
+    
+  <link rel="icon" type="image/x-icon" href="https://storage.googleapis.com/gpt-engineer-file-uploads/UvIMPethhaONUEnwJNzOOknYYqI2/uploads/1759047768005-Favicon for a profes.png">
+</head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
