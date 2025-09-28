@@ -40,7 +40,7 @@ const Header = () => {
           <img 
             src={proInvoiceLogo} 
             alt="ProInvoice.app - Professional Invoice Generator" 
-            className="h-8"
+            className="h-24"
           />
         </Link>
 

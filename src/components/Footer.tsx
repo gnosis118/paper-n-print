@@ -37,7 +37,7 @@ const Footer = () => {
               <img 
                 src={proInvoiceLogo} 
                 alt="ProInvoice.app - Professional Invoice Generator" 
-                className="h-8"
+                className="h-24"
               />
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
