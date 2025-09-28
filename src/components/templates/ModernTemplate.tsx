@@ -3,23 +3,29 @@ interface ModernTemplateProps {
 }
 
 const ModernTemplate = ({ data }: ModernTemplateProps) => {
-  const { business, client, meta, items, totals, notes, accent, watermark } = data;
+  const { business, client, meta, items, totals, notes, accent, watermark, userProfile } = data;
   
   // Calculate totals
   const subtotal = items.reduce((sum: number, item: any) => sum + (item.qty * item.rate), 0);
   const taxAmount = (subtotal * (totals.taxRate || 0)) / 100;
   const totalAmount = subtotal + taxAmount + (totals.shipping || 0) - (totals.discount || 0);
 
+  // Determine watermark text and visibility
+  const isFreeUser = userProfile?.subscription_status === 'free';
+  const hasCreatedInvoices = (userProfile?.invoice_count || 0) > 0;
+  const shouldShowWatermark = watermark || (isFreeUser && hasCreatedInvoices);
+  const watermarkText = (isFreeUser && hasCreatedInvoices) ? "PREVIEW" : "DRAFT";
+
   return (
     <div className="bg-white relative min-h-[11in]" style={{ fontFamily: "'Inter', sans-serif" }}>
       {/* Watermark */}
-      {watermark && (
+      {shouldShowWatermark && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
           <div 
             className="text-8xl font-black opacity-5 transform -rotate-12 select-none"
             style={{ color: accent }}
           >
-            DRAFT
+            {watermarkText}
           </div>
         </div>
       )}
@@ -27,11 +33,22 @@ const ModernTemplate = ({ data }: ModernTemplateProps) => {
       {/* Header with colored band */}
       <div className="h-24 flex items-center px-8" style={{ backgroundColor: accent }}>
         <div className="flex justify-between items-center w-full text-white">
-          <div>
-            <h1 className="text-2xl font-bold">
-              {business.name || "Your Business Name"}
-            </h1>
-            <div className="text-sm opacity-90">{business.email}</div>
+          <div className="flex items-center space-x-4">
+            {business.logoUrl && (
+              <div className="w-12 h-12 flex-shrink-0">
+                <img
+                  src={business.logoUrl}
+                  alt={`${business.name} logo`}
+                  className="w-full h-full object-contain brightness-0 invert"
+                />
+              </div>
+            )}
+            <div>
+              <h1 className="text-2xl font-bold">
+                {business.name || "Your Business Name"}
+              </h1>
+              <div className="text-sm opacity-90">{business.email}</div>
+            </div>
           </div>
           <div className="text-right">
             <div className="text-3xl font-bold">INVOICE</div>

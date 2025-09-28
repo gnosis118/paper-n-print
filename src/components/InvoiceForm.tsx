@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { LogoUpload } from "@/components/LogoUpload";
 import { Plus, Trash2, Building, User, FileText, Calculator } from "lucide-react";
 
 interface InvoiceFormProps {
@@ -10,6 +11,7 @@ interface InvoiceFormProps {
 }
 
 const InvoiceForm = ({ data, onUpdate }: InvoiceFormProps) => {
+  const isPaidUser = data.userProfile?.subscription_status !== 'free';
   const addLineItem = () => {
     const newItems = [...data.items, { description: "", qty: 1, rate: 0, taxable: true }];
     onUpdate("items", newItems);
@@ -86,6 +88,13 @@ const InvoiceForm = ({ data, onUpdate }: InvoiceFormProps) => {
               placeholder="123 Business St, Suite 100, City, State 12345"
               className="mt-1"
               rows={2}
+            />
+          </div>
+          <div className="md:col-span-2">
+            <LogoUpload
+              currentLogoUrl={data.business.logoUrl}
+              onLogoChange={(logoUrl) => onUpdate("business.logoUrl", logoUrl)}
+              disabled={!isPaidUser}
             />
           </div>
         </div>
@@ -362,8 +371,14 @@ const InvoiceForm = ({ data, onUpdate }: InvoiceFormProps) => {
               checked={data.watermark}
               onChange={(e) => onUpdate("watermark", e.target.checked)}
               className="rounded"
+              disabled={!isPaidUser}
             />
-            <Label htmlFor="watermark">Show watermark (Free tier)</Label>
+            <Label htmlFor="watermark">
+              {isPaidUser 
+                ? "Show draft watermark" 
+                : "Watermark (Free users show 'PREVIEW' after first invoice)"
+              }
+            </Label>
           </div>
         </div>
       </section>

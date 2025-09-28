@@ -13,7 +13,8 @@ const sampleData = {
     email: "contact@yourbusiness.com",
     phone: "+1 (555) 123-4567",
     address: "123 Business Street\nSuite 100\nYour City, ST 12345",
-    website: "www.yourbusiness.com"
+    website: "www.yourbusiness.com",
+    logoUrl: ""
   },
   client: {
     name: "John Smith",
@@ -55,7 +56,11 @@ const sampleData = {
   notes: "Thank you for your business! Payment is due within 14 days. Please include invoice number with payment.",
   template: "Clean",
   accent: "#3b82f6",
-  watermark: false
+  watermark: false,
+  userProfile: {
+    subscription_status: 'pro',
+    invoice_count: 5
+  }
 };
 
 const templates = [

@@ -3,38 +3,55 @@ interface CleanTemplateProps {
 }
 
 const CleanTemplate = ({ data }: CleanTemplateProps) => {
-  const { business, client, meta, items, totals, notes, accent, watermark } = data;
+  const { business, client, meta, items, totals, notes, accent, watermark, userProfile } = data;
   
   // Calculate totals
   const subtotal = items.reduce((sum: number, item: any) => sum + (item.qty * item.rate), 0);
   const taxAmount = (subtotal * (totals.taxRate || 0)) / 100;
   const totalAmount = subtotal + taxAmount + (totals.shipping || 0) - (totals.discount || 0);
 
+  // Determine watermark text and visibility
+  const isFreeUser = userProfile?.subscription_status === 'free';
+  const hasCreatedInvoices = (userProfile?.invoice_count || 0) > 0;
+  const shouldShowWatermark = watermark || (isFreeUser && hasCreatedInvoices);
+  const watermarkText = (isFreeUser && hasCreatedInvoices) ? "PREVIEW" : "DRAFT";
+
   return (
     <div className="p-8 bg-white relative min-h-[11in]" style={{ fontFamily: "'Inter', sans-serif" }}>
       {/* Watermark */}
-      {watermark && (
+      {shouldShowWatermark && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
           <div 
             className="text-8xl font-black opacity-5 transform -rotate-12 select-none"
             style={{ color: accent }}
           >
-            DRAFT
+            {watermarkText}
           </div>
         </div>
       )}
 
       {/* Header */}
       <div className="flex justify-between items-start mb-8">
-        <div className="flex-1">
-          <h1 className="text-3xl font-bold mb-2" style={{ color: accent }}>
-            {business.name || "Your Business Name"}
-          </h1>
-          <div className="text-sm text-gray-600 space-y-1">
-            {business.email && <div>{business.email}</div>}
-            {business.phone && <div>{business.phone}</div>}
-            {business.address && <div>{business.address}</div>}
-            {business.website && <div>{business.website}</div>}
+        <div className="flex-1 flex items-start space-x-4">
+          {business.logoUrl && (
+            <div className="w-16 h-16 flex-shrink-0">
+              <img
+                src={business.logoUrl}
+                alt={`${business.name} logo`}
+                className="w-full h-full object-contain"
+              />
+            </div>
+          )}
+          <div>
+            <h1 className="text-3xl font-bold mb-2" style={{ color: accent }}>
+              {business.name || "Your Business Name"}
+            </h1>
+            <div className="text-sm text-gray-600 space-y-1">
+              {business.email && <div>{business.email}</div>}
+              {business.phone && <div>{business.phone}</div>}
+              {business.address && <div>{business.address}</div>}
+              {business.website && <div>{business.website}</div>}
+            </div>
           </div>
         </div>
         

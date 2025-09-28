@@ -10,6 +10,7 @@ export interface InvoiceData {
     phone: string;
     address: string;
     website: string;
+    logoUrl?: string;
   };
   client: {
     name: string;
@@ -41,6 +42,7 @@ export interface InvoiceData {
   template: "Clean" | "Modern" | "Trades";
   accent: string;
   watermark: boolean;
+  userProfile?: any;
 }
 
 export function useInvoiceData() {
@@ -54,6 +56,7 @@ export function useInvoiceData() {
       phone: "",
       address: "",
       website: "",
+      logoUrl: "",
     },
     client: {
       name: "",
@@ -81,13 +84,29 @@ export function useInvoiceData() {
 
   const [businessProfile, setBusinessProfile] = useState<any>(null);
   const [subscription, setSubscription] = useState<any>(null);
+  const [userProfile, setUserProfile] = useState<any>(null);
 
-  // Load user's business profile and subscription
+  // Load user's business profile, subscription, and user profile
   useEffect(() => {
     if (!user) return;
 
     const loadUserData = async () => {
       try {
+        // Load user profile (with invoice count and subscription status)
+        const { data: userProf } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', user.id)
+          .maybeSingle();
+
+        if (userProf) {
+          setUserProfile(userProf);
+          setInvoiceData(prev => ({
+            ...prev,
+            userProfile: userProf,
+          }));
+        }
+
         // Load business profile
         const { data: profile } = await supabase
           .from('business_profiles')
@@ -105,6 +124,7 @@ export function useInvoiceData() {
               phone: profile.phone || "",
               address: profile.address || "",
               website: profile.website || "",
+              logoUrl: profile.logo_url || "",
             }
           }));
         }
@@ -118,11 +138,6 @@ export function useInvoiceData() {
 
         if (sub) {
           setSubscription(sub);
-          const features = sub.features as any || {};
-          setInvoiceData(prev => ({
-            ...prev,
-            watermark: features.watermark !== false,
-          }));
         }
       } catch (error) {
         console.error('Error loading user data:', error);
@@ -158,6 +173,7 @@ export function useInvoiceData() {
         phone: invoiceData.business.phone,
         website: invoiceData.business.website,
         address: invoiceData.business.address,
+        logo_url: invoiceData.business.logoUrl,
       };
 
       const { error } = await supabase
@@ -270,7 +286,36 @@ export function useInvoiceData() {
           .from('invoice_items')
           .insert(itemsToInsert);
 
-        if (itemsError) throw itemsError;
+      if (itemsError) throw itemsError;
+      }
+
+      // Update user profile invoice count for free users
+      if (userProfile?.subscription_status === 'free') {
+        const { error: profileError } = await supabase
+          .from('profiles')
+          .update({ 
+            invoice_count: (userProfile.invoice_count || 0) + 1,
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', user.id);
+
+        if (!profileError) {
+          setUserProfile(prev => ({
+            ...prev,
+            invoice_count: (prev?.invoice_count || 0) + 1
+          }));
+          
+          // Update watermark state if this is their first invoice
+          if ((userProfile.invoice_count || 0) === 0) {
+            setInvoiceData(prev => ({
+              ...prev,
+              userProfile: {
+                ...prev.userProfile,
+                invoice_count: (prev.userProfile?.invoice_count || 0) + 1
+              }
+            }));
+          }
+        }
       }
 
       toast({
@@ -296,6 +341,7 @@ export function useInvoiceData() {
     saveInvoice,
     saveBusinessProfile,
     subscription,
-    businessProfile
+    businessProfile,
+    userProfile
   };
 }

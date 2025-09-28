@@ -264,6 +264,7 @@ export type Database = {
           created_at: string
           email: string | null
           id: string
+          invoice_count: number
           plan: string
           scan_count: number
           scan_limit: number
@@ -274,6 +275,7 @@ export type Database = {
           created_at?: string
           email?: string | null
           id: string
+          invoice_count?: number
           plan?: string
           scan_count?: number
           scan_limit?: number
@@ -284,6 +286,7 @@ export type Database = {
           created_at?: string
           email?: string | null
           id?: string
+          invoice_count?: number
           plan?: string
           scan_count?: number
           scan_limit?: number
