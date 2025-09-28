@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Mail, Lock, User, Chrome } from "lucide-react";
 import { enhancedAuthSchema, sanitizeInput } from "@/lib/validation";
 import { z } from "zod";
+import Header from "@/components/Header";
 
 export default function Auth() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -163,7 +164,9 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background">
+      <Header />
+      <div className="flex items-center justify-center p-4 pt-20">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold">Invoice Pro</CardTitle>
@@ -319,6 +322,7 @@ export default function Auth() {
           </div>
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 }

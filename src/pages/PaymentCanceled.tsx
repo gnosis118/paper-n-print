@@ -2,20 +2,13 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { XCircle, FileText, ArrowLeft, RefreshCw } from "lucide-react";
+import Header from "@/components/Header";
 
 const PaymentCanceled = () => {
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <div className="bg-card border-b border-border px-6 py-4">
-        <div className="flex items-center space-x-2 max-w-7xl mx-auto">
-          <FileText className="w-5 h-5 text-invoice-brand" />
-          <h1 className="text-xl font-semibold">Invoice Pro</h1>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="max-w-2xl mx-auto px-6 py-12">
+      <Header />
+      <div className="max-w-2xl mx-auto px-6 py-12 pt-20">
         <Card className="text-center shadow-medium">
           <CardHeader className="pb-4">
             <div className="w-16 h-16 bg-destructive/10 rounded-full flex items-center justify-center mx-auto mb-4">
