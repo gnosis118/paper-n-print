@@ -7,8 +7,8 @@ import { useToast } from "@/hooks/use-toast";
 import { SubscriptionStatus } from "@/components/SubscriptionStatus";
 import PageLayout from "@/components/PageLayout";
 import { LazyFeatureGrid, LazyTestimonialGrid, LazyComparisonTable } from "@/components/LazyIndex";
-import proInvoiceLogo from '@/assets/proinvoice-logo.png';
-import proInvoiceLogoFull from '@/assets/proinvoice-logo-full.png';
+import proInvoiceLogo from '@/assets/proinvoice-logo-new.png';
+import proInvoiceLogoFull from '@/assets/proinvoice-logo-new.png';
 
 const Index = () => {
   const { user, signOut } = useAuth();
@@ -27,20 +27,18 @@ const Index = () => {
       title="InvoicePro - Create & Get Paid in 2 Clicks | Free Invoice Generator"
       description="Create professional invoices in 30 seconds with embedded Stripe checkout. Get paid 3x faster with smart dunning and auto-reminders. Free plan: 3 invoices/month."
     >
-      {/* Logo Section */}
-      <div className="bg-gradient-to-br from-primary-light to-accent-light py-8 sm:py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+      {/* Hero Section with Logo */}
+      <div className="bg-gradient-to-br from-primary-light to-accent-light">
+        {/* Logo Section */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center py-8 sm:py-12">
           <img 
             src={proInvoiceLogoFull} 
             alt="ProInvoice.app - Professional Invoice Generator" 
             className="mx-auto h-16 sm:h-24 md:h-32"
           />
         </div>
-      </div>
-
-      {/* Hero Section */}
-      <div className="bg-gradient-to-br from-primary-light to-accent-light">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-12 sm:pb-20">
           <div className="text-center">
             <div className="inline-flex items-center space-x-2 bg-white/80 rounded-full px-3 sm:px-4 py-2 mb-4 sm:mb-6">
               <Star className="w-3 sm:w-4 h-3 sm:h-4 text-accent" />

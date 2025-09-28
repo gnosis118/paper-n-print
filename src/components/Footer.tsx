@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import proInvoiceLogo from '@/assets/proinvoice-logo-horizontal.png';
+import proInvoiceLogo from '@/assets/proinvoice-logo-new.png';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
