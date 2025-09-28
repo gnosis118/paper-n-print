@@ -18,17 +18,15 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
-  const supabaseClient = createClient(
+  // Create Supabase client with service role for accessing user data
+  const supabase = createClient(
     Deno.env.get("SUPABASE_URL") ?? "",
-    Deno.env.get("SUPABASE_ANON_KEY") ?? ""
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
+    { auth: { persistSession: false } }
   );
 
   try {
     logStep("Function started");
-
-    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
-    if (!stripeKey) throw new Error("STRIPE_SECRET_KEY is not set");
-    logStep("Stripe key verified");
 
     const authHeader = req.headers.get("Authorization");
     if (!authHeader) throw new Error("No authorization header provided");
@@ -37,69 +35,76 @@ serve(async (req) => {
     const token = authHeader.replace("Bearer ", "");
     logStep("Authenticating user with token");
     
-    const { data: userData, error: userError } = await supabaseClient.auth.getUser(token);
+    // Use anon client for auth verification
+    const supabaseAuth = createClient(
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_ANON_KEY") ?? ""
+    );
+    
+    const { data: userData, error: userError } = await supabaseAuth.auth.getUser(token);
     if (userError) throw new Error(`Authentication error: ${userError.message}`);
     const user = userData.user;
     if (!user?.email) throw new Error("User not authenticated or email not available");
     logStep("User authenticated", { userId: user.id, email: user.email });
 
-    const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" });
-    const customers = await stripe.customers.list({ email: user.email, limit: 1 });
-    
-    if (customers.data.length === 0) {
-      logStep("No customer found, updating unsubscribed state");
-      return new Response(JSON.stringify({ 
+    // Get user's subscription data from our database
+    const { data: subscription } = await supabase
+      .from('user_subscriptions')
+      .select('*')
+      .eq('user_id', user.id)
+      .eq('status', 'active')
+      .single();
+
+    // Get user's credit balance
+    const { data: creditData, error: creditError } = await supabase
+      .rpc('get_user_credit_balance', { p_user_id: user.id });
+
+    if (creditError) {
+      logStep("Error getting credit balance", { error: creditError.message });
+    }
+
+    const credits = (creditData as any)?.[0]?.balance || 0;
+    const templatesDownloaded = (creditData as any)?.[0]?.templates_downloaded || 0;
+
+    if (!subscription) {
+      logStep("No active subscription found");
+      return new Response(JSON.stringify({
         subscribed: false,
-        plan: 'free'
+        plan: 'free',
+        credits,
+        templates_downloaded: templatesDownloaded,
+        features: {
+          templates: 1,
+          watermark: true,
+          export_limit: 5
+        }
       }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 200,
       });
     }
 
-    const customerId = customers.data[0].id;
-    logStep("Found Stripe customer", { customerId });
-
-    const subscriptions = await stripe.subscriptions.list({
-      customer: customerId,
-      status: "active",
-      limit: 1,
+    logStep("Active subscription found", { 
+      plan: subscription.plan,
+      status: subscription.status,
+      creditsPerMonth: subscription.credits_per_month
     });
-    const hasActiveSub = subscriptions.data.length > 0;
-    let productId = null;
-    let subscriptionEnd = null;
-    let plan = 'free';
-
-    if (hasActiveSub) {
-      const subscription = subscriptions.data[0];
-      subscriptionEnd = new Date(subscription.current_period_end * 1000).toISOString();
-      logStep("Active subscription found", { subscriptionId: subscription.id, endDate: subscriptionEnd });
-      
-      // Get product ID and determine plan
-      productId = subscription.items.data[0].price.product as string;
-      
-      // Map product IDs to plan names
-      const planMapping: Record<string, string> = {
-        'prod_T8U1Ikj6ohlqjO': 'starter',
-        'prod_T8U1RBnEx9r0xM': 'pro', 
-        'prod_T8U1HA2lMfERIw': 'agency'
-      };
-      
-      plan = planMapping[productId] || 'free';
-      logStep("Determined subscription plan", { productId, plan });
-    } else {
-      logStep("No active subscription found");
-    }
 
     return new Response(JSON.stringify({
-      subscribed: hasActiveSub,
-      product_id: productId,
-      subscription_end: subscriptionEnd,
-      plan: plan
+      subscribed: true,
+      plan: subscription.plan,
+      status: subscription.status,
+      subscription_end: subscription.current_period_end,
+      credits,
+      credits_per_month: subscription.credits_per_month,
+      templates_downloaded: templatesDownloaded,
+      features: subscription.features,
+      stripe_customer_id: subscription.stripe_customer_id
     }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
     });
+    
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     logStep("ERROR in check-subscription", { message: errorMessage });

@@ -9,57 +9,86 @@ import { toast } from "sonner";
 
 const plans = [
   {
-    name: "Starter",
-    description: "Perfect for solos needing a few professional invoices",
-    price: 15,
-    yearlyPrice: 150,
-    credits: 3,
-    effectivePrice: 5.00,
-    priceId: "price_1SCD33Gpz30x93KjxpV34FSG",
+    name: "Lite",
+    description: "Perfect for solopreneurs and small projects",
+    price: 9,
+    yearlyPrice: 90,
+    credits: 2,
+    effectivePrice: 4.50,
+    lookupKey: "lite",
     icon: Zap,
     features: [
-      "3 professional invoices per month",
-      "Clean, modern templates",
-      "PDF export",
+      "2 invoice credits per month",
+      "3 professional templates",
       "Basic customization",
+      "PDF export",
       "Email support"
     ]
   },
   {
     name: "Pro",
-    description: "Perfect for freelancers and SMBs sending invoices weekly", 
-    price: 29,
-    yearlyPrice: 290,
-    credits: 8,
-    effectivePrice: 3.63,
-    priceId: "price_1SCD3GGpz30x93Kj0R3vOBQd",
+    description: "Perfect for freelancers and growing businesses", 
+    price: 19,
+    yearlyPrice: 190,
+    credits: 6,
+    effectivePrice: 3.17,
+    lookupKey: "pro",
     icon: Building,
     popular: true,
     features: [
-      "8 professional invoices per month",
+      "6 invoice credits per month",
       "All invoice templates",
       "Custom branding & logo",
-      "Payment links integration",
+      "Advanced customization",
       "Priority support",
       "Client management"
     ]
   },
   {
     name: "Agency", 
-    description: "Perfect for agencies and bookkeepers with multiple clients",
-    price: 59,
-    yearlyPrice: 590,
-    credits: 20,
-    effectivePrice: 2.95,
-    priceId: "price_1SCD3dGpz30x93KjcuQ58v2g",
+    description: "Perfect for agencies and teams with high volume",
+    price: 39,
+    yearlyPrice: 390,
+    credits: 15,
+    effectivePrice: 2.60,
+    lookupKey: "agency",
     icon: Users,
     features: [
-      "20 professional invoices per month",
+      "15 invoice credits per month",
+      "Unlimited templates",
       "White-label solutions",
-      "Advanced customization",
-      "Multi-client management",
+      "Team collaboration",
       "API access",
       "Dedicated support"
+    ]
+  }
+];
+
+const oneTimeProducts = [
+  {
+    name: "Single Template",
+    description: "One-time template purchase",
+    price: 10,
+    lookupKey: "template_onetime",
+    credits: 1,
+    features: [
+      "1 invoice credit",
+      "Access to all templates",
+      "PDF export",
+      "No expiration"
+    ]
+  },
+  {
+    name: "Try One Template",
+    description: "Trial template purchase",
+    price: 5,
+    lookupKey: "template_trial", 
+    credits: 1,
+    features: [
+      "1 invoice credit",
+      "Access to all templates", 
+      "PDF export",
+      "Perfect for testing"
     ]
   }
 ];
@@ -69,16 +98,22 @@ export default function Pricing() {
   const [isYearly, setIsYearly] = useState(false);
   const { user } = useAuth();
 
-  const handleSubscribe = async (priceId: string, planName: string) => {
+  const handleSubscribe = async (plan: any, billingCycle: 'monthly' | 'annual') => {
     if (!user) {
       toast.error("Please sign in to subscribe");
       return;
     }
 
-    setIsLoading(priceId);
+    const planKey = `${plan.lookupKey}_${billingCycle}`;
+    setIsLoading(planKey);
+    
     try {
       const { data, error } = await supabase.functions.invoke('create-checkout', {
-        body: { priceId }
+        body: { 
+          plan_type: plan.lookupKey,
+          billing_cycle: billingCycle,
+          product_type: 'subscription'
+        }
       });
 
       if (error) throw error;
@@ -89,6 +124,35 @@ export default function Pricing() {
     } catch (error) {
       console.error('Subscription error:', error);
       toast.error("Failed to start subscription process");
+    } finally {
+      setIsLoading(null);
+    }
+  };
+
+  const handleOneTimePurchase = async (product: any) => {
+    if (!user) {
+      toast.error("Please sign in to purchase");
+      return;
+    }
+
+    setIsLoading(product.lookupKey);
+    
+    try {
+      const { data, error } = await supabase.functions.invoke('create-checkout', {
+        body: { 
+          plan_type: product.lookupKey === 'template_trial' ? 'trial' : 'standard',
+          product_type: 'template'
+        }
+      });
+
+      if (error) throw error;
+
+      if (data?.url) {
+        window.open(data.url, '_blank');
+      }
+    } catch (error) {
+      console.error('Purchase error:', error);
+      toast.error("Failed to start purchase process");
     } finally {
       setIsLoading(null);
     }
@@ -130,11 +194,13 @@ export default function Pricing() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
           {plans.map((plan) => {
             const Icon = plan.icon;
             const displayPrice = isYearly ? plan.yearlyPrice : plan.price;
             const period = isYearly ? '/year' : '/month';
+            const billingCycle = isYearly ? 'annual' : 'monthly';
+            const planKey = `${plan.lookupKey}_${billingCycle}`;
             
             return (
               <Card 
@@ -168,7 +234,7 @@ export default function Pricing() {
                     <span className="text-muted-foreground">{period}</span>
                   </div>
                   <div className="text-sm text-muted-foreground">
-                    ${plan.effectivePrice.toFixed(2)} per invoice
+                    {plan.credits} credits • ${plan.effectivePrice.toFixed(2)} per invoice
                   </div>
                 </CardHeader>
                 
@@ -187,15 +253,68 @@ export default function Pricing() {
                   <Button
                     className="w-full"
                     variant={plan.popular ? "default" : "outline"}
-                    onClick={() => handleSubscribe(plan.priceId, plan.name)}
-                    disabled={isLoading === plan.priceId}
+                    onClick={() => handleSubscribe(plan, billingCycle)}
+                    disabled={isLoading === planKey}
                   >
-                    {isLoading === plan.priceId ? "Processing..." : "Get Started"}
+                    {isLoading === planKey ? "Processing..." : "Subscribe Now"}
                   </Button>
                 </CardFooter>
               </Card>
             );
           })}
+        </div>
+
+        {/* One-Time Products Section */}
+        <div className="max-w-4xl mx-auto mb-12">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-foreground mb-2">
+              No Subscription? No Problem!
+            </h2>
+            <p className="text-muted-foreground">
+              Purchase individual templates as you need them
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            {oneTimeProducts.map((product) => (
+              <Card key={product.name} className="border-border hover:shadow-lg transition-all duration-300">
+                <CardHeader className="text-center pb-4">
+                  <CardTitle className="text-xl">{product.name}</CardTitle>
+                  <CardDescription className="text-sm">
+                    {product.description}
+                  </CardDescription>
+                  <div className="mt-2">
+                    <span className="text-3xl font-bold text-foreground">
+                      ${product.price}
+                    </span>
+                    <span className="text-muted-foreground"> one-time</span>
+                  </div>
+                </CardHeader>
+                
+                <CardContent className="px-6 pb-4">
+                  <ul className="space-y-2">
+                    {product.features.map((feature, index) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                        <span className="text-sm text-muted-foreground">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+                
+                <CardFooter className="px-6 pb-6">
+                  <Button
+                    className="w-full"
+                    variant="outline"
+                    onClick={() => handleOneTimePurchase(product)}
+                    disabled={isLoading === product.lookupKey}
+                  >
+                    {isLoading === product.lookupKey ? "Processing..." : "Buy Now"}
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
         </div>
 
         <div className="text-center mt-12">

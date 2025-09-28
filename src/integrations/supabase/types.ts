@@ -408,16 +408,16 @@ export type Database = {
       }
     }
     Views: {
-      credit_balance: {
-        Row: {
-          balance: number | null
-          templates_downloaded: number | null
-          user_id: string | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
+      get_user_credit_balance: {
+        Args: { p_user_id?: string }
+        Returns: {
+          balance: number
+          templates_downloaded: number
+        }[]
+      }
       invoke_pro_scans: {
         Args: Record<PropertyKey, never>
         Returns: undefined
