@@ -34,7 +34,7 @@ const Index = () => {
           <img 
             src={proInvoiceLogoFull} 
             alt="ProInvoice.app - Professional Invoice Generator" 
-            className="w-full h-16 sm:h-24 md:h-32 object-fill"
+            className="w-full h-16 sm:h-24 md:h-32 object-cover"
           />
         </div>
         
