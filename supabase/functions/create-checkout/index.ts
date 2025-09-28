@@ -48,11 +48,11 @@ const handleCheckout = async (req: Request): Promise<Response> => {
     logStep("Request data received", { hasKeys: Object.keys(requestData) });
     
     // Handle legacy format (priceId) or new format (plan_type, billing_cycle, product_type)
-    const { priceId, plan_type, billing_cycle, product_type } = requestData;
+    const { priceId, price_id, plan_type, billing_cycle, product_type } = requestData;
     
     // Validate input data
-    if (priceId) {
-      inputValidator.validateString(priceId, 100, 'priceId');
+    if (priceId || price_id) {
+      inputValidator.validateString(priceId || price_id, 100, 'priceId');
     }
     if (plan_type) {
       inputValidator.validateString(plan_type, 50, 'plan_type');
@@ -100,11 +100,11 @@ const handleCheckout = async (req: Request): Promise<Response> => {
     let mode: "subscription" | "payment";
     
     // Determine price ID and mode
-    if (priceId) {
-      // Legacy format - use provided price ID
-      finalPriceId = priceId;
-      mode = "subscription"; // Default to subscription for legacy
-      logStep("Using legacy priceId", { priceId });
+    if (priceId || price_id) {
+      // Direct price ID provided - use it
+      finalPriceId = priceId || price_id;
+      mode = "subscription"; // Default to subscription when price_id is provided
+      logStep("Using provided price_id", { priceId: finalPriceId });
     } else {
       // New format - use direct price IDs
       if (product_type === "template") {
