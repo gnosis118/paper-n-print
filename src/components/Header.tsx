@@ -36,7 +36,11 @@ const Header = () => {
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2">
           <div className="h-8 w-8 rounded bg-primary flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-sm">IG</span>
+            <img 
+              src="https://storage.googleapis.com/gpt-engineer-file-uploads/UvIMPethhaONUEnwJNzOOknYYqI2/uploads/1759047768005-Favicon for a profes.png" 
+              alt="Invoice Generator" 
+              className="w-6 h-6"
+            />
           </div>
           <span className="font-bold text-lg">Invoice Generator</span>
         </Link>
