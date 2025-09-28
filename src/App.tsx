@@ -27,6 +27,9 @@ import BusinessSettings from "./pages/BusinessSettings";
 import Security from "./pages/Security";
 import Accessibility from "./pages/Accessibility";
 import SubscriptionManagement from "./pages/SubscriptionManagement";
+import EstimateView from './pages/EstimateView';
+import InvoiceView from './pages/InvoiceView';
+import Estimates from './pages/Estimates';
 import NotFound from "./pages/NotFound";
 import ConstructionInvoiceTemplate from "./pages/templates/Construction";
 import ConsultingInvoiceTemplate from "./pages/templates/Consulting";
@@ -108,6 +111,13 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <Routes>
+              <Route path="/e/:slug" element={<EstimateView />} />
+              <Route path="/i/:id" element={<InvoiceView />} />
+              <Route path="/estimates" element={
+                <ProtectedRoute>
+                  <Estimates />
+                </ProtectedRoute>
+              } />
               <Route path="/auth" element={<Auth />} />
               <Route path="/payment-success" element={<PaymentSuccess />} />
               <Route path="/payment-canceled" element={<PaymentCanceled />} />

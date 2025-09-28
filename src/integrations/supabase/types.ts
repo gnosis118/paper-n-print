@@ -140,6 +140,86 @@ export type Database = {
         }
         Relationships: []
       }
+      estimates: {
+        Row: {
+          accepted_at: string | null
+          accepted_ip: unknown | null
+          checkout_session_id: string | null
+          client_id: string | null
+          created_at: string | null
+          deposit_type: string | null
+          deposit_value: number | null
+          id: string
+          items: Json | null
+          number: string
+          payment_intent_id: string | null
+          public_slug: string
+          status: string | null
+          subtotal: number | null
+          tax_amount: number | null
+          tax_rate: number | null
+          terms: string | null
+          title: string
+          total: number | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          accepted_at?: string | null
+          accepted_ip?: unknown | null
+          checkout_session_id?: string | null
+          client_id?: string | null
+          created_at?: string | null
+          deposit_type?: string | null
+          deposit_value?: number | null
+          id?: string
+          items?: Json | null
+          number: string
+          payment_intent_id?: string | null
+          public_slug: string
+          status?: string | null
+          subtotal?: number | null
+          tax_amount?: number | null
+          tax_rate?: number | null
+          terms?: string | null
+          title: string
+          total?: number | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          accepted_at?: string | null
+          accepted_ip?: unknown | null
+          checkout_session_id?: string | null
+          client_id?: string | null
+          created_at?: string | null
+          deposit_type?: string | null
+          deposit_value?: number | null
+          id?: string
+          items?: Json | null
+          number?: string
+          payment_intent_id?: string | null
+          public_slug?: string
+          status?: string | null
+          subtotal?: number | null
+          tax_amount?: number | null
+          tax_rate?: number | null
+          terms?: string | null
+          title?: string
+          total?: number | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "estimates_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       invoice_items: {
         Row: {
           amount: number
@@ -192,10 +272,13 @@ export type Database = {
           created_at: string
           discount: number
           due_date: string
+          estimate_id: string | null
           id: string
           invoice_number: string
           issue_date: string
           notes: string | null
+          pay_link_url: string | null
+          pay_qr_svg: string | null
           payment_terms: string
           shipping: number
           status: string
@@ -214,10 +297,13 @@ export type Database = {
           created_at?: string
           discount?: number
           due_date: string
+          estimate_id?: string | null
           id?: string
           invoice_number: string
           issue_date: string
           notes?: string | null
+          pay_link_url?: string | null
+          pay_qr_svg?: string | null
           payment_terms?: string
           shipping?: number
           status?: string
@@ -236,10 +322,13 @@ export type Database = {
           created_at?: string
           discount?: number
           due_date?: string
+          estimate_id?: string | null
           id?: string
           invoice_number?: string
           issue_date?: string
           notes?: string | null
+          pay_link_url?: string | null
+          pay_qr_svg?: string | null
           payment_terms?: string
           shipping?: number
           status?: string
@@ -264,6 +353,13 @@ export type Database = {
             columns: ["client_id"]
             isOneToOne: false
             referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "invoices_estimate_id_fkey"
+            columns: ["estimate_id"]
+            isOneToOne: false
+            referencedRelation: "estimates"
             referencedColumns: ["id"]
           },
         ]
@@ -291,6 +387,54 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      payments: {
+        Row: {
+          amount: number
+          created_at: string | null
+          estimate_id: string | null
+          id: string
+          invoice_id: string | null
+          method: string | null
+          status: string | null
+          stripe_payment_intent: string | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string | null
+          estimate_id?: string | null
+          id?: string
+          invoice_id?: string | null
+          method?: string | null
+          status?: string | null
+          stripe_payment_intent?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string | null
+          estimate_id?: string | null
+          id?: string
+          invoice_id?: string | null
+          method?: string | null
+          status?: string | null
+          stripe_payment_intent?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_estimate_id_fkey"
+            columns: ["estimate_id"]
+            isOneToOne: false
+            referencedRelation: "estimates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payments_invoice_id_fkey"
+            columns: ["invoice_id"]
+            isOneToOne: false
+            referencedRelation: "invoices"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
