@@ -193,7 +193,7 @@ Disallow: /*?*
 Crawl-delay: 5
 
 # Sitemap location
-Sitemap: https://paper-n-print.lovable.app/sitemap.xml
+Sitemap: https://www.proinvoice.app/sitemap.xml
 
 # Additional directives for better SEO
 # Clean URLs only - block query parameters that don't provide unique content
