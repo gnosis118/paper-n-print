@@ -236,6 +236,108 @@ const Templates = () => {
             </Link>
           </div>
         </div>
+
+        {/* Industry-Specific Templates */}
+        <div className="mt-16 pt-16 border-t border-invoice-border">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-primary mb-4">
+              Industry-Specific Templates
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Specialized invoice templates designed for specific industries and locations
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
+            <Link to="/templates/construction" className="group">
+              <div className="bg-card border border-invoice-border rounded-lg shadow-soft p-6 hover:shadow-medium transition-all group-hover:border-primary">
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="w-10 h-10 bg-primary-light rounded-lg flex items-center justify-center">
+                    <Palette className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold">Construction Invoice Template</h3>
+                    <span className="text-xs px-2 py-1 rounded-full bg-secondary text-secondary-foreground">
+                      Industry Specific
+                    </span>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Perfect for contractors, builders, and construction companies. Track labor, materials, and equipment costs.
+                </p>
+                <div className="text-primary text-sm font-medium group-hover:underline">
+                  View Template →
+                </div>
+              </div>
+            </Link>
+
+            <Link to="/templates/consulting" className="group">
+              <div className="bg-card border border-invoice-border rounded-lg shadow-soft p-6 hover:shadow-medium transition-all group-hover:border-primary">
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="w-10 h-10 bg-primary-light rounded-lg flex items-center justify-center">
+                    <Palette className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold">Consulting Invoice Template</h3>
+                    <span className="text-xs px-2 py-1 rounded-full bg-secondary text-secondary-foreground">
+                      Professional Services
+                    </span>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Designed for consultants and professional service providers. Perfect for hourly billing and project tracking.
+                </p>
+                <div className="text-primary text-sm font-medium group-hover:underline">
+                  View Template →
+                </div>
+              </div>
+            </Link>
+
+            <Link to="/templates/freelance-nyc" className="group">
+              <div className="bg-card border border-invoice-border rounded-lg shadow-soft p-6 hover:shadow-medium transition-all group-hover:border-primary">
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="w-10 h-10 bg-primary-light rounded-lg flex items-center justify-center">
+                    <Palette className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold">NYC Freelance Template</h3>
+                    <span className="text-xs px-2 py-1 rounded-full bg-accent text-accent-foreground">
+                      NYC Compliant
+                    </span>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Compliant with NYC's Freelance Isn't Free Act. Includes required legal protections and tax calculations.
+                </p>
+                <div className="text-primary text-sm font-medium group-hover:underline">
+                  View Template →
+                </div>
+              </div>
+            </Link>
+
+            <Link to="/templates/freelance-california" className="group">
+              <div className="bg-card border border-invoice-border rounded-lg shadow-soft p-6 hover:shadow-medium transition-all group-hover:border-primary">
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="w-10 h-10 bg-primary-light rounded-lg flex items-center justify-center">
+                    <Palette className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold">California Freelance Template</h3>
+                    <span className="text-xs px-2 py-1 rounded-full bg-accent text-accent-foreground">
+                      CA Compliant
+                    </span>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground mb-4">
+                  AB5 compliant template for California freelancers. Includes proper independent contractor documentation.
+                </p>
+                <div className="text-primary text-sm font-medium group-hover:underline">
+                  View Template →
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );

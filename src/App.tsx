@@ -26,6 +26,10 @@ import BusinessSettings from "./pages/BusinessSettings";
 import Security from "./pages/Security";
 import Accessibility from "./pages/Accessibility";
 import NotFound from "./pages/NotFound";
+import ConstructionInvoiceTemplate from "./pages/templates/Construction";
+import ConsultingInvoiceTemplate from "./pages/templates/Consulting";
+import FreelanceNYCTemplate from "./pages/templates/FreelanceNYC";
+import FreelanceCATemplate from "./pages/templates/FreelanceCA";
 
 const queryClient = new QueryClient();
 
@@ -68,6 +72,10 @@ const App = () => (
                   <BusinessSettings />
                 </ProtectedRoute>
               } />
+              <Route path="/templates/construction" element={<ConstructionInvoiceTemplate />} />
+              <Route path="/templates/consulting" element={<ConsultingInvoiceTemplate />} />
+              <Route path="/templates/freelance-nyc" element={<FreelanceNYCTemplate />} />
+              <Route path="/templates/freelance-california" element={<FreelanceCATemplate />} />
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/get-started" element={<Auth />} />
               <Route path="*" element={<NotFound />} />
