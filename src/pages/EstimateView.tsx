@@ -49,22 +49,23 @@ const EstimateView: React.FC = () => {
 
     const fetchEstimate = async () => {
       try {
-        const { data, error } = await supabase
-          .from('estimates')
-          .select('*')
-          .eq('sharing_token', token)
-          .single();
+        const { data, error } = await supabase.functions.invoke('get-estimate', {
+          body: { token },
+        });
 
         if (error) throw error;
         
-        // Type cast the data properly
-        const estimate: Estimate = {
-          ...data,
-          items: (data.items as unknown as EstimateItem[]) || [],
-          deposit_type: data.deposit_type as 'percent' | 'fixed',
-          status: data.status as 'draft' | 'sent' | 'accepted' | 'invoiced'
-        };
-        setEstimate(estimate);
+        if (data?.estimate) {
+          const estimate: Estimate = {
+            ...data.estimate,
+            items: data.estimate.items || [],
+            deposit_type: data.estimate.deposit_type as 'percent' | 'fixed',
+            status: data.estimate.status as 'draft' | 'sent' | 'accepted' | 'invoiced'
+          };
+          setEstimate(estimate);
+        } else {
+          throw new Error('Estimate not found');
+        }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load estimate');
       } finally {
