@@ -1,10 +1,46 @@
 import { Button } from "@/components/ui/button";
-import { FileText, Zap, Download, Star } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Check, FileText, Palette, Download, Star, ArrowRight, Zap, Shield, Users, LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
+import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
+  const { user, signOut } = useAuth();
+  const { toast } = useToast();
+
+  const handleSignOut = async () => {
+    await signOut();
+    toast({
+      title: "Signed out",
+      description: "You have been successfully signed out.",
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      <nav className="flex items-center justify-between p-6">
+        <div className="flex items-center space-x-2">
+          <FileText className="w-8 h-8 text-invoice-brand" />
+          <span className="text-2xl font-bold">Invoice Pro</span>
+        </div>
+        <div className="flex items-center space-x-4">
+          {user && (
+            <span className="text-sm text-muted-foreground">Welcome, {user.email}</span>
+          )}
+          <Link to="/templates">
+            <Button variant="ghost">Templates</Button>
+          </Link>
+          <Link to="/invoice">
+            <Button>Create Invoice</Button>
+          </Link>
+          <Button onClick={handleSignOut} variant="ghost" size="sm">
+            <LogOut className="w-4 h-4 mr-2" />
+            Sign Out
+          </Button>
+        </div>
+      </nav>
+
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-primary-light to-accent-light">
         <div className="max-w-7xl mx-auto px-6 py-20">

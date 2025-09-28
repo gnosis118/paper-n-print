@@ -1,211 +1,164 @@
-import { useState } from "react";
-import InvoiceForm from "@/components/InvoiceForm";
-import InvoicePreview from "@/components/InvoicePreview";
-import { Button } from "@/components/ui/button";
-import { FileDown, Plus, Settings } from "lucide-react";
-import { Link } from "react-router-dom";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-
-interface InvoiceData {
-  business: {
-    name: string;
-    email: string;
-    phone: string;
-    address: string;
-    website: string;
-  };
-  client: {
-    name: string;
-    company: string;
-    email: string;
-    address: string;
-  };
-  meta: {
-    number: string;
-    issueDate: string;
-    dueDate: string;
-    terms: string;
-  };
-  items: Array<{
-    description: string;
-    qty: number;
-    rate: number;
-    taxable: boolean;
-  }>;
-  totals: {
-    taxRate: number;
-    discount: number;
-    shipping: number;
-  };
-  notes: string;
-  template: "Clean" | "Modern" | "Trades";
-  accent: string;
-  watermark: boolean;
-}
+import InvoiceForm from "../components/InvoiceForm";
+import InvoicePreview from "../components/InvoicePreview";
+import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Download, FileText, ArrowLeft, Save, LogOut } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
+import { useInvoiceData } from "@/hooks/useInvoiceData";
+import { useToast } from "@/hooks/use-toast";
 
 const Invoice = () => {
-  const [invoiceData, setInvoiceData] = useState<InvoiceData>({
-    business: {
-      name: "",
-      email: "",
-      phone: "",
-      address: "",
-      website: "",
-    },
-    client: {
-      name: "",
-      company: "",
-      email: "",
-      address: "",
-    },
-    meta: {
-      number: "INV-1001",
-      issueDate: new Date().toISOString().slice(0, 10),
-      dueDate: "",
-      terms: "Net 14",
-    },
-    items: [
-      {
-        description: "",
-        qty: 1,
-        rate: 0,
-        taxable: true,
-      },
-    ],
-    totals: {
-      taxRate: 0,
-      discount: 0,
-      shipping: 0,
-    },
-    notes: "Thank you for your business!",
-    template: "Clean",
-    accent: "#3b82f6",
-    watermark: true,
-  });
-
-  const updateInvoiceData = (path: string, value: any) => {
-    const keys = path.split(".");
-    setInvoiceData((prev) => {
-      const updated = { ...prev };
-      let current: any = updated;
-      
-      for (let i = 0; i < keys.length - 1; i++) {
-        current = current[keys[i]];
-      }
-      
-      current[keys[keys.length - 1]] = value;
-      return updated;
-    });
-  };
+  const { user, signOut } = useAuth();
+  const { invoiceData, updateInvoiceData, saveInvoice, subscription } = useInvoiceData();
+  const { toast } = useToast();
 
   const downloadPDF = async () => {
-    const previewElement = document.querySelector('.print-page') as HTMLElement;
-    if (!previewElement) return;
+    const invoiceElement = document.getElementById('invoice-preview');
+    if (!invoiceElement) return;
 
     try {
-      // Create canvas from the preview element
-      const canvas = await html2canvas(previewElement, {
+      const canvas = await html2canvas(invoiceElement, {
         scale: 2,
         useCORS: true,
         allowTaint: true,
-        backgroundColor: '#ffffff',
       });
 
-      // Create PDF
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p', 'mm', 'a4');
-      
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
       const imgWidth = canvas.width;
       const imgHeight = canvas.height;
       const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
       const imgX = (pdfWidth - imgWidth * ratio) / 2;
-      const imgY = 0;
+      const imgY = 30;
 
       pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
-      pdf.save(`${invoiceData.meta.number || 'invoice'}.pdf`);
+      pdf.save(`invoice-${invoiceData.meta.number}.pdf`);
+
+      toast({
+        title: "PDF Downloaded",
+        description: `Invoice ${invoiceData.meta.number} has been downloaded successfully.`,
+      });
     } catch (error) {
       console.error('Error generating PDF:', error);
-      // Fallback to browser print
-      window.print();
+      toast({
+        title: "Download Failed",
+        description: "There was an error generating the PDF. Please try again.",
+        variant: "destructive",
+      });
     }
+  };
+
+  const handleSaveInvoice = async () => {
+    const savedInvoiceId = await saveInvoice();
+    if (savedInvoiceId) {
+      // Optionally redirect to a saved invoices list or show success
+    }
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
+    toast({
+      title: "Signed out",
+      description: "You have been successfully signed out.",
+    });
   };
 
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-invoice-border bg-invoice-paper shadow-soft">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <h1 className="text-2xl font-bold text-invoice-brand">Invoice Generator</h1>
-              <span className="text-sm text-muted-foreground">Professional invoices in minutes</span>
+      <div className="bg-card border-b border-border px-6 py-4">
+        <div className="flex items-center justify-between max-w-7xl mx-auto">
+          <div className="flex items-center space-x-4">
+            <Link to="/" className="flex items-center space-x-2 text-muted-foreground hover:text-foreground">
+              <ArrowLeft className="w-4 h-4" />
+              <span>Back</span>
+            </Link>
+            <div className="h-4 w-px bg-border" />
+            <div className="flex items-center space-x-2">
+              <FileText className="w-5 h-5 text-invoice-brand" />
+              <h1 className="text-xl font-semibold">Create Invoice</h1>
             </div>
-            <div className="flex items-center space-x-3">
-              <Link to="/templates">
-                <Button variant="outline" size="sm">
-                  <Settings className="w-4 h-4 mr-2" />
-                  Templates
-                </Button>
-              </Link>
-              <Button onClick={downloadPDF} className="bg-invoice-brand hover:bg-invoice-brand/90">
-                <FileDown className="w-4 h-4 mr-2" />
-                Download PDF
+            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+              <span>•</span>
+              <span>{user?.email}</span>
+              {subscription && (
+                <>
+                  <span>•</span>
+                  <span className="capitalize font-medium">{subscription.plan}</span>
+                </>
+              )}
+            </div>
+          </div>
+          
+          <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2">
+              <label htmlFor="template-select" className="text-sm font-medium">Template:</label>
+              <Select
+                value={invoiceData.template}
+                onValueChange={(value: "Clean" | "Modern" | "Trades") => updateInvoiceData("template", value)}
+              >
+                <SelectTrigger className="w-32">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Clean">Clean</SelectItem>
+                  <SelectItem value="Modern">Modern</SelectItem>
+                  <SelectItem value="Trades">Trades</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <Link to="/templates">
+              <Button variant="outline" size="sm">
+                Templates
               </Button>
-            </div>
+            </Link>
+            
+            <Button onClick={handleSaveInvoice} variant="outline" size="sm">
+              <Save className="w-4 h-4 mr-2" />
+              Save
+            </Button>
+            
+            <Button onClick={downloadPDF} className="bg-invoice-brand hover:bg-invoice-brand/90">
+              <Download className="w-4 h-4 mr-2" />
+              Download PDF
+            </Button>
+            
+            <Button onClick={handleSignOut} variant="ghost" size="sm">
+              <LogOut className="w-4 h-4 mr-2" />
+              Sign Out
+            </Button>
           </div>
         </div>
-      </header>
+      </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        <div className="grid lg:grid-cols-2 gap-8">
-          {/* Form Section */}
-          <div className="space-y-6">
-            <div className="bg-card border border-invoice-border rounded-lg shadow-soft">
-              <div className="p-6 border-b border-invoice-border">
-                <h2 className="text-lg font-semibold text-card-foreground">Invoice Details</h2>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Fill in your business and client information
-                </p>
-              </div>
-              <div className="p-6">
-                <InvoiceForm
-                  data={invoiceData}
-                  onUpdate={updateInvoiceData}
-                />
-              </div>
-            </div>
+      <div className="flex flex-col lg:flex-row max-w-7xl mx-auto">
+        {/* Form Section */}
+        <div className="w-full lg:w-1/2 p-6">
+          <div className="bg-card border border-border rounded-lg p-6 shadow-soft">
+            <InvoiceForm
+              data={invoiceData}
+              onUpdate={updateInvoiceData}
+            />
           </div>
+        </div>
 
-          {/* Preview Section */}
-          <div className="space-y-6">
-            <div className="bg-card border border-invoice-border rounded-lg shadow-soft">
-              <div className="p-6 border-b border-invoice-border">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h2 className="text-lg font-semibold text-card-foreground">Live Preview</h2>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      See your invoice as you build it
-                    </p>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-sm text-muted-foreground">Template:</span>
-                    <select
-                      value={invoiceData.template}
-                      onChange={(e) => updateInvoiceData("template", e.target.value)}
-                      className="text-sm border border-invoice-border rounded px-2 py-1"
-                    >
-                      <option value="Clean">Clean</option>
-                      <option value="Modern">Modern</option>
-                      <option value="Trades">Trades</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div className="p-6">
+        {/* Preview Section */}
+        <div className="w-full lg:w-1/2 p-6">
+          <div className="bg-card border border-border rounded-lg overflow-hidden shadow-soft sticky top-6">
+            <div className="p-4 border-b border-border bg-secondary/50">
+              <h2 className="font-semibold text-lg">Invoice Preview</h2>
+              <p className="text-sm text-muted-foreground">Live preview of your invoice</p>
+            </div>
+            
+            <div className="p-6 max-h-[80vh] overflow-auto">
+              <div id="invoice-preview">
                 <InvoicePreview data={invoiceData} />
               </div>
             </div>
