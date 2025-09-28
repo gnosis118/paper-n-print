@@ -28,10 +28,10 @@ const Index = () => {
     >
       {/* Hero Section */}
       <div 
-        className="bg-gradient-to-br from-primary-light to-accent-light relative overflow-hidden"
+        className="bg-gradient-to-br from-primary-light to-accent-light relative overflow-hidden w-full"
         style={{
           backgroundImage: `url(${proInvoiceLogo})`,
-          backgroundSize: 'contain',
+          backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
           backgroundColor: 'hsl(var(--primary-light))'
