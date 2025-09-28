@@ -30,6 +30,7 @@ import ConstructionInvoiceTemplate from "./pages/templates/Construction";
 import ConsultingInvoiceTemplate from "./pages/templates/Consulting";
 import FreelanceNYCTemplate from "./pages/templates/FreelanceNYC";
 import FreelanceCATemplate from "./pages/templates/FreelanceCA";
+import ProgrammaticSEO from "./pages/templates/ProgrammaticSEO";
 
 const queryClient = new QueryClient();
 
@@ -77,6 +78,7 @@ const App = () => (
               <Route path="/templates/freelance-nyc" element={<FreelanceNYCTemplate />} />
               <Route path="/templates/freelance-california" element={<FreelanceCATemplate />} />
               <Route path="/pricing" element={<Pricing />} />
+              <Route path="/templates/:trade/:location" element={<ProgrammaticSEO />} />
               <Route path="/get-started" element={<Auth />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

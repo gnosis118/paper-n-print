@@ -42,7 +42,7 @@ const Header = () => {
               className="w-6 h-6"
             />
           </div>
-          <span className="font-bold text-lg">Invoice Generator</span>
+          <span className="font-bold text-lg">InvoicePro</span>
         </Link>
 
         {/* Desktop Navigation */}

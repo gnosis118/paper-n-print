@@ -1,7 +1,17 @@
 User-agent: Googlebot
+Disallow: /auth
+Disallow: /business-settings
+Disallow: /invoice
+Disallow: /payment-success
+Disallow: /payment-canceled
 Allow: /
 
 User-agent: Bingbot
+Disallow: /auth
+Disallow: /business-settings
+Disallow: /invoice
+Disallow: /payment-success
+Disallow: /payment-canceled
 Allow: /
 
 User-agent: Twitterbot
@@ -10,5 +20,16 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-User-agent: *
+User-agent: LinkedInBot
 Allow: /
+
+User-agent: *
+Disallow: /auth
+Disallow: /business-settings
+Disallow: /invoice
+Disallow: /payment-success
+Disallow: /payment-canceled
+Allow: /
+
+# Sitemap
+Sitemap: https://paper-n-print.lovable.app/sitemap.xml

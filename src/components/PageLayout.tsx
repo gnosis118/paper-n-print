@@ -4,6 +4,7 @@ import Header from './Header';
 import Footer from './Footer';
 import CookieBanner from './CookieBanner';
 import { useGoogleAnalytics } from '@/hooks/useGoogleAnalytics';
+import { SEOHeaders } from './SEOHeaders';
 
 interface PageLayoutProps {
   children: React.ReactNode;
@@ -15,45 +16,25 @@ interface PageLayoutProps {
 
 const PageLayout: React.FC<PageLayoutProps> = ({
   children,
-  title = 'Professional Invoice Generator - Create Professional Invoices',
-  description = 'Create professional invoices with our easy-to-use invoice generator. Professional templates, automated calculations, and seamless payment integration.',
+  title = 'InvoicePro - Create & Get Paid in 2 Clicks | Free Invoice Generator',
+  description = 'Create professional invoices in 30 seconds with embedded Stripe checkout. Get paid 3x faster with smart dunning and auto-reminders. Free plan: 3 invoices/month.',
   canonical,
   noIndex = false,
 }) => {
-  const fullTitle = title.includes('Invoice Generator') ? title : `${title} | Invoice Generator`;
+  const fullTitle = title.includes('InvoicePro') ? title : `${title} | InvoicePro`;
   
   // Track page views
   useGoogleAnalytics();
 
   return (
     <>
-      <Helmet>
-        <title>{fullTitle}</title>
-        <meta name="description" content={description} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        
-        {/* Open Graph */}
-        <meta property="og:title" content={fullTitle} />
-        <meta property="og:description" content={description} />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Invoice Generator" />
-        
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={fullTitle} />
-        <meta name="twitter:description" content={description} />
-        
-        {/* Canonical URL */}
-        {canonical && <link rel="canonical" href={canonical} />}
-        
-        {/* No Index */}
-        {noIndex && <meta name="robots" content="noindex, nofollow" />}
-        
-        {/* Additional SEO */}
-        <meta name="author" content="Gavin Clay" />
-        <meta name="copyright" content="Invoice Generator" />
-        <meta name="language" content="en-US" />
-      </Helmet>
+      <SEOHeaders 
+        title={fullTitle}
+        description={description}
+        canonical={canonical}
+        noIndex={noIndex}
+        ogImage="https://paper-n-print.lovable.app/og-image.png"
+      />
       
       <div className="min-h-screen flex flex-col">
         <Header />

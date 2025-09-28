@@ -36,7 +36,7 @@ const Footer = () => {
               <div className="h-8 w-8 rounded bg-primary flex items-center justify-center">
                 <span className="text-primary-foreground font-bold text-sm">IG</span>
               </div>
-              <span className="font-bold text-lg">Invoice Generator</span>
+              <span className="font-bold text-lg">InvoicePro</span>
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
               Professional invoice templates and SaaS tools for businesses worldwide.
@@ -127,7 +127,7 @@ const Footer = () => {
         <div className="mt-12 pt-8 border-t border-border">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-sm text-muted-foreground">
-              © {currentYear} Invoice Generator. All rights reserved.
+              © {currentYear} InvoicePro. All rights reserved.
             </p>
             <div className="flex items-center gap-4 text-sm text-muted-foreground">
               <a 
@@ -155,7 +155,7 @@ const Footer = () => {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
-            "name": "Invoice Generator",
+            "name": "InvoicePro",
             "url": "https://[PLACEHOLDER-DOMAIN]",
             "logo": "https://[PLACEHOLDER-DOMAIN]/logo.png",
             "contactPoint": {

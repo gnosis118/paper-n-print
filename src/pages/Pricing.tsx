@@ -150,8 +150,8 @@ export default function Pricing() {
 
   return (
     <PageLayout
-      title="Pricing - Choose Your Plan"
-      description="Create professional invoices that get you paid faster. Start free with 3 invoices per month, or choose a paid plan for unlimited invoices without watermarks."
+      title="Pricing Plans - Free & Premium Invoice Generator | InvoicePro"
+      description="Start free with 3 invoices/month. Upgrade to Starter ($7/mo) or Pro ($14/mo) for unlimited invoices without watermarks. Benchmarked against Zoho Invoice, Wave, and Invoice Simple."
     >
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-12">
@@ -278,7 +278,7 @@ export default function Pricing() {
 
         {/* Value Proposition */}
         <div className="bg-gradient-to-r from-primary/10 to-primary/5 rounded-2xl p-8 mb-12 text-center">
-          <h2 className="text-2xl font-bold mb-4">Why Choose Invoice Pro?</h2>
+          <h2 className="text-2xl font-bold mb-4">Why Choose InvoicePro?</h2>
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div className="flex flex-col items-center">
               <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mb-3">

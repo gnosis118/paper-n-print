@@ -21,8 +21,8 @@ const Index = () => {
 
   return (
     <PageLayout 
-      title="Professional Invoice Generator - Create Beautiful Invoices"
-      description="Create professional invoices in minutes with our free invoice generator. Multiple templates, PDF export, and customizable branding for your business."
+      title="InvoicePro - Create & Get Paid in 2 Clicks | Free Invoice Generator"
+      description="Create professional invoices in 30 seconds with embedded Stripe checkout. Get paid 3x faster with smart dunning and auto-reminders. Free plan: 3 invoices/month."
     >
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-primary-light to-accent-light">
@@ -34,16 +34,15 @@ const Index = () => {
             </div>
             
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-primary mb-4 sm:mb-6">
-              Create & Send Invoices in 30 Seconds
+              Create & Get Paid in 2 Clicks
             </h1>
             
             <p className="text-base sm:text-xl text-primary/80 mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
-              Create compliant invoices with embedded payments and auto-reminders. 
-              Get paid 3x faster with our Stripe-powered invoice system.
+              Embedded checkout, smart dunning, milestone billing. Generate invoices in 30 seconds, get paid in 2 clicks with our Stripe-powered system.
             </p>
             
-            <div className="text-xs sm:text-sm text-primary/60 mb-4">
-              <em>Not affiliated with ProInvoice (.co) or similarly named applications</em>
+            <div className="text-xs sm:text-sm text-primary/60 mb-4 bg-white/20 rounded-full px-4 py-2 inline-block">
+              <strong>Independent Platform:</strong> Not affiliated with ProInvoice (.co), Google Play apps, or similarly named services
             </div>
             
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">

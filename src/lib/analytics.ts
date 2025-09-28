@@ -39,6 +39,14 @@ export const analytics = {
     });
   },
 
+  trackInvoiceSent: (method: string = 'email') => {
+    analytics.trackEvent('invoice_sent', {
+      send_method: method,
+      event_category: 'invoice',
+      event_label: 'send'
+    });
+  },
+
   // Track user interactions
   trackButtonClick: (buttonName: string, location?: string) => {
     analytics.trackEvent('button_click', {
@@ -70,6 +78,40 @@ export const analytics = {
       plan_type: planType || 'unknown',
       event_category: 'conversion',
       value: 1
+    });
+  },
+
+  // Track activation funnel events
+  trackFirstInvoiceCreated: (timeToCreate?: number) => {
+    analytics.trackEvent('first_invoice_created', {
+      time_to_create: timeToCreate || 0,
+      event_category: 'activation',
+      event_label: 'milestone_1'
+    });
+  },
+
+  trackFirstPDFDownloaded: (timeSinceCreation?: number) => {
+    analytics.trackEvent('first_pdf_downloaded', {
+      time_since_creation: timeSinceCreation || 0,
+      event_category: 'activation',
+      event_label: 'milestone_2'
+    });
+  },
+
+  trackFirstInvoiceSent: (timeSinceDownload?: number) => {
+    analytics.trackEvent('first_invoice_sent', {
+      time_since_download: timeSinceDownload || 0,
+      event_category: 'activation',
+      event_label: 'milestone_3'
+    });
+  },
+
+  trackFirstPaymentReceived: (amount?: number, timeSinceSent?: number) => {
+    analytics.trackEvent('first_payment_received', {
+      amount: amount || 0,
+      time_since_sent: timeSinceSent || 0,
+      event_category: 'activation',
+      event_label: 'milestone_4'
     });
   },
 
