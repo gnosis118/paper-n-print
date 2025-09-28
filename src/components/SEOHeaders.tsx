@@ -19,7 +19,9 @@ export const SEOHeaders = ({
   structuredData,
   noIndex = false
 }: SEOHeadersProps) => {
-  const currentUrl = canonical || window.location.href;
+  // Always use www.proinvoice.app as canonical URL
+  const pathname = window.location.pathname;
+  const currentUrl = canonical || `https://www.proinvoice.app${pathname}`;
   const siteName = "InvoicePro";
 
   return (
@@ -27,8 +29,8 @@ export const SEOHeaders = ({
       {/* Basic Meta Tags */}
       <title>{title}</title>
       <meta name="description" content={description} />
-      {canonical && <link rel="canonical" href={canonical} />}
-      {noIndex && <meta name="robots" content="noindex,nofollow" />}
+      <link rel="canonical" href={currentUrl} />
+      <meta name="robots" content={noIndex ? "noindex,nofollow" : "index,follow"} />
 
       {/* Open Graph Meta Tags */}
       <meta property="og:site_name" content={siteName} />
