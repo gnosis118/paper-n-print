@@ -59,15 +59,15 @@ const plans = [
     description: "Perfect for growing businesses and agencies",
     price: 14,
     yearlyPrice: 140,  
-    credits: 100,
-    effectivePrice: 0.14,
+    credits: -1, // Unlimited
+    effectivePrice: 0,
     lookupKey: "pro",
     icon: Crown,
     popular: true,
     stripeMonthlyId: "price_1SCH1IGpz30x93KjBDXYrvZC",
     stripeYearlyId: "price_1SCH3PGpz30x93KjDe2eeXcj",
     features: [
-      "100 invoices per month",
+      "Unlimited invoices",
       "All templates + premium designs",
       "Advanced customization",
       "White-label invoices",
@@ -133,7 +133,7 @@ export default function Pricing() {
   return (
     <PageLayout
       title="Pricing Plans - Free & Premium Invoice Generator | InvoicePro"
-      description="Start free with 3 invoices/month. Upgrade to Starter ($7/mo) or Pro ($14/mo) for unlimited invoices without watermarks. Benchmarked against Zoho Invoice, Wave, and Invoice Simple."
+      description="Start free with 3 invoices/month. Upgrade to Starter (25 invoices, $7/mo) or Pro (unlimited invoices, $14/mo) for no watermarks. Benchmarked against Zoho Invoice, Wave, and Invoice Simple."
     >
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-12">
@@ -141,7 +141,7 @@ export default function Pricing() {
             Choose Your Plan
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Start free with 3 invoices per month. Upgrade for unlimited invoices, no watermarks, and premium features.
+            Start free with 3 invoices per month. Upgrade to Starter (25 invoices) or Pro (unlimited invoices), no watermarks, and premium features.
           </p>
           
           <div className="flex items-center justify-center gap-4 mt-8">
@@ -218,14 +218,15 @@ export default function Pricing() {
                     </span>
                     <span className="text-muted-foreground">{period}</span>
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    {plan.credits} invoices {plan.isFree ? '' : `• $${plan.effectivePrice.toFixed(2)} per invoice`}
-                    {plan.comparison && (
-                      <div className="text-xs mt-1 text-green-600 dark:text-green-400">
-                        💰 {plan.comparison}
-                      </div>
-                    )}
-                  </div>
+                   <div className="text-sm text-muted-foreground">
+                     {plan.credits === -1 ? 'Unlimited invoices' : `${plan.credits} invoices`} 
+                     {plan.isFree || plan.credits === -1 ? '' : ` • $${plan.effectivePrice.toFixed(2)} per invoice`}
+                     {plan.comparison && (
+                       <div className="text-xs mt-1 text-green-600 dark:text-green-400">
+                         💰 {plan.comparison}
+                       </div>
+                     )}
+                   </div>
                 </CardHeader>
                 
                 <CardContent className="px-6 pb-6">
