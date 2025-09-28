@@ -8,6 +8,7 @@ import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import Invoice from "./pages/Invoice";
 import Templates from "./pages/Templates";
+import Pricing from "./pages/Pricing";
 import Auth from "./pages/Auth";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentCanceled from "./pages/PaymentCanceled";
@@ -41,6 +42,7 @@ const App = () => (
                 <Templates />
               </ProtectedRoute>
             } />
+            <Route path="/pricing" element={<Pricing />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

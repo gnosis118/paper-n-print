@@ -4,6 +4,7 @@ import { Check, FileText, Palette, Download, Star, ArrowRight, Zap, Shield, User
 import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
+import { SubscriptionStatus } from "@/components/SubscriptionStatus";
 
 const Index = () => {
   const { user, signOut } = useAuth();
@@ -30,6 +31,9 @@ const Index = () => {
           )}
           <Link to="/templates">
             <Button variant="ghost" size="sm">Templates</Button>
+          </Link>
+          <Link to="/pricing">
+            <Button variant="ghost" size="sm">Pricing</Button>
           </Link>
           <Link to="/invoice">
             <Button size="sm" className="bg-invoice-brand hover:bg-invoice-brand/90">
@@ -83,6 +87,11 @@ const Index = () => {
 
       {/* Features Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
+        {/* Subscription Status */}
+        <div className="mb-8 sm:mb-12">
+          <SubscriptionStatus />
+        </div>
+
         <div className="text-center mb-8 sm:mb-16">
           <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-3 sm:mb-4">
             Everything You Need for Professional Invoicing
