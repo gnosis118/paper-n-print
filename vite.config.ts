@@ -29,7 +29,7 @@ export default defineConfig(({ mode }) => ({
         manualChunks: {
           vendor: ['react', 'react-dom'],
           router: ['react-router-dom'],
-          ui: ['@radix-ui/react-dialog', '@radix-ui/react-button', '@radix-ui/react-card'],
+          ui: ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-tabs'],
           forms: ['react-hook-form', '@hookform/resolvers', 'zod'],
           utils: ['clsx', 'tailwind-merge', 'class-variance-authority'],
         },
