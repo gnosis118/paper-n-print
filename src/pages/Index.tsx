@@ -39,17 +39,8 @@ const Index = () => {
       </div>
 
       {/* Hero Section */}
-      <div 
-        className="bg-gradient-to-br from-primary-light to-accent-light relative overflow-hidden w-full"
-        style={{
-          backgroundImage: `url(${proInvoiceLogoFull})`,
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          backgroundColor: 'hsl(var(--primary-light))'
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20 pt-32 sm:pt-40">
+      <div className="bg-gradient-to-br from-primary-light to-accent-light">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
           <div className="text-center">
             <div className="inline-flex items-center space-x-2 bg-white/80 rounded-full px-3 sm:px-4 py-2 mb-4 sm:mb-6">
               <Star className="w-3 sm:w-4 h-3 sm:h-4 text-accent" />
