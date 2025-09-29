@@ -63,13 +63,6 @@ const Footer = () => {
                   916-969-3705
                 </a>
               </div>
-              <div className="pt-2 text-xs">
-                <strong>Mailing Address:</strong><br />
-                [PLACEHOLDER - TO BE FILLED BY SITE OWNER]<br />
-                [Street Address]<br />
-                [City, State ZIP]<br />
-                [Country]
-              </div>
             </div>
           </div>
 

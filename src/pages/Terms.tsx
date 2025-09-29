@@ -386,13 +386,6 @@ const Terms = () => {
                 <p className="mb-2"><strong>Contact:</strong> Gavin Clay</p>
                 <p className="mb-2"><strong>Email:</strong> <a href="mailto:gavin@currencytocurrency.app" className="text-primary hover:underline">gavin@currencytocurrency.app</a></p>
                 <p className="mb-2"><strong>Phone:</strong> <a href="tel:916-969-3705" className="text-primary hover:underline">916-969-3705</a></p>
-                <p>
-                  <strong>Mailing Address:</strong><br />
-                  [PLACEHOLDER - TO BE FILLED BY SITE OWNER]<br />
-                  [Street Address]<br />
-                  [City, State ZIP Code]<br />
-                  [Country]
-                </p>
               </div>
             </section>
           </div>
