@@ -12,6 +12,11 @@ import { Separator } from '@/components/ui/separator';
 import { Plus, Edit, Eye, Send, Copy, Trash2, CheckCircle, Clock, CreditCard } from 'lucide-react';
 import { useEstimates, type Estimate } from '@/hooks/useEstimates';
 import { useToast } from '@/hooks/use-toast';
+import { useFreeUsageTracking } from '@/hooks/useFreeUsageTracking';
+import { useSubscription } from '@/hooks/useSubscription';
+import { Watermark } from '@/components/Watermark';
+import { useNavigate } from 'react-router-dom';
+import { AnonymousUserBanner } from '@/components/AnonymousUserBanner';
 import {
   Dialog,
   DialogContent,
@@ -25,6 +30,9 @@ const Estimates: React.FC = () => {
   const { toast } = useToast();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingEstimate, setEditingEstimate] = useState<Estimate | null>(null);
+  const { hasUsedFree, canUseFree, recordFreeUsage, isAnonymous } = useFreeUsageTracking();
+  const { subscribed, hasWatermark } = useSubscription();
+  const navigate = useNavigate();
 
   // Form state for new/edit estimate
   const [formData, setFormData] = useState({
@@ -175,7 +183,17 @@ const Estimates: React.FC = () => {
 
   return (
     <PageLayout title="Estimates" description="Create, manage and send estimates with deposit collection">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 relative">
+        {/* Watermark for non-paid users */}
+        {(hasWatermark || isAnonymous) && <Watermark />}
+
+        {/* Anonymous user banner */}
+        {isAnonymous && (
+          <div className="mb-6">
+            <AnonymousUserBanner hasUsedFree={hasUsedFree} canUseFree={canUseFree} />
+          </div>
+        )}
+
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold">Estimates</h1>

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Download, FileText, ArrowLeft, Save, LogOut, Edit, Eye } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useInvoiceData } from "@/hooks/useInvoiceData";
 import { useToast } from "@/hooks/use-toast";
@@ -14,17 +14,35 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { UsageLimitBanner } from "@/components/UsageLimitBanner";
 import { useUsageTracking } from "@/hooks/useUsageTracking";
 import { analytics } from "@/lib/analytics";
+import { useFreeUsageTracking } from "@/hooks/useFreeUsageTracking";
+import { Watermark } from "@/components/Watermark";
+import { useSubscription } from "@/hooks/useSubscription";
+import { AnonymousUserBanner } from '@/components/AnonymousUserBanner';
 
 const Invoice = () => {
   const { user, signOut } = useAuth();
-  const { invoiceData, updateInvoiceData, saveInvoice, subscription } = useInvoiceData();
+  const { invoiceData, updateInvoiceData, saveInvoice } = useInvoiceData();
   const { toast } = useToast();
   const isMobile = useIsMobile();
   const { canCreateInvoice, trackInvoiceCreation } = useUsageTracking();
+  const { hasUsedFree, canUseFree, recordFreeUsage, isAnonymous } = useFreeUsageTracking();
+  const { subscribed, hasWatermark } = useSubscription();
+  const navigate = useNavigate();
 
   const downloadPDF = async () => {
-    // Check usage limits for free users
-    if (!canCreateInvoice) {
+    // Check if anonymous user has used their free template
+    if (isAnonymous && hasUsedFree) {
+      toast({
+        title: "Login Required",
+        description: "Please sign in to download more invoices.",
+        variant: "destructive",
+      });
+      navigate('/auth');
+      return;
+    }
+
+    // Check usage limits for authenticated free users
+    if (!canCreateInvoice && user) {
       toast({
         title: "Upgrade Required",
         description: "You've reached your free invoice limit. Upgrade to download more invoices.",
@@ -56,6 +74,11 @@ const Invoice = () => {
       pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
       pdf.save(`invoice-${invoiceData.meta.number}.pdf`);
 
+      // Record free usage for anonymous users
+      if (isAnonymous) {
+        recordFreeUsage();
+      }
+
       // Track analytics
       analytics.trackInvoiceDownloaded('pdf');
 
@@ -74,19 +97,48 @@ const Invoice = () => {
   };
 
   const handleSaveInvoice = async () => {
-    // Track invoice creation for usage limits
-    const canCreate = await trackInvoiceCreation();
-    if (!canCreate) {
+    // Check if anonymous user needs to login
+    if (isAnonymous && hasUsedFree) {
       toast({
-        title: "Upgrade Required", 
-        description: "You've reached your free invoice limit. Upgrade to create more invoices.",
+        title: "Login Required",
+        description: "Please sign in to save more invoices.",
         variant: "destructive",
       });
+      navigate('/auth');
       return;
+    }
+
+    // Check if anonymous user can use free template
+    if (isAnonymous && !canUseFree) {
+      toast({
+        title: "Login Required",
+        description: "You've used your free template. Please sign in to continue.",
+        variant: "destructive",
+      });
+      navigate('/auth');
+      return;
+    }
+
+    // Track invoice creation for authenticated users
+    if (user) {
+      const canCreate = await trackInvoiceCreation();
+      if (!canCreate) {
+        toast({
+          title: "Upgrade Required", 
+          description: "You've reached your free invoice limit. Upgrade to create more invoices.",
+          variant: "destructive",
+        });
+        return;
+      }
     }
 
     const savedInvoiceId = await saveInvoice();
     if (savedInvoiceId) {
+      // Record free usage for anonymous users
+      if (isAnonymous) {
+        recordFreeUsage();
+      }
+
       // Track analytics
       analytics.trackInvoiceCreated(invoiceData.template);
       analytics.trackInvoiceSaved();
@@ -121,14 +173,14 @@ const Invoice = () => {
               <FileText className="w-5 h-5 text-invoice-brand" />
               <h1 className="text-lg sm:text-xl font-semibold">Create Invoice</h1>
             </div>
-            {!isMobile && (
+            {!isMobile && user && (
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <span>•</span>
-                <span>{user?.email}</span>
-                {subscription && (
+                <span>{user.email}</span>
+                {subscribed && (
                   <>
                     <span>•</span>
-                    <span className="capitalize font-medium">{subscription.plan}</span>
+                    <span className="capitalize font-medium">Premium</span>
                   </>
                 )}
               </div>
@@ -173,16 +225,34 @@ const Invoice = () => {
               <span className="hidden sm:inline">PDF</span>
             </Button>
             
-            <Button onClick={handleSignOut} variant="ghost" size="sm">
-              <LogOut className="w-4 h-4 sm:mr-2" />
-              <span className="hidden sm:inline">Sign Out</span>
-            </Button>
+            {user ? (
+              <Button onClick={handleSignOut} variant="ghost" size="sm">
+                <LogOut className="w-4 h-4 sm:mr-2" />
+                <span className="hidden sm:inline">Sign Out</span>
+              </Button>
+            ) : (
+              <Link to="/auth">
+                <Button variant="ghost" size="sm">
+                  <span>Sign In</span>
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto relative">
+        {/* Watermark for non-paid users */}
+        {(hasWatermark || isAnonymous) && <Watermark />}
+
+        {/* Anonymous user banner */}
+        {isAnonymous && (
+          <div className="px-4 sm:px-6 pt-4">
+            <AnonymousUserBanner hasUsedFree={hasUsedFree} canUseFree={canUseFree} />
+          </div>
+        )}
+
         {/* Usage Limit Banner */}
         <div className="px-4 sm:px-6 pt-4">
           <UsageLimitBanner />

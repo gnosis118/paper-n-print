@@ -129,11 +129,7 @@ const App = () => (
             <Routes>
               <Route path="/e/:token" element={<EstimateView />} />
               <Route path="/i/:id" element={<InvoiceView />} />
-              <Route path="/estimates" element={
-                <ProtectedRoute>
-                  <Estimates />
-                </ProtectedRoute>
-              } />
+              <Route path="/estimates" element={<Estimates />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/payment-success" element={<PaymentSuccess />} />
               <Route path="/payment-canceled" element={<PaymentCanceled />} />
@@ -196,26 +192,10 @@ const App = () => (
               
               {/* Main Pages */}
               <Route path="/" element={<Index />} />
-              <Route path="/invoice" element={
-                <ProtectedRoute>
-                  <Invoice />
-                </ProtectedRoute>
-              } />
-              <Route path="/templates" element={
-                <ProtectedRoute>
-                  <Templates />
-                </ProtectedRoute>
-              } />
-              <Route path="/business-settings" element={
-                <ProtectedRoute>
-                  <BusinessSettings />
-                </ProtectedRoute>
-              } />
-              <Route path="/subscription" element={
-                <ProtectedRoute>
-                  <SubscriptionManagement />
-                </ProtectedRoute>
-              } />
+              <Route path="/invoice" element={<Invoice />} />
+              <Route path="/templates" element={<Templates />} />
+              <Route path="/business-settings" element={<BusinessSettings />} />
+              <Route path="/subscription" element={<SubscriptionManagement />} />
               {/* Legacy Template Pages */}
               <Route path="/templates/construction" element={<ConstructionInvoiceTemplate />} />
               <Route path="/templates/consulting" element={<ConsultingInvoiceTemplate />} />
