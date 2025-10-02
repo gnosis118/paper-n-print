@@ -184,13 +184,13 @@ const EstimateTemplates = () => {
                   
                   <div className="flex gap-2">
                     <Button asChild variant="outline" size="sm" className="flex-1">
-                      <Link to={`/templates/${template.id}-invoice-template`}>
+                      <Link to={`/templates/${template.id}-estimate-template`}>
                         <Eye className="w-3 h-3 mr-1" />
                         View
                       </Link>
                     </Button>
                     <Button asChild size="sm" className="flex-1">
-                      <Link to="/get-started">
+                      <Link to="/estimates">
                         Use Online
                       </Link>
                     </Button>

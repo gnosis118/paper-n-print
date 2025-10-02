@@ -69,6 +69,14 @@ import MassageTherapistInvoiceTemplate from "./pages/templates/MassageTherapistI
 import CarpetCleanerInvoiceTemplate from "./pages/templates/CarpetCleanerInvoiceTemplate";
 import GetStarted from './pages/GetStarted';
 import EstimateTemplates from './pages/EstimateTemplates';
+
+// Import estimate templates
+import HVACEstimateTemplate from "./pages/templates/HVACEstimateTemplate";
+import PlumbingEstimateTemplate from "./pages/templates/PlumbingEstimateTemplate";
+import ConstructionEstimateTemplate from "./pages/templates/ConstructionEstimateTemplate";
+import LandscapingEstimateTemplate from "./pages/templates/LandscapingEstimateTemplate";
+import RoofingEstimateTemplate from "./pages/templates/RoofingEstimateTemplate";
+import CleaningEstimateTemplate from "./pages/templates/CleaningEstimateTemplate";
 import WaveVsProInvoice from './pages/compare/WaveVsProInvoice';
 import InvoiceSimpleVsProInvoice from './pages/compare/InvoiceSimpleVsProInvoice';
 
@@ -232,6 +240,14 @@ const App = () => (
               <Route path="/templates/window-cleaning-invoice-template" element={<WindowCleaningInvoiceTemplate />} />
               <Route path="/templates/massage-therapist-invoice-template" element={<MassageTherapistInvoiceTemplate />} />
               <Route path="/templates/carpet-cleaner-invoice-template" element={<CarpetCleanerInvoiceTemplate />} />
+              
+              {/* Estimate Template Pages */}
+              <Route path="/templates/hvac-estimate-template" element={<HVACEstimateTemplate />} />
+              <Route path="/templates/plumbing-estimate-template" element={<PlumbingEstimateTemplate />} />
+              <Route path="/templates/construction-estimate-template" element={<ConstructionEstimateTemplate />} />
+              <Route path="/templates/landscaping-estimate-template" element={<LandscapingEstimateTemplate />} />
+              <Route path="/templates/roofing-estimate-template" element={<RoofingEstimateTemplate />} />
+              <Route path="/templates/cleaning-estimate-template" element={<CleaningEstimateTemplate />} />
               
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/templates/:trade/:location" element={<ProgrammaticSEO />} />
