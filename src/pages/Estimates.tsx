@@ -17,6 +17,7 @@ import { useSubscription } from '@/hooks/useSubscription';
 import { Watermark } from '@/components/Watermark';
 import { useNavigate } from 'react-router-dom';
 import { AnonymousUserBanner } from '@/components/AnonymousUserBanner';
+import EstimatePreview from '@/components/EstimatePreview';
 import {
   Dialog,
   DialogContent,
@@ -30,6 +31,8 @@ const Estimates: React.FC = () => {
   const { toast } = useToast();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingEstimate, setEditingEstimate] = useState<Estimate | null>(null);
+  const [previewEstimate, setPreviewEstimate] = useState<Estimate | null>(null);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const { hasUsedFree, canUseFree, recordFreeUsage, isAnonymous } = useFreeUsageTracking();
   const { subscribed, hasWatermark } = useSubscription();
   const navigate = useNavigate();
@@ -455,7 +458,10 @@ const Estimates: React.FC = () => {
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => window.open(`/e/${estimate.sharing_token}`, '_blank')}
+                        onClick={() => {
+                          setPreviewEstimate(estimate);
+                          setIsPreviewOpen(true);
+                        }}
                       >
                         <Eye className="w-3 h-3 mr-1" />
                         Preview
@@ -503,6 +509,21 @@ const Estimates: React.FC = () => {
             ))
           )}
         </div>
+
+        {/* Preview Dialog */}
+        <Dialog open={isPreviewOpen} onOpenChange={setIsPreviewOpen}>
+          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle>Estimate Preview</DialogTitle>
+            </DialogHeader>
+            {previewEstimate && (
+              <EstimatePreview 
+                estimate={previewEstimate} 
+                showPaymentOptions={true}
+              />
+            )}
+          </DialogContent>
+        </Dialog>
       </div>
     </PageLayout>
   );
