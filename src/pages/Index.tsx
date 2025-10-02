@@ -45,6 +45,12 @@ const Index = () => {
               <span className="text-xs sm:text-sm font-medium">Independent Invoice Generator</span>
             </div>
             
+            <div className="mb-4 sm:mb-6">
+              <a href="https://launchigniter.com/product/proinvoice-app?ref=badge-proinvoice-app" target="_blank" rel="noopener noreferrer">
+                <img src="https://launchigniter.com/api/badge/proinvoice-app?theme=light" alt="Featured on LaunchIgniter" width="212" height="55" className="mx-auto" />
+              </a>
+            </div>
+            
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-primary mb-4 sm:mb-6">
               Create & Get Paid in 2 Clicks
             </h1>
