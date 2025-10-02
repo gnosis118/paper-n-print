@@ -391,18 +391,18 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
           </h2>
           
           <div className="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <Card className="text-center hover:shadow-lg transition-shadow">
+            <Card className="text-center hover:shadow-lg transition-shadow bg-card">
               <CardContent className="p-6">
-                <div className="w-16 h-16 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-red-50 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <Download className="w-8 h-8 text-red-600" />
                 </div>
-                <h3 className="font-bold mb-2">PDF Template</h3>
+                <h3 className="font-bold mb-2 text-foreground">PDF Template</h3>
                 <p className="text-sm text-muted-foreground mb-4">
                   Fillable PDF format with professional styling
                 </p>
                 <Button 
-                  variant="outline" 
-                  className="w-full"
+                  variant="secondary" 
+                  className="w-full bg-muted/50 hover:bg-muted text-foreground"
                   onClick={() => handleDownload('pdf')}
                 >
                   Download PDF
@@ -410,18 +410,18 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
               </CardContent>
             </Card>
 
-            <Card className="text-center hover:shadow-lg transition-shadow">
+            <Card className="text-center hover:shadow-lg transition-shadow bg-card">
               <CardContent className="p-6">
-                <div className="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-blue-50 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <Download className="w-8 h-8 text-blue-600" />
                 </div>
-                <h3 className="font-bold mb-2">Word Template</h3>
+                <h3 className="font-bold mb-2 text-foreground">Word Template</h3>
                 <p className="text-sm text-muted-foreground mb-4">
                   Fully editable Microsoft Word document
                 </p>
                 <Button 
-                  variant="outline" 
-                  className="w-full"
+                  variant="secondary" 
+                  className="w-full bg-muted/50 hover:bg-muted text-foreground"
                   onClick={() => handleDownload('word')}
                 >
                   Download Word
@@ -429,18 +429,18 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
               </CardContent>
             </Card>
 
-            <Card className="text-center hover:shadow-lg transition-shadow">
+            <Card className="text-center hover:shadow-lg transition-shadow bg-card">
               <CardContent className="p-6">
-                <div className="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-green-50 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <Download className="w-8 h-8 text-green-600" />
                 </div>
-                <h3 className="font-bold mb-2">Excel Template</h3>
+                <h3 className="font-bold mb-2 text-foreground">Excel Template</h3>
                 <p className="text-sm text-muted-foreground mb-4">
                   Spreadsheet with automatic calculations
                 </p>
                 <Button 
-                  variant="outline" 
-                  className="w-full"
+                  variant="secondary" 
+                  className="w-full bg-muted/50 hover:bg-muted text-foreground"
                   onClick={() => handleDownload('excel')}
                 >
                   Download Excel

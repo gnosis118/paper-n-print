@@ -191,19 +191,19 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
           </h2>
           
           <div className="grid sm:grid-cols-3 gap-6">
-            <Card className="text-center hover:shadow-medium transition-shadow">
+            <Card className="text-center hover:shadow-medium transition-shadow bg-card">
               <CardContent className="p-6">
-                <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <div className="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <Download className="w-6 h-6 text-red-600" />
                 </div>
-                <h3 className="font-semibold mb-2">PDF Template</h3>
+                <h3 className="font-semibold mb-2 text-foreground">PDF Template</h3>
                 <p className="text-sm text-muted-foreground mb-4">
                   Fillable PDF with {template.title.toLowerCase()} specific fields
                 </p>
                 <Button 
-                  variant="outline" 
+                  variant="secondary" 
                   size="sm" 
-                  className="w-full"
+                  className="w-full bg-muted/50 hover:bg-muted text-foreground"
                   onClick={() => handleDownload('pdf')}
                 >
                   Download PDF
@@ -211,19 +211,19 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
               </CardContent>
             </Card>
 
-            <Card className="text-center hover:shadow-medium transition-shadow">
+            <Card className="text-center hover:shadow-medium transition-shadow bg-card">
               <CardContent className="p-6">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <Download className="w-6 h-6 text-blue-600" />
                 </div>
-                <h3 className="font-semibold mb-2">Word Template</h3>
+                <h3 className="font-semibold mb-2 text-foreground">Word Template</h3>
                 <p className="text-sm text-muted-foreground mb-4">
                   Editable Word document for customization
                 </p>
                 <Button 
-                  variant="outline" 
+                  variant="secondary" 
                   size="sm" 
-                  className="w-full"
+                  className="w-full bg-muted/50 hover:bg-muted text-foreground"
                   onClick={() => handleDownload('word')}
                 >
                   Download Word
@@ -231,19 +231,19 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
               </CardContent>
             </Card>
 
-            <Card className="text-center hover:shadow-medium transition-shadow">
+            <Card className="text-center hover:shadow-medium transition-shadow bg-card">
               <CardContent className="p-6">
-                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <div className="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <Download className="w-6 h-6 text-green-600" />
                 </div>
-                <h3 className="font-semibold mb-3">Excel Template</h3>
+                <h3 className="font-semibold mb-3 text-foreground">Excel Template</h3>
                 <p className="text-sm text-muted-foreground mb-4">
                   Spreadsheet with automatic calculations
                 </p>
                 <Button 
-                  variant="outline" 
+                  variant="secondary" 
                   size="sm" 
-                  className="w-full"
+                  className="w-full bg-muted/50 hover:bg-muted text-foreground"
                   onClick={() => handleDownload('excel')}
                 >
                   Download Excel
