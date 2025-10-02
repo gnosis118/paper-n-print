@@ -11,19 +11,19 @@ max_rows = 1000
 verify_jwt = false
 
 [functions.send-invoice-email]
-verify_jwt = false
+verify_jwt = true
 
 [functions.create-payment]
-verify_jwt = false
+verify_jwt = true
 
 [functions.create-checkout]
-verify_jwt = false
+verify_jwt = true
 
 [functions.check-subscription]
-verify_jwt = false
+verify_jwt = true
 
 [functions.customer-portal]
-verify_jwt = false
+verify_jwt = true
 
 [functions.stripe-webhook]
 verify_jwt = false
