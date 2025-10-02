@@ -15,6 +15,16 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
   const pageTitle = `${template.title} Invoice Template (Free PDF, Word & Excel) | InvoicePro`;
   const description = `Free ${template.title.toLowerCase()} invoice template. Create professional ${template.title.toLowerCase()} invoices in 30 seconds with embedded Stripe payments. Download PDF, Word & Excel formats.`;
 
+  const handleDownload = (format: 'pdf' | 'word' | 'excel') => {
+    // Create a link element and trigger download
+    const link = document.createElement('a');
+    link.href = `/templates/${template.title.toLowerCase().replace(/\s+/g, '-')}-invoice-template.${format === 'word' ? 'docx' : format === 'excel' ? 'xlsx' : 'pdf'}`;
+    link.download = `${template.title}-invoice-template.${format === 'word' ? 'docx' : format === 'excel' ? 'xlsx' : 'pdf'}`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -190,7 +200,12 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
                 <p className="text-sm text-muted-foreground mb-4">
                   Fillable PDF with {template.title.toLowerCase()} specific fields
                 </p>
-                <Button variant="outline" size="sm" className="w-full">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full"
+                  onClick={() => handleDownload('pdf')}
+                >
                   Download PDF
                 </Button>
               </CardContent>
@@ -205,7 +220,12 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
                 <p className="text-sm text-muted-foreground mb-4">
                   Editable Word document for customization
                 </p>
-                <Button variant="outline" size="sm" className="w-full">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full"
+                  onClick={() => handleDownload('word')}
+                >
                   Download Word
                 </Button>
               </CardContent>
@@ -220,7 +240,12 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
                 <p className="text-sm text-muted-foreground mb-4">
                   Spreadsheet with automatic calculations
                 </p>
-                <Button variant="outline" size="sm" className="w-full">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full"
+                  onClick={() => handleDownload('excel')}
+                >
                   Download Excel
                 </Button>
               </CardContent>

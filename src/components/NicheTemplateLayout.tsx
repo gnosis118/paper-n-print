@@ -29,6 +29,15 @@ export const NicheTemplateLayout: React.FC<NicheTemplateLayoutProps> = ({ templa
   const pageTitle = `${template.title} Invoice Template - Free PDF Download | InvoicePro`;
   const description = `Free ${template.title.toLowerCase()} invoice template with embedded payments. Professional PDF format includes industry-specific fields, automatic calculations, and Stripe integration. Download now!`;
 
+  const handleDownload = (format: 'pdf' | 'word' | 'excel') => {
+    const link = document.createElement('a');
+    link.href = `/templates/${template.title.toLowerCase().replace(/\s+/g, '-')}-invoice-template.${format === 'word' ? 'docx' : format === 'excel' ? 'xlsx' : 'pdf'}`;
+    link.download = `${template.title}-invoice-template.${format === 'word' ? 'docx' : format === 'excel' ? 'xlsx' : 'pdf'}`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -333,7 +342,11 @@ export const NicheTemplateLayout: React.FC<NicheTemplateLayoutProps> = ({ templa
                 <p className="text-sm text-muted-foreground mb-4">
                   Fillable PDF format with professional styling
                 </p>
-                <Button variant="outline" className="w-full">
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => handleDownload('pdf')}
+                >
                   Download PDF
                 </Button>
               </CardContent>
@@ -348,7 +361,11 @@ export const NicheTemplateLayout: React.FC<NicheTemplateLayoutProps> = ({ templa
                 <p className="text-sm text-muted-foreground mb-4">
                   Fully editable Microsoft Word document
                 </p>
-                <Button variant="outline" className="w-full">
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => handleDownload('word')}
+                >
                   Download Word
                 </Button>
               </CardContent>
@@ -360,10 +377,14 @@ export const NicheTemplateLayout: React.FC<NicheTemplateLayoutProps> = ({ templa
                   <Download className="w-8 h-8 text-green-600" />
                 </div>
                 <h3 className="font-bold mb-2">Excel Template</h3>
-                <p className="text-sm text-muted-foregreen mb-4">
+                <p className="text-sm text-muted-foreground mb-4">
                   Spreadsheet with automatic calculations
                 </p>
-                <Button variant="outline" className="w-full">
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => handleDownload('excel')}
+                >
                   Download Excel
                 </Button>
               </CardContent>

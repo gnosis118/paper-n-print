@@ -29,6 +29,15 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
   const pageTitle = `${template.title} Estimate Template - Free PDF Download | ProInvoice`;
   const description = `Free ${template.title.toLowerCase()} estimate template with online deposit collection. Professional format with ${template.lineItems.slice(0, 3).join(', ').toLowerCase()}. Auto-converts to invoice when accepted.`;
 
+  const handleDownload = (format: 'pdf' | 'word' | 'excel') => {
+    const link = document.createElement('a');
+    link.href = `/templates/${template.title.toLowerCase().replace(/\s+/g, '-')}-estimate-template.${format === 'word' ? 'docx' : format === 'excel' ? 'xlsx' : 'pdf'}`;
+    link.download = `${template.title}-estimate-template.${format === 'word' ? 'docx' : format === 'excel' ? 'xlsx' : 'pdf'}`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -147,7 +156,12 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
                 Create Estimate Online Free
               </Button>
             </Link>
-            <Button size="lg" variant="outline" className="text-lg px-8 py-3 bg-white/90 hover:bg-white">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="text-lg px-8 py-3 bg-white/90 hover:bg-white"
+              onClick={() => handleDownload('pdf')}
+            >
               <Download className="w-5 h-5 mr-2" />
               Download Template
             </Button>
@@ -365,6 +379,72 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
                   Customers can review and accept estimates on any device - desktop, tablet, or mobile. 
                   Works perfectly on-site or from anywhere.
                 </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* Download Templates Section */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold text-center text-primary mb-12">
+            Download Free {template.title} Estimate Templates
+          </h2>
+          
+          <div className="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <Card className="text-center hover:shadow-lg transition-shadow">
+              <CardContent className="p-6">
+                <div className="w-16 h-16 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <Download className="w-8 h-8 text-red-600" />
+                </div>
+                <h3 className="font-bold mb-2">PDF Template</h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Fillable PDF format with professional styling
+                </p>
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => handleDownload('pdf')}
+                >
+                  Download PDF
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center hover:shadow-lg transition-shadow">
+              <CardContent className="p-6">
+                <div className="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <Download className="w-8 h-8 text-blue-600" />
+                </div>
+                <h3 className="font-bold mb-2">Word Template</h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Fully editable Microsoft Word document
+                </p>
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => handleDownload('word')}
+                >
+                  Download Word
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center hover:shadow-lg transition-shadow">
+              <CardContent className="p-6">
+                <div className="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <Download className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="font-bold mb-2">Excel Template</h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Spreadsheet with automatic calculations
+                </p>
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => handleDownload('excel')}
+                >
+                  Download Excel
+                </Button>
               </CardContent>
             </Card>
           </div>
