@@ -61,18 +61,20 @@ export const enhancedAuthSchema = z.object({
   
   password: z
     .string()
-    .min(8, "Password must be at least 8 characters")
+    .min(10, "Password must be at least 10 characters")
     .max(128, "Password must be less than 128 characters")
-    .regex(/[A-Za-z]/, "Password must contain at least one letter")
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .regex(/[a-z]/, "Password must contain at least one lowercase letter")
     .regex(/[0-9]/, "Password must contain at least one number")
+    .regex(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, "Password must contain at least one special character")
     .refine((password) => {
-      // Check for common weak patterns
-      const commonPasswords = ['password', '123456', 'qwerty', 'admin'];
+      // Check for common weak patterns - expanded list
+      const commonPasswords = ['password', '123456', 'qwerty', 'admin', '12345678', 'letmein', 'password123'];
       const isWeak = commonPasswords.some(weak => 
         password.toLowerCase().includes(weak)
       );
       return !isWeak;
-    }, "Password is too common or weak"),
+    }, "Password is too common or weak. Please choose a stronger password"),
   
   confirmPassword: z.string().optional(),
 }).refine((data) => {

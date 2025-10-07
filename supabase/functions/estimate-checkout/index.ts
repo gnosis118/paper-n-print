@@ -7,7 +7,32 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+// Rate limiting store
+const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
+
+const checkRateLimit = (identifier: string, maxRequests = 10, windowMs = 60000): boolean => {
+  const now = Date.now();
+  const record = rateLimitStore.get(identifier);
+  
+  if (!record || now > record.resetTime) {
+    rateLimitStore.set(identifier, { count: 1, resetTime: now + windowMs });
+    return true;
+  }
+  
+  if (record.count >= maxRequests) {
+    return false;
+  }
+  
+  record.count++;
+  return true;
+};
+
 const logStep = (step: string, details?: any) => {
+  const env = Deno.env.get("DENO_DEPLOYMENT_ID") ? "production" : "development";
+  if (env === "production" && details?.token) {
+    // Don't log tokens in production
+    delete details.token;
+  }
   const detailsStr = details ? ` - ${JSON.stringify(details)}` : '';
   console.log(`[ESTIMATE-CHECKOUT] ${step}${detailsStr}`);
 };
@@ -18,6 +43,16 @@ serve(async (req) => {
   }
 
   try {
+    // Rate limiting by IP (stricter for checkout)
+    const clientIp = req.headers.get("x-forwarded-for") || "unknown";
+    if (!checkRateLimit(clientIp)) {
+      logStep("Rate limit exceeded", { ip: clientIp });
+      return new Response(JSON.stringify({ error: "Too many requests" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 429,
+      });
+    }
+    
     logStep("Function started");
 
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
@@ -29,10 +64,21 @@ serve(async (req) => {
       { auth: { persistSession: false } }
     );
 
-    const { token } = await req.json();
-    if (!token) throw new Error("Estimate sharing token is required");
+    const body = await req.json();
+    const { token } = body;
+    
+    // Input validation
+    if (!token || typeof token !== 'string') {
+      throw new Error("Valid estimate sharing token is required");
+    }
+    
+    // UUID format validation
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    if (!uuidRegex.test(token)) {
+      throw new Error("Invalid token format");
+    }
 
-    logStep("Fetching estimate", { token });
+    logStep("Fetching estimate");
 
     // Get estimate by sharing token
     const { data: estimate, error: estimateError } = await supabaseClient
