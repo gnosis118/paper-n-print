@@ -1,11 +1,13 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CreditCard, Copy, Check, Link as LinkIcon } from "lucide-react";
+import { CreditCard, Copy, Check, Link as LinkIcon, Lock } from "lucide-react";
 import { InvoiceData } from "@/hooks/useInvoiceData";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { useSubscription } from "@/hooks/useSubscription";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import CleanTemplate from "@/components/templates/CleanTemplate";
 import ModernTemplate from "@/components/templates/ModernTemplate";
@@ -18,12 +20,25 @@ interface InvoicePreviewProps {
 
 const InvoicePreview = ({ data, showPaymentOptions = false }: InvoicePreviewProps) => {
   const { user } = useAuth();
+  const { subscribed } = useSubscription();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [isGeneratingPayment, setIsGeneratingPayment] = useState(false);
   const [paymentUrl, setPaymentUrl] = useState<string | null>(null);
   const [copySuccess, setCopySuccess] = useState(false);
 
   const generatePaymentLink = async () => {
+    // Check subscription first
+    if (!subscribed) {
+      toast({
+        title: "Upgrade Required",
+        description: "Payment links are available on Pro and Agency plans. Upgrade to start collecting payments.",
+        variant: "destructive",
+      });
+      navigate('/pricing');
+      return;
+    }
+
     if (!data.totals?.total || data.totals.total <= 0) {
       toast({
         title: "Cannot create payment link",
@@ -147,23 +162,34 @@ const InvoicePreview = ({ data, showPaymentOptions = false }: InvoicePreviewProp
                   </ul>
                 </div>
                 
-                <Button 
-                  onClick={generatePaymentLink}
-                  disabled={isGeneratingPayment || !data.totals?.total || data.totals.total <= 0}
-                  className="w-full sm:w-auto bg-invoice-brand hover:bg-invoice-brand/90"
-                >
-                  {isGeneratingPayment ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                      Generating...
-                    </>
-                  ) : (
-                    <>
-                      <CreditCard className="w-4 h-4 mr-2" />
-                      Generate Payment Link
-                    </>
-                  )}
-                </Button>
+                {subscribed ? (
+                  <Button
+                    onClick={generatePaymentLink}
+                    disabled={isGeneratingPayment || !data.totals?.total || data.totals.total <= 0}
+                    className="w-full sm:w-auto bg-invoice-brand hover:bg-invoice-brand/90"
+                  >
+                    {isGeneratingPayment ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                        Generating...
+                      </>
+                    ) : (
+                      <>
+                        <CreditCard className="w-4 h-4 mr-2" />
+                        Generate Payment Link
+                      </>
+                    )}
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => navigate('/pricing')}
+                    variant="outline"
+                    className="w-full sm:w-auto border-invoice-brand text-invoice-brand hover:bg-invoice-brand/10"
+                  >
+                    <Lock className="w-4 h-4 mr-2" />
+                    Upgrade to Enable Payment Links
+                  </Button>
+                )}
               </div>
             ) : (
               <div className="space-y-3">

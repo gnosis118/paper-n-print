@@ -1,10 +1,12 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CreditCard, Copy, Check, Link as LinkIcon, Clock, CheckCircle } from "lucide-react";
+import { CreditCard, Copy, Check, Link as LinkIcon, Clock, CheckCircle, Lock } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { useSubscription } from "@/hooks/useSubscription";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import type { Estimate } from "@/hooks/useEstimates";
 
@@ -15,12 +17,25 @@ interface EstimatePreviewProps {
 
 const EstimatePreview = ({ estimate, showPaymentOptions = false }: EstimatePreviewProps) => {
   const { user } = useAuth();
+  const { subscribed } = useSubscription();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [isGeneratingPayment, setIsGeneratingPayment] = useState(false);
   const [paymentUrl, setPaymentUrl] = useState<string | null>(null);
   const [copySuccess, setCopySuccess] = useState(false);
 
   const generatePaymentLink = async () => {
+    // Check subscription first
+    if (!subscribed) {
+      toast({
+        title: "Upgrade Required",
+        description: "Deposit collection is available on Pro and Agency plans. Upgrade to start collecting deposits.",
+        variant: "destructive",
+      });
+      navigate('/pricing');
+      return;
+    }
+
     if (!estimate.total || estimate.total <= 0) {
       toast({
         title: "Cannot create payment link",
@@ -140,23 +155,34 @@ const EstimatePreview = ({ estimate, showPaymentOptions = false }: EstimatePrevi
                   </ul>
                 </div>
                 
-                <Button 
-                  onClick={generatePaymentLink}
-                  disabled={isGeneratingPayment || !estimate.total || estimate.total <= 0}
-                  className="w-full sm:w-auto"
-                >
-                  {isGeneratingPayment ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                      Generating...
-                    </>
-                  ) : (
-                    <>
-                      <CreditCard className="w-4 h-4 mr-2" />
-                      Generate Payment Link
-                    </>
-                  )}
-                </Button>
+                {subscribed ? (
+                  <Button
+                    onClick={generatePaymentLink}
+                    disabled={isGeneratingPayment || !estimate.total || estimate.total <= 0}
+                    className="w-full sm:w-auto"
+                  >
+                    {isGeneratingPayment ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                        Generating...
+                      </>
+                    ) : (
+                      <>
+                        <CreditCard className="w-4 h-4 mr-2" />
+                        Generate Deposit Link
+                      </>
+                    )}
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => navigate('/pricing')}
+                    variant="outline"
+                    className="w-full sm:w-auto border-primary text-primary hover:bg-primary/10"
+                  >
+                    <Lock className="w-4 h-4 mr-2" />
+                    Upgrade to Enable Deposit Collection
+                  </Button>
+                )}
               </div>
             ) : (
               <div className="space-y-3">

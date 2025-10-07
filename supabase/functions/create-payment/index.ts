@@ -51,6 +51,21 @@ const handlePayment = async (req: Request): Promise<Response> => {
     }
     logStep("User authenticated", { userId: user.id, email: user.email });
 
+    // Check user subscription - payment links require paid subscription
+    const { data: subscription } = await supabaseClient
+      .from('user_subscriptions')
+      .select('*')
+      .eq('user_id', user.id)
+      .eq('status', 'active')
+      .single();
+
+    if (!subscription || subscription.plan === 'free') {
+      logStep("Subscription check failed", { hasSubscription: !!subscription, plan: subscription?.plan });
+      throw new SecurityError('Payment links require a paid subscription. Please upgrade to Pro or Agency plan.', 403);
+    }
+
+    logStep("Subscription verified", { plan: subscription.plan });
+
     // Parse and validate request body
     const body = await req.json();
     const { invoiceId, amount, description, clientEmail } = body;

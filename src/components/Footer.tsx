@@ -150,22 +150,19 @@ const Footer = () => {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
-            "name": "InvoicePro",
-            "url": "https://[PLACEHOLDER-DOMAIN]",
-            "logo": "https://[PLACEHOLDER-DOMAIN]/logo.png",
+            "name": "ProInvoice",
+            "url": "https://www.proinvoice.app",
+            "logo": "https://www.proinvoice.app/og-image.webp",
             "contactPoint": {
               "@type": "ContactPoint",
               "telephone": "+1-916-969-3705",
               "contactType": "customer service",
-              "email": "gavin@proinvoice.app"
+              "email": "gavin@proinvoice.app",
+              "availableLanguage": "English"
             },
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "[PLACEHOLDER CITY]",
-              "addressRegion": "[PLACEHOLDER STATE]",
-              "postalCode": "[PLACEHOLDER ZIP]",
-              "addressCountry": "US"
-            }
+            "sameAs": [
+              "https://twitter.com/proinvoiceapp"
+            ]
           })
         }}
       />

@@ -97,6 +97,25 @@ serve(async (req) => {
 
     logStep("Estimate found", { id: estimate.id, status: estimate.status });
 
+    // Check user subscription - deposit collection requires paid subscription
+    const { data: subscription } = await supabaseClient
+      .from('user_subscriptions')
+      .select('*')
+      .eq('user_id', estimate.user_id)
+      .eq('status', 'active')
+      .single();
+
+    if (!subscription || subscription.plan === 'free') {
+      logStep("Subscription check failed", {
+        userId: estimate.user_id,
+        hasSubscription: !!subscription,
+        plan: subscription?.plan
+      });
+      throw new Error('Deposit collection requires a paid subscription. The business owner needs to upgrade to Pro or Agency plan.');
+    }
+
+    logStep("Subscription verified", { plan: subscription.plan });
+
     const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" });
 
     // Calculate deposit amount
