@@ -4,14 +4,53 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Check, Star, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const Pricing = () => {
+  const pricingStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "ProInvoice",
+    "description": "Professional invoice and estimate software for contractors and service businesses",
+    "brand": {
+      "@type": "Brand",
+      "name": "ProInvoice"
+    },
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Monthly Plan",
+        "price": "19",
+        "priceCurrency": "USD",
+        "priceValidUntil": "2026-12-31",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.proinvoice.app/pricing",
+        "billingIncrement": "P1M"
+      },
+      {
+        "@type": "Offer",
+        "name": "Annual Plan",
+        "price": "190",
+        "priceCurrency": "USD",
+        "priceValidUntil": "2026-12-31",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.proinvoice.app/pricing",
+        "billingIncrement": "P1Y"
+      }
+    ]
+  };
+
   return (
     <PageLayout
       title="Pricing - ProInvoice"
       description="Simple, transparent pricing for contractors and service businesses. 7-day free trial, no credit card required. Get paid faster with estimates and invoices."
       canonical="/pricing"
     >
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(pricingStructuredData)}
+        </script>
+      </Helmet>
       <div className="container mx-auto px-4 py-12">
         {/* Hero Section */}
         <div className="text-center mb-12">
