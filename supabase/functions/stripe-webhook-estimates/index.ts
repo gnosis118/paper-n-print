@@ -17,7 +17,17 @@ const generateQRCodeSVG = (text: string): string => {
   </svg>`;
 };
 
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+};
+
 serve(async (req) => {
+  // Handle CORS preflight
+  if (req.method === "OPTIONS") {
+    return new Response(null, { headers: corsHeaders });
+  }
+
   try {
     logStep("Webhook received");
 
@@ -188,8 +198,8 @@ serve(async (req) => {
             },
           ],
           mode: 'payment',
-          success_url: `${Deno.env.get("SUPABASE_URL")}/i/${newInvoice.id}?paid=true`,
-          cancel_url: `${Deno.env.get("SUPABASE_URL")}/i/${newInvoice.id}`,
+          success_url: `https://proinvoice.app/invoice/${newInvoice.id}?paid=true`,
+          cancel_url: `https://proinvoice.app/invoice/${newInvoice.id}`,
           metadata: {
             invoice_id: newInvoice.id,
           },
