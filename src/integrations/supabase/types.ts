@@ -16,22 +16,52 @@ export type Database = {
     Tables: {
       app_settings: {
         Row: {
-          cron_secret: string
           id: string
           site_url: string
           updated_at: string
         }
         Insert: {
-          cron_secret: string
           id?: string
           site_url: string
           updated_at?: string
         }
         Update: {
-          cron_secret?: string
           id?: string
           site_url?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      audit_log: {
+        Row: {
+          id: string
+          user_id: string | null
+          action: string
+          table_name: string
+          record_id: string | null
+          ip_address: string | null
+          user_agent: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id?: string | null
+          action: string
+          table_name: string
+          record_id?: string | null
+          ip_address?: string | null
+          user_agent?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string | null
+          action?: string
+          table_name?: string
+          record_id?: string | null
+          ip_address?: string | null
+          user_agent?: string | null
+          created_at?: string
         }
         Relationships: []
       }
@@ -82,7 +112,9 @@ export type Database = {
           address: string | null
           company: string | null
           created_at: string
+          data_classification: string
           email: string
+          email_encrypted: boolean
           id: string
           name: string
           updated_at: string
@@ -92,7 +124,9 @@ export type Database = {
           address?: string | null
           company?: string | null
           created_at?: string
+          data_classification?: string
           email: string
+          email_encrypted?: boolean
           id?: string
           name: string
           updated_at?: string
@@ -102,7 +136,9 @@ export type Database = {
           address?: string | null
           company?: string | null
           created_at?: string
+          data_classification?: string
           email?: string
+          email_encrypted?: boolean
           id?: string
           name?: string
           updated_at?: string
@@ -568,6 +604,23 @@ export type Database = {
         Args: { _sharing_token: string }
         Returns: boolean
       }
+      cleanup_old_audit_logs: {
+        Args: Record<PropertyKey, never>
+        Returns: void
+      }
+      get_client_secure: {
+        Args: { p_client_id: string }
+        Returns: {
+          id: string
+          user_id: string
+          name: string
+          company: string | null
+          email: string
+          address: string | null
+          created_at: string
+          updated_at: string
+        }[]
+      }
       get_user_credit_balance: {
         Args: { p_user_id?: string }
         Returns: {
@@ -584,9 +637,8 @@ export type Database = {
         Returns: undefined
       }
       upsert_app_settings: {
-        Args: { p_cron_secret: string; p_site_url: string }
+        Args: { p_site_url: string }
         Returns: {
-          cron_secret: string
           id: string
           site_url: string
           updated_at: string
