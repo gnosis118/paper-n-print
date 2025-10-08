@@ -34,34 +34,34 @@ export type Database = {
       }
       audit_log: {
         Row: {
-          id: string
-          user_id: string | null
           action: string
-          table_name: string
-          record_id: string | null
-          ip_address: string | null
-          user_agent: string | null
           created_at: string
+          id: string
+          ip_address: unknown | null
+          record_id: string
+          table_name: string
+          user_agent: string | null
+          user_id: string | null
         }
         Insert: {
-          id?: string
-          user_id?: string | null
           action: string
-          table_name: string
-          record_id?: string | null
-          ip_address?: string | null
-          user_agent?: string | null
           created_at?: string
+          id?: string
+          ip_address?: unknown | null
+          record_id: string
+          table_name: string
+          user_agent?: string | null
+          user_id?: string | null
         }
         Update: {
-          id?: string
-          user_id?: string | null
           action?: string
-          table_name?: string
-          record_id?: string | null
-          ip_address?: string | null
-          user_agent?: string | null
           created_at?: string
+          id?: string
+          ip_address?: unknown | null
+          record_id?: string
+          table_name?: string
+          user_agent?: string | null
+          user_id?: string | null
         }
         Relationships: []
       }
@@ -112,9 +112,7 @@ export type Database = {
           address: string | null
           company: string | null
           created_at: string
-          data_classification: string
           email: string
-          email_encrypted: boolean
           id: string
           name: string
           updated_at: string
@@ -124,9 +122,7 @@ export type Database = {
           address?: string | null
           company?: string | null
           created_at?: string
-          data_classification?: string
           email: string
-          email_encrypted?: boolean
           id?: string
           name: string
           updated_at?: string
@@ -136,9 +132,7 @@ export type Database = {
           address?: string | null
           company?: string | null
           created_at?: string
-          data_classification?: string
           email?: string
-          email_encrypted?: boolean
           id?: string
           name?: string
           updated_at?: string
@@ -605,19 +599,18 @@ export type Database = {
         Returns: boolean
       }
       cleanup_old_audit_logs: {
-        Args: Record<PropertyKey, never>
-        Returns: void
+        Args: { days_to_keep?: number }
+        Returns: number
       }
       get_client_secure: {
-        Args: { p_client_id: string }
+        Args: { client_id: string }
         Returns: {
-          id: string
-          user_id: string
-          name: string
-          company: string | null
-          email: string
-          address: string | null
+          address: string
+          company: string
           created_at: string
+          email: string
+          id: string
+          name: string
           updated_at: string
         }[]
       }
@@ -637,7 +630,9 @@ export type Database = {
         Returns: undefined
       }
       upsert_app_settings: {
-        Args: { p_site_url: string }
+        Args:
+          | { p_cron_secret: string; p_site_url: string }
+          | { p_site_url: string }
         Returns: {
           id: string
           site_url: string
