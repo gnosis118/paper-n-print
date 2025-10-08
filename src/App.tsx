@@ -91,6 +91,15 @@ import AddingClients from './pages/docs/AddingClients';
 import FAQ from './pages/docs/FAQ';
 import FeatureRequests from './pages/docs/FeatureRequests';
 import SystemStatus from './pages/docs/SystemStatus';
+import UploadingLogo from './pages/docs/UploadingLogo';
+import ManagingBusinessInfo from './pages/docs/ManagingBusinessInfo';
+import CustomizingBrandColors from './pages/docs/CustomizingBrandColors';
+import EditingClientInfo from './pages/docs/EditingClientInfo';
+import ClientHistory from './pages/docs/ClientHistory';
+import ManagingContacts from './pages/docs/ManagingContacts';
+import PaymentTerms from './pages/docs/PaymentTerms';
+import ManagingSubscriptions from './pages/docs/ManagingSubscriptions';
+import PaymentSecurity from './pages/docs/PaymentSecurity';
 
 // Import all industry-specific invoice templates
 import ConstructionTemplate from "./pages/invoice-templates/Construction";
@@ -160,6 +169,15 @@ const App = () => (
               <Route path="/docs/faq" element={<FAQ />} />
               <Route path="/docs/feature-requests" element={<FeatureRequests />} />
               <Route path="/docs/system-status" element={<SystemStatus />} />
+              <Route path="/docs/uploading-your-business-logo" element={<UploadingLogo />} />
+              <Route path="/docs/managing-business-information" element={<ManagingBusinessInfo />} />
+              <Route path="/docs/customizing-brand-colors" element={<CustomizingBrandColors />} />
+              <Route path="/docs/editing-client-information" element={<EditingClientInfo />} />
+              <Route path="/docs/client-history-and-records" element={<ClientHistory />} />
+              <Route path="/docs/managing-multiple-contacts" element={<ManagingContacts />} />
+              <Route path="/docs/understanding-payment-terms" element={<PaymentTerms />} />
+              <Route path="/docs/managing-subscriptions" element={<ManagingSubscriptions />} />
+              <Route path="/docs/payment-security-compliance" element={<PaymentSecurity />} />
               <Route path="/security" element={<Security />} />
               <Route path="/accessibility" element={<Accessibility />} />
               

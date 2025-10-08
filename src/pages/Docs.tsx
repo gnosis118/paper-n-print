@@ -89,8 +89,8 @@ export default function Docs() {
                     <ul className="space-y-2">
                       {section.articles.map((article, articleIndex) => (
                         <li key={articleIndex}>
-                          <Link 
-                            to={`/docs/${article.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}`}
+                          <Link
+                            to={`/docs/${article.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '').replace(/-+/g, '-')}`}
                             className="text-sm text-muted-foreground hover:text-primary transition-colors"
                           >
                             {article}
