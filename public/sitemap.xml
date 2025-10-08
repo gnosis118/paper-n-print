@@ -76,6 +76,27 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Documentation Pages -->
+  <url><loc>https://www.proinvoice.app/docs/creating-your-first-invoice</loc><lastmod>2025-10-07</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.proinvoice.app/docs/understanding-invoice-templates</loc><lastmod>2025-10-07</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.proinvoice.app/docs/adding-line-items-and-calculations</loc><lastmod>2025-10-07</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.proinvoice.app/docs/customizing-invoice-appearance</loc><lastmod>2025-10-07</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.proinvoice.app/docs/setting-up-your-business-profile</loc><lastmod>2025-10-07</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.proinvoice.app/docs/uploading-your-business-logo</loc><lastmod>2025-10-07</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.proinvoice.app/docs/managing-business-information</loc><lastmod>2025-10-07</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.proinvoice.app/docs/customizing-brand-colors</loc><lastmod>2025-10-07</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.proinvoice.app/docs/adding-new-clients</loc><lastmod>2025-10-07</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.proinvoice.app/docs/editing-client-information</loc><lastmod>2025-10-07</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.proinvoice.app/docs/client-history-and-records</loc><lastmod>2025-10-07</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.proinvoice.app/docs/managing-multiple-contacts</loc><lastmod>2025-10-07</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.proinvoice.app/docs/setting-up-payment-links</loc><lastmod>2025-10-07</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.proinvoice.app/docs/understanding-payment-terms</loc><lastmod>2025-10-07</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.proinvoice.app/docs/managing-subscriptions</loc><lastmod>2025-10-07</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.proinvoice.app/docs/payment-security-compliance</loc><lastmod>2025-10-07</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.proinvoice.app/docs/faq</loc><lastmod>2025-10-07</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.proinvoice.app/docs/feature-requests</loc><lastmod>2025-10-07</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://www.proinvoice.app/docs/system-status</loc><lastmod>2025-10-07</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+
   <!-- Comparison Pages -->
   <url>
     <loc>https://www.proinvoice.app/compare/wave-vs-proinvoice</loc>
