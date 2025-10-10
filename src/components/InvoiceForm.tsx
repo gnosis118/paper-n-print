@@ -80,15 +80,34 @@ const InvoiceForm = ({ data, onUpdate }: InvoiceFormProps) => {
             />
           </div>
           <div className="md:col-span-2">
-            <Label htmlFor="business-address">Address</Label>
-            <Textarea
-              id="business-address"
-              value={data.business.address}
-              onChange={(e) => onUpdate("business.address", e.target.value)}
-              placeholder="123 Business St, Suite 100, City, State 12345"
-              className="mt-1"
-              rows={2}
-            />
+            <Label>Address</Label>
+            <div className="grid grid-cols-1 gap-3 mt-1">
+              <Input
+                placeholder="Street Number (e.g., 123)"
+                value={data.business.streetNumber || ''}
+                onChange={(e) => onUpdate("business.streetNumber", e.target.value)}
+              />
+              <Input
+                placeholder="Street Name (e.g., Business St, Suite 100)"
+                value={data.business.streetName || ''}
+                onChange={(e) => onUpdate("business.streetName", e.target.value)}
+              />
+              <Input
+                placeholder="City"
+                value={data.business.city || ''}
+                onChange={(e) => onUpdate("business.city", e.target.value)}
+              />
+              <Input
+                placeholder="State"
+                value={data.business.state || ''}
+                onChange={(e) => onUpdate("business.state", e.target.value)}
+              />
+              <Input
+                placeholder="Zip Code"
+                value={data.business.zipCode || ''}
+                onChange={(e) => onUpdate("business.zipCode", e.target.value)}
+              />
+            </div>
           </div>
           <div className="md:col-span-2">
             <LogoUpload
@@ -140,15 +159,34 @@ const InvoiceForm = ({ data, onUpdate }: InvoiceFormProps) => {
             />
           </div>
           <div className="md:col-span-2">
-            <Label htmlFor="client-address">Address</Label>
-            <Textarea
-              id="client-address"
-              value={data.client.address}
-              onChange={(e) => onUpdate("client.address", e.target.value)}
-              placeholder="456 Client Ave, City, State 12345"
-              className="mt-1"
-              rows={2}
-            />
+            <Label>Address</Label>
+            <div className="grid grid-cols-1 gap-3 mt-1">
+              <Input
+                placeholder="Street Number (e.g., 456)"
+                value={data.client.streetNumber || ''}
+                onChange={(e) => onUpdate("client.streetNumber", e.target.value)}
+              />
+              <Input
+                placeholder="Street Name (e.g., Client Ave)"
+                value={data.client.streetName || ''}
+                onChange={(e) => onUpdate("client.streetName", e.target.value)}
+              />
+              <Input
+                placeholder="City"
+                value={data.client.city || ''}
+                onChange={(e) => onUpdate("client.city", e.target.value)}
+              />
+              <Input
+                placeholder="State"
+                value={data.client.state || ''}
+                onChange={(e) => onUpdate("client.state", e.target.value)}
+              />
+              <Input
+                placeholder="Zip Code"
+                value={data.client.zipCode || ''}
+                onChange={(e) => onUpdate("client.zipCode", e.target.value)}
+              />
+            </div>
           </div>
         </div>
       </section>
