@@ -4,20 +4,56 @@ import { Badge } from "@/components/ui/badge";
 import { Crown, Settings, RefreshCw } from "lucide-react";
 import { useSubscription } from "@/hooks/useSubscription";
 import { Link } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 export function SubscriptionStatus() {
-  const { 
-    plan, 
-    subscribed, 
-    subscription_end, 
-    loading, 
-    checkSubscription, 
+  const { toast } = useToast();
+  const {
+    plan,
+    subscribed,
+    subscription_end,
+    loading,
+    checkSubscription,
     openCustomerPortal,
     isFree,
     isStarter,
     isPro,
     isAgency
   } = useSubscription();
+
+  const handleOpenPortal = async () => {
+    try {
+      await openCustomerPortal();
+      toast({
+        title: "Opening Customer Portal",
+        description: "Redirecting you to Stripe...",
+      });
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Failed to open customer portal";
+
+      if (errorMessage.includes('No Stripe customer')) {
+        toast({
+          title: "No Active Subscription",
+          description: "You need to subscribe to a plan first to access the customer portal.",
+          variant: "destructive",
+        });
+      } else if (errorMessage.includes('No active session')) {
+        toast({
+          title: "Session Expired",
+          description: "Please log in again to continue.",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: errorMessage,
+          variant: "destructive",
+        });
+      }
+
+      console.error('Customer portal error:', error);
+    }
+  };
 
   if (loading) {
     return (
@@ -99,15 +135,15 @@ export function SubscriptionStatus() {
           
           {subscribed && (
             <>
-              <Button 
-                variant="outline" 
-                onClick={openCustomerPortal}
+              <Button
+                variant="outline"
+                onClick={handleOpenPortal}
                 className="flex items-center gap-2"
               >
                 <Settings className="h-4 w-4" />
                 Manage Subscription
               </Button>
-              
+
               <Button asChild variant="secondary" className="flex items-center gap-2">
                 <Link to="/subscription">
                   <Crown className="h-4 w-4" />

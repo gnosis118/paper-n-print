@@ -90,17 +90,28 @@ export const useSubscription = () => {
     }
 
     try {
-      const { data, error } = await supabase.functions.invoke('customer-portal');
-      
+      // Get the current session to ensure we have a valid token
+      const { data: { session } } = await supabase.auth.getSession();
+
+      if (!session) {
+        throw new Error('No active session. Please log in again.');
+      }
+
+      const { data, error } = await supabase.functions.invoke('customer-portal', {
+        headers: {
+          Authorization: `Bearer ${session.access_token}`,
+        },
+      });
+
       if (error) {
         console.error('Customer portal error:', error);
-        throw error;
+        throw new Error(error.message || 'Failed to open customer portal');
       }
-      
+
       if (data?.url) {
         window.open(data.url, '_blank');
       } else {
-        throw new Error('No portal URL received');
+        throw new Error('No portal URL received from Stripe');
       }
     } catch (error) {
       console.error('Customer portal error:', error);
