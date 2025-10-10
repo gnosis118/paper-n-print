@@ -56,7 +56,7 @@ serve(async (req) => {
 
     const supabaseClient = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
+      Deno.env.get("SUPABASE_ANON_KEY") ?? "",
       { auth: { persistSession: false } }
     );
 
@@ -76,7 +76,8 @@ serve(async (req) => {
 
     logStep("Fetching estimate");
 
-    // Use service role to bypass RLS and then manually verify access
+    // RLS policy handles all security checks automatically
+    // Only estimates with sharing_enabled=true and valid expiry can be accessed
     const { data: estimate, error: estimateError } = await supabaseClient
       .from('estimates')
       .select('*')
@@ -86,15 +87,6 @@ serve(async (req) => {
     if (estimateError || !estimate) {
       logStep("Estimate not found", { error: estimateError?.message });
       throw new Error("Estimate not found or access denied");
-    }
-
-    // Verify sharing is enabled and not expired
-    if (!estimate.sharing_enabled) {
-      throw new Error("Estimate sharing is disabled");
-    }
-
-    if (estimate.sharing_expires_at && new Date(estimate.sharing_expires_at) < new Date()) {
-      throw new Error("Estimate sharing has expired");
     }
 
     logStep("Estimate access granted", { id: estimate.id, status: estimate.status });
