@@ -85,18 +85,26 @@ export const useSubscription = () => {
   };
 
   const openCustomerPortal = async () => {
-    if (!user) return;
+    if (!user) {
+      throw new Error('Please log in to manage your subscription');
+    }
 
     try {
       const { data, error } = await supabase.functions.invoke('customer-portal');
       
-      if (error) throw error;
+      if (error) {
+        console.error('Customer portal error:', error);
+        throw error;
+      }
       
       if (data?.url) {
         window.open(data.url, '_blank');
+      } else {
+        throw new Error('No portal URL received');
       }
     } catch (error) {
       console.error('Customer portal error:', error);
+      throw error;
     }
   };
 
