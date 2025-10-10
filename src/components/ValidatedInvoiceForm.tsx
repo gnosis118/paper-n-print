@@ -273,17 +273,54 @@ const ValidatedInvoiceForm = ({ data, onUpdate }: ValidatedInvoiceFormProps) => 
             <ErrorMessage error={errors['business.website']} />
           </div>
           <div className="md:col-span-2">
-            <Label htmlFor="business-address">Address</Label>
-            <Textarea
-              id="business-address"
-              value={data.business.address}
-              onChange={(e) => handleBusinessUpdate('address', e.target.value)}
-              placeholder="123 Business St, Suite 100, City, State 12345"
-              className="mt-1"
-              rows={2}
-              maxLength={500}
-            />
-            <ErrorMessage error={errors['business.address']} />
+            <Label>Address</Label>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-1">
+              <div className="md:col-span-2">
+                <Input
+                  placeholder="Street Number (e.g., 123)"
+                  value={data.business.streetNumber || ''}
+                  onChange={(e) => handleBusinessUpdate('streetNumber', e.target.value)}
+                  maxLength={20}
+                />
+                <ErrorMessage error={errors['business.streetNumber']} />
+              </div>
+              <div className="md:col-span-2">
+                <Input
+                  placeholder="Street Name (e.g., Business St, Suite 100)"
+                  value={data.business.streetName || ''}
+                  onChange={(e) => handleBusinessUpdate('streetName', e.target.value)}
+                  maxLength={100}
+                />
+                <ErrorMessage error={errors['business.streetName']} />
+              </div>
+              <div>
+                <Input
+                  placeholder="City"
+                  value={data.business.city || ''}
+                  onChange={(e) => handleBusinessUpdate('city', e.target.value)}
+                  maxLength={50}
+                />
+                <ErrorMessage error={errors['business.city']} />
+              </div>
+              <div>
+                <Input
+                  placeholder="State"
+                  value={data.business.state || ''}
+                  onChange={(e) => handleBusinessUpdate('state', e.target.value)}
+                  maxLength={50}
+                />
+                <ErrorMessage error={errors['business.state']} />
+              </div>
+              <div className="md:col-span-2">
+                <Input
+                  placeholder="Zip Code"
+                  value={data.business.zipCode || ''}
+                  onChange={(e) => handleBusinessUpdate('zipCode', e.target.value)}
+                  maxLength={20}
+                />
+                <ErrorMessage error={errors['business.zipCode']} />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -336,17 +373,54 @@ const ValidatedInvoiceForm = ({ data, onUpdate }: ValidatedInvoiceFormProps) => 
             <ErrorMessage error={errors['client.email']} />
           </div>
           <div className="md:col-span-2">
-            <Label htmlFor="client-address">Address</Label>
-            <Textarea
-              id="client-address"
-              value={data.client.address}
-              onChange={(e) => handleClientUpdate('address', e.target.value)}
-              placeholder="456 Client Ave, City, State 12345"
-              className="mt-1"
-              rows={2}
-              maxLength={500}
-            />
-            <ErrorMessage error={errors['client.address']} />
+            <Label>Address</Label>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-1">
+              <div className="md:col-span-2">
+                <Input
+                  placeholder="Street Number (e.g., 456)"
+                  value={data.client.streetNumber || ''}
+                  onChange={(e) => handleClientUpdate('streetNumber', e.target.value)}
+                  maxLength={20}
+                />
+                <ErrorMessage error={errors['client.streetNumber']} />
+              </div>
+              <div className="md:col-span-2">
+                <Input
+                  placeholder="Street Name (e.g., Client Ave)"
+                  value={data.client.streetName || ''}
+                  onChange={(e) => handleClientUpdate('streetName', e.target.value)}
+                  maxLength={100}
+                />
+                <ErrorMessage error={errors['client.streetName']} />
+              </div>
+              <div>
+                <Input
+                  placeholder="City"
+                  value={data.client.city || ''}
+                  onChange={(e) => handleClientUpdate('city', e.target.value)}
+                  maxLength={50}
+                />
+                <ErrorMessage error={errors['client.city']} />
+              </div>
+              <div>
+                <Input
+                  placeholder="State"
+                  value={data.client.state || ''}
+                  onChange={(e) => handleClientUpdate('state', e.target.value)}
+                  maxLength={50}
+                />
+                <ErrorMessage error={errors['client.state']} />
+              </div>
+              <div className="md:col-span-2">
+                <Input
+                  placeholder="Zip Code"
+                  value={data.client.zipCode || ''}
+                  onChange={(e) => handleClientUpdate('zipCode', e.target.value)}
+                  maxLength={20}
+                />
+                <ErrorMessage error={errors['client.zipCode']} />
+              </div>
+            </div>
           </div>
         </div>
       </section>

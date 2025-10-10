@@ -11,12 +11,22 @@ export interface InvoiceData {
     address: string;
     website: string;
     logoUrl?: string;
+    streetNumber?: string;
+    streetName?: string;
+    city?: string;
+    state?: string;
+    zipCode?: string;
   };
   client: {
     name: string;
     company: string;
     email: string;
     address: string;
+    streetNumber?: string;
+    streetName?: string;
+    city?: string;
+    state?: string;
+    zipCode?: string;
   };
   meta: {
     number: string;
