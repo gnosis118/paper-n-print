@@ -65,7 +65,17 @@ const ModernTemplate = ({ data }: ModernTemplateProps) => {
             <div className="text-sm text-gray-600 space-y-1">
               <div className="font-semibold text-gray-800">{business.name || "Your Business"}</div>
               {business.phone && <div>{business.phone}</div>}
-              {business.address && <div>{business.address}</div>}
+              {(business.streetNumber || business.streetName || business.city || business.state || business.zipCode) ? (
+                <>
+                  {business.streetNumber && <div>{business.streetNumber}</div>}
+                  {business.streetName && <div>{business.streetName}</div>}
+                  {business.city && <div>{business.city}</div>}
+                  {business.state && <div>{business.state}</div>}
+                  {business.zipCode && <div>{business.zipCode}</div>}
+                </>
+              ) : (
+                business.address && <div>{business.address}</div>
+              )}
               {business.website && <div>{business.website}</div>}
             </div>
           </div>
@@ -90,7 +100,17 @@ const ModernTemplate = ({ data }: ModernTemplateProps) => {
               <div className="font-semibold text-lg">{client.name}</div>
               {client.company && <div className="text-gray-600">{client.company}</div>}
               {client.email && <div className="text-gray-600">{client.email}</div>}
-              {client.address && <div className="text-gray-600 mt-1">{client.address}</div>}
+              {(client.streetNumber || client.streetName || client.city || client.state || client.zipCode) ? (
+                <div className="text-gray-600 mt-1">
+                  {client.streetNumber && <div>{client.streetNumber}</div>}
+                  {client.streetName && <div>{client.streetName}</div>}
+                  {client.city && <div>{client.city}</div>}
+                  {client.state && <div>{client.state}</div>}
+                  {client.zipCode && <div>{client.zipCode}</div>}
+                </div>
+              ) : (
+                client.address && <div className="text-gray-600 mt-1">{client.address}</div>
+              )}
             </div>
           </div>
         </div>
