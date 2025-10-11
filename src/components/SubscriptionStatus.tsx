@@ -16,9 +16,7 @@ export function SubscriptionStatus() {
     checkSubscription,
     openCustomerPortal,
     isFree,
-    isStarter,
-    isPro,
-    isAgency
+    isPaid
   } = useSubscription();
 
   const handleOpenPortal = async () => {
@@ -72,22 +70,12 @@ export function SubscriptionStatus() {
     free: {
       name: "Free",
       color: "default" as const,
-      description: "Limited features available"
+      description: "3 invoices per month with watermark"
     },
-    starter: {
-      name: "Starter",
-      color: "secondary" as const,
-      description: "3 invoices per month"
-    },
-    pro: {
+    paid: {
       name: "Pro",
       color: "default" as const,
-      description: "8 invoices per month"
-    },
-    agency: {
-      name: "Agency", 
-      color: "default" as const,
-      description: "20 invoices per month"
+      description: "Unlimited invoices, no watermark, payment links"
     }
   };
 

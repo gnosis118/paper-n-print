@@ -7,15 +7,13 @@ const Footer = () => {
 
   const companyLinks = [
     { name: 'About', href: '/about' },
-    { name: 'Careers', href: '#' },
     { name: 'Contact', href: '/contact' },
   ];
 
   const resourceLinks = [
     { name: 'Blog', href: '/blog' },
     { name: 'Help Center', href: '/docs' },
-    { name: 'Status', href: '#' },
-    { name: 'Community', href: '#' },
+    { name: 'System Status', href: '/docs/system-status' },
   ];
 
   const legalLinks = [
@@ -122,7 +120,7 @@ const Footer = () => {
         <div className="mt-12 pt-8 border-t border-border">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-sm text-muted-foreground">
-              © {currentYear} InvoicePro. All rights reserved.
+              © {currentYear} ProInvoice. All rights reserved.
             </p>
             <div className="flex items-center gap-4 text-sm text-muted-foreground">
               <a 
