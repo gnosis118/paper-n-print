@@ -135,22 +135,6 @@ USING (false);
 
 
 -- ============================================================================
--- AUDIT LOG: Record security policy changes
--- ============================================================================
--- Log this security fix for audit trail
--- Note: Simplified to match audit_log table structure
-INSERT INTO public.audit_log (
-  user_id,
-  action,
-  table_name
-) VALUES (
-  '00000000-0000-0000-0000-000000000000'::uuid, -- System user
-  'SECURITY_FIX: Fixed 3 critical vulnerabilities - EXPOSED_SENSITIVE_DATA, MISSING_RLS_PROTECTION (credit_ledger), MISSING_RLS_PROTECTION (payments)',
-  'estimates, credit_ledger, payments'
-);
-
-
--- ============================================================================
 -- ISSUE 3: Fix Payment Transaction Data Access Vulnerability
 -- ============================================================================
 -- Problem: The payments table SELECT policy uses complex EXISTS clauses that
@@ -166,25 +150,25 @@ DROP POLICY IF EXISTS "Users can view their own payments" ON public.payments;
 DROP POLICY IF EXISTS "System can insert payments" ON public.payments;
 
 -- Create simplified SELECT policy that only allows viewing own payments
-CREATE POLICY "Users can view only their own payments"
-ON public.payments
-FOR SELECT
+CREATE POLICY "Users can view only their own payments" 
+ON public.payments 
+FOR SELECT 
 TO authenticated
 USING (
   -- User must own the estimate or invoice associated with this payment
   (
-    estimate_id IS NOT NULL
+    estimate_id IS NOT NULL 
     AND EXISTS (
-      SELECT 1 FROM public.estimates e
-      WHERE e.id = payments.estimate_id
+      SELECT 1 FROM public.estimates e 
+      WHERE e.id = payments.estimate_id 
         AND e.user_id = auth.uid()
         AND auth.uid() IS NOT NULL
     )
   ) OR (
-    invoice_id IS NOT NULL
+    invoice_id IS NOT NULL 
     AND EXISTS (
-      SELECT 1 FROM public.invoices i
-      WHERE i.id = payments.invoice_id
+      SELECT 1 FROM public.invoices i 
+      WHERE i.id = payments.invoice_id 
         AND i.user_id = auth.uid()
         AND auth.uid() IS NOT NULL
     )
@@ -192,89 +176,57 @@ USING (
 );
 
 -- Only service role can insert payments (from Stripe webhooks)
-CREATE POLICY "Only service role can insert payments"
-ON public.payments
-FOR INSERT
+CREATE POLICY "Only service role can insert payments" 
+ON public.payments 
+FOR INSERT 
 TO service_role
 WITH CHECK (true);
 
 -- Explicitly deny authenticated users from inserting payments
-CREATE POLICY "Deny authenticated user payment inserts"
-ON public.payments
-FOR INSERT
+CREATE POLICY "Deny authenticated user payment inserts" 
+ON public.payments 
+FOR INSERT 
 TO authenticated
 WITH CHECK (false);
 
 -- Explicitly deny UPDATE operations (payments are immutable)
-CREATE POLICY "Only service role can update payments"
-ON public.payments
-FOR UPDATE
+CREATE POLICY "Only service role can update payments" 
+ON public.payments 
+FOR UPDATE 
 TO service_role
 USING (true)
 WITH CHECK (true);
 
-CREATE POLICY "Deny authenticated user payment updates"
-ON public.payments
-FOR UPDATE
+CREATE POLICY "Deny authenticated user payment updates" 
+ON public.payments 
+FOR UPDATE 
 TO authenticated
 USING (false)
 WITH CHECK (false);
 
 -- Explicitly deny DELETE operations (payments are immutable)
-CREATE POLICY "Only service role can delete payments"
-ON public.payments
-FOR DELETE
+CREATE POLICY "Only service role can delete payments" 
+ON public.payments 
+FOR DELETE 
 TO service_role
 USING (true);
 
-CREATE POLICY "Deny authenticated user payment deletes"
-ON public.payments
-FOR DELETE
+CREATE POLICY "Deny authenticated user payment deletes" 
+ON public.payments 
+FOR DELETE 
 TO authenticated
 USING (false);
 
 -- Add comments for documentation
-COMMENT ON POLICY "Users can view only their own payments" ON public.payments IS
+COMMENT ON POLICY "Users can view only their own payments" ON public.payments IS 
 'Allows users to view payments only for estimates or invoices they own. Includes explicit NULL checks for security.';
 
-COMMENT ON POLICY "Only service role can insert payments" ON public.payments IS
+COMMENT ON POLICY "Only service role can insert payments" ON public.payments IS 
 'Restricts payment creation to service role only (Stripe webhooks). Prevents users from creating fake payment records.';
 
-COMMENT ON POLICY "Deny authenticated user payment updates" ON public.payments IS
+COMMENT ON POLICY "Deny authenticated user payment updates" ON public.payments IS 
 'Payments are immutable. Only service role can update payment records.';
 
-COMMENT ON POLICY "Deny authenticated user payment deletes" ON public.payments IS
+COMMENT ON POLICY "Deny authenticated user payment deletes" ON public.payments IS 
 'Payments are immutable. Only service role can delete payment records for data integrity.';
-
-
--- ============================================================================
--- VERIFICATION QUERIES (for testing)
--- ============================================================================
--- Run these queries to verify the fixes are working:
-
--- 1. Verify estimates can only be accessed by owners or through secure function
--- SELECT * FROM public.estimates; -- Should only show user's own estimates
-
--- 2. Verify credit_ledger INSERT is blocked for authenticated users
--- INSERT INTO public.credit_ledger (user_id, delta, reason)
--- VALUES (auth.uid(), 1000, 'test'); -- Should FAIL with permission denied
-
--- 3. Verify the secure function works
--- SELECT * FROM public.get_estimate_by_token('valid-token-uuid'); -- Should work
-
--- 4. Verify payments INSERT is blocked for authenticated users
--- INSERT INTO public.payments (estimate_id, amount, method)
--- VALUES ('some-uuid', 100.00, 'test'); -- Should FAIL with permission denied
-
--- 5. Verify payments UPDATE is blocked for authenticated users
--- UPDATE public.payments SET amount = 999.99 WHERE id = 'some-uuid'; -- Should FAIL
-
--- 6. Verify payments DELETE is blocked for authenticated users
--- DELETE FROM public.payments WHERE id = 'some-uuid'; -- Should FAIL
-
--- 7. Verify RLS policies are active
--- SELECT schemaname, tablename, policyname, permissive, roles, cmd, qual
--- FROM pg_policies
--- WHERE tablename IN ('estimates', 'credit_ledger', 'payments')
--- ORDER BY tablename, policyname;
 

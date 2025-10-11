@@ -2,10 +2,11 @@
 
 ## ⚠️ **CRITICAL: Deploy These Fixes NOW**
 
-You have **2 critical security vulnerabilities** that need immediate attention:
+You have **3 critical security vulnerabilities** that need immediate attention:
 
 1. **Public Estimate Data Exposure** - Anyone can access all shared estimates
 2. **Credit System Manipulation** - Users can grant themselves unlimited credits
+3. **Payment Data Access Issues** - Missing UPDATE/DELETE policies, complex SELECT logic
 
 ---
 
@@ -57,12 +58,21 @@ VALUES (auth.uid(), 1000, 'test');
 -- ✅ Should get: permission denied for table credit_ledger
 ```
 
-**Test 3: Check RLS Policies**
+**Test 3: Check Payments Are Protected**
+```sql
+-- Try to insert payment (should FAIL):
+INSERT INTO public.payments (estimate_id, amount, method)
+VALUES ('00000000-0000-0000-0000-000000000000'::uuid, 100.00, 'test');
+
+-- ✅ Should get: permission denied for table payments
+```
+
+**Test 4: Check RLS Policies**
 ```sql
 -- View all policies:
 SELECT tablename, policyname, roles, cmd
-FROM pg_policies 
-WHERE tablename IN ('estimates', 'credit_ledger')
+FROM pg_policies
+WHERE tablename IN ('estimates', 'credit_ledger', 'payments')
 ORDER BY tablename, policyname;
 
 -- ✅ Should see new restrictive policies
@@ -144,6 +154,23 @@ After deployment, verify:
    Result: Success (authorized backend only)
 ```
 
+### **Issue 3: Payment Data Access**
+
+**Before:**
+```
+❌ Complex SELECT logic with potential edge cases
+❌ No UPDATE policy (could allow modifications)
+❌ No DELETE policy (could allow deletions)
+```
+
+**After:**
+```
+✅ Simplified SELECT with explicit NULL checks
+✅ UPDATE explicitly denied for users
+✅ DELETE explicitly denied for users
+✅ Only service role can modify payments
+```
+
 ---
 
 ## 🔍 **EXPECTED RESULTS**
@@ -159,6 +186,13 @@ After deployment, verify:
 - ✅ Users CANNOT modify credits (UPDATE blocked)
 - ✅ Users CANNOT delete credits (DELETE blocked)
 - ✅ Only service role can modify credits
+
+### **Payments Table:**
+- ✅ Users can view only their own payments (simplified logic)
+- ✅ Users CANNOT insert payments (INSERT blocked)
+- ✅ Users CANNOT modify payments (UPDATE blocked)
+- ✅ Users CANNOT delete payments (DELETE blocked)
+- ✅ Only service role can modify payments (Stripe webhooks)
 
 ---
 
@@ -236,12 +270,17 @@ After successful deployment:
 
 ## 🎯 **SUMMARY**
 
-**What:** Fix 2 critical security vulnerabilities
+**What:** Fix 3 critical security vulnerabilities
 **When:** NOW (immediate deployment required)
 **How:** Deploy migration file
 **Time:** 5 minutes
 **Risk:** Low (migration is safe and tested)
 **Impact:** High (prevents data theft and fraud)
+
+**Issues Fixed:**
+1. ✅ Estimate data exposure (token validation required)
+2. ✅ Credit manipulation (service role only)
+3. ✅ Payment data access (simplified + immutable)
 
 ---
 
