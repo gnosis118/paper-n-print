@@ -26,20 +26,20 @@ export default function SubscriptionManagement() {
       await openCustomerPortal();
       toast.success("Opening Stripe Customer Portal...");
     } catch (error) {
+      console.error('Customer portal error:', error);
+      
       const errorMessage = error instanceof Error ? error.message : "Failed to open subscription management. Please try again.";
 
       // Show more specific error messages
-      if (errorMessage.includes('No Stripe customer')) {
-        toast.error("You don't have an active subscription yet. Please subscribe to a plan first.");
-      } else if (errorMessage.includes('No active session')) {
+      if (errorMessage.toLowerCase().includes('stripe customer')) {
+        toast.error("You need to subscribe to a plan first before you can manage your subscription.");
+      } else if (errorMessage.includes('session')) {
         toast.error("Your session has expired. Please log in again.");
       } else if (errorMessage.includes('log in')) {
         toast.error("Please log in to manage your subscription.");
       } else {
-        toast.error(errorMessage);
+        toast.error("Unable to open subscription management. Please subscribe to a plan first.");
       }
-
-      console.error('Customer portal error:', error);
     }
   };
 
