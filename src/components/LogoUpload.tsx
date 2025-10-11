@@ -180,7 +180,7 @@ export function LogoUpload({ currentLogoUrl, onLogoChange, disabled }: LogoUploa
 
       {disabled && (
         <p className="text-sm text-amber-600">
-          Logo upload is available for Starter, Pro, and Agency plans.
+          Logo upload is available with the Pro plan.
         </p>
       )}
     </div>

@@ -44,20 +44,8 @@ export const useUsageTracking = () => {
         .single();
 
       let invoiceLimit = 3; // Free plan default
-      if (subscription) {
-        switch(subscription.plan) {
-          case 'basic':
-            invoiceLimit = 25;
-            break;
-          case 'professional':
-            invoiceLimit = 100;
-            break;
-          case 'enterprise':
-            invoiceLimit = 500;
-            break;
-          default:
-            invoiceLimit = 3;
-        }
+      if (subscription && subscription.plan === 'paid') {
+        invoiceLimit = Infinity; // Unlimited for paid plan
       }
 
       // Count invoices created this month

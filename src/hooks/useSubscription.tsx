@@ -15,22 +15,12 @@ const PLAN_CONFIG = {
   free: {
     invoiceLimit: 3,
     hasWatermark: true,
-    features: ['Basic templates', 'PDF export with watermark', 'Email support']
+    features: ['Basic templates', 'PDF export with watermark', '3 invoices per month', 'Email support']
   },
-  basic: {
-    invoiceLimit: 25, 
+  paid: {
+    invoiceLimit: Infinity,
     hasWatermark: false,
-    features: ['All templates', 'No watermark', 'Priority support', 'Custom branding']
-  },
-  professional: {
-    invoiceLimit: 100,
-    hasWatermark: false,
-    features: ['Premium templates', 'Team collaboration', 'Advanced features']
-  },
-  enterprise: {
-    invoiceLimit: 500,
-    hasWatermark: false,
-    features: ['Unlimited features', 'API access', 'Dedicated support']
+    features: ['All templates', 'Unlimited invoices', 'No watermark', 'Payment links', 'Custom branding', 'Priority support']
   }
 };
 
@@ -142,13 +132,7 @@ export const useSubscription = () => {
     openCustomerPortal,
     // Plan type helpers
     isFree: subscription.plan === 'free',
-    isBasic: subscription.plan === 'basic', 
-    isProfessional: subscription.plan === 'professional',
-    isEnterprise: subscription.plan === 'enterprise',
-    // Legacy compatibility
-    isStarter: subscription.plan === 'basic',
-    isPro: subscription.plan === 'professional', 
-    isAgency: subscription.plan === 'enterprise',
+    isPaid: subscription.plan === 'paid' || subscription.subscribed,
     // Plan configuration
     planConfig: currentPlanConfig,
     invoiceLimit: currentPlanConfig.invoiceLimit,
