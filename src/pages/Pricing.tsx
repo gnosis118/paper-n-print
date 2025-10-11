@@ -251,7 +251,7 @@ const Pricing = () => {
               <Link to="/get-started">Start 7-Day Free Trial</Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <Link to="/templates">View Templates</Link>
+              <Link to="/invoice-templates">View Templates</Link>
             </Button>
           </div>
           <p className="text-sm text-muted-foreground mt-4">
