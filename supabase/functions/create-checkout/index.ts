@@ -92,8 +92,40 @@ const handleCheckout = async (req: Request): Promise<Response> => {
     if (customers.data.length > 0) {
       customerId = customers.data[0].id;
       logStep("Existing customer found", { customerId });
+
+      // Save customer ID to database if not already saved
+      const { data: subscription } = await supabaseClient
+        .from('user_subscriptions')
+        .select('stripe_customer_id')
+        .eq('user_id', user.id)
+        .single();
+
+      if (subscription && !subscription.stripe_customer_id) {
+        await supabaseClient
+          .from('user_subscriptions')
+          .update({ stripe_customer_id: customerId, updated_at: new Date().toISOString() })
+          .eq('user_id', user.id);
+        logStep("Saved customer ID to database", { customerId });
+      }
     } else {
-      logStep("No existing customer, will create during checkout");
+      // Create new Stripe customer
+      const newCustomer = await stripe.customers.create({
+        email: user.email,
+        metadata: {
+          supabase_user_id: user.id,
+        },
+        name: user.email.split('@')[0],
+        description: `ProInvoice user - ${user.email}`,
+      });
+      customerId = newCustomer.id;
+      logStep("Created new Stripe customer", { customerId });
+
+      // Save customer ID to database
+      await supabaseClient
+        .from('user_subscriptions')
+        .update({ stripe_customer_id: customerId, updated_at: new Date().toISOString() })
+        .eq('user_id', user.id);
+      logStep("Saved new customer ID to database", { customerId });
     }
 
     let finalPriceId: string;
