@@ -75,8 +75,15 @@ const handleSubscriptionCheck = async (req: Request): Promise<Response> => {
     const credits = (creditData as any)?.[0]?.balance || 0;
     const templatesDownloaded = (creditData as any)?.[0]?.templates_downloaded || 0;
 
-    if (!subscription) {
-      logStep("No active subscription found");
+    // Check if user has an active paid subscription (plan is NOT 'free' and status is 'active')
+    const hasPaidSubscription = subscription && subscription.plan !== 'free' && subscription.status === 'active';
+
+    if (!hasPaidSubscription) {
+      logStep("No active paid subscription found", {
+        hasSubscription: !!subscription,
+        plan: subscription?.plan,
+        status: subscription?.status
+      });
       return new Response(JSON.stringify({
         subscribed: false,
         plan: 'free',
@@ -93,21 +100,26 @@ const handleSubscriptionCheck = async (req: Request): Promise<Response> => {
       });
     }
 
-    logStep("Active subscription found", { 
+    logStep("Active paid subscription found", { 
       plan: subscription.plan,
       status: subscription.status,
       creditsPerMonth: subscription.credits_per_month
     });
 
+    // Return 'paid' as the plan for all non-free subscriptions
     return new Response(JSON.stringify({
       subscribed: true,
-      plan: subscription.plan,
+      plan: 'paid', // Simplified to just 'paid' vs 'free'
       status: subscription.status,
       subscription_end: subscription.current_period_end,
       credits,
       credits_per_month: subscription.credits_per_month,
       templates_downloaded: templatesDownloaded,
-      features: subscription.features,
+      features: {
+        templates: Infinity,
+        watermark: false,
+        export_limit: Infinity
+      },
       stripe_customer_id: subscription.stripe_customer_id
     }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },

@@ -176,12 +176,12 @@ serve(async (req) => {
           break;
         }
 
-        // Update subscription record
+        // Update subscription record - all paying customers get 'paid' plan
         const subscriptionData = {
           user_id: userId,
           stripe_subscription_id: subscription.id,
           stripe_customer_id: customerId,
-          plan: tier || 'unknown',
+          plan: 'paid', // Simplified: all paying subscriptions are 'paid'
           status: subscription.status,
           stripe_price_id: price.id,
           credits_per_month: tier ? CREDIT_MAP[tier as keyof typeof CREDIT_MAP] : 0,
@@ -189,9 +189,9 @@ serve(async (req) => {
           current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
           next_credit_at: interval === "year" ? getFirstOfNextMonth().toISOString() : null,
           features: {
-            templates: tier === 'lite' ? 3 : tier === 'pro' ? 10 : 25,
+            templates: Infinity,
             watermark: false,
-            export_limit: tier === 'lite' ? 50 : tier === 'pro' ? 200 : -1
+            export_limit: Infinity
           }
         };
 
@@ -212,8 +212,8 @@ serve(async (req) => {
         const { error: profileError } = await supabase
           .from('profiles')
           .update({ 
-            subscription_status: tier || 'free',
-            plan: tier || 'free'
+            subscription_status: 'paid',
+            plan: 'paid'
           })
           .eq('id', userId);
 
