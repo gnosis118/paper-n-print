@@ -46,15 +46,27 @@ serve(async (req) => {
       { auth: { persistSession: false } }
     );
 
-    const body = await req.text();
     const signature = req.headers.get("stripe-signature");
 
     if (!signature) {
       throw new Error("No Stripe signature found");
     }
 
+    // Get raw body text for signature verification
+    const body = await req.text();
+
     // Verify webhook signature
-    const event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
+    let event;
+    try {
+      event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : String(err);
+      logStep("Webhook signature verification failed", { error: errorMessage });
+      return new Response(`Webhook signature verification failed: ${errorMessage}`, { 
+        status: 400,
+        headers: corsHeaders 
+      });
+    }
     logStep("Event verified", { type: event.type });
 
     if (event.type === "checkout.session.completed") {
