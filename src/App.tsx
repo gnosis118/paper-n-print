@@ -30,6 +30,7 @@ import SubscriptionManagement from "./pages/SubscriptionManagement";
 import EstimateView from './pages/EstimateView';
 import InvoiceView from './pages/InvoiceView';
 import Estimates from './pages/Estimates';
+import Clients from './pages/Clients';
 import NotFound from "@/pages/NotFound";
 import ConstructionInvoiceTemplate from "./pages/templates/Construction";
 import ConsultingInvoiceTemplate from "./pages/templates/Consulting";
@@ -222,6 +223,7 @@ const App = () => (
               <Route path="/templates" element={<Templates />} />
               <Route path="/business-settings" element={<BusinessSettings />} />
               <Route path="/subscription" element={<SubscriptionManagement />} />
+              <Route path="/clients" element={<Clients />} />
               {/* Legacy Template Pages */}
               <Route path="/templates/construction" element={<ConstructionInvoiceTemplate />} />
               <Route path="/templates/consulting" element={<ConsultingInvoiceTemplate />} />

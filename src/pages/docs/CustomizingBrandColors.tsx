@@ -1,8 +1,9 @@
 import { Helmet } from 'react-helmet-async';
 import PageLayout from "@/components/PageLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Palette, Eye, Sparkles } from "lucide-react";
+import { ArrowLeft, Palette, Eye, Sparkles, Crown } from "lucide-react";
 
 export default function CustomizingBrandColors() {
   return (
@@ -29,6 +30,14 @@ export default function CustomizingBrandColors() {
                 Make your invoices stand out with your brand's unique color scheme.
               </p>
             </div>
+
+            <Alert className="mb-8 border-amber-200 bg-amber-50">
+              <Crown className="h-5 w-5 text-amber-600" />
+              <AlertDescription className="text-amber-900">
+                <strong className="font-semibold">Pro Plan Required:</strong> Brand color customization is a premium feature available on Pro and Agency plans.
+                <Link to="/pricing" className="underline ml-1 font-medium">Upgrade to customize your colors</Link>
+              </AlertDescription>
+            </Alert>
 
             <div className="space-y-8">
               <Card>

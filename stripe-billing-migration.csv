@@ -1,0 +1,5 @@
+customer,start_date,price,quantity,metadata.third_party_sub_id,automatic_tax,billing_cycle_anchor,coupon,trial_end,proration_behavior,collection_method,default_tax_rate,backdate_start_date,days_until_due,cancel_at_period_end,add_invoice_items.0.amount,add_invoice_items.0.product,add_invoice_items.0.currency
+cus_REPLACE_WITH_STRIPE_CUSTOMER_ID_1,1727481010,price_1SCDJ4Gpz30x93KjNOLCJgNK,1,6615a994-e8fe-4b61-84db-9d3dfa9741b4,FALSE,1730159410,,,create_prorations,charge_automatically,,,FALSE,,,
+cus_REPLACE_WITH_STRIPE_CUSTOMER_ID_2,1727649048,price_1SCDJ4Gpz30x93KjNOLCJgNK,1,a79ccd37-664e-4b1f-858f-c3664bf311ac,FALSE,1730327448,,,create_prorations,charge_automatically,,,FALSE,,,
+cus_REPLACE_WITH_STRIPE_CUSTOMER_ID_3,1727496910,price_1SCDJ4Gpz30x93KjNOLCJgNK,1,7dd4768b-91e9-4ef0-a25b-3e4c049c02d8,FALSE,1730175310,,,create_prorations,charge_automatically,,,FALSE,,,
+

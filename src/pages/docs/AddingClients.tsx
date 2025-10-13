@@ -73,11 +73,11 @@ export default function AddingClients() {
                     <div>
                       <h3 className="font-semibold mb-2">Step-by-Step Process</h3>
                       <ol className="list-decimal list-inside space-y-2 ml-4 text-sm">
-                        <li>Navigate to the "Clients" section in your dashboard</li>
-                        <li>Click the "Add New Client" button</li>
-                        <li>Fill in the client information form (details below)</li>
-                        <li>Review the information for accuracy</li>
-                        <li>Save the client to your database</li>
+                        <li>Navigate to the "Clients" page from your dashboard menu</li>
+                        <li>Click the "Add Client" button in the top right</li>
+                        <li>Fill in the required fields: Client Name and Email</li>
+                        <li>Optionally add Company and Address information</li>
+                        <li>Click "Create Client" to save</li>
                         <li>The client will now appear in your client list</li>
                       </ol>
                     </div>
@@ -85,9 +85,8 @@ export default function AddingClients() {
                     <div>
                       <h3 className="font-semibold mb-2">Alternative Methods</h3>
                       <ul className="list-disc list-inside space-y-1 ml-4 text-sm">
-                        <li><strong>During Invoice Creation:</strong> Add clients while creating invoices</li>
-                        <li><strong>Quick Add:</strong> Use the quick add feature for basic information</li>
-                        <li><strong>Import:</strong> Bulk import from spreadsheets or other systems</li>
+                        <li><strong>Automatic Save:</strong> Clients are automatically saved when you create invoices or estimates</li>
+                        <li><strong>Manual Entry:</strong> Use the dedicated Clients page for full control</li>
                       </ul>
                     </div>
                   </div>
@@ -96,7 +95,7 @@ export default function AddingClients() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Required Client Information</CardTitle>
+                  <CardTitle>Client Information Fields</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-4">
@@ -105,24 +104,22 @@ export default function AddingClients() {
                         <div>
                           <h3 className="font-semibold mb-1 flex items-center gap-1">
                             <Building className="h-4 w-4" />
-                            Basic Information
+                            Required Fields
                           </h3>
                           <ul className="list-disc list-inside space-y-1 text-sm">
-                            <li><strong>Client Name:</strong> Individual or company name</li>
-                            <li><strong>Client Type:</strong> Individual or Business</li>
-                            <li><strong>Display Name:</strong> How they appear in lists</li>
+                            <li><strong>Client Name:</strong> Full name or business name (required)</li>
+                            <li><strong>Email:</strong> Primary email address (required)</li>
                           </ul>
                         </div>
-                        
+
                         <div>
                           <h3 className="font-semibold mb-1 flex items-center gap-1">
                             <Mail className="h-4 w-4" />
-                            Contact Information
+                            Optional Fields
                           </h3>
                           <ul className="list-disc list-inside space-y-1 text-sm">
-                            <li><strong>Email:</strong> Primary email for invoices</li>
-                            <li><strong>Phone:</strong> Main contact number</li>
-                            <li><strong>Website:</strong> Company website (optional)</li>
+                            <li><strong>Company:</strong> Company or organization name</li>
+                            <li><strong>Address:</strong> Full mailing address</li>
                           </ul>
                         </div>
                       </div>
@@ -131,21 +128,21 @@ export default function AddingClients() {
                         <div>
                           <h3 className="font-semibold mb-1 flex items-center gap-1">
                             <MapPin className="h-4 w-4" />
-                            Address Information
+                            Automatic Features
                           </h3>
                           <ul className="list-disc list-inside space-y-1 text-sm">
-                            <li><strong>Street Address:</strong> Physical location</li>
-                            <li><strong>City, State, ZIP:</strong> Complete address</li>
-                            <li><strong>Country:</strong> For international clients</li>
+                            <li><strong>Auto-Save:</strong> Clients saved automatically during invoice creation</li>
+                            <li><strong>Duplicate Detection:</strong> System checks for existing clients by email</li>
+                            <li><strong>History Tracking:</strong> View all invoices and estimates per client</li>
                           </ul>
                         </div>
 
                         <div>
-                          <h3 className="font-semibold mb-1">Business Details</h3>
+                          <h3 className="font-semibold mb-1">Client Statistics</h3>
                           <ul className="list-disc list-inside space-y-1 text-sm">
-                            <li><strong>Industry:</strong> Type of business</li>
-                            <li><strong>Tax ID:</strong> For business clients</li>
-                            <li><strong>Payment Terms:</strong> Custom terms if different</li>
+                            <li><strong>Invoice Count:</strong> Total invoices sent</li>
+                            <li><strong>Estimate Count:</strong> Total estimates created</li>
+                            <li><strong>Total Revenue:</strong> Sum of all invoices</li>
                           </ul>
                         </div>
                       </div>
@@ -288,10 +285,10 @@ export default function AddingClients() {
 
               <div className="flex gap-4 pt-6">
                 <Button asChild>
-                  <Link to="/invoice">Add Your First Client</Link>
+                  <Link to="/clients">Go to Client Management</Link>
                 </Button>
                 <Button variant="outline" asChild>
-                  <Link to="/docs/editing-clients">Next: Editing Client Information</Link>
+                  <Link to="/docs/editing-client-information">Next: Editing Client Information</Link>
                 </Button>
               </div>
             </div>

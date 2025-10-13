@@ -1,8 +1,9 @@
 import { Helmet } from 'react-helmet-async';
 import PageLayout from "@/components/PageLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Image, Upload, CheckCircle, AlertCircle } from "lucide-react";
+import { ArrowLeft, Image, Upload, CheckCircle, AlertCircle, Crown } from "lucide-react";
 
 export default function UploadingLogo() {
   return (
@@ -29,6 +30,14 @@ export default function UploadingLogo() {
                 Add your business logo to create professional, branded invoices.
               </p>
             </div>
+
+            <Alert className="mb-8 border-amber-200 bg-amber-50">
+              <Crown className="h-5 w-5 text-amber-600" />
+              <AlertDescription className="text-amber-900">
+                <strong className="font-semibold">Pro Plan Required:</strong> Logo upload is a premium feature available on Pro and Agency plans.
+                <Link to="/pricing" className="underline ml-1 font-medium">Upgrade to add your logo</Link>
+              </AlertDescription>
+            </Alert>
 
             <div className="space-y-8">
               <Card>

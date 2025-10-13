@@ -1,0 +1,5 @@
+customer,start_date,items.0.price,items.0.quantity,automatic_tax,cancel_at_period_end,billing_cycle_anchor,coupon,trial_end,proration_behavior,collection_method,default_tax_rate,days_until_due,backdate_start_date
+cus_REPLACE_WITH_CUSTOMER_ID_1,1729468800,price_1SCDJ4Gpz30x93KjNOLCJgNK,1,false,false,1732147200,,,create_prorations,charge_automatically,,,
+cus_REPLACE_WITH_CUSTOMER_ID_2,1729468800,price_1SCDJ4Gpz30x93KjNOLCJgNK,1,false,false,1732147200,,,create_prorations,charge_automatically,,,
+cus_REPLACE_WITH_CUSTOMER_ID_3,1729468800,price_1SCDJ4Gpz30x93KjNOLCJgNK,1,false,false,1732147200,,,create_prorations,charge_automatically,,,
+

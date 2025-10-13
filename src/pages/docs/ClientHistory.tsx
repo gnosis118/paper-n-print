@@ -41,16 +41,15 @@ export default function ClientHistory() {
                 <CardContent className="space-y-4">
                   <p>To access a client's complete history:</p>
                   <ol className="list-decimal list-inside space-y-2 ml-4">
-                    <li>Navigate to the Clients section</li>
-                    <li>Click on the client's name to open their profile</li>
-                    <li>View the "History" tab for a complete timeline</li>
-                    <li>Use filters to narrow down specific types of records</li>
-                    <li>Export history data for reporting or analysis</li>
+                    <li>Go to the Clients page (/clients)</li>
+                    <li>Find the client in the list</li>
+                    <li>Click the "View History" icon (document icon) in the Actions column</li>
+                    <li>A dialog will open showing all invoices and estimates for that client</li>
                   </ol>
                   <div className="bg-blue-50 p-4 rounded-lg">
                     <p className="text-sm font-medium text-blue-900">💡 Quick Access</p>
                     <p className="text-sm text-blue-800 mt-1">
-                      Click on any invoice in the history to view its full details or make edits.
+                      The history dialog shows client information, all invoices with their status, and all estimates with their status.
                     </p>
                   </div>
                 </CardContent>
@@ -66,13 +65,10 @@ export default function ClientHistory() {
                 <CardContent className="space-y-4">
                   <p>Client history includes comprehensive records of:</p>
                   <ul className="list-disc list-inside space-y-2 ml-4">
-                    <li><strong>All Invoices:</strong> Complete list of invoices sent to the client</li>
-                    <li><strong>Payment Records:</strong> All payments received and their dates</li>
-                    <li><strong>Outstanding Balances:</strong> Current amounts owed</li>
-                    <li><strong>Communication Log:</strong> Emails and messages sent</li>
-                    <li><strong>Status Changes:</strong> Invoice status updates and modifications</li>
-                    <li><strong>Notes and Comments:</strong> Internal notes about the client</li>
-                    <li><strong>Document Attachments:</strong> Any files associated with the client</li>
+                    <li><strong>Client Information:</strong> Name, email, company, address, and when they became a client</li>
+                    <li><strong>All Invoices:</strong> Complete list of invoices with invoice number, dates, amounts, and status</li>
+                    <li><strong>All Estimates:</strong> Complete list of estimates with number, title, amounts, and status</li>
+                    <li><strong>Total Statistics:</strong> Invoice count, estimate count, and total revenue from the client</li>
                   </ul>
                 </CardContent>
               </Card>

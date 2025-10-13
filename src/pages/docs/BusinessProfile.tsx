@@ -2,8 +2,9 @@ import { Helmet } from 'react-helmet-async';
 import PageLayout from "@/components/PageLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Building, User, MapPin, Mail, Phone, Globe } from "lucide-react";
+import { ArrowLeft, Building, User, MapPin, Mail, Phone, Globe, Crown } from "lucide-react";
 
 export default function BusinessProfile() {
   return (
@@ -30,6 +31,14 @@ export default function BusinessProfile() {
                 Configure your business information to create professional, branded invoices automatically.
               </p>
             </div>
+
+            <Alert className="mb-8 border-amber-200 bg-amber-50">
+              <Crown className="h-5 w-5 text-amber-600" />
+              <AlertDescription className="text-amber-900">
+                <strong className="font-semibold">Pro Plan Required:</strong> Business profile management, logo upload, and brand customization features require a Pro or Agency plan.
+                <Link to="/pricing" className="underline ml-1 font-medium">Upgrade to unlock these features</Link>
+              </AlertDescription>
+            </Alert>
 
             <div className="space-y-8">
               <Card>
