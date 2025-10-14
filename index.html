@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#3B82F6" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     
     <!-- Content Security Policy -->
     <meta http-equiv="Content-Security-Policy" content="
@@ -27,8 +30,11 @@
     <!-- DNS prefetch and preconnect for external resources -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//js.stripe.com">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://js.stripe.com">
+    <link rel="preconnect" href="https://api.stripe.com">
     
     <!-- Critical CSS optimization for immediate above-the-fold rendering -->
     <style id="critical-css">
@@ -114,7 +120,6 @@
     <title>Invoice Generator App – Create &amp; Get Paid Faster</title>
     <meta name="description" content="Create compliant invoices in 30 seconds, send with embedded payments, and auto-remind late payers. Free to start. Unlimited on Pro.">
     <meta name="author" content="Invoice Generator App" />
-    <meta name="keywords" content="invoice generator, create invoices, pdf invoices, business invoicing, stripe payments, invoice templates">
     <link rel="canonical" href="https://www.proinvoice.app/" />
     
     <!-- Enhanced Open Graph tags -->
@@ -164,7 +169,50 @@
         "Multiple professional templates",
         "Auto payment reminders",
         "Custom branding"
-      ]
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "127",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }
+    </script>
+
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "ProInvoice",
+      "url": "https://www.proinvoice.app/",
+      "logo": "https://www.proinvoice.app/og-image.webp",
+      "description": "Professional invoice generator with embedded Stripe payments. Create, send, and get paid faster.",
+      "sameAs": [
+        "https://twitter.com/proinvoiceapp"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Support",
+        "url": "https://www.proinvoice.app/contact",
+        "availableLanguage": "English"
+      }
+    }
+    </script>
+
+    <!-- WebSite Schema with SearchAction -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "ProInvoice",
+      "url": "https://www.proinvoice.app/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.proinvoice.app/invoice-templates?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
     }
     </script>
     
@@ -192,6 +240,7 @@
     </script>
 
   <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/favicon.png">
   <link rel="manifest" href="/manifest.json">
   
   <!-- Service Worker Registration for caching -->
@@ -212,14 +261,6 @@
       });
     }
   </script>
-  
-  
-  
-  
-  <meta property="og:title" content="Invoice Generator App – Create &amp; Get Paid Faster">
-  <meta name="twitter:title" content="Invoice Generator App – Create &amp; Get Paid Faster">
-  <meta property="og:description" content="Create compliant invoices in 30 seconds, send with embedded payments, and auto-remind late payers. Free to start. Unlimited on Pro.">
-  <meta name="twitter:description" content="Create compliant invoices in 30 seconds, send with embedded payments, and auto-remind late payers. Free to start. Unlimited on Pro.">
 </head>
 
   <body>

@@ -117,14 +117,40 @@ Disallow: /payment-success
 Disallow: /payment-canceled
 Disallow: /subscription-management
 
-# Aggressive crawlers - Be more restrictive
+# SEO Tool Crawlers - Allow with rate limiting for proper auditing
 User-agent: AhrefsBot
-Crawl-delay: 10
-Disallow: /
+Allow: /
+Allow: /invoice-templates/
+Allow: /invoice-template/
+Allow: /templates/
+Allow: /pricing
+Allow: /about
+Allow: /contact
+Allow: /blog
+Allow: /docs/
+Disallow: /auth
+Disallow: /business-settings
+Disallow: /invoice?
+Disallow: /invoices
+Disallow: /api/
+Crawl-delay: 5
 
 User-agent: SemrushBot
-Crawl-delay: 10
-Disallow: /
+Allow: /
+Allow: /invoice-templates/
+Allow: /invoice-template/
+Allow: /templates/
+Allow: /pricing
+Allow: /about
+Allow: /contact
+Allow: /blog
+Allow: /docs/
+Disallow: /auth
+Disallow: /business-settings
+Disallow: /invoice?
+Disallow: /invoices
+Disallow: /api/
+Crawl-delay: 5
 
 User-agent: MJ12bot
 Crawl-delay: 10
