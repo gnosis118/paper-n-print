@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, FileText, Palette } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import CleanTemplate from "@/components/templates/CleanTemplate";
 import ModernTemplate from "@/components/templates/ModernTemplate";
 import TradesTemplate from "@/components/templates/TradesTemplate";
@@ -102,7 +103,19 @@ const Templates = () => {
   const selectedTemplateInfo = templates.find(t => t.name === selectedTemplate);
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <Helmet>
+        <title>Invoice Templates - Choose Your Perfect Design | ProInvoice</title>
+        <meta name="description" content="Choose from professional invoice templates: Clean, Modern, or Trades. Preview and customize your perfect invoice design. Free to use with embedded Stripe payments." />
+        <link rel="canonical" href="https://www.proinvoice.app/templates" />
+        <meta property="og:title" content="Invoice Templates - Choose Your Perfect Design | ProInvoice" />
+        <meta property="og:description" content="Choose from professional invoice templates: Clean, Modern, or Trades. Preview and customize your perfect invoice design." />
+        <meta property="og:url" content="https://www.proinvoice.app/templates" />
+        <meta name="twitter:title" content="Invoice Templates - Choose Your Perfect Design | ProInvoice" />
+        <meta name="twitter:description" content="Choose from professional invoice templates: Clean, Modern, or Trades. Preview and customize your perfect invoice design." />
+      </Helmet>
+
+      <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-invoice-border bg-invoice-paper shadow-soft">
         <div className="max-w-7xl mx-auto px-6 py-4">
@@ -340,6 +353,7 @@ const Templates = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
