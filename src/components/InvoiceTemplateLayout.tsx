@@ -25,6 +25,31 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
     document.body.removeChild(link);
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.proinvoice.app/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Invoice Templates",
+        "item": "https://www.proinvoice.app/invoice-templates"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": `${template.title} Invoice Template`,
+        "item": `https://www.proinvoice.app${template.slug}`
+      }
+    ]
+  };
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -38,7 +63,7 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
         }
       },
       {
-        "@type": "Question", 
+        "@type": "Question",
         "name": `What should be on a ${template.title.toLowerCase()} invoice?`,
         "acceptedAnswer": {
           "@type": "Answer",
@@ -62,13 +87,18 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
       description={description}
       canonical={`https://www.proinvoice.app${template.slug}`}
     >
-      <SEOHeaders 
+      <SEOHeaders
         title={pageTitle}
         description={description}
         canonical={`https://www.proinvoice.app${template.slug}`}
         structuredData={faqSchema}
         ogImage="/og-image.webp"
       />
+
+      {/* Breadcrumb Structured Data */}
+      <script type="application/ld+json">
+        {JSON.stringify(breadcrumbSchema)}
+      </script>
 
       {/* Breadcrumb */}
       <div className="bg-muted/20 py-4">

@@ -62,6 +62,15 @@
           "value": "public, max-age=3600, s-maxage=3600"
         }
       ]
+    },
+    {
+      "source": "/(.*)\\.(?:js|css|woff2|woff|ttf|eot|svg|png|jpg|jpeg|webp|gif|ico)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
   ]
 }
