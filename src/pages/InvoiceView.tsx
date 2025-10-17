@@ -91,10 +91,44 @@ const InvoiceView: React.FC = () => {
     });
   };
 
+  const sanitizeSVG = (svg: string): string => {
+    // Basic SVG sanitization - only allow safe SVG elements
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(svg, 'image/svg+xml');
+
+    // Check for parsing errors
+    const parserError = doc.querySelector('parsererror');
+    if (parserError) {
+      console.error('SVG parsing error');
+      return '';
+    }
+
+    // Only allow specific SVG elements
+    const allowedTags = ['svg', 'rect', 'text', 'path', 'circle', 'line', 'polyline', 'polygon'];
+    const elements = doc.querySelectorAll('*');
+
+    elements.forEach(el => {
+      if (!allowedTags.includes(el.tagName.toLowerCase())) {
+        el.remove();
+      }
+      // Remove event handlers and scripts
+      Array.from(el.attributes).forEach(attr => {
+        if (attr.name.startsWith('on') || attr.name === 'href' && attr.value.startsWith('javascript:')) {
+          el.removeAttribute(attr.name);
+        }
+      });
+    });
+
+    return new XMLSerializer().serializeToString(doc);
+  };
+
   const downloadQRCode = () => {
     if (!invoice?.pay_qr_svg) return;
-    
-    const blob = new Blob([invoice.pay_qr_svg], { type: 'image/svg+xml' });
+
+    const sanitizedSVG = sanitizeSVG(invoice.pay_qr_svg);
+    if (!sanitizedSVG) return;
+
+    const blob = new Blob([sanitizedSVG], { type: 'image/svg+xml' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -268,9 +302,9 @@ const InvoiceView: React.FC = () => {
                     {invoice.pay_qr_svg && (
                       <div className="flex items-center justify-between bg-white p-3 rounded border">
                         <div className="flex items-center gap-3">
-                          <div 
+                          <div
                             className="w-16 h-16 border rounded"
-                            dangerouslySetInnerHTML={{ __html: invoice.pay_qr_svg }}
+                            dangerouslySetInnerHTML={{ __html: sanitizeSVG(invoice.pay_qr_svg) }}
                           />
                           <div>
                             <p className="font-medium">QR Code Payment</p>

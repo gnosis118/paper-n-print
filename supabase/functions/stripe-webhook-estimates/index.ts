@@ -7,13 +7,26 @@ const logStep = (step: string, details?: any) => {
   console.log(`[STRIPE-WEBHOOK-ESTIMATES] ${step}${detailsStr}`);
 };
 
-// QR code generation utility
+// QR code generation utility with sanitization
 const generateQRCodeSVG = (text: string): string => {
-  // Simple QR code SVG generation (placeholder - in production you'd use a proper QR library)
+  // Sanitize input to prevent XSS attacks
+  const sanitizedText = text
+    .replace(/[<>'"&]/g, (char) => {
+      const entities: Record<string, string> = {
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&apos;',
+        '"': '&quot;',
+        '&': '&amp;'
+      };
+      return entities[char] || char;
+    })
+    .substring(0, 100); // Limit length
+
   const size = 200;
   return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
     <rect width="${size}" height="${size}" fill="white"/>
-    <text x="50%" y="50%" text-anchor="middle" dy=".3em" font-family="monospace" font-size="8">QR: ${text.substring(0, 30)}...</text>
+    <text x="50%" y="50%" text-anchor="middle" dy=".3em" font-family="monospace" font-size="8">QR: ${sanitizedText.substring(0, 30)}...</text>
   </svg>`;
 };
 
@@ -246,6 +259,7 @@ serve(async (req) => {
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     logStep("ERROR", { message: errorMessage });
-    return new Response(`Error: ${errorMessage}`, { status: 500 });
+    // Return generic error for webhooks (Stripe doesn't need detailed errors)
+    return new Response("Webhook processing error", { status: 500 });
   }
 });

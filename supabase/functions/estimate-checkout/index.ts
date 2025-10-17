@@ -176,7 +176,13 @@ serve(async (req) => {
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     logStep("ERROR", { message: errorMessage });
-    return new Response(JSON.stringify({ error: errorMessage }), {
+
+    // Return generic error message to client, log detailed error server-side
+    const clientError = errorMessage.includes('subscription') || errorMessage.includes('not found') || errorMessage.includes('not available')
+      ? errorMessage
+      : 'An error occurred processing your request';
+
+    return new Response(JSON.stringify({ error: clientError }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 500,
     });
