@@ -478,6 +478,7 @@ export type Database = {
       profiles: {
         Row: {
           created_at: string
+          email: string | null
           id: string
           invoice_count: number
           plan: string
@@ -488,6 +489,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          email?: string | null
           id: string
           invoice_count?: number
           plan?: string
@@ -498,6 +500,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          email?: string | null
           id?: string
           invoice_count?: number
           plan?: string
@@ -612,6 +615,35 @@ export type Database = {
           id: string
           name: string
           updated_at: string
+        }[]
+      }
+      get_estimate_by_token: {
+        Args: { _sharing_token: string }
+        Returns: {
+          accepted_at: string | null
+          accepted_ip: unknown | null
+          checkout_session_id: string | null
+          client_id: string | null
+          created_at: string | null
+          deposit_type: string | null
+          deposit_value: number | null
+          id: string
+          items: Json | null
+          number: string
+          payment_intent_id: string | null
+          public_slug: string | null
+          sharing_enabled: boolean | null
+          sharing_expires_at: string | null
+          sharing_token: string | null
+          status: string | null
+          subtotal: number | null
+          tax_amount: number | null
+          tax_rate: number | null
+          terms: string | null
+          title: string
+          total: number | null
+          updated_at: string | null
+          user_id: string
         }[]
       }
       get_user_credit_balance: {
