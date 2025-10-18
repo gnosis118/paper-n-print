@@ -318,7 +318,7 @@ serve(async (req) => {
 
       case "customer.subscription.deleted": {
         const subscription = event.data.object;
-        
+
         // Update subscription status
         const { error: subError } = await supabase
           .from('user_subscriptions')
@@ -335,13 +335,13 @@ serve(async (req) => {
         if (userSub?.user_id) {
           const { error: profileError } = await supabase
             .from('profiles')
-            .update({ 
+            .update({
               subscription_status: 'free',
               plan: 'free'
             })
             .eq('id', userSub.user_id);
 
-          logStep("User reset to free plan", { 
+          logStep("User reset to free plan", {
             userId: userSub.user_id,
             subscriptionId: subscription.id,
             errors: {
@@ -349,6 +349,60 @@ serve(async (req) => {
               profile: profileError?.message
             }
           });
+        }
+        break;
+      }
+
+      case "charge.refunded": {
+        const charge = event.data.object;
+        logStep("Processing refund", { chargeId: charge.id, amount: charge.amount_refunded });
+
+        // Find invoice by charge ID
+        const { data: invoice } = await supabase
+          .from('invoices')
+          .select('id, user_id, total')
+          .eq('stripe_charge_id', charge.id)
+          .single();
+
+        if (invoice) {
+          // Update invoice status to refunded
+          const { error } = await supabase
+            .from('invoices')
+            .update({ status: 'refunded', updated_at: new Date().toISOString() })
+            .eq('id', invoice.id);
+
+          if (error) {
+            logStep("Error updating invoice status", { error: error.message });
+          } else {
+            logStep("Invoice marked as refunded", { invoiceId: invoice.id });
+          }
+        }
+        break;
+      }
+
+      case "payment_intent.payment_failed": {
+        const paymentIntent = event.data.object;
+        logStep("Processing failed payment", { paymentIntentId: paymentIntent.id });
+
+        // Find invoice by payment intent
+        const { data: invoice } = await supabase
+          .from('invoices')
+          .select('id, user_id')
+          .eq('stripe_payment_intent', paymentIntent.id)
+          .single();
+
+        if (invoice) {
+          // Update invoice status to payment_failed
+          const { error } = await supabase
+            .from('invoices')
+            .update({ status: 'payment_failed', updated_at: new Date().toISOString() })
+            .eq('id', invoice.id);
+
+          if (error) {
+            logStep("Error updating invoice status", { error: error.message });
+          } else {
+            logStep("Invoice marked as payment_failed", { invoiceId: invoice.id });
+          }
         }
         break;
       }
