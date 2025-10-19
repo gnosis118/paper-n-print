@@ -6,17 +6,21 @@ export default function Accessibility() {
   return (
     <>
       <Helmet>
-        <title>Accessibility - Invoice Pro</title>
-        <meta name="description" content="Invoice Pro's commitment to accessibility and inclusive design for all users." />
+        <title>Accessibility - ProInvoice | WCAG 2.1 Compliant</title>
+        <meta name="description" content="ProInvoice's commitment to accessibility and inclusive design for all users. WCAG 2.1 Level AA compliant." />
       </Helmet>
-      
-      <PageLayout>
+
+      <PageLayout
+        title="Accessibility - ProInvoice | WCAG 2.1 Compliant"
+        description="ProInvoice's commitment to accessibility and inclusive design for all users. WCAG 2.1 Level AA compliant."
+        canonical="/accessibility"
+      >
         <div className="container py-12">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <h1 className="text-4xl font-bold mb-4">Accessibility Statement</h1>
               <p className="text-xl text-muted-foreground">
-                We're committed to making Invoice Pro accessible to everyone
+                We're committed to making ProInvoice accessible to everyone
               </p>
             </div>
 
@@ -27,7 +31,7 @@ export default function Accessibility() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    Invoice Pro is committed to ensuring digital accessibility for people with disabilities. 
+                    ProInvoice is committed to ensuring digital accessibility for people with disabilities.
                     We are continually improving the user experience for everyone, and applying the relevant 
                     accessibility standards.
                   </p>

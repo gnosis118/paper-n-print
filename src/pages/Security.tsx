@@ -30,11 +30,15 @@ export default function Security() {
   return (
     <>
       <Helmet>
-        <title>Security - Invoice Pro</title>
-        <meta name="description" content="Learn about Invoice Pro's security measures and data protection policies for your business information." />
+        <title>Security - ProInvoice | Enterprise-Grade Data Protection</title>
+        <meta name="description" content="Learn about ProInvoice's security measures, encryption, and data protection. Enterprise-grade security for your invoices and business data." />
       </Helmet>
-      
-      <PageLayout>
+
+      <PageLayout
+        title="Security - ProInvoice | Enterprise-Grade Data Protection"
+        description="Learn about ProInvoice's security measures, encryption, and data protection. Enterprise-grade security for your invoices and business data."
+        canonical="/security"
+      >
         <div className="container py-12">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">

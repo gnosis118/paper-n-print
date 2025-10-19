@@ -32,10 +32,10 @@ const Footer = () => {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center space-x-2 mb-4">
-              <img 
-                src={proInvoiceLogo} 
-                alt="ProInvoice.app - Professional Invoice Generator" 
-                className="h-24"
+              <img
+                src={proInvoiceLogo}
+                alt="ProInvoice.app - Professional Invoice Generator"
+                className="h-12"
               />
             </Link>
             <p className="text-sm text-muted-foreground mb-4">

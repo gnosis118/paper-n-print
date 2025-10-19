@@ -7,17 +7,21 @@ export default function Contact() {
   return (
     <>
       <Helmet>
-        <title>Contact Us - Invoice Pro</title>
-        <meta name="description" content="Get in touch with Invoice Pro. Contact us for support, questions, or business inquiries." />
+        <title>Contact ProInvoice - Get Support & Business Inquiries</title>
+        <meta name="description" content="Get in touch with ProInvoice. Contact us for support, questions, or business inquiries. We're here to help you get paid faster." />
       </Helmet>
-      
-      <PageLayout>
+
+      <PageLayout
+        title="Contact ProInvoice - Get Support & Business Inquiries"
+        description="Get in touch with ProInvoice. Contact us for support, questions, or business inquiries. We're here to help you get paid faster."
+        canonical="/contact"
+      >
         <div className="container py-12">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
+              <h1 className="text-4xl font-bold mb-4">Contact ProInvoice</h1>
               <p className="text-xl text-muted-foreground">
-                We're here to help with any questions or support you need
+                We're here to help with any questions or support you need. Reach out anytime.
               </p>
             </div>
 

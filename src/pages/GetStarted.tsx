@@ -60,9 +60,10 @@ const GetStarted = () => {
   };
 
   return (
-    <PageLayout 
+    <PageLayout
       title="Get Started - Free 7-Day Trial | ProInvoice"
       description="Start your free 7-day trial of ProInvoice. Create professional estimates and invoices, collect deposits online, and get paid faster. No credit card required."
+      canonical="/get-started"
     >
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">

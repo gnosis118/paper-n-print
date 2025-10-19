@@ -43,18 +43,22 @@ export default function Products() {
   return (
     <>
       <Helmet>
-        <title>Products - Invoice Pro</title>
-        <meta name="description" content="Explore Invoice Pro's professional invoice generation features, templates, and payment solutions for your business." />
+        <title>ProInvoice Features - Professional Invoice Generation Tools</title>
+        <meta name="description" content="Explore ProInvoice's professional invoice generation features, templates, and Stripe payment solutions. Create invoices in 30 seconds with embedded payments." />
       </Helmet>
-      
-      <PageLayout>
+
+      <PageLayout
+        title="ProInvoice Features - Professional Invoice Generation Tools"
+        description="Explore ProInvoice's professional invoice generation features, templates, and Stripe payment solutions. Create invoices in 30 seconds with embedded payments."
+        canonical="/products"
+      >
         <div className="container py-12">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <Badge variant="secondary" className="mb-4">Products</Badge>
-              <h1 className="text-4xl font-bold mb-4">Invoice Pro Features</h1>
+              <Badge variant="secondary" className="mb-4">Features</Badge>
+              <h1 className="text-4xl font-bold mb-4">ProInvoice Features</h1>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Everything you need to create, send, and manage professional invoices
+                Everything you need to create, send, and manage professional invoices with embedded payments
               </p>
             </div>
 

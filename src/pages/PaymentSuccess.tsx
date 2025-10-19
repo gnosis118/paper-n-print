@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, FileText, ArrowLeft } from "lucide-react";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { useGoogleAnalytics } from "@/hooks/useGoogleAnalytics";
 
 const PaymentSuccess = () => {
@@ -32,9 +34,16 @@ const PaymentSuccess = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <div className="max-w-2xl mx-auto px-6 py-12" style={{paddingTop: '5rem'}}>
+    <>
+      <Helmet>
+        <title>Payment Successful - ProInvoice</title>
+        <meta name="description" content="Your payment has been processed successfully. Thank you for your payment." />
+        <meta name="robots" content="noindex,nofollow" />
+      </Helmet>
+      <div className="min-h-screen bg-background flex flex-col">
+        <Header />
+        <main className="flex-1 pt-20">
+          <div className="max-w-2xl mx-auto px-6 py-12">
         <Card className="text-center shadow-medium">
           <CardHeader className="pb-4">
             <div className="w-16 h-16 bg-invoice-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -79,8 +88,11 @@ const PaymentSuccess = () => {
             </div>
           </CardContent>
         </Card>
+          </div>
+        </main>
+        <Footer />
       </div>
-    </div>
+    </>
   );
 };
 
