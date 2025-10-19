@@ -60,7 +60,7 @@ export default function Accessibility() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground mb-4">
-                    If you encounter any accessibility barriers while using Invoice Pro, please contact us:
+                    If you encounter any accessibility barriers while using ProInvoice, please contact us:
                   </p>
                   <div className="space-y-2 text-sm">
                     <p><strong>Email:</strong> <a href="mailto:gavin@currencytocurrency.app" className="text-primary hover:underline">gavin@currencytocurrency.app</a></p>

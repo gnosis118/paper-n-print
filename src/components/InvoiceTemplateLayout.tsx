@@ -12,7 +12,7 @@ interface InvoiceTemplateLayoutProps {
 }
 
 export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ template }) => {
-  const pageTitle = `${template.title} Invoice Template (Free PDF, Word & Excel) | InvoicePro`;
+  const pageTitle = `${template.title} Invoice Template (Free PDF, Word & Excel) | ProInvoice`;
   const description = `Free ${template.title.toLowerCase()} invoice template. Create professional ${template.title.toLowerCase()} invoices in 30 seconds with embedded Stripe payments. Download PDF, Word & Excel formats.`;
 
   const handleDownload = (format: 'pdf' | 'word' | 'excel') => {

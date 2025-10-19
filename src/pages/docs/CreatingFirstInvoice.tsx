@@ -9,8 +9,8 @@ export default function CreatingFirstInvoice() {
   return (
     <>
       <Helmet>
-        <title>Creating Your First Invoice - Invoice Pro Documentation</title>
-        <meta name="description" content="Step-by-step guide to creating your first professional invoice with Invoice Pro." />
+        <title>Creating Your First Invoice - ProInvoice Documentation</title>
+        <meta name="description" content="Step-by-step guide to creating your first professional invoice with ProInvoice." />
       </Helmet>
       
       <PageLayout>

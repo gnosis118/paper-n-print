@@ -27,7 +27,7 @@ export default function FAQ() {
           answer: "Click 'Create Invoice' from your dashboard, choose a template, fill in your business and client information, add line items for your products or services, and review before sending. Our step-by-step guide walks you through each step."
         },
         {
-          question: "Do I need to create an account to use Invoice Pro?",
+          question: "Do I need to create an account to use ProInvoice?",
           answer: "Yes, creating an account allows you to save your invoices, manage clients, track payments, and access all features. Sign up is free and takes just a few minutes."
         },
         {

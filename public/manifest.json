@@ -1,6 +1,6 @@
 {
-  "name": "InvoicePro - Professional Invoice Generator",
-  "short_name": "InvoicePro",
+  "name": "ProInvoice - Professional Invoice Generator",
+  "short_name": "ProInvoice",
   "description": "Create professional invoices in 30 seconds with embedded Stripe checkout. Get paid 3x faster.",
   "start_url": "/",
   "display": "standalone",

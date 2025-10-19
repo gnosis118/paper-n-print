@@ -75,7 +75,7 @@ const InvoiceTemplates = () => {
 
   return (
     <PageLayout
-      title="Free Invoice Templates by Industry | InvoicePro"
+      title="Free Invoice Templates by Industry | ProInvoice"
       description="30+ free professional invoice templates for every industry. Construction, plumbing, photography, consulting and more. Download PDF, Word & Excel formats with embedded Stripe payments."
       canonical="https://www.proinvoice.app/invoice-templates"
     >

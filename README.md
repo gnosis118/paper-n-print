@@ -1,4 +1,4 @@
-# InvoicePro - Professional Invoice Generator
+# ProInvoice - Professional Invoice Generator
 
 ## Project info
 

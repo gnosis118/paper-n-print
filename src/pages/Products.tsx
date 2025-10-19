@@ -79,7 +79,7 @@ export default function Products() {
             <div className="text-center bg-muted/50 rounded-lg p-8">
               <h2 className="text-2xl font-bold mb-4">Ready to Get Started?</h2>
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Join thousands of businesses using Invoice Pro to streamline their invoicing process
+                Join thousands of businesses using ProInvoice to streamline their invoicing process
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/auth">
