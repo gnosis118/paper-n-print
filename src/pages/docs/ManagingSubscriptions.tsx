@@ -8,7 +8,7 @@ export default function ManagingSubscriptions() {
   return (
     <>
       <Helmet>
-        <title>Managing Subscriptions - Invoice Pro Documentation</title>
+        <title>Managing Subscriptions - ProInvoice Documentation</title>
         <meta name="description" content="Learn how to set up and manage recurring invoices and subscriptions." />
       </Helmet>
       

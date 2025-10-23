@@ -9,7 +9,7 @@ export default function AddingLineItems() {
   return (
     <>
       <Helmet>
-        <title>Adding Line Items and Calculations - Invoice Pro Documentation</title>
+        <title>Adding Line Items and Calculations - ProInvoice Documentation</title>
         <meta name="description" content="Learn how to add line items, set quantities and rates, and understand automatic calculations in your invoices." />
       </Helmet>
       
@@ -172,7 +172,7 @@ export default function AddingLineItems() {
                   <div className="space-y-4">
                     <div>
                       <h3 className="font-semibold mb-2">Automatic Calculations</h3>
-                      <p className="text-sm mb-2">Invoice Pro automatically calculates:</p>
+                      <p className="text-sm mb-2">ProInvoice automatically calculates:</p>
                       <ul className="list-disc list-inside space-y-1 ml-4 text-sm">
                         <li><strong>Line Total:</strong> Quantity × Rate</li>
                         <li><strong>Subtotal:</strong> Sum of all line items</li>

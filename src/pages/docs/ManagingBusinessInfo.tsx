@@ -8,7 +8,7 @@ export default function ManagingBusinessInfo() {
   return (
     <>
       <Helmet>
-        <title>Managing Business Information - Invoice Pro Documentation</title>
+        <title>Managing Business Information - ProInvoice Documentation</title>
         <meta name="description" content="Learn how to manage and update your business information for invoices." />
       </Helmet>
       

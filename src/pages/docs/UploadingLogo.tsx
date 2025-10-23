@@ -9,7 +9,7 @@ export default function UploadingLogo() {
   return (
     <>
       <Helmet>
-        <title>Uploading Your Business Logo - Invoice Pro Documentation</title>
+        <title>Uploading Your Business Logo - ProInvoice Documentation</title>
         <meta name="description" content="Learn how to upload and customize your business logo for professional invoices." />
       </Helmet>
       

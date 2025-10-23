@@ -198,7 +198,7 @@ export default function Auth() {
         <CardHeader className="text-center">
           <div className="flex items-center justify-between">
             <div className="flex-1">
-              <CardTitle className="text-2xl font-bold">Invoice Pro</CardTitle>
+              <CardTitle className="text-2xl font-bold">ProInvoice</CardTitle>
               <CardDescription>
                 {isSignUp ? "Create your account to start generating professional invoices" : "Sign in to your account"}
               </CardDescription>

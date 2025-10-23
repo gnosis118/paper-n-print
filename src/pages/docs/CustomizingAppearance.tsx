@@ -9,7 +9,7 @@ export default function CustomizingAppearance() {
   return (
     <>
       <Helmet>
-        <title>Customizing Invoice Appearance - Invoice Pro Documentation</title>
+        <title>Customizing Invoice Appearance - ProInvoice Documentation</title>
         <meta name="description" content="Learn how to customize your invoice appearance with colors, logos, fonts, and branding to match your business style." />
       </Helmet>
       

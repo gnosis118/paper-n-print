@@ -8,7 +8,7 @@ export default function EditingClientInfo() {
   return (
     <>
       <Helmet>
-        <title>Editing Client Information - Invoice Pro Documentation</title>
+        <title>Editing Client Information - ProInvoice Documentation</title>
         <meta name="description" content="Learn how to update and manage your client information effectively." />
       </Helmet>
       

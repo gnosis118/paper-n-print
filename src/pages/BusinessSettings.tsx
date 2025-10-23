@@ -6,7 +6,7 @@ export default function BusinessSettings() {
   return (
     <>
       <Helmet>
-        <title>Business Settings - Invoice Pro</title>
+        <title>Business Settings - ProInvoice</title>
         <meta name="description" content="Manage your business profile, logo, and branding settings for professional invoices." />
       </Helmet>
       

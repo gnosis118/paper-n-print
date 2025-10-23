@@ -9,7 +9,7 @@ export default function CustomizingBrandColors() {
   return (
     <>
       <Helmet>
-        <title>Customizing Brand Colors - Invoice Pro Documentation</title>
+        <title>Customizing Brand Colors - ProInvoice Documentation</title>
         <meta name="description" content="Learn how to customize your invoice colors to match your brand identity." />
       </Helmet>
       

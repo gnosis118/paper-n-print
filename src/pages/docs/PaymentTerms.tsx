@@ -8,7 +8,7 @@ export default function PaymentTerms() {
   return (
     <>
       <Helmet>
-        <title>Understanding Payment Terms - Invoice Pro Documentation</title>
+        <title>Understanding Payment Terms - ProInvoice Documentation</title>
         <meta name="description" content="Learn about payment terms and how to set them for your invoices." />
       </Helmet>
       

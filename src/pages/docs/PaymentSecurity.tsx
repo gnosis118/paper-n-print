@@ -8,7 +8,7 @@ export default function PaymentSecurity() {
   return (
     <>
       <Helmet>
-        <title>Payment Security & Compliance - Invoice Pro Documentation</title>
+        <title>Payment Security & Compliance - ProInvoice Documentation</title>
         <meta name="description" content="Learn about payment security measures and compliance standards." />
       </Helmet>
       
@@ -39,7 +39,7 @@ export default function PaymentSecurity() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p>Invoice Pro implements industry-leading security measures:</p>
+                  <p>ProInvoice implements industry-leading security measures:</p>
                   <ul className="list-disc list-inside space-y-2 ml-4">
                     <li><strong>SSL/TLS Encryption:</strong> All data transmitted is encrypted using 256-bit SSL</li>
                     <li><strong>PCI DSS Compliance:</strong> We never store credit card information on our servers</li>

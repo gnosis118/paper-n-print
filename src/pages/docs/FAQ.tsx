@@ -53,7 +53,7 @@ export default function FAQ() {
         },
         {
           question: "Are there transaction fees?",
-          answer: "We use Stripe for payment processing, which charges standard processing fees (2.9% + 30¢ for cards). There are no additional fees from Invoice Pro for payment processing."
+          answer: "We use Stripe for payment processing, which charges standard processing fees (2.9% + 30¢ for cards). There are no additional fees from ProInvoice for payment processing."
         }
       ]
     },
@@ -134,8 +134,8 @@ export default function FAQ() {
   return (
     <>
       <Helmet>
-        <title>Frequently Asked Questions - Invoice Pro</title>
-        <meta name="description" content="Find answers to common questions about Invoice Pro. Get help with billing, payments, customization, and technical support." />
+        <title>Frequently Asked Questions - ProInvoice</title>
+        <meta name="description" content="Find answers to common questions about ProInvoice. Get help with billing, payments, customization, and technical support." />
       </Helmet>
       
       <PageLayout>
@@ -152,7 +152,7 @@ export default function FAQ() {
               <HelpCircle className="h-12 w-12 text-primary mb-4" />
               <h1 className="text-4xl font-bold mb-4">Frequently Asked Questions</h1>
               <p className="text-xl text-muted-foreground">
-                Find quick answers to the most common questions about Invoice Pro.
+                Find quick answers to the most common questions about ProInvoice.
               </p>
             </div>
 

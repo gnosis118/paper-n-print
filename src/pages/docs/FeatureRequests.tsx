@@ -51,8 +51,8 @@ export default function FeatureRequests() {
   return (
     <>
       <Helmet>
-        <title>Feature Requests - Invoice Pro</title>
-        <meta name="description" content="Submit feature requests and vote on upcoming features for Invoice Pro. Help shape the future of our invoicing platform." />
+        <title>Feature Requests - ProInvoice</title>
+        <meta name="description" content="Submit feature requests and vote on upcoming features for ProInvoice. Help shape the future of our invoicing platform." />
       </Helmet>
       
       <PageLayout>

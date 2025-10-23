@@ -9,7 +9,7 @@ export default function AddingClients() {
   return (
     <>
       <Helmet>
-        <title>Adding New Clients - Invoice Pro Documentation</title>
+        <title>Adding New Clients - ProInvoice Documentation</title>
         <meta name="description" content="Learn how to add and manage client information for faster invoice creation and better client relationships." />
       </Helmet>
       

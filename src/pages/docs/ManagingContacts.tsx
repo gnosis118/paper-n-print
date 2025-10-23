@@ -8,7 +8,7 @@ export default function ManagingContacts() {
   return (
     <>
       <Helmet>
-        <title>Managing Multiple Contacts - Invoice Pro Documentation</title>
+        <title>Managing Multiple Contacts - ProInvoice Documentation</title>
         <meta name="description" content="Learn how to manage multiple contacts for a single client organization." />
       </Helmet>
       

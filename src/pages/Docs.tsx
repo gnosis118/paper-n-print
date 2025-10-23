@@ -62,10 +62,10 @@ export default function Docs() {
   return (
     <>
       <Helmet>
-        <title>Documentation - Invoice Pro</title>
-        <meta name="description" content="Complete documentation and help guides for Invoice Pro. Learn how to create invoices, manage clients, and set up payments." />
+        <title>Documentation - ProInvoice</title>
+        <meta name="description" content="Complete documentation and help guides for ProInvoice. Learn how to create invoices, manage clients, and set up payments." />
       </Helmet>
-      
+
       <PageLayout>
         <div className="container py-12">
           <div className="max-w-6xl mx-auto">
@@ -73,7 +73,7 @@ export default function Docs() {
               <Book className="h-16 w-16 mx-auto text-primary mb-4" />
               <h1 className="text-4xl font-bold mb-4">Documentation & Help</h1>
               <p className="text-xl text-muted-foreground">
-                Everything you need to know about using Invoice Pro
+                Everything you need to know about using ProInvoice
               </p>
             </div>
 

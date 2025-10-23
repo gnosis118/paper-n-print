@@ -9,7 +9,7 @@ export default function PaymentLinks() {
   return (
     <>
       <Helmet>
-        <title>Setting Up Payment Links - Invoice Pro Documentation</title>
+        <title>Setting Up Payment Links - ProInvoice Documentation</title>
         <meta name="description" content="Learn how to set up secure payment links for your invoices to get paid faster with multiple payment options." />
       </Helmet>
       

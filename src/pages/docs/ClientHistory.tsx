@@ -8,7 +8,7 @@ export default function ClientHistory() {
   return (
     <>
       <Helmet>
-        <title>Client History and Records - Invoice Pro Documentation</title>
+        <title>Client History and Records - ProInvoice Documentation</title>
         <meta name="description" content="Learn how to view and manage client history and transaction records." />
       </Helmet>
       

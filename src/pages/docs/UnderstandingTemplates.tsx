@@ -30,7 +30,7 @@ export default function UnderstandingTemplates() {
   return (
     <>
       <Helmet>
-        <title>Understanding Invoice Templates - Invoice Pro Documentation</title>
+        <title>Understanding Invoice Templates - ProInvoice Documentation</title>
         <meta name="description" content="Learn about different invoice templates and how to choose the best one for your business." />
       </Helmet>
       

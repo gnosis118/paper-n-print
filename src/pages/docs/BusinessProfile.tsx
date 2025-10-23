@@ -10,8 +10,8 @@ export default function BusinessProfile() {
   return (
     <>
       <Helmet>
-        <title>Setting Up Your Business Profile - Invoice Pro Documentation</title>
-        <meta name="description" content="Learn how to set up and configure your business profile for professional invoicing with Invoice Pro." />
+        <title>Setting Up Your Business Profile - ProInvoice Documentation</title>
+        <meta name="description" content="Learn how to set up and configure your business profile for professional invoicing with ProInvoice." />
       </Helmet>
       
       <PageLayout>
