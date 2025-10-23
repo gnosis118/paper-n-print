@@ -67,29 +67,3 @@ export default function About() {
     </>
   );
 }
-                  <div className="space-y-4">
-                    <div>
-                      <strong>Contact Person:</strong> Gavin Clay
-                    </div>
-                    <div>
-                      <strong>Email:</strong> 
-                      <a href="mailto:gavin@proinvoice.app" className="ml-2 text-primary hover:underline">
-                        gavin@proinvoice.app
-                      </a>
-                    </div>
-                    <div>
-                      <strong>Phone:</strong> 
-                      <a href="tel:916-969-3705" className="ml-2 text-primary hover:underline">
-                        916-969-3705
-                      </a>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </PageLayout>
-    </>
-  );
-}
