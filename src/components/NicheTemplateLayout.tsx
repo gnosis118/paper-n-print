@@ -26,7 +26,7 @@ interface NicheTemplateLayoutProps {
 }
 
 export const NicheTemplateLayout: React.FC<NicheTemplateLayoutProps> = ({ template }) => {
-  const pageTitle = `${template.title} Invoice Template - Free PDF Download | InvoicePro`;
+  const pageTitle = `${template.title} Invoice Template - Free PDF Download | ProInvoice`;
   const description = `Free ${template.title.toLowerCase()} invoice template with embedded payments. Professional PDF format includes industry-specific fields, automatic calculations, and Stripe integration. Download now!`;
 
   const handleDownload = (format: 'pdf' | 'word' | 'excel') => {
