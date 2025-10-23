@@ -4,8 +4,8 @@ import PageLayout from '@/components/PageLayout';
 const DoNotSell = () => {
   return (
     <PageLayout
-      title="Do Not Sell or Share My Personal Information"
-      description="California residents can opt out of the sale or sharing of personal information under CCPA/CPRA."
+      title="Do Not Sell or Share My Personal Information - ProInvoice"
+      description="California residents can opt out of the sale or sharing of personal information under CCPA/CPRA. ProInvoice respects your privacy rights and Global Privacy Control signals."
     >
       <div className="container max-w-4xl py-12">
         <h1 className="text-4xl font-bold mb-6">Do Not Sell or Share My Personal Information</h1>

@@ -14,8 +14,8 @@ const Cookies = () => {
 
   return (
     <PageLayout
-      title="Cookie Preferences"
-      description="Manage your cookie preferences and learn about how we use cookies on our website."
+      title="Cookie Preferences - ProInvoice"
+      description="Manage your cookie preferences and learn about how ProInvoice uses cookies on our website. Control analytics, functional, and marketing cookies."
     >
       <div className="container max-w-4xl py-12">
         <h1 className="text-4xl font-bold mb-6">Cookie Preferences</h1>
