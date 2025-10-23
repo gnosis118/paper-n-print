@@ -10,8 +10,8 @@ const Terms = () => {
 
   return (
     <PageLayout
-      title="Terms of Service"
-      description="Read our Terms of Service to understand the rules and regulations governing the use of Invoice Generator platform and services."
+      title="Terms of Service - ProInvoice"
+      description="Read our Terms of Service to understand the rules and regulations governing the use of ProInvoice platform and services."
       canonical={`${window.location.origin}/terms`}
     >
       <div className="container max-w-4xl py-12">
@@ -25,8 +25,8 @@ const Terms = () => {
             <section id="acceptance">
               <h2 className="text-2xl font-semibold mb-4">1. Acceptance of Terms</h2>
               <p className="mb-4">
-                Welcome to Invoice Generator. These Terms of Service ("Terms") constitute a legally binding 
-                agreement between you ("you," "your," or "User") and Invoice Generator ("we," "our," or "us") 
+                Welcome to ProInvoice. These Terms of Service ("Terms") constitute a legally binding
+                agreement between you ("you," "your," or "User") and ProInvoice ("we," "our," or "us")
                 regarding your use of our website, platform, and services.
               </p>
               <p className="mb-4">
@@ -73,7 +73,7 @@ const Terms = () => {
             <section id="services">
               <h2 className="text-2xl font-semibold mb-4">3. Description of Services</h2>
               <p className="mb-4">
-                Invoice Generator provides digital tools and templates for creating professional invoices 
+                ProInvoice provides digital tools and templates for creating professional invoices
                 and managing billing processes. Our services include:
               </p>
               <ul className="mb-4 space-y-1">
@@ -165,8 +165,8 @@ const Terms = () => {
               
               <h3 className="text-xl font-medium mb-3">6.1 Our Intellectual Property</h3>
               <p className="mb-4">
-                Invoice Generator and all related materials, including but not limited to software, templates, 
-                designs, text, graphics, logos, and trademarks, are owned by us or our licensors and are 
+                ProInvoice and all related materials, including but not limited to software, templates,
+                designs, text, graphics, logos, and trademarks, are owned by us or our licensors and are
                 protected by intellectual property laws.
               </p>
 
@@ -240,9 +240,9 @@ const Terms = () => {
             <section id="liability">
               <h2 className="text-2xl font-semibold mb-4">9. Limitation of Liability</h2>
               <p className="mb-4">
-                TO THE FULLEST EXTENT PERMITTED BY LAW, IN NO EVENT SHALL INVOICE GENERATOR, ITS OFFICERS, 
-                DIRECTORS, EMPLOYEES, AGENTS, OR SUPPLIERS BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, 
-                CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS, DATA, 
+                TO THE FULLEST EXTENT PERMITTED BY LAW, IN NO EVENT SHALL PROINVOICE, ITS OFFICERS,
+                DIRECTORS, EMPLOYEES, AGENTS, OR SUPPLIERS BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL,
+                CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS, DATA,
                 USE, OR GOODWILL, ARISING OUT OF OR RELATING TO YOUR USE OF OUR SERVICES.
               </p>
               <p className="mb-4">
@@ -259,11 +259,11 @@ const Terms = () => {
             <section id="indemnification">
               <h2 className="text-2xl font-semibold mb-4">10. Indemnification</h2>
               <p>
-                You agree to defend, indemnify, and hold harmless Invoice Generator and its officers, 
-                directors, employees, agents, and suppliers from and against any claims, liabilities, 
-                damages, losses, costs, or expenses (including reasonable attorneys' fees) arising out of 
-                or relating to: (a) your use of our services, (b) your violation of these Terms, 
-                (c) your violation of any applicable laws or rights of third parties, or (d) any content 
+                You agree to defend, indemnify, and hold harmless ProInvoice and its officers,
+                directors, employees, agents, and suppliers from and against any claims, liabilities,
+                damages, losses, costs, or expenses (including reasonable attorneys' fees) arising out of
+                or relating to: (a) your use of our services, (b) your violation of these Terms,
+                (c) your violation of any applicable laws or rights of third parties, or (d) any content
                 you submit or transmit through our services.
               </p>
             </section>

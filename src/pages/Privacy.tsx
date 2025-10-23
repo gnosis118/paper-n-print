@@ -10,8 +10,8 @@ const Privacy = () => {
 
   return (
     <PageLayout
-      title="Privacy Policy"
-      description="Learn how Invoice Generator collects, uses, and protects your personal information. Comprehensive privacy policy covering GDPR, CCPA, and global privacy standards."
+      title="Privacy Policy - ProInvoice"
+      description="Learn how ProInvoice collects, uses, and protects your personal information. Comprehensive privacy policy covering GDPR, CCPA, and global privacy standards."
       canonical={`${window.location.origin}/privacy`}
     >
       <div className="container max-w-4xl py-12">
@@ -25,8 +25,8 @@ const Privacy = () => {
             <section id="introduction">
               <h2 className="text-2xl font-semibold mb-4">1. Introduction and Scope</h2>
               <p className="mb-4">
-                Welcome to Invoice Generator ("we," "our," or "us"). This Privacy Policy explains how we collect, 
-                use, disclose, and safeguard your personal information when you visit our website, use our services, 
+                Welcome to ProInvoice ("we," "our," or "us"). This Privacy Policy explains how we collect,
+                use, disclose, and safeguard your personal information when you visit our website, use our services,
                 or interact with us in other ways.
               </p>
               <p className="mb-4">
