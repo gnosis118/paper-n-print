@@ -2,11 +2,26 @@ import PageLayout from '@/components/PageLayout';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Check, Star, Users } from 'lucide-react';
+import { Check, Star, Users, TrendingUp, Clock, DollarSign } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { useState } from 'react';
 
 const Pricing = () => {
+  const [invoicesPerMonth, setInvoicesPerMonth] = useState(50);
+  const [avgInvoiceValue, setAvgInvoiceValue] = useState(1000);
+
+  // ROI Calculations
+  const monthlyRevenue = invoicesPerMonth * avgInvoiceValue;
+  const paymentDelayDays = 30; // Average payment delay
+  const dailyRevenue = monthlyRevenue / 30;
+  const cashFlowLoss = dailyRevenue * paymentDelayDays;
+  const paymentSpeedImprovement = cashFlowLoss * 0.66; // 3x faster = 66% improvement
+  const annualSavings = paymentSpeedImprovement * 12;
+  const proinvoiceCost = 19 * 12; // $19/month * 12 months
+  const netROI = annualSavings - proinvoiceCost;
+  const roiPercentage = ((netROI / proinvoiceCost) * 100).toFixed(0);
+
   const pricingStructuredData = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -59,6 +74,68 @@ const Pricing = () => {
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Get paid faster with professional estimates and invoices. Start your 7-day free trial today—no credit card required.
           </p>
+        </div>
+
+        {/* ROI Calculator */}
+        <div className="bg-gradient-to-br from-primary/10 to-accent/10 rounded-lg p-8 mb-12">
+          <h2 className="text-2xl font-bold text-center mb-8">Calculate Your ROI</h2>
+          <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            <div>
+              <label className="block text-sm font-semibold mb-2">Invoices per month</label>
+              <input
+                type="range"
+                min="10"
+                max="500"
+                value={invoicesPerMonth}
+                onChange={(e) => setInvoicesPerMonth(Number(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-center mt-2 text-lg font-bold text-primary">{invoicesPerMonth}</div>
+            </div>
+            <div>
+              <label className="block text-sm font-semibold mb-2">Average invoice value</label>
+              <input
+                type="range"
+                min="100"
+                max="10000"
+                step="100"
+                value={avgInvoiceValue}
+                onChange={(e) => setAvgInvoiceValue(Number(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-center mt-2 text-lg font-bold text-primary">${avgInvoiceValue.toLocaleString()}</div>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4 mt-8 max-w-3xl mx-auto">
+            <Card className="bg-white">
+              <CardContent className="p-4 text-center">
+                <div className="flex justify-center mb-2">
+                  <DollarSign className="w-6 h-6 text-green-600" />
+                </div>
+                <div className="text-2xl font-bold text-green-600">${(annualSavings / 1000).toFixed(1)}k</div>
+                <div className="text-sm text-muted-foreground">Annual cash flow improvement</div>
+              </CardContent>
+            </Card>
+            <Card className="bg-white">
+              <CardContent className="p-4 text-center">
+                <div className="flex justify-center mb-2">
+                  <Clock className="w-6 h-6 text-blue-600" />
+                </div>
+                <div className="text-2xl font-bold text-blue-600">20 days</div>
+                <div className="text-sm text-muted-foreground">Faster payment collection</div>
+              </CardContent>
+            </Card>
+            <Card className="bg-white">
+              <CardContent className="p-4 text-center">
+                <div className="flex justify-center mb-2">
+                  <TrendingUp className="w-6 h-6 text-purple-600" />
+                </div>
+                <div className="text-2xl font-bold text-purple-600">{roiPercentage}%</div>
+                <div className="text-sm text-muted-foreground">Annual ROI</div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
 
         {/* First Invoice Guarantee */}
@@ -164,6 +241,68 @@ const Pricing = () => {
         </div>
 
         {/* Referral Program - Removed */}
+
+        {/* ProInvoice vs Wave Value Comparison */}
+        <div className="max-w-4xl mx-auto mb-12">
+          <h2 className="text-2xl font-bold text-center mb-8">Why ProInvoice Delivers Better Value</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <Card className="border-2 border-red-200">
+              <CardHeader>
+                <CardTitle className="text-lg">Wave</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex items-start gap-3">
+                  <span className="text-red-500 font-bold text-lg">✗</span>
+                  <span className="text-sm">No estimates or deposit collection</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-red-500 font-bold text-lg">✗</span>
+                  <span className="text-sm">Manual estimate-to-invoice workflow</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-red-500 font-bold text-lg">✗</span>
+                  <span className="text-sm">Generic templates only</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-red-500 font-bold text-lg">✗</span>
+                  <span className="text-sm">Focused on accounting, not payment speed</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-green-600 font-bold text-lg">✓</span>
+                  <span className="text-sm">Free accounting features</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2 border-green-200 bg-green-50/30">
+              <CardHeader>
+                <CardTitle className="text-lg">ProInvoice</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex items-start gap-3">
+                  <span className="text-green-600 font-bold text-lg">✓</span>
+                  <span className="text-sm font-semibold">Estimates + Deposit Collection</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-green-600 font-bold text-lg">✓</span>
+                  <span className="text-sm font-semibold">Auto-Convert Estimates to Invoices</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-green-600 font-bold text-lg">✓</span>
+                  <span className="text-sm font-semibold">25+ Industry-Specific Templates</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-green-600 font-bold text-lg">✓</span>
+                  <span className="text-sm font-semibold">Built for Payment Speed (3x faster)</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-green-600 font-bold text-lg">✓</span>
+                  <span className="text-sm font-semibold">QR Code Payments</span>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
 
         {/* FAQ */}
         <div className="max-w-3xl mx-auto mb-12">
