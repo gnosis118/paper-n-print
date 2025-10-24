@@ -4,39 +4,65 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { FileText, CreditCard, Palette, Users, Shield, Zap } from "lucide-react";
+import { FileText, CreditCard, Palette, Users, Shield, Zap, Check, ArrowRight, QrCode, Zap as Lightning } from "lucide-react";
 
 export default function Products() {
   const features = [
     {
       icon: FileText,
-      title: "Professional Templates",
-      description: "Choose from multiple professional invoice templates to match your brand"
+      title: "25+ Industry-Specific Templates",
+      description: "Not generic templates. Built for construction, HVAC, plumbing, cleaning, and 20+ other industries",
+      problem: "Generic templates don't fit your business",
+      solution: "Industry-specific templates with pre-built fields for your exact workflow"
     },
     {
       icon: CreditCard,
-      title: "Payment Integration",
-      description: "Secure payment links for easy client payments via Stripe"
+      title: "Embedded Payment Links",
+      description: "Get paid in 2 clicks with Stripe integration. No separate payment page needed",
+      problem: "Clients don't pay invoices they have to click through to pay",
+      solution: "Payment link embedded in invoice. One-click payment. 3x faster collection"
+    },
+    {
+      icon: QrCode,
+      title: "QR Code Payments",
+      description: "Generate QR codes for instant mobile payments. Perfect for on-site invoicing",
+      problem: "Can't collect payment while on the job site",
+      solution: "QR code payment links. Scan and pay. Instant confirmation"
     },
     {
       icon: Palette,
       title: "Custom Branding",
-      description: "Add your logo, colors, and business information"
+      description: "Add your logo, colors, and business information. Look professional",
+      problem: "Generic invoices don't build trust",
+      solution: "Fully branded invoices that look like your business"
     },
     {
       icon: Users,
       title: "Client Management",
-      description: "Store and manage client information for repeat invoicing"
+      description: "Store client info once. Auto-populate on future invoices. Save time",
+      problem: "Manually entering client info on every invoice",
+      solution: "One-click client selection. Auto-populate all fields"
+    },
+    {
+      icon: Lightning,
+      title: "Auto-Convert Estimates to Invoices",
+      description: "Estimate accepted? One-click conversion to invoice. No manual data entry",
+      problem: "Manually recreating estimates as invoices (Wave doesn't have this)",
+      solution: "Automatic conversion. Deposit already applied. Ready to send"
     },
     {
       icon: Shield,
       title: "Secure & Reliable",
-      description: "Enterprise-grade security with automatic backups"
+      description: "Enterprise-grade security with automatic backups. Your data is safe",
+      problem: "Worried about losing important financial data",
+      solution: "Bank-level encryption. Daily backups. 99.9% uptime"
     },
     {
       icon: Zap,
       title: "Fast & Efficient",
-      description: "Generate professional invoices in seconds"
+      description: "Create professional invoices in 30 seconds. Not 30 minutes",
+      problem: "Invoicing takes too much time",
+      solution: "30-second invoice creation. Auto-calculations. Ready to send"
     }
   ];
 
@@ -62,15 +88,37 @@ export default function Products() {
               </p>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12">
+            <div className="grid gap-6 md:grid-cols-2 mb-12">
               {features.map((feature, index) => (
-                <Card key={index} className="h-full">
+                <Card key={index} className="h-full border-2 hover:border-primary/50 transition-colors">
                   <CardHeader>
-                    <feature.icon className="h-12 w-12 text-primary mb-4" />
-                    <CardTitle className="text-xl">{feature.title}</CardTitle>
+                    <div className="flex items-start justify-between mb-4">
+                      <feature.icon className="h-10 w-10 text-primary" />
+                      {feature.problem && <Badge variant="outline" className="text-xs">Wave doesn't have this</Badge>}
+                    </div>
+                    <CardTitle className="text-lg">{feature.title}</CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="space-y-4">
                     <p className="text-muted-foreground">{feature.description}</p>
+
+                    {feature.problem && (
+                      <div className="space-y-2 pt-4 border-t">
+                        <div className="flex gap-2">
+                          <span className="text-red-500 font-bold">✗</span>
+                          <div>
+                            <p className="text-xs font-semibold text-muted-foreground">The Problem:</p>
+                            <p className="text-sm">{feature.problem}</p>
+                          </div>
+                        </div>
+                        <div className="flex gap-2">
+                          <span className="text-green-600 font-bold">✓</span>
+                          <div>
+                            <p className="text-xs font-semibold text-muted-foreground">ProInvoice Solution:</p>
+                            <p className="text-sm font-medium">{feature.solution}</p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               ))}
