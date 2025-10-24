@@ -80,6 +80,8 @@ import RoofingEstimateTemplate from "./pages/templates/RoofingEstimateTemplate";
 import CleaningEstimateTemplate from "./pages/templates/CleaningEstimateTemplate";
 import WaveVsProInvoice from './pages/compare/WaveVsProInvoice';
 import InvoiceSimpleVsProInvoice from './pages/compare/InvoiceSimpleVsProInvoice';
+import WhyEstimatesMatter from './pages/WhyEstimatesMatter';
+import DepositCollectionGuide from './pages/DepositCollectionGuide';
 
 // Import documentation pages
 import CreatingFirstInvoice from './pages/docs/CreatingFirstInvoice';
@@ -275,6 +277,11 @@ const App = () => (
               <Route path="/estimate-templates" element={<EstimateTemplates />} />
               <Route path="/compare/wave-vs-proinvoice" element={<WaveVsProInvoice />} />
               <Route path="/compare/invoice-simple-vs-proinvoice" element={<InvoiceSimpleVsProInvoice />} />
+
+              {/* Unique Pages Wave Doesn't Have */}
+              <Route path="/why-estimates-matter" element={<WhyEstimatesMatter />} />
+              <Route path="/deposit-collection-guide" element={<DepositCollectionGuide />} />
+
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
