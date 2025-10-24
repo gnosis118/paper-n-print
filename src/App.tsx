@@ -82,6 +82,7 @@ import WaveVsProInvoice from './pages/compare/WaveVsProInvoice';
 import InvoiceSimpleVsProInvoice from './pages/compare/InvoiceSimpleVsProInvoice';
 import WhyEstimatesMatter from './pages/WhyEstimatesMatter';
 import DepositCollectionGuide from './pages/DepositCollectionGuide';
+import PaymentSpeedCalculator from './pages/PaymentSpeedCalculator';
 
 // Import documentation pages
 import CreatingFirstInvoice from './pages/docs/CreatingFirstInvoice';
@@ -281,6 +282,7 @@ const App = () => (
               {/* Unique Pages Wave Doesn't Have */}
               <Route path="/why-estimates-matter" element={<WhyEstimatesMatter />} />
               <Route path="/deposit-collection-guide" element={<DepositCollectionGuide />} />
+              <Route path="/payment-speed-calculator" element={<PaymentSpeedCalculator />} />
 
               <Route path="*" element={<NotFound />} />
             </Routes>
