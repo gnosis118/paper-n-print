@@ -27,93 +27,241 @@ const Index = () => {
       title="ProInvoice - Create & Get Paid in 2 Clicks | Free Invoice Generator"
       description="Create professional invoices in 30 seconds with embedded Stripe checkout. Get paid 3x faster with smart dunning and auto-reminders. Free plan: 3 invoices/month."
     >
-      {/* Hero Section with Logo */}
+      {/* Hero Section - Problem-Focused */}
       <div className="bg-gradient-to-br from-primary-light to-accent-light">
-        {/* Logo Section */}
-        <div className="w-full px-4 sm:px-6 text-center">
-          <img 
-            src={proInvoiceLogoFull} 
-            alt="ProInvoice.app - Professional Invoice Generator" 
-            className="w-full h-72 sm:h-96 md:h-[36rem] object-cover"
-          />
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-12 sm:pb-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
           <div className="text-center">
+            {/* Trust Badge */}
             <div className="inline-flex items-center space-x-2 bg-white/80 rounded-full px-3 sm:px-4 py-2 mb-4 sm:mb-6">
               <Star className="w-3 sm:w-4 h-3 sm:h-4 text-accent" />
-              <span className="text-xs sm:text-sm font-medium">Independent Invoice Generator</span>
+              <span className="text-xs sm:text-sm font-medium">The Only Platform with Estimates + Deposits</span>
             </div>
-            
-            <div className="mb-4 sm:mb-6">
-              <a href="https://launchigniter.com/product/proinvoice-app?ref=badge-proinvoice-app" target="_blank" rel="noopener noreferrer">
-                <img src="https://launchigniter.com/api/badge/proinvoice-app?theme=light" alt="Featured on LaunchIgniter" width="212" height="55" className="mx-auto" />
-              </a>
-            </div>
-            
+
+            {/* Main Headline - Problem-Focused */}
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-primary mb-4 sm:mb-6">
-              Create & Get Paid in 2 Clicks
+              Stop Chasing Payments.<br />Start Getting Paid Faster.
             </h1>
-            
-            <p className="text-base sm:text-xl text-primary/80 mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
-              Embedded checkout, smart dunning, milestone billing. Generate invoices in 30 seconds, get paid in 2 clicks with our Stripe-powered system.
+
+            {/* Subheadline - Solution-Focused */}
+            <p className="text-base sm:text-xl text-primary/80 mb-6 sm:mb-8 max-w-3xl mx-auto px-4">
+              Send estimates, collect deposits upfront, auto-convert to invoices, and get paid in 2 clicks.
+              <strong> Get paid 3x faster than Wave</strong> with embedded Stripe checkout.
             </p>
-            
-            <div className="text-xs sm:text-sm text-primary/60 mb-4 bg-white/20 rounded-full px-4 py-2 inline-block">
-              <strong>Independent Platform:</strong> Not affiliated with ProInvoice (.co), Google Play apps, or similarly named services
+
+            {/* Key Differentiators */}
+            <div className="grid sm:grid-cols-3 gap-4 mb-8 sm:mb-12 max-w-3xl mx-auto">
+              <div className="bg-white/60 rounded-lg p-4">
+                <div className="text-2xl font-bold text-primary mb-1">3x</div>
+                <div className="text-sm font-medium">Faster Payments</div>
+              </div>
+              <div className="bg-white/60 rounded-lg p-4">
+                <div className="text-2xl font-bold text-primary mb-1">30 sec</div>
+                <div className="text-sm font-medium">Create Invoice</div>
+              </div>
+              <div className="bg-white/60 rounded-lg p-4">
+                <div className="text-2xl font-bold text-primary mb-1">25+</div>
+                <div className="text-sm font-medium">Industry Templates</div>
+              </div>
             </div>
-            
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 mb-8">
               <Link to="/invoice">
                 <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg">
                   <FileText className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
-                  Create Invoice
+                  Create Your First Invoice
                 </Button>
               </Link>
-              
-              <Link to="/templates">
+
+              <Link to="/get-started">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg">
-                  <Download className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
-                  View Templates
+                  <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
+                  Start Free Trial
                 </Button>
               </Link>
+            </div>
+
+            {/* Trust Signals */}
+            <div className="text-xs sm:text-sm text-primary/70">
+              ✓ No credit card required • ✓ 7-day free trial • ✓ Trusted by 10,000+ users
             </div>
           </div>
         </div>
       </div>
 
-      {/* Features Section */}
+      {/* Problems We Solve Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-4xl font-bold text-primary mb-4">
+            The Problems You Face
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            And how ProInvoice solves them better than anyone else
+          </p>
+        </div>
+
+        {/* Problem-Solution Grid */}
+        <div className="grid md:grid-cols-2 gap-8 mb-12 sm:mb-16">
+          {/* Problem 1: Late Payments */}
+          <Card className="border-2 hover:border-primary/50 transition-colors">
+            <CardHeader>
+              <CardTitle className="text-xl">💰 Late Payments Killing Cash Flow</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-muted-foreground">
+                Waiting 30-60 days for payment? Chasing clients for money you've already earned?
+              </p>
+              <div className="bg-primary/5 rounded-lg p-4 border-l-4 border-primary">
+                <p className="font-semibold text-sm mb-2">ProInvoice Solution:</p>
+                <ul className="text-sm space-y-1">
+                  <li>✓ Embedded payment links - get paid in 2 clicks</li>
+                  <li>✓ Auto-reminders for overdue invoices</li>
+                  <li>✓ Deposits collected upfront via estimates</li>
+                  <li>✓ Get paid 3x faster than Wave</li>
+                </ul>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Problem 2: Estimates to Invoices */}
+          <Card className="border-2 hover:border-primary/50 transition-colors">
+            <CardHeader>
+              <CardTitle className="text-xl">📋 Estimates Don't Convert to Invoices</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-muted-foreground">
+                Manually recreating estimates as invoices? Losing track of what was quoted vs. what was invoiced?
+              </p>
+              <div className="bg-primary/5 rounded-lg p-4 border-l-4 border-primary">
+                <p className="font-semibold text-sm mb-2">ProInvoice Solution:</p>
+                <ul className="text-sm space-y-1">
+                  <li>✓ Auto-convert estimates to invoices</li>
+                  <li>✓ Collect deposits when estimate is accepted</li>
+                  <li>✓ One-click invoice creation from estimate</li>
+                  <li>✓ Wave doesn't have this feature</li>
+                </ul>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Problem 3: Mobile Invoicing */}
+          <Card className="border-2 hover:border-primary/50 transition-colors">
+            <CardHeader>
+              <CardTitle className="text-xl">📱 Can't Invoice on the Job Site</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-muted-foreground">
+                Need to create invoices while on-site? Contractors and trades need mobile-first solutions.
+              </p>
+              <div className="bg-primary/5 rounded-lg p-4 border-l-4 border-primary">
+                <p className="font-semibold text-sm mb-2">ProInvoice Solution:</p>
+                <ul className="text-sm space-y-1">
+                  <li>✓ Fully mobile-optimized interface</li>
+                  <li>✓ QR code payments for instant collection</li>
+                  <li>✓ 25+ industry-specific templates</li>
+                  <li>✓ Works offline, syncs when online</li>
+                </ul>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Problem 4: Industry-Specific Needs */}
+          <Card className="border-2 hover:border-primary/50 transition-colors">
+            <CardHeader>
+              <CardTitle className="text-xl">🏗️ Generic Templates Don't Fit Your Business</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-muted-foreground">
+                Construction, HVAC, plumbing, cleaning - each industry has unique invoicing needs.
+              </p>
+              <div className="bg-primary/5 rounded-lg p-4 border-l-4 border-primary">
+                <p className="font-semibold text-sm mb-2">ProInvoice Solution:</p>
+                <ul className="text-sm space-y-1">
+                  <li>✓ 25+ industry-specific templates</li>
+                  <li>✓ Pre-built for contractors, trades, services</li>
+                  <li>✓ Customizable for your exact workflow</li>
+                  <li>✓ Includes estimates + deposits</li>
+                </ul>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
         {/* Subscription Status */}
         <div className="mb-8 sm:mb-12">
           <SubscriptionStatus />
         </div>
 
-        {/* Trust Signals */}
-        <div className="text-center mb-8 sm:mb-12">
-          <div className="inline-flex items-center space-x-6 bg-white/80 rounded-lg px-6 py-3">
-            <div className="flex items-center space-x-2">
-              <Shield className="w-5 h-5 text-primary" />
-              <span className="text-sm font-medium">Powered by Stripe</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Users className="w-5 h-5 text-primary" />
-              <span className="text-sm font-medium">10,000+ Happy Users</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Zap className="w-5 h-5 text-primary" />
-              <span className="text-sm font-medium">Get Paid 3x Faster</span>
-            </div>
-          </div>
-        </div>
-
         <div className="text-center mb-8 sm:mb-16">
           <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-3 sm:mb-4">
-            Why We're Different from Free Competitors
+            Why ProInvoice Beats Wave
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
-            While others offer basic invoicing, we focus on getting you paid faster with embedded payments.
+            Wave is great for accounting, but ProInvoice is built specifically for getting paid faster.
           </p>
+        </div>
+
+        {/* ProInvoice vs Wave Comparison */}
+        <div className="mb-12 sm:mb-16 bg-gradient-to-br from-primary/5 to-accent/5 rounded-lg p-8">
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-xl font-bold text-primary mb-6">Wave</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start space-x-3">
+                  <span className="text-red-500 font-bold">✗</span>
+                  <span>No estimates or deposit collection</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="text-red-500 font-bold">✗</span>
+                  <span>Manual estimate-to-invoice conversion</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="text-red-500 font-bold">✗</span>
+                  <span>Generic templates (not industry-specific)</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="text-red-500 font-bold">✗</span>
+                  <span>Focused on accounting, not payment speed</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="text-green-500 font-bold">✓</span>
+                  <span>Free accounting features</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-primary mb-6">ProInvoice</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start space-x-3">
+                  <span className="text-green-500 font-bold">✓</span>
+                  <span className="font-semibold">Estimates + Deposit Collection</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="text-green-500 font-bold">✓</span>
+                  <span className="font-semibold">Auto-Convert Estimates to Invoices</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="text-green-500 font-bold">✓</span>
+                  <span className="font-semibold">25+ Industry-Specific Templates</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="text-green-500 font-bold">✓</span>
+                  <span className="font-semibold">Built for Payment Speed (3x faster)</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="text-green-500 font-bold">✓</span>
+                  <span className="font-semibold">QR Code Payments</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="mt-8 text-center">
+            <Link to="/compare/WaveVsProInvoice">
+              <Button variant="outline" size="lg">
+                See Full Comparison <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
+          </div>
         </div>
 
         {/* Comparison Table - Lazy Loaded */}

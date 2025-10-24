@@ -111,8 +111,8 @@ export default function SystemStatus() {
   return (
     <>
       <Helmet>
-        <title>System Status - Invoice Pro</title>
-        <meta name="description" content="Check the current status of Invoice Pro services, uptime statistics, and any ongoing incidents." />
+        <title>System Status - ProInvoice</title>
+        <meta name="description" content="Check the current status of ProInvoice services, uptime statistics, and any ongoing incidents." />
       </Helmet>
       
       <PageLayout>
@@ -129,7 +129,7 @@ export default function SystemStatus() {
               <Activity className="h-12 w-12 text-primary mb-4" />
               <h1 className="text-4xl font-bold mb-4">System Status</h1>
               <p className="text-xl text-muted-foreground">
-                Current operational status of all Invoice Pro services and systems.
+                Current operational status of all ProInvoice services and systems.
               </p>
             </div>
 
