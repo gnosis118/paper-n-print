@@ -214,6 +214,39 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
           </Card>
         </div>
 
+        {/* Industry ROI & Success Metrics */}
+        <div className="mb-12 bg-gradient-to-br from-primary/5 to-accent/5 rounded-lg p-8">
+          <h2 className="text-2xl font-bold text-primary text-center mb-8">
+            {template.title} Invoicing ROI
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+            <Card className="text-center border-0 bg-white/50">
+              <CardContent className="p-6">
+                <div className="text-3xl font-bold text-primary mb-2">3x</div>
+                <p className="text-sm font-medium text-muted-foreground">Faster Payment Collection</p>
+                <p className="text-xs text-muted-foreground mt-2">Average 7 days vs 30+ days</p>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center border-0 bg-white/50">
+              <CardContent className="p-6">
+                <div className="text-3xl font-bold text-primary mb-2">70%</div>
+                <p className="text-sm font-medium text-muted-foreground">Fewer Late Payments</p>
+                <p className="text-xs text-muted-foreground mt-2">With embedded payment links</p>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center border-0 bg-white/50">
+              <CardContent className="p-6">
+                <div className="text-3xl font-bold text-primary mb-2">30 sec</div>
+                <p className="text-sm font-medium text-muted-foreground">Invoice Creation Time</p>
+                <p className="text-xs text-muted-foreground mt-2">Industry-specific templates</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
         {/* Download Templates */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold text-primary text-center mb-8">
