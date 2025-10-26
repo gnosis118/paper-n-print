@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -6,6 +7,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from "@/hooks/useAuth";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { TrialExpirationPopup } from "@/components/TrialExpirationPopup";
+import { useTrialStatus } from "@/hooks/useTrialStatus";
 import Index from "./pages/Index";
 import Invoice from "./pages/Invoice";
 import Templates from "./pages/Templates";
@@ -139,14 +142,21 @@ import TutorTemplate from "./pages/invoice-templates/Tutor";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <HelmetProvider>
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
+// Wrapper component to handle trial popup
+const AppContent = () => {
+  const { isTrialExpired, daysRemaining, loading } = useTrialStatus();
+  const [showTrialPopup, setShowTrialPopup] = useState(false);
+
+  // Show popup when trial expires or is about to expire
+  if (!loading && (isTrialExpired || (daysRemaining > 0 && daysRemaining <= 2))) {
+    if (!showTrialPopup) {
+      setShowTrialPopup(true);
+    }
+  }
+
+  return (
+    <>
+      <BrowserRouter>
             <Routes>
               <Route path="/e/:token" element={<EstimateView />} />
               <Route path="/i/:id" element={<InvoiceView />} />
@@ -287,6 +297,23 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
+      <TrialExpirationPopup
+        isOpen={showTrialPopup}
+        onClose={() => setShowTrialPopup(false)}
+        daysRemaining={daysRemaining}
+      />
+    </>
+  );
+};
+
+const App = () => (
+  <HelmetProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <AppContent />
         </TooltipProvider>
       </AuthProvider>
     </QueryClientProvider>

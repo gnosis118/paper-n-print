@@ -37,5 +37,8 @@ verify_jwt = false
 [functions.create-stripe-customer]
 verify_jwt = false
 
+[functions.check-trial-expiration]
+verify_jwt = false
+
 [functions.backfill-stripe-customers]
 verify_jwt = true
