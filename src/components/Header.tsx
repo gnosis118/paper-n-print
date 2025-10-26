@@ -35,11 +35,11 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-[9999] w-full border-b bg-background shadow-sm">
       <div className="container flex h-20 items-center justify-between px-4">
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-2">
+        <Link to="/" className="flex items-center space-x-2 flex-shrink-0">
           <img
             src={proInvoiceLogo}
             alt="ProInvoice.app - Professional Invoice Generator"
-            className="h-12"
+            className="h-14 w-auto"
           />
         </Link>
 
