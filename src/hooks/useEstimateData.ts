@@ -115,6 +115,9 @@ export function useEstimateData() {
         clientId = newClient?.id;
       }
 
+      // Generate a unique sharing token
+      const sharingToken = crypto.randomUUID();
+
       // Save estimate
       const { data: estimate, error: estimateError } = await supabase
         .from("estimates")
@@ -132,10 +135,11 @@ export function useEstimateData() {
           total: totals.total,
           deposit_percentage: estimateData.depositPercentage,
           deposit_amount: totals.depositAmount,
-          status: "pending_payment",
+          status: "sent",
           notes: estimateData.notes,
           sharing_enabled: true,
-          public_slug: crypto.getRandomValues(new Uint8Array(16)).toString(),
+          public_slug: sharingToken,
+          sharing_token: sharingToken,
         })
         .select("id")
         .single();

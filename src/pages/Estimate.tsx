@@ -17,8 +17,9 @@ const Estimate = () => {
     try {
       const result = await saveEstimate();
       if (result) {
-        // Reset form
-        navigate(`/estimates/${result.id}`);
+        // Redirect to estimate view page with sharing token
+        const sharingToken = result.sharing_token || result.public_slug;
+        navigate(`/e/${sharingToken}`);
       }
     } finally {
       setIsSaving(false);
