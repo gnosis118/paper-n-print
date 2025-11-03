@@ -18,6 +18,7 @@ import { Watermark } from '@/components/Watermark';
 import { useNavigate } from 'react-router-dom';
 import { AnonymousUserBanner } from '@/components/AnonymousUserBanner';
 import EstimatePreview from '@/components/EstimatePreview';
+import { EstimateAnalyticsDashboard } from '@/components/EstimateAnalyticsDashboard';
 import {
   Dialog,
   DialogContent,
@@ -25,6 +26,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const Estimates: React.FC = () => {
   const { estimates, loading, createEstimate, updateEstimate, deleteEstimate } = useEstimates();
@@ -36,6 +38,7 @@ const Estimates: React.FC = () => {
   const { hasUsedFree, canUseFree, recordFreeUsage, isAnonymous } = useFreeUsageTracking();
   const { subscribed, hasWatermark } = useSubscription();
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState('list');
 
   // Form state for new/edit estimate
   const [formData, setFormData] = useState({
@@ -403,8 +406,15 @@ const Estimates: React.FC = () => {
           </Dialog>
         </div>
 
-        <div className="grid gap-6">
-          {estimates.length === 0 ? (
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="list">Estimates List</TabsTrigger>
+            <TabsTrigger value="analytics">Analytics</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="list" className="space-y-6">
+            <div className="grid gap-6">
+              {estimates.length === 0 ? (
             <Card>
               <CardContent className="py-16 text-center">
                 <h3 className="text-lg font-semibold mb-2">No estimates yet</h3>
@@ -508,7 +518,13 @@ const Estimates: React.FC = () => {
               </Card>
             ))
           )}
-        </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="analytics" className="space-y-6">
+            <EstimateAnalyticsDashboard />
+          </TabsContent>
+        </Tabs>
 
         {/* Preview Dialog */}
         <Dialog open={isPreviewOpen} onOpenChange={setIsPreviewOpen}>
