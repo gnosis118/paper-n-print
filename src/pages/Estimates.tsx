@@ -19,6 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import { AnonymousUserBanner } from '@/components/AnonymousUserBanner';
 import EstimatePreview from '@/components/EstimatePreview';
 import { EstimateAnalyticsDashboard } from '@/components/EstimateAnalyticsDashboard';
+import { BulkEstimateCreator } from '@/components/BulkEstimateCreator';
 import {
   Dialog,
   DialogContent,
@@ -206,13 +207,15 @@ const Estimates: React.FC = () => {
             <p className="text-muted-foreground mt-2">Create estimates that convert to invoices automatically</p>
           </div>
           
-          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-            <DialogTrigger asChild>
-              <Button size="lg" onClick={resetForm}>
-                <Plus className="w-4 h-4 mr-2" />
-                Create Estimate
-              </Button>
-            </DialogTrigger>
+          <div className="flex gap-2">
+            <BulkEstimateCreator />
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+              <DialogTrigger asChild>
+                <Button size="lg" onClick={resetForm}>
+                  <Plus className="w-4 h-4 mr-2" />
+                  Create Estimate
+                </Button>
+              </DialogTrigger>
             
             <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
               <DialogHeader>
@@ -403,7 +406,8 @@ const Estimates: React.FC = () => {
                 </div>
               </form>
             </DialogContent>
-          </Dialog>
+            </Dialog>
+          </div>
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
