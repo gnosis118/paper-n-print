@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS public.estimates (
   terms TEXT,
   notes TEXT,
   public_slug UUID UNIQUE,
+  sharing_token UUID UNIQUE,
   sharing_enabled BOOLEAN DEFAULT false,
   sharing_expires_at TIMESTAMP WITH TIME ZONE,
   created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),

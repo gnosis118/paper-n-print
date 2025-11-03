@@ -116,15 +116,10 @@ serve(async (req) => {
 
     logStep("Subscription verified", { plan: subscription.plan });
 
-    const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" });
+    const stripe = new Stripe(stripeKey, { apiVersion: "2024-11-20" });
 
-    // Calculate deposit amount
-    let depositAmount: number;
-    if (estimate.deposit_type === 'percent') {
-      depositAmount = Math.round((estimate.total * estimate.deposit_value) / 100 * 100); // Convert to cents
-    } else {
-      depositAmount = Math.round(estimate.deposit_value * 100); // Convert to cents
-    }
+    // Calculate deposit amount (already calculated and stored in deposit_amount field)
+    const depositAmount = Math.round(estimate.deposit_amount * 100); // Convert to cents
 
     logStep("Creating checkout session", { depositAmount });
 

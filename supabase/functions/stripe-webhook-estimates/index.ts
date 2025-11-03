@@ -51,7 +51,7 @@ serve(async (req) => {
       throw new Error("Missing Stripe configuration");
     }
 
-    const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" });
+    const stripe = new Stripe(stripeKey, { apiVersion: "2024-11-20" });
     
     const supabaseClient = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
