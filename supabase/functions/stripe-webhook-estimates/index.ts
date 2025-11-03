@@ -252,6 +252,21 @@ serve(async (req) => {
         .eq('id', estimateId);
 
       logStep("Process completed successfully");
+
+      // Send deposit paid email notification
+      try {
+        await supabaseClient.functions.invoke('send-estimate-email', {
+          body: {
+            estimateId: estimateId,
+            type: 'deposit_paid',
+            recipientEmail: estimate.client_email,
+          },
+        });
+        logStep("Deposit paid email sent");
+      } catch (emailError) {
+        logStep("Warning: Failed to send deposit paid email", { error: String(emailError) });
+        // Don't fail the webhook if email fails
+      }
     }
 
     return new Response("OK", { status: 200 });

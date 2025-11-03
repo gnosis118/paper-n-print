@@ -146,6 +146,20 @@ export function useEstimateData() {
 
       if (estimateError) throw estimateError;
 
+      // Send estimate created email
+      try {
+        await supabase.functions.invoke('send-estimate-email', {
+          body: {
+            estimateId: estimate.id,
+            type: 'created',
+            recipientEmail: estimateData.clientEmail,
+          },
+        });
+      } catch (emailError) {
+        console.warn('Failed to send estimate email:', emailError);
+        // Don't fail the estimate creation if email fails
+      }
+
       toast({
         title: "Success",
         description: "Estimate created successfully!",
