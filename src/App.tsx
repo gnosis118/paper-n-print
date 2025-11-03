@@ -71,6 +71,7 @@ import MassageTherapistInvoiceTemplate from "./pages/templates/MassageTherapistI
 import CarpetCleanerInvoiceTemplate from "./pages/templates/CarpetCleanerInvoiceTemplate";
 import GetStarted from './pages/GetStarted';
 import EstimateTemplates from './pages/EstimateTemplates';
+import Estimate from './pages/Estimate';
 
 // Import estimate templates
 import HVACEstimateTemplate from "./pages/templates/HVACEstimateTemplate";
@@ -152,6 +153,7 @@ const App = () => {
             <Routes>
               <Route path="/e/:token" element={<EstimateView />} />
               <Route path="/i/:id" element={<InvoiceView />} />
+              <Route path="/estimate/new" element={<ProtectedRoute><Estimate /></ProtectedRoute>} />
               <Route path="/estimates" element={<Estimates />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/payment-success" element={<PaymentSuccess />} />
