@@ -4,6 +4,8 @@ import { Badge } from '@/components/ui/badge';
 import { TrendingUp, DollarSign, FileText, CheckCircle, Clock, Target } from 'lucide-react';
 import { useEstimateAnalytics } from '@/hooks/useEstimateAnalytics';
 import { Skeleton } from '@/components/ui/skeleton';
+import { SmartSuggestionsPanel } from './SmartSuggestionsPanel';
+import { RevenueTrendChart } from './RevenueTrendChart';
 
 export const EstimateAnalyticsDashboard: React.FC = () => {
   const { analytics, loading, error } = useEstimateAnalytics();
@@ -185,6 +187,14 @@ export const EstimateAnalyticsDashboard: React.FC = () => {
           </div>
         </CardContent>
       </Card>
+
+      {/* Revenue Trends */}
+      <RevenueTrendChart />
+
+      {/* Smart Suggestions */}
+      <div>
+        <SmartSuggestionsPanel />
+      </div>
 
       {/* Recent Estimates */}
       {analytics.recentEstimates.length > 0 && (
