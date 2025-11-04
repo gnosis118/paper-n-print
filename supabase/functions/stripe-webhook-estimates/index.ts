@@ -85,13 +85,26 @@ serve(async (req) => {
     if (event.type === "checkout.session.completed") {
       const session = event.data.object as Stripe.Checkout.Session;
       const estimateId = session.metadata?.estimate_id;
+      const stripeEventId = event.id;
 
       if (!estimateId) {
         logStep("No estimate ID in metadata, skipping");
         return new Response("OK", { status: 200 });
       }
 
-      logStep("Processing deposit payment", { estimateId, sessionId: session.id });
+      logStep("Processing deposit payment", { estimateId, sessionId: session.id, stripeEventId });
+
+      // Check for idempotency - has this event already been processed?
+      const { data: existingEvent } = await supabaseClient
+        .from('webhook_events')
+        .select('id, status')
+        .eq('stripe_event_id', stripeEventId)
+        .single();
+
+      if (existingEvent) {
+        logStep("Event already processed, returning OK", { stripeEventId, status: existingEvent.status });
+        return new Response("OK", { status: 200 });
+      }
 
       // Get the estimate
       const { data: estimate, error: estimateError } = await supabaseClient
@@ -101,6 +114,16 @@ serve(async (req) => {
         .single();
 
       if (estimateError || !estimate) {
+        // Log failed event
+        await supabaseClient
+          .from('webhook_events')
+          .insert({
+            stripe_event_id: stripeEventId,
+            event_type: 'checkout.session.completed',
+            estimate_id: estimateId,
+            status: 'failed',
+            error_message: `Estimate not found: ${estimateError?.message}`,
+          });
         throw new Error(`Estimate not found: ${estimateError?.message}`);
       }
 
@@ -120,7 +143,7 @@ serve(async (req) => {
 
       logStep("Estimate marked as accepted");
 
-      // Create payment record
+      // Calculate deposit amount
       let depositAmount: number;
       if (estimate.deposit_type === 'percent') {
         depositAmount = (estimate.total * estimate.deposit_value) / 100;
@@ -128,17 +151,26 @@ serve(async (req) => {
         depositAmount = estimate.deposit_value;
       }
 
-      await supabaseClient
+      // Create payment record with idempotency key
+      const { data: payment, error: paymentError } = await supabaseClient
         .from('payments')
         .insert({
           estimate_id: estimateId,
           amount: depositAmount,
           method: 'stripe',
           stripe_payment_intent: session.payment_intent as string,
+          stripe_event_id: stripeEventId,
           status: 'completed',
-        });
+        })
+        .select()
+        .single();
 
-      logStep("Payment record created");
+      if (paymentError) {
+        logStep("Warning: Payment record creation failed", { error: paymentError.message });
+        // Continue processing even if payment record fails
+      } else {
+        logStep("Payment record created", { paymentId: payment?.id });
+      }
 
       // Create invoice from estimate
       const invoiceNumber = `INV-${new Date().getFullYear()}-${String(Date.now()).slice(-6)}`;
@@ -253,18 +285,58 @@ serve(async (req) => {
 
       logStep("Process completed successfully");
 
+      // Record successful webhook event
+      await supabaseClient
+        .from('webhook_events')
+        .insert({
+          stripe_event_id: stripeEventId,
+          event_type: 'checkout.session.completed',
+          estimate_id: estimateId,
+          invoice_id: newInvoice?.id,
+          status: 'processed',
+        });
+
+      logStep("Webhook event recorded");
+
       // Send deposit paid email notification
       try {
-        await supabaseClient.functions.invoke('send-estimate-email', {
+        const emailResponse = await supabaseClient.functions.invoke('send-estimate-email', {
           body: {
             estimateId: estimateId,
             type: 'deposit_paid',
             recipientEmail: estimate.client_email,
           },
         });
-        logStep("Deposit paid email sent");
+
+        // Log email sent
+        await supabaseClient
+          .from('email_logs')
+          .insert({
+            estimate_id: estimateId,
+            invoice_id: newInvoice?.id,
+            recipient_email: estimate.client_email,
+            email_type: 'deposit_paid',
+            subject: `Deposit Received - Invoice #${newInvoice?.invoice_number || 'N/A'} Created`,
+            status: 'sent',
+          });
+
+        logStep("Deposit paid email sent and logged");
       } catch (emailError) {
-        logStep("Warning: Failed to send deposit paid email", { error: String(emailError) });
+        const errorMsg = emailError instanceof Error ? emailError.message : String(emailError);
+        logStep("Warning: Failed to send deposit paid email", { error: errorMsg });
+
+        // Log failed email
+        await supabaseClient
+          .from('email_logs')
+          .insert({
+            estimate_id: estimateId,
+            invoice_id: newInvoice?.id,
+            recipient_email: estimate.client_email,
+            email_type: 'deposit_paid',
+            subject: `Deposit Received - Invoice #${newInvoice?.invoice_number || 'N/A'} Created`,
+            status: 'failed',
+            error_message: errorMsg,
+          });
         // Don't fail the webhook if email fails
       }
     }

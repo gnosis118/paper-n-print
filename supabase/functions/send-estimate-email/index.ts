@@ -68,29 +68,90 @@ const generateEstimateCreatedEmail = (estimate: any, estimateLink: string): stri
 };
 
 const generateDepositPaidEmail = (estimate: any, invoice: any): string => {
+  const depositAmount = estimate.deposit_amount || 0;
+  const remainingBalance = invoice.total || 0;
+  const totalAmount = depositAmount + remainingBalance;
+
   return `
-    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-      <h2>Deposit Received - Invoice Created</h2>
-      <p>Hi ${estimate.client_name},</p>
-      <p>Thank you! We've received your deposit payment of $${(estimate.deposit_amount).toFixed(2)}.</p>
-      
-      <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
-        <h3>Invoice #${invoice.invoice_number}</h3>
-        <p><strong>Remaining Balance:</strong> $${(invoice.total).toFixed(2)}</p>
-        <p><strong>Due Date:</strong> ${invoice.due_date}</p>
+    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
+      <!-- Header -->
+      <div style="background: linear-gradient(135deg, #f973a7 0%, #c77dff 100%); padding: 30px 20px; text-align: center; border-radius: 8px 8px 0 0;">
+        <h1 style="color: white; margin: 0; font-size: 28px;">✓ Deposit Received</h1>
+        <p style="color: rgba(255,255,255,0.9); margin: 8px 0 0 0; font-size: 16px;">Thank you for your payment!</p>
       </div>
 
-      <p>Your invoice has been created and is ready for payment. You can view and pay it using the link below:</p>
-      
-      <p>
-        <a href="https://proinvoice.app/i/${invoice.id}" style="background: #3b82f6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
-          View Invoice
-        </a>
-      </p>
+      <!-- Main Content -->
+      <div style="background: #fff; padding: 30px 20px; border: 1px solid #e5e7eb; border-top: none;">
+        <p style="margin: 0 0 20px 0; font-size: 16px;">Hi ${estimate.client_name},</p>
 
-      <p style="color: #666; font-size: 12px; margin-top: 30px;">
-        Thank you for your business!
-      </p>
+        <p style="margin: 0 0 20px 0; font-size: 15px; line-height: 1.6;">
+          We've successfully received your deposit payment of <strong style="color: #f973a7; font-size: 18px;">$${depositAmount.toFixed(2)}</strong>.
+          Your project is now confirmed and we're ready to get started!
+        </p>
+
+        <!-- Payment Summary -->
+        <div style="background: #f9fafb; border-left: 4px solid #f973a7; padding: 20px; margin: 20px 0; border-radius: 4px;">
+          <h3 style="margin: 0 0 15px 0; color: #1f2937; font-size: 16px;">Payment Summary</h3>
+
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e5e7eb;">
+            <span style="color: #666;">Deposit Paid:</span>
+            <strong style="color: #059669;">$${depositAmount.toFixed(2)}</strong>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e5e7eb;">
+            <span style="color: #666;">Remaining Balance:</span>
+            <strong style="color: #d97706;">$${remainingBalance.toFixed(2)}</strong>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; font-size: 16px;">
+            <span style="color: #1f2937; font-weight: 600;">Total Project Amount:</span>
+            <strong style="color: #1f2937; font-size: 18px;">$${totalAmount.toFixed(2)}</strong>
+          </div>
+        </div>
+
+        <!-- Invoice Details -->
+        <div style="background: #f0f9ff; border: 1px solid #bfdbfe; padding: 20px; margin: 20px 0; border-radius: 4px;">
+          <h3 style="margin: 0 0 15px 0; color: #1e40af; font-size: 16px;">Invoice Created</h3>
+          <p style="margin: 0 0 10px 0; color: #333;">
+            <strong>Invoice #:</strong> ${invoice.invoice_number || 'N/A'}
+          </p>
+          <p style="margin: 0 0 10px 0; color: #333;">
+            <strong>Due Date:</strong> ${invoice.due_date || 'N/A'}
+          </p>
+          <p style="margin: 0; color: #666; font-size: 14px;">
+            Your invoice has been created and is ready for the remaining balance payment.
+          </p>
+        </div>
+
+        <!-- CTA Button -->
+        <div style="text-align: center; margin: 30px 0;">
+          <a href="https://proinvoice.app/i/${invoice.id}" style="background: linear-gradient(135deg, #f973a7 0%, #c77dff 100%); color: white; padding: 14px 32px; text-decoration: none; border-radius: 6px; display: inline-block; font-weight: 600; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            View Invoice & Pay Balance
+          </a>
+        </div>
+
+        <!-- Next Steps -->
+        <div style="background: #fef3c7; border-left: 4px solid #f59e0b; padding: 20px; margin: 20px 0; border-radius: 4px;">
+          <h3 style="margin: 0 0 10px 0; color: #92400e; font-size: 15px;">What's Next?</h3>
+          <ul style="margin: 0; padding-left: 20px; color: #78350f;">
+            <li style="margin-bottom: 8px;">We'll begin work on your project right away</li>
+            <li style="margin-bottom: 8px;">You'll receive updates on your project progress</li>
+            <li>Pay the remaining balance by the due date to complete your project</li>
+          </ul>
+        </div>
+
+        <!-- Footer -->
+        <p style="color: #999; font-size: 13px; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+          If you have any questions about your invoice or project, please don't hesitate to reach out. We're here to help!
+        </p>
+      </div>
+
+      <!-- Footer Brand -->
+      <div style="background: #f3f4f6; padding: 20px; text-align: center; border-radius: 0 0 8px 8px; border: 1px solid #e5e7eb; border-top: none;">
+        <p style="margin: 0; color: #999; font-size: 12px;">
+          ProInvoice — Professional Invoicing for Beauty & Service Professionals
+        </p>
+      </div>
     </div>
   `;
 };
