@@ -20,6 +20,8 @@ import { AnonymousUserBanner } from '@/components/AnonymousUserBanner';
 import EstimatePreview from '@/components/EstimatePreview';
 import { EstimateAnalyticsDashboard } from '@/components/EstimateAnalyticsDashboard';
 import { BulkEstimateCreator } from '@/components/BulkEstimateCreator';
+import EstimateProgressIndicator from '@/components/EstimateProgressIndicator';
+import EstimateTimeline from '@/components/EstimateTimeline';
 import {
   Dialog,
   DialogContent,
@@ -411,8 +413,9 @@ const Estimates: React.FC = () => {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-2">
+          <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="list">Estimates List</TabsTrigger>
+            <TabsTrigger value="timeline">Timeline</TabsTrigger>
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
           </TabsList>
 
@@ -445,7 +448,7 @@ const Estimates: React.FC = () => {
                       <p className="text-2xl font-bold">${estimate.total.toFixed(2)}</p>
                       {estimate.deposit_value > 0 && (
                         <p className="text-sm text-muted-foreground">
-                          Deposit: ${estimate.deposit_type === 'percent' 
+                          Deposit: ${estimate.deposit_type === 'percent'
                             ? ((estimate.total * estimate.deposit_value) / 100).toFixed(2)
                             : estimate.deposit_value.toFixed(2)
                           }
@@ -454,7 +457,15 @@ const Estimates: React.FC = () => {
                     </div>
                   </div>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="space-y-4">
+                  {/* Progress Indicator */}
+                  <div className="py-3 px-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <EstimateProgressIndicator
+                      status={estimate.status as any}
+                      compact={true}
+                    />
+                  </div>
+
                   <div className="flex justify-between items-center">
                     <div className="text-sm text-muted-foreground">
                       Created: {new Date(estimate.created_at).toLocaleDateString()}
@@ -523,6 +534,85 @@ const Estimates: React.FC = () => {
             ))
           )}
             </div>
+          </TabsContent>
+
+          <TabsContent value="timeline" className="space-y-6">
+            {estimates.length === 0 ? (
+              <Card>
+                <CardContent className="py-16 text-center">
+                  <h3 className="text-lg font-semibold mb-2">No estimates yet</h3>
+                  <p className="text-muted-foreground mb-4">Create your first estimate to view timeline</p>
+                </CardContent>
+              </Card>
+            ) : (
+              <div className="grid gap-6">
+                {estimates.map((estimate) => {
+                  const depositAmount = estimate.deposit_type === 'percent'
+                    ? (estimate.total * estimate.deposit_value) / 100
+                    : estimate.deposit_value;
+
+                  const timelineEvents = [
+                    {
+                      stage: 'draft' as const,
+                      label: 'Draft',
+                      timestamp: new Date(estimate.created_at),
+                      status: 'completed' as const,
+                      description: 'Estimate created',
+                    },
+                    {
+                      stage: 'sent' as const,
+                      label: 'Sent',
+                      timestamp: estimate.sent_at ? new Date(estimate.sent_at) : undefined,
+                      status: estimate.status !== 'draft' ? 'completed' as const : 'pending' as const,
+                      description: 'Sent to client',
+                    },
+                    {
+                      stage: 'deposit_paid' as const,
+                      label: 'Deposit Paid',
+                      timestamp: estimate.deposit_paid_at ? new Date(estimate.deposit_paid_at) : undefined,
+                      amount: depositAmount,
+                      status: estimate.status === 'deposit_paid' || estimate.status === 'invoiced' || estimate.status === 'paid'
+                        ? 'completed' as const
+                        : 'pending' as const,
+                      description: 'Deposit received',
+                    },
+                    {
+                      stage: 'invoiced' as const,
+                      label: 'Invoiced',
+                      timestamp: estimate.invoiced_at ? new Date(estimate.invoiced_at) : undefined,
+                      status: estimate.status === 'invoiced' || estimate.status === 'paid'
+                        ? 'completed' as const
+                        : 'pending' as const,
+                      description: 'Invoice created',
+                    },
+                    {
+                      stage: 'paid' as const,
+                      label: 'Paid',
+                      timestamp: estimate.paid_at ? new Date(estimate.paid_at) : undefined,
+                      amount: estimate.total,
+                      status: estimate.status === 'paid' ? 'completed' as const : 'pending' as const,
+                      description: 'Full payment received',
+                    },
+                  ];
+
+                  return (
+                    <Card key={estimate.id}>
+                      <CardHeader>
+                        <CardTitle>Estimate #{estimate.number} - {estimate.title}</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <EstimateTimeline
+                          events={timelineEvents}
+                          currentStage={estimate.status as any}
+                          estimateTotal={estimate.total}
+                          depositAmount={depositAmount}
+                        />
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            )}
           </TabsContent>
 
           <TabsContent value="analytics" className="space-y-6">
