@@ -39,13 +39,12 @@ const Index = () => {
 
             {/* Main Headline - Problem-Focused */}
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-primary mb-4 sm:mb-6">
-              Stop Chasing Payments.<br />Start Getting Paid Faster.
+              Get Paid Without Chasing.
             </h1>
 
             {/* Subheadline - Solution-Focused */}
             <p className="text-base sm:text-xl text-primary/80 mb-6 sm:mb-8 max-w-3xl mx-auto px-4">
-              Send estimates, collect deposits upfront, auto-convert to invoices, and get paid in 2 clicks.
-              <strong> Get paid 3x faster than Wave</strong> with embedded Stripe checkout.
+              ProInvoice automates your deposits, invoices, and payment reminders — so you can focus on clients, not admin.
             </p>
 
             {/* Key Differentiators */}
@@ -66,10 +65,10 @@ const Index = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 mb-8">
-              <Link to="/invoice">
+              <Link to="/estimate">
                 <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg">
                   <FileText className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
-                  Create Your First Invoice
+                  Create Your First Estimate
                 </Button>
               </Link>
 
@@ -86,6 +85,80 @@ const Index = () => {
               ✓ No credit card required • ✓ 7-day free trial • ✓ Trusted by 10,000+ users
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Lead Capture Section */}
+      <div className="bg-gradient-to-r from-accent/10 to-primary/10 py-12 sm:py-16">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
+              Perfect for Beauty & Personal Care Professionals
+            </h2>
+            <p className="text-muted-foreground">
+              Hair stylists, nail techs, lash artists, massage therapists, and more
+            </p>
+          </div>
+
+          <Card className="border-2 border-primary/20 shadow-lg">
+            <CardContent className="pt-8">
+              <form className="space-y-4" onSubmit={(e) => {
+                e.preventDefault();
+                const formData = new FormData(e.currentTarget);
+                const data = {
+                  name: formData.get('name'),
+                  email: formData.get('email'),
+                  service_type: formData.get('service_type'),
+                };
+                // TODO: Post to /api/leads
+                console.log('Lead captured:', data);
+              }}>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Your Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Jane Doe"
+                    className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Email Address</label>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="jane@example.com"
+                    className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">What's Your Service?</label>
+                  <select
+                    name="service_type"
+                    className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                    required
+                  >
+                    <option value="">Select your service...</option>
+                    <option value="hair_stylist">Hair Stylist</option>
+                    <option value="nail_tech">Nail Technician</option>
+                    <option value="lash_artist">Lash Artist</option>
+                    <option value="massage_therapist">Massage Therapist</option>
+                    <option value="tattoo_artist">Tattoo Artist</option>
+                    <option value="esthetician">Esthetician</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+
+                <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white py-3 text-base font-semibold">
+                  Get Started Free
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
         </div>
       </div>
 

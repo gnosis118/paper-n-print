@@ -71,7 +71,10 @@ const Pricing = () => {
           <h1 className="text-4xl font-bold text-foreground mb-4">
             Simple, Transparent Pricing
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-4">
+            Perfect for: Hair stylists, nail techs, lash artists, massage therapists, and beauty professionals
+          </p>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Get paid faster with professional estimates and invoices. Start your 7-day free trial today—no credit card required.
           </p>
         </div>
@@ -150,17 +153,17 @@ const Pricing = () => {
           </p>
         </div>
 
-        {/* Pricing Cards */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
-          {/* Free Plan */}
+        {/* Pricing Cards - 3 Tiers */}
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
+          {/* Starter Plan */}
           <Card className="border-2">
             <CardHeader className="text-center pb-4">
-              <CardTitle className="text-2xl">Free</CardTitle>
+              <CardTitle className="text-2xl">Starter</CardTitle>
               <div className="text-4xl font-bold text-foreground">
                 $0
                 <span className="text-lg font-normal text-muted-foreground">/month</span>
               </div>
-              <p className="text-muted-foreground">Perfect for trying out</p>
+              <p className="text-muted-foreground">Perfect for getting started</p>
             </CardHeader>
             <CardContent className="space-y-4">
               <Button asChild className="w-full" size="lg" variant="outline">
@@ -169,15 +172,15 @@ const Pricing = () => {
               <div className="space-y-3 text-sm">
                 <div className="flex items-center gap-3">
                   <Check className="w-4 h-4 text-green-600" />
-                  <span>3 invoices per month</span>
+                  <span>5 invoices/estimates per month</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Check className="w-4 h-4 text-green-600" />
-                  <span>Basic templates</span>
+                  <span>Beauty industry templates</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Check className="w-4 h-4 text-green-600" />
-                  <span>PDF export with watermark</span>
+                  <span>PDF export</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Check className="w-4 h-4 text-green-600" />
@@ -187,8 +190,8 @@ const Pricing = () => {
             </CardContent>
           </Card>
 
-          {/* Paid Plan */}
-          <Card className="border-2 border-primary relative">
+          {/* Pro Plan - Most Popular */}
+          <Card className="border-2 border-primary relative shadow-lg">
             <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
               <Badge className="bg-primary text-primary-foreground px-4 py-1">
                 MOST POPULAR
@@ -200,7 +203,7 @@ const Pricing = () => {
                 $19
                 <span className="text-lg font-normal text-muted-foreground">/month</span>
               </div>
-              <p className="text-muted-foreground">Everything you need</p>
+              <p className="text-muted-foreground">For growing businesses</p>
             </CardHeader>
             <CardContent className="space-y-4">
               <Button asChild className="w-full" size="lg">
@@ -213,27 +216,66 @@ const Pricing = () => {
                 </div>
                 <div className="flex items-center gap-3">
                   <Check className="w-4 h-4 text-green-600" />
-                  <span>No watermark</span>
+                  <span>Stripe payment links</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Check className="w-4 h-4 text-green-600" />
-                  <span>Payment links (Stripe integration)</span>
+                  <span>Deposit collection</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Check className="w-4 h-4 text-green-600" />
-                  <span>Online deposit collection</span>
+                  <span>AI payment reminders</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Check className="w-4 h-4 text-green-600" />
-                  <span>Custom branding & logo</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Check className="w-4 h-4 text-green-600" />
-                  <span>All industry templates</span>
+                  <span>Custom branding</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Check className="w-4 h-4 text-green-600" />
                   <span>Priority support</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Agency Plan */}
+          <Card className="border-2">
+            <CardHeader className="text-center pb-4">
+              <CardTitle className="text-2xl">Agency</CardTitle>
+              <div className="text-4xl font-bold text-foreground">
+                $49
+                <span className="text-lg font-normal text-muted-foreground">/month</span>
+              </div>
+              <p className="text-muted-foreground">For teams & agencies</p>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <Button asChild className="w-full" size="lg">
+                <Link to="/get-started">Start 7-Day Free Trial</Link>
+              </Button>
+              <div className="space-y-3 text-sm">
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" />
+                  <span>Everything in Pro</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" />
+                  <span>Team member accounts</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" />
+                  <span>Advanced analytics</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" />
+                  <span>API access</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" />
+                  <span>Dedicated support</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" />
+                  <span>Custom integrations</span>
                 </div>
               </div>
             </CardContent>

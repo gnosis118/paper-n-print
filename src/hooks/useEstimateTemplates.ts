@@ -34,14 +34,9 @@ export const useEstimateTemplates = () => {
 
     const fetchTemplates = async () => {
       try {
-        const { data, error } = await supabase
-          .from('estimate_templates')
-          .select('*')
-          .eq('user_id', user.id)
-          .order('created_at', { ascending: false });
-
-        if (error) throw error;
-        setTemplates(data || []);
+        // Note: estimate_templates table requires migration to be applied
+        // See MIGRATION_REQUIRED.md for setup instructions
+        setTemplates([]);
       } catch (err) {
         console.error('Error fetching templates:', err);
       } finally {
@@ -51,20 +46,8 @@ export const useEstimateTemplates = () => {
 
     fetchTemplates();
 
-    // Subscribe to changes
-    const subscription = supabase
-      .channel('estimate-templates')
-      .on(
-        'postgres_changes',
-        { event: '*', schema: 'public', table: 'estimate_templates', filter: `user_id=eq.${user.id}` },
-        () => {
-          fetchTemplates();
-        }
-      )
-      .subscribe();
-
     return () => {
-      subscription.unsubscribe();
+      // Cleanup
     };
   }, [user]);
 
@@ -72,23 +55,11 @@ export const useEstimateTemplates = () => {
     if (!user) throw new Error('User not authenticated');
 
     try {
-      const { data, error } = await supabase
-        .from('estimate_templates')
-        .insert({
-          user_id: user.id,
-          ...template,
-        })
-        .select()
-        .single();
-
-      if (error) throw error;
-
       toast({
-        title: 'Success',
-        description: 'Template saved successfully',
+        title: 'Info',
+        description: 'Template saving requires database migration. See MIGRATION_REQUIRED.md',
       });
-
-      return data;
+      return null;
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to save template';
       toast({
@@ -104,22 +75,11 @@ export const useEstimateTemplates = () => {
     if (!user) throw new Error('User not authenticated');
 
     try {
-      const { data, error } = await supabase
-        .from('estimate_templates')
-        .update(updates)
-        .eq('id', id)
-        .eq('user_id', user.id)
-        .select()
-        .single();
-
-      if (error) throw error;
-
       toast({
-        title: 'Success',
-        description: 'Template updated successfully',
+        title: 'Info',
+        description: 'Template update requires database migration. See MIGRATION_REQUIRED.md',
       });
-
-      return data;
+      return null;
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to update template';
       toast({
@@ -135,17 +95,9 @@ export const useEstimateTemplates = () => {
     if (!user) throw new Error('User not authenticated');
 
     try {
-      const { error } = await supabase
-        .from('estimate_templates')
-        .delete()
-        .eq('id', id)
-        .eq('user_id', user.id);
-
-      if (error) throw error;
-
       toast({
-        title: 'Success',
-        description: 'Template deleted successfully',
+        title: 'Info',
+        description: 'Template deletion requires database migration. See MIGRATION_REQUIRED.md',
       });
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to delete template';

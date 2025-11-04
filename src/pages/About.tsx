@@ -19,8 +19,11 @@ export default function About() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <h1 className="text-4xl font-bold mb-4">About ProInvoice</h1>
-              <p className="text-xl text-muted-foreground">
-                Professional invoice generation made simple for businesses worldwide
+              <p className="text-xl text-muted-foreground mb-2">
+                Professional invoice & estimate software for beauty professionals
+              </p>
+              <p className="text-lg text-muted-foreground">
+                Perfect for: Hair stylists, nail techs, lash artists, massage therapists, tattoo artists, and estheticians
               </p>
             </div>
 
@@ -29,8 +32,8 @@ export default function About() {
                 <CardContent className="p-6">
                   <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
                   <p className="text-muted-foreground">
-                    To simplify invoice creation and management for businesses of all sizes,
-                    providing professional templates and seamless payment integration with Stripe.
+                    To help beauty professionals get paid faster and focus on what they love—their clients.
+                    We automate deposits, invoices, and payment reminders so you can spend less time on admin.
                   </p>
                 </CardContent>
               </Card>
@@ -39,12 +42,12 @@ export default function About() {
                 <CardContent className="p-6">
                   <h2 className="text-2xl font-semibold mb-4">Why Choose ProInvoice</h2>
                   <ul className="space-y-2 text-muted-foreground">
-                    <li>• 30-second invoice creation</li>
+                    <li>• Collect deposits upfront via estimates</li>
+                    <li>• Auto-convert estimates to invoices</li>
                     <li>• Embedded Stripe payment processing</li>
-                    <li>• Custom branding with logo upload</li>
-                    <li>• Smart client management</li>
-                    <li>• Auto-payment reminders</li>
-                    <li>• Industry-specific templates</li>
+                    <li>• AI-powered payment reminders</li>
+                    <li>• Beauty industry templates</li>
+                    <li>• Get paid 3x faster than Wave</li>
                   </ul>
                 </CardContent>
               </Card>

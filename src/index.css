@@ -15,20 +15,20 @@
     --popover: 0 0% 100%;
     --popover-foreground: 215 28% 17%;
 
-    /* Professional invoice blues */
-    --primary: 220 62% 47%;
+    /* Warm, soft tones for beauty professionals */
+    --primary: 349 89% 60%;
     --primary-foreground: 0 0% 100%;
-    --primary-light: 220 70% 95%;
+    --primary-light: 349 89% 95%;
 
-    --secondary: 210 17% 95%;
+    --secondary: 15 100% 95%;
     --secondary-foreground: 215 28% 17%;
 
-    --muted: 220 13% 91%;
+    --muted: 15 100% 92%;
     --muted-foreground: 215 16.3% 46.9%;
 
-    --accent: 39 84% 56%;
-    --accent-foreground: 215 28% 17%;
-    --accent-light: 39 84% 95%;
+    --accent: 280 85% 65%;
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 280 85% 95%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -37,13 +37,13 @@
     --input: 220 13% 96%;
     --ring: 220 62% 47%;
 
-    /* Invoice specific colors */
-    --invoice-brand: 220 62% 47%;
-    --invoice-accent: 39 84% 56%;
+    /* Invoice specific colors - warm palette */
+    --invoice-brand: 349 89% 60%;
+    --invoice-accent: 280 85% 65%;
     --invoice-success: 142 76% 36%;
     --invoice-warning: 32 95% 44%;
     --invoice-gray: 215 16.3% 46.9%;
-    --invoice-border: 220 13% 91%;
+    --invoice-border: 15 100% 92%;
     --invoice-paper: 0 0% 100%;
 
     /* Shadows for professional depth */

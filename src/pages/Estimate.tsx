@@ -18,7 +18,7 @@ const Estimate = () => {
       const result = await saveEstimate();
       if (result) {
         // Redirect to estimate view page with sharing token
-        const sharingToken = result.sharing_token || result.public_slug;
+        const sharingToken = result.sharing_token as string || result.public_slug as string || result.id;
         navigate(`/e/${sharingToken}`);
       }
     } finally {

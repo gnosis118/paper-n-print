@@ -100,13 +100,13 @@ export const useEstimateAnalytics = () => {
         const totalEstimateValue = estimates.reduce((sum, e) => sum + (e.total || 0), 0);
         const totalDepositCollected = estimates
           .filter(e => e.status === 'accepted' || e.status === 'invoiced')
-          .reduce((sum, e) => sum + (e.deposit_amount || 0), 0);
+          .reduce((sum, e) => sum + (e.deposit_value || 0), 0);
 
         // Recent estimates (last 5)
         const recentEstimates = estimates.slice(0, 5).map(e => ({
           id: e.id,
           number: e.number,
-          client_name: e.client_name,
+          client_name: e.title || 'Untitled',
           total: e.total,
           status: e.status,
           created_at: e.created_at,
