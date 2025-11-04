@@ -8,6 +8,7 @@ import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/hooks/useAuth';
 import PageLayout from '@/components/PageLayout';
+import AdminNav from '@/components/AdminNav';
 import { Loader, Search, Trash2, Mail, Phone, Building2, TrendingUp } from 'lucide-react';
 
 interface Lead {
@@ -151,6 +152,9 @@ export const CRM: React.FC = () => {
       description="Manage and track your leads with our simple CRM interface"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        {/* Admin Navigation */}
+        <AdminNav />
+
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-primary mb-2">Lead Management</h1>
