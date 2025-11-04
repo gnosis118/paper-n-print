@@ -74,6 +74,8 @@ import EstimateTemplates from './pages/EstimateTemplates';
 import Estimate from './pages/Estimate';
 import CRM from './pages/admin/CRM';
 import Analytics from './pages/admin/Analytics';
+import TradesIndex from './pages/trades/TradesIndex';
+import TradePage from './pages/trades/TradePage';
 
 // Import estimate templates
 import HVACEstimateTemplate from "./pages/templates/HVACEstimateTemplate";
@@ -286,6 +288,10 @@ const App = () => {
               <Route path="/estimate-templates" element={<EstimateTemplates />} />
               <Route path="/compare/wave-vs-proinvoice" element={<WaveVsProInvoice />} />
               <Route path="/compare/invoice-simple-vs-proinvoice" element={<InvoiceSimpleVsProInvoice />} />
+
+              {/* Contractor Trades Pages */}
+              <Route path="/trades" element={<TradesIndex />} />
+              <Route path="/trades/:trade" element={<TradePage />} />
 
               {/* Unique Pages Wave Doesn't Have */}
               <Route path="/why-estimates-matter" element={<WhyEstimatesMatter />} />
