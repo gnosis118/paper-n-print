@@ -7,6 +7,57 @@ import { Link } from 'react-router-dom';
 
 const EstimateTemplates = () => {
   const templates = [
+    // Beauty & Personal Care Templates
+    {
+      id: 'hair-styling',
+      title: 'Hair Styling Estimate Template',
+      description: 'Professional estimates for hair salons with color, cuts, and styling services',
+      averageAmount: '$185',
+      paymentTerms: '50% deposit, Balance due at appointment',
+      features: ['Service packages', 'Color pricing', 'Product recommendations'],
+      category: 'Beauty'
+    },
+    {
+      id: 'nail-services',
+      title: 'Nail Services Estimate Template',
+      description: 'Complete estimates for nail salons with manicures, pedicures, and nail art',
+      averageAmount: '$95',
+      paymentTerms: 'Payment at service completion',
+      features: ['Service menu pricing', 'Gel vs regular options', 'Art design pricing']
+    },
+    {
+      id: 'lash-services',
+      title: 'Lash Services Estimate Template',
+      description: 'Professional estimates for lash artists with extensions, lifts, and fills',
+      averageAmount: '$165',
+      paymentTerms: '50% deposit, Balance due at appointment',
+      features: ['Extension pricing', 'Lift & tint options', 'Fill scheduling']
+    },
+    {
+      id: 'massage-therapy',
+      title: 'Massage Therapy Estimate Template',
+      description: 'Professional estimates for massage therapists with session types and add-ons',
+      averageAmount: '$120',
+      paymentTerms: '50% deposit, Balance due at appointment',
+      features: ['Session type pricing', 'Add-on options', 'Package deals']
+    },
+    {
+      id: 'tattoo-services',
+      title: 'Tattoo Services Estimate Template',
+      description: 'Professional estimates for tattoo artists with design consultation and hourly rates',
+      averageAmount: '$450',
+      paymentTerms: '50% deposit, Balance due at appointment',
+      features: ['Design consultation', 'Hourly pricing', 'Touch-up terms']
+    },
+    {
+      id: 'esthetics',
+      title: 'Esthetics Estimate Template',
+      description: 'Professional estimates for estheticians with facials, waxing, and skincare',
+      averageAmount: '$135',
+      paymentTerms: '50% deposit, Balance due at appointment',
+      features: ['Treatment pricing', 'Waxing options', 'Skincare products']
+    },
+    // Trades & Services Templates
     {
       id: 'hvac',
       title: 'HVAC Estimate Template',
@@ -16,7 +67,7 @@ const EstimateTemplates = () => {
       features: ['Equipment specifications', 'Labor breakdown', 'Warranty details']
     },
     {
-      id: 'plumbing', 
+      id: 'plumbing',
       title: 'Plumbing Estimate Template',
       description: 'Complete estimates for residential and commercial plumbing projects',
       averageAmount: '$475',
@@ -25,7 +76,7 @@ const EstimateTemplates = () => {
     },
     {
       id: 'construction',
-      title: 'Construction Estimate Template', 
+      title: 'Construction Estimate Template',
       description: 'Detailed estimates for construction and remodeling projects',
       averageAmount: '$15,500',
       paymentTerms: '30% deposit, Progress billing',
@@ -69,8 +120,11 @@ const EstimateTemplates = () => {
           <h1 className="text-4xl font-bold text-foreground mb-4">
             Professional Estimate Templates
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-2">
             Create professional estimates in minutes, collect deposits online, and automatically convert accepted estimates to invoices.
+          </p>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
+            Perfect for beauty professionals, contractors, and service businesses.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
@@ -144,7 +198,7 @@ const EstimateTemplates = () => {
 
         {/* Template Grid */}
         <div className="mb-16">
-          <h2 className="text-2xl font-bold text-center mb-8">Popular Estimate Templates</h2>
+          <h2 className="text-2xl font-bold text-center mb-8">All Estimate Templates</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {templates.map((template) => (
               <Card key={template.id} className="hover:shadow-lg transition-shadow">

@@ -104,5 +104,95 @@ export const estimateTemplates: EstimateTemplate[] = [
       rateType: '4 hours @ $35/hour per cleaner (2 cleaners)',
       additionalCharges: ['Cleaning supplies', 'Deep clean surcharge', 'Window cleaning']
     }
+  },
+  {
+    title: 'Hair Styling',
+    slug: '/templates/hair-styling-estimate-template',
+    description: 'Professional hair styling estimate template for salons with service packages, product costs, and color treatments.',
+    averageAmount: '$185',
+    paymentTerms: '50% deposit, Balance due at appointment',
+    lineItems: ['Consultation', 'Cut & Style', 'Color Treatment', 'Highlights/Lowlights', 'Hair Products', 'Styling Products'],
+    painPoints: ['No-show clients', 'Color correction costs', 'Product upselling'],
+    benefits: ['Service packages', 'Color pricing', 'Product recommendations', 'Deposit collection', 'Appointment reminders', 'Retail tracking'],
+    sampleFields: {
+      serviceDescription: 'Full Color + Cut + Style',
+      rateType: 'Consultation: $0 + Color: $85 + Cut: $60 + Style: $40',
+      additionalCharges: ['Premium color treatment', 'Deep conditioning', 'Styling products']
+    }
+  },
+  {
+    title: 'Nail Services',
+    slug: '/templates/nail-services-estimate-template',
+    description: 'Complete nail services estimate template for nail salons with manicure, pedicure, and nail art pricing.',
+    averageAmount: '$95',
+    paymentTerms: 'Payment at service completion',
+    lineItems: ['Manicure', 'Pedicure', 'Gel Polish', 'Nail Art', 'Extensions', 'Nail Care Products'],
+    painPoints: ['Walk-in vs appointment pricing', 'Gel removal costs', 'Design complexity'],
+    benefits: ['Service menu pricing', 'Gel vs regular options', 'Art design pricing', 'Package deals', 'Loyalty discounts', 'Quick checkout'],
+    sampleFields: {
+      serviceDescription: 'Gel Manicure + Pedicure with Nail Art',
+      rateType: 'Gel Manicure: $35 + Pedicure: $45 + Nail Art: $15',
+      additionalCharges: ['Gel removal', 'Design complexity', 'Premium polish']
+    }
+  },
+  {
+    title: 'Lash Services',
+    slug: '/templates/lash-services-estimate-template',
+    description: 'Professional lash services estimate template for lash artists with extensions, lifts, and fills.',
+    averageAmount: '$165',
+    paymentTerms: '50% deposit, Balance due at appointment',
+    lineItems: ['Lash Extension Application', 'Lash Lift & Tint', 'Fill Service', 'Lash Removal', 'Aftercare Products', 'Premium Lashes'],
+    painPoints: ['Lash retention issues', 'Fill scheduling', 'Aftercare compliance'],
+    benefits: ['Extension pricing', 'Lift & tint options', 'Fill scheduling', 'Retention tracking', 'Aftercare guidance', 'Product sales'],
+    sampleFields: {
+      serviceDescription: 'Full Lash Extension Set - Classic',
+      rateType: 'Consultation: $0 + Application: $150 + Aftercare Kit: $15',
+      additionalCharges: ['Premium lash material', 'Volume lashes', 'Aftercare products']
+    }
+  },
+  {
+    title: 'Massage Therapy',
+    slug: '/templates/massage-therapy-estimate-template',
+    description: 'Professional massage therapy estimate template with session types, add-ons, and package pricing.',
+    averageAmount: '$120',
+    paymentTerms: '50% deposit, Balance due at appointment',
+    lineItems: ['Swedish Massage', 'Deep Tissue', 'Hot Stone Therapy', 'Aromatherapy', 'Cupping', 'Package Discount'],
+    painPoints: ['Cancellation policies', 'Package tracking', 'Add-on upselling'],
+    benefits: ['Session type pricing', 'Add-on options', 'Package deals', 'Cancellation terms', 'Membership discounts', 'Wellness tracking'],
+    sampleFields: {
+      serviceDescription: '60-Minute Deep Tissue Massage',
+      rateType: 'Base Massage: $100 + Hot Stone: $20',
+      additionalCharges: ['Aromatherapy upgrade', 'Cupping therapy', 'Package discount']
+    }
+  },
+  {
+    title: 'Tattoo Services',
+    slug: '/templates/tattoo-services-estimate-template',
+    description: 'Professional tattoo services estimate template with design consultation, hourly rates, and touch-up policies.',
+    averageAmount: '$450',
+    paymentTerms: '50% deposit, Balance due at appointment',
+    lineItems: ['Design Consultation', 'Hourly Rate', 'Custom Design Fee', 'Touch-up Sessions', 'Aftercare Products', 'Rush Fee'],
+    painPoints: ['Design revisions', 'Session scheduling', 'Touch-up policies'],
+    benefits: ['Design consultation', 'Hourly pricing', 'Custom design fees', 'Touch-up terms', 'Aftercare products', 'Portfolio showcase'],
+    sampleFields: {
+      serviceDescription: 'Custom Tattoo Design - Medium Size',
+      rateType: 'Design Consultation: $50 + Hourly Rate: $150/hr (2 hours)',
+      additionalCharges: ['Custom design fee', 'Touch-up sessions', 'Aftercare kit']
+    }
+  },
+  {
+    title: 'Esthetics',
+    slug: '/templates/esthetics-estimate-template',
+    description: 'Professional esthetics estimate template for facials, waxing, and skincare treatments.',
+    averageAmount: '$135',
+    paymentTerms: '50% deposit, Balance due at appointment',
+    lineItems: ['Facial Treatment', 'Waxing Service', 'Chemical Peel', 'Microdermabrasion', 'Skincare Products', 'Package Discount'],
+    painPoints: ['Skin sensitivity issues', 'Product recommendations', 'Treatment packages'],
+    benefits: ['Treatment pricing', 'Waxing options', 'Skincare products', 'Package deals', 'Consultation included', 'Aftercare guidance'],
+    sampleFields: {
+      serviceDescription: 'Hydrating Facial + Waxing Service',
+      rateType: 'Facial: $85 + Waxing: $50',
+      additionalCharges: ['Premium skincare products', 'Chemical peel add-on', 'Package discount']
+    }
   }
 ];
