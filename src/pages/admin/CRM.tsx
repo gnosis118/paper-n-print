@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,7 +9,8 @@ import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/hooks/useAuth';
 import PageLayout from '@/components/PageLayout';
 import AdminNav from '@/components/AdminNav';
-import { Loader, Search, Trash2, Mail, Phone, Building2, TrendingUp } from 'lucide-react';
+import SwipeableCard from '@/components/SwipeableCard';
+import { Loader, Search, Trash2, Mail, Phone, Building2, TrendingUp, Edit2 } from 'lucide-react';
 
 interface Lead {
   id: string;
@@ -130,13 +131,15 @@ export const CRM: React.FC = () => {
   };
 
   // Filter leads
-  const filteredLeads = leads.filter(lead => {
-    const matchesSearch = lead.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         lead.email.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = statusFilter === 'all' || lead.status === statusFilter;
-    const matchesService = serviceFilter === 'all' || lead.service_type === serviceFilter;
-    return matchesSearch && matchesStatus && matchesService;
-  });
+  const filteredLeads = useMemo(() => {
+    return leads.filter(lead => {
+      const matchesSearch = lead.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           lead.email.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesStatus = statusFilter === 'all' || lead.status === statusFilter;
+      const matchesService = serviceFilter === 'all' || lead.service_type === serviceFilter;
+      return matchesSearch && matchesStatus && matchesService;
+    });
+  }, [leads, searchTerm, statusFilter, serviceFilter]);
 
   // Calculate stats
   const stats = {
@@ -259,49 +262,61 @@ export const CRM: React.FC = () => {
         ) : (
           <div className="space-y-3">
             {filteredLeads.map(lead => (
-              <Card key={lead.id} className="hover:shadow-md transition-shadow">
-                <CardContent className="pt-6">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <SwipeableCard
+                key={lead.id}
+                actions={[
+                  {
+                    label: 'Delete',
+                    icon: <Trash2 className="w-5 h-5" />,
+                    color: 'bg-red-500 hover:bg-red-600 text-white',
+                    onClick: () => handleDeleteLead(lead.id),
+                  },
+                ]}
+              >
+                <CardContent className="pt-6 pb-6">
+                  <div className="flex flex-col gap-4">
                     {/* Lead Info */}
                     <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="font-semibold text-lg">{lead.name}</h3>
+                      <div className="flex flex-wrap items-center gap-2 mb-3">
+                        <h3 className="font-semibold text-base sm:text-lg">{lead.name}</h3>
                         <Badge className={STATUS_COLORS[lead.status] || 'bg-gray-100'}>
                           {lead.status}
                         </Badge>
                         {lead.service_type && (
-                          <Badge variant="outline">{SERVICE_LABELS[lead.service_type] || lead.service_type}</Badge>
+                          <Badge variant="outline" className="text-xs">
+                            {SERVICE_LABELS[lead.service_type] || lead.service_type}
+                          </Badge>
                         )}
                       </div>
 
-                      <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-                        <div className="flex items-center gap-1">
-                          <Mail className="w-4 h-4" />
-                          {lead.email}
+                      <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+                        <div className="flex items-center gap-2 min-h-[44px]">
+                          <Mail className="w-4 h-4 flex-shrink-0" />
+                          <span className="break-all">{lead.email}</span>
                         </div>
                         {lead.phone && (
-                          <div className="flex items-center gap-1">
-                            <Phone className="w-4 h-4" />
-                            {lead.phone}
+                          <div className="flex items-center gap-2 min-h-[44px]">
+                            <Phone className="w-4 h-4 flex-shrink-0" />
+                            <span>{lead.phone}</span>
                           </div>
                         )}
                         {lead.company && (
-                          <div className="flex items-center gap-1">
-                            <Building2 className="w-4 h-4" />
-                            {lead.company}
+                          <div className="flex items-center gap-2 min-h-[44px]">
+                            <Building2 className="w-4 h-4 flex-shrink-0" />
+                            <span>{lead.company}</span>
                           </div>
                         )}
-                        <div className="flex items-center gap-1">
-                          <TrendingUp className="w-4 h-4" />
-                          Score: {lead.lead_score}
+                        <div className="flex items-center gap-2 min-h-[44px]">
+                          <TrendingUp className="w-4 h-4 flex-shrink-0" />
+                          <span>Score: {lead.lead_score}</span>
                         </div>
                       </div>
                     </div>
 
-                    {/* Actions */}
-                    <div className="flex flex-col sm:flex-row gap-2">
+                    {/* Actions - Mobile optimized */}
+                    <div className="flex flex-col sm:flex-row gap-2 pt-2 border-t border-border">
                       <Select value={lead.status} onValueChange={(value) => handleStatusChange(lead.id, value)}>
-                        <SelectTrigger className="w-full sm:w-40">
+                        <SelectTrigger className="w-full sm:w-40 h-11">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -314,17 +329,18 @@ export const CRM: React.FC = () => {
                       </Select>
 
                       <Button
-                        variant="ghost"
-                        size="sm"
+                        variant="outline"
+                        size="lg"
                         onClick={() => handleDeleteLead(lead.id)}
-                        className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                        className="text-red-600 hover:text-red-700 hover:bg-red-50 h-11"
                       >
-                        <Trash2 className="w-4 h-4" />
+                        <Trash2 className="w-5 h-5 mr-2" />
+                        Delete
                       </Button>
                     </div>
                   </div>
                 </CardContent>
-              </Card>
+              </SwipeableCard>
             ))}
           </div>
         )}

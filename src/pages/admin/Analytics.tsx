@@ -33,45 +33,45 @@ const Analytics: React.FC = () => {
     }).format(value / 100);
   };
 
-  const MetricCard = ({ 
-    title, 
-    value, 
-    icon: Icon, 
-    description, 
-    trend, 
-    isCurrency = false 
+  const MetricCard = React.memo(({
+    title,
+    value,
+    icon: Icon,
+    description,
+    trend,
+    isCurrency = false
   }: any) => (
-    <Card className="border-l-4 border-l-primary">
-      <CardContent className="pt-6">
-        <div className="flex items-start justify-between">
-          <div>
-            <p className="text-sm text-muted-foreground mb-1">{title}</p>
-            <p className="text-2xl font-bold">
+    <Card className="border-l-4 border-l-primary hover:shadow-md transition-shadow">
+      <CardContent className="pt-6 pb-6">
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex-1 min-w-0">
+            <p className="text-xs sm:text-sm text-muted-foreground mb-2 truncate">{title}</p>
+            <p className="text-xl sm:text-2xl font-bold break-words">
               {isLoading ? <Skeleton className="h-8 w-24" /> : (
                 isCurrency ? formatCurrency(value) : value
               )}
             </p>
-            {description && <p className="text-xs text-muted-foreground mt-2">{description}</p>}
+            {description && <p className="text-xs text-muted-foreground mt-2 line-clamp-2">{description}</p>}
           </div>
-          <div className="p-3 bg-primary/10 rounded-lg">
-            <Icon className="w-6 h-6 text-primary" />
+          <div className="p-3 bg-primary/10 rounded-lg flex-shrink-0">
+            <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
           </div>
         </div>
         {trend !== undefined && (
-          <div className="mt-4 flex items-center gap-2">
+          <div className="mt-4 flex items-center gap-2 min-h-[44px]">
             {trend >= 0 ? (
               <TrendingUp className="w-4 h-4 text-green-600" />
             ) : (
               <TrendingDown className="w-4 h-4 text-red-600" />
             )}
-            <span className={trend >= 0 ? 'text-green-600' : 'text-red-600'}>
+            <span className={`text-sm font-medium ${trend >= 0 ? 'text-green-600' : 'text-red-600'}`}>
               {trend >= 0 ? '+' : ''}{trend}%
             </span>
           </div>
         )}
       </CardContent>
     </Card>
-  );
+  ));
 
   return (
     <PageLayout title="Analytics | ProInvoice" description="View your business analytics and metrics">
@@ -80,18 +80,19 @@ const Analytics: React.FC = () => {
         <AdminNav />
 
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-foreground mb-2">Analytics Dashboard</h1>
-            <p className="text-muted-foreground">Track your business performance and growth</p>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+          <div className="min-w-0">
+            <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">Analytics Dashboard</h1>
+            <p className="text-sm sm:text-base text-muted-foreground">Track your business performance and growth</p>
           </div>
-          <Button 
-            onClick={refetch} 
-            variant="outline" 
-            size="sm"
+          <Button
+            onClick={refetch}
+            variant="outline"
+            size="lg"
             disabled={isLoading}
+            className="h-11 w-full sm:w-auto"
           >
-            <RefreshCw className="w-4 h-4 mr-2" />
+            <RefreshCw className="w-5 h-5 mr-2" />
             Refresh
           </Button>
         </div>
@@ -298,9 +299,9 @@ const Analytics: React.FC = () => {
         )}
 
         {/* Export Button */}
-        <div className="flex justify-end gap-2">
-          <Button variant="outline">
-            <Download className="w-4 h-4 mr-2" />
+        <div className="flex justify-end gap-2 pt-4">
+          <Button variant="outline" size="lg" className="h-11">
+            <Download className="w-5 h-5 mr-2" />
             Export Report
           </Button>
         </div>
