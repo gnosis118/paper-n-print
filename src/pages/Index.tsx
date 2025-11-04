@@ -7,7 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { SubscriptionStatus } from "@/components/SubscriptionStatus";
 import PageLayout from "@/components/PageLayout";
 import { LazyFeatureGrid, LazyTestimonialGrid, LazyComparisonTable } from "@/components/LazyIndex";
-import { LeadCaptureForm } from "@/components/LeadCaptureForm";
+// LeadCaptureForm removed - missing database tables
 import proInvoiceLogo from '@/assets/proinvoice-logo-new.png';
 import proInvoiceLogoFull from '@/assets/proinvoice-logo-new.png';
 
@@ -101,7 +101,13 @@ const Index = () => {
             </p>
           </div>
 
-          <LeadCaptureForm source="homepage" />
+          {/* Lead capture form removed - missing database tables */}
+          <div className="bg-card border border-border rounded-lg p-6 text-center">
+            <p className="text-muted-foreground">Ready to streamline your invoicing?</p>
+            <Button asChild className="mt-4">
+              <Link to="/auth">Get Started Free</Link>
+            </Button>
+          </div>
         </div>
       </div>
 

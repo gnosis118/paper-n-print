@@ -195,6 +195,7 @@ export const reportPerformanceMetrics = (callback: (metrics: any) => void) => {
  * Optimize bundle size by lazy loading routes
  */
 export const lazyLoadRoute = (importFunc: () => Promise<any>) => {
+  const React = require('react');
   return React.lazy(importFunc);
 };
 
