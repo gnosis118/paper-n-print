@@ -3,7 +3,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://www.proinvoice.app/</loc>
-    <lastmod>2025-10-17</lastmod>
+    <lastmod>2025-11-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -11,7 +11,7 @@
   <!-- Core Business Pages -->
   <url>
     <loc>https://www.proinvoice.app/pricing</loc>
-    <lastmod>2025-10-17</lastmod>
+    <lastmod>2025-11-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -67,6 +67,50 @@
     <loc>https://www.proinvoice.app/blog</loc>
     <lastmod>2025-10-17</lastmod>
     <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Phase 9: AI Cashflow Features -->
+  <url>
+    <loc>https://www.proinvoice.app/analytics</loc>
+    <lastmod>2025-11-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.proinvoice.app/crm</loc>
+    <lastmod>2025-11-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.proinvoice.app/features/smart-suggestions</loc>
+    <lastmod>2025-11-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.proinvoice.app/features/revenue-trends</loc>
+    <lastmod>2025-11-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.proinvoice.app/features/ai-reminders</loc>
+    <lastmod>2025-11-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.proinvoice.app/features/lead-management</loc>
+    <lastmod>2025-11-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.proinvoice.app/features/payment-tracking</loc>
+    <lastmod>2025-11-04</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
@@ -224,6 +268,14 @@
   <url><loc>https://www.proinvoice.app/templates/landscaping-estimate-template</loc><lastmod>2025-10-17</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.proinvoice.app/templates/roofing-estimate-template</loc><lastmod>2025-10-17</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.proinvoice.app/templates/cleaning-estimate-template</loc><lastmod>2025-10-17</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
+  <!-- Beauty Professional Estimate Templates (Phase 9) -->
+  <url><loc>https://www.proinvoice.app/templates/hair-styling-estimate-template</loc><lastmod>2025-11-04</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/templates/nail-services-estimate-template</loc><lastmod>2025-11-04</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/templates/lash-services-estimate-template</loc><lastmod>2025-11-04</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/templates/massage-therapy-estimate-template</loc><lastmod>2025-11-04</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/templates/tattoo-services-estimate-template</loc><lastmod>2025-11-04</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.proinvoice.app/templates/esthetics-estimate-template</loc><lastmod>2025-11-04</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 
   <!-- Legal Pages -->
   <url><loc>https://www.proinvoice.app/privacy</loc><lastmod>2025-10-17</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>

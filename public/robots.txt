@@ -15,6 +15,9 @@ Allow: /docs/
 Allow: /products
 Allow: /estimate-templates
 Allow: /get-started
+Allow: /analytics
+Allow: /crm
+Allow: /features/
 Allow: /privacy
 Allow: /terms
 Allow: /security
@@ -44,6 +47,9 @@ Allow: /docs/
 Allow: /products
 Allow: /estimate-templates
 Allow: /get-started
+Allow: /analytics
+Allow: /crm
+Allow: /features/
 Allow: /privacy
 Allow: /terms
 Allow: /security
@@ -200,6 +206,9 @@ Allow: /docs/
 Allow: /products
 Allow: /estimate-templates
 Allow: /get-started
+Allow: /analytics
+Allow: /crm
+Allow: /features/
 Allow: /privacy
 Allow: /terms
 Allow: /security
