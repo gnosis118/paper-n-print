@@ -27,176 +27,231 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <SEOHeaders
-        title="ProInvoice - Cashflow Automation for Contractors & Subcontractors"
-        description="Finish the Job. Get Paid. No More Waiting 30 Days. ProInvoice automates bids, deposits, and progress payments for contractors and subs."
+        title="ProInvoice - Contractor Invoicing App | Subcontractor Billing Software"
+        description="Finish the job. Get paid. No more waiting. ProInvoice automates your bids, deposits, and progress payments for contractors and tradespeople."
       />
       <Header />
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-accent/5 py-20 md:py-32">
+        <section className="relative overflow-hidden bg-primary py-20 md:py-32">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="inline-flex items-center gap-2 bg-accent/20 rounded-full px-4 py-2 mb-6">
-                <HardHat className="w-4 h-4 text-accent-foreground" />
-                <span className="text-sm font-medium text-accent-foreground">Built for the Trades</span>
+            <div className="grid md:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+              <div>
+                <div className="inline-flex items-center gap-2 bg-accent/20 rounded-full px-4 py-2 mb-6">
+                  <HardHat className="w-4 h-4 text-accent" />
+                  <span className="text-sm font-medium text-accent">Built for the Trades</span>
+                </div>
+                
+                <h1 className="text-4xl md:text-6xl font-bold text-primary-foreground mb-6 leading-tight">
+                  Finish the job. Get paid. No more waiting.
+                </h1>
+                
+                <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8">
+                  ProInvoice automates your bids, deposits, and progress payments — stop chasing checks and start building.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                  <Button 
+                    size="lg" 
+                    onClick={() => navigate("/estimate")}
+                    className="text-lg px-8 bg-accent text-accent-foreground hover:bg-accent/90 font-bold"
+                  >
+                    Send Your First Bid Free
+                  </Button>
+                  <Button 
+                    size="lg" 
+                    variant="outline" 
+                    onClick={() => navigate("/pricing")}
+                    className="text-lg px-8 bg-transparent border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+                  >
+                    See Pricing
+                  </Button>
+                </div>
+                
+                <p className="text-sm text-primary-foreground/75">
+                  ✓ No credit card • ✓ Works on your phone • ✓ Get deposit before you start
+                </p>
               </div>
               
-              <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
-                Job Done? Get Paid Before You Head Home.
-              </h1>
-              
-              <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-                Send bids on-site. Collect deposits upfront. Invoice automatically when you finish. Built for contractors who work in the field, not behind a desk.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-                <Button 
-                  size="lg" 
-                  onClick={() => navigate("/estimate")}
-                  className="text-lg px-8 bg-accent text-accent-foreground hover:bg-accent/90"
-                >
-                  <Smartphone className="w-5 h-5 mr-2" />
-                  Try It Now — From Your Phone
-                </Button>
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  onClick={() => navigate("/pricing")}
-                  className="text-lg px-8"
-                >
-                  See Pricing
-                </Button>
+              <div className="relative">
+                <div className="bg-primary-foreground/10 rounded-2xl p-8 backdrop-blur-sm border border-primary-foreground/20">
+                  <div className="bg-background rounded-lg p-6 shadow-2xl">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-2">
+                        <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
+                          <DollarSign className="w-6 h-6 text-accent" />
+                        </div>
+                        <div>
+                          <p className="font-bold text-foreground">Deposit Received</p>
+                          <p className="text-sm text-muted-foreground">Johnson Kitchen Remodel</p>
+                        </div>
+                      </div>
+                      <CheckCircle2 className="w-8 h-8 text-green-500" />
+                    </div>
+                    <div className="bg-muted/50 rounded-lg p-4 mb-4">
+                      <p className="text-sm text-muted-foreground mb-1">Payment Amount</p>
+                      <p className="text-3xl font-bold text-foreground">$4,250.00</p>
+                      <p className="text-sm text-muted-foreground mt-1">50% deposit • Balance due on completion</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button className="flex-1 bg-primary text-primary-foreground">
+                        <FileCheck className="w-4 h-4 mr-2" />
+                        Start Job
+                      </Button>
+                      <Button variant="outline" className="flex-1">
+                        <Receipt className="w-4 h-4 mr-2" />
+                        View Receipt
+                      </Button>
+                    </div>
+                  </div>
+                </div>
               </div>
-              
-              <p className="text-sm text-muted-foreground">
-                ✓ No credit card • ✓ Works on your phone • ✓ Get deposit before you start
-              </p>
             </div>
           </div>
         </section>
 
-        {/* Real Job Site Problems Solved */}
+        {/* Feature Cards */}
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4">
             <div className="text-center mb-4">
               <div className="inline-flex items-center gap-2 bg-accent/10 rounded-full px-4 py-2 mb-4">
-                <AlertCircle className="w-4 h-4 text-accent-foreground" />
-                <span className="text-sm font-medium text-accent-foreground">The Problems You Face Every Day</span>
+                <Zap className="w-4 h-4 text-accent" />
+                <span className="text-sm font-medium text-accent-foreground">Speed Up Your Cashflow</span>
               </div>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-              Stop Losing Money on Paperwork
+              Built for How You Actually Work
             </h2>
             <p className="text-xl text-muted-foreground text-center mb-16 max-w-3xl mx-auto">
-              You did the work. Now get paid without chasing, waiting, or doing admin from your truck.
+              No more paperwork delays. Get paid as fast as you work.
             </p>
             
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              {/* Problem 1: Waiting for Payment */}
-              <div className="bg-card rounded-lg p-8 border-2 border-border hover:border-primary transition-all">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="bg-destructive/10 rounded-full w-12 h-12 flex items-center justify-center">
-                    <Clock className="w-6 h-6 text-destructive" />
-                  </div>
-                  <h3 className="text-xl font-bold">The Problem</h3>
+              {/* Feature 1: Bid Faster */}
+              <div className="bg-card rounded-lg p-8 border-2 border-accent/20 hover:border-accent transition-all">
+                <div className="bg-accent/10 rounded-full w-16 h-16 flex items-center justify-center mb-6 mx-auto">
+                  <Zap className="w-8 h-8 text-accent" />
                 </div>
-                <p className="text-muted-foreground mb-6 font-medium">
-                  "I finished the job 45 days ago. Still waiting for my check. Meanwhile, I have bills to pay."
+                <h3 className="text-2xl font-bold text-center mb-4">Bid Faster</h3>
+                <p className="text-muted-foreground text-center mb-6">
+                  Send professional job bids in 60 seconds — from your phone, on-site, while the customer's still there.
                 </p>
-                <div className="bg-primary/5 rounded-lg p-4 border-l-4 border-primary">
-                  <div className="flex items-start gap-2 mb-2">
-                    <Zap className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                    <p className="font-semibold text-sm">ProInvoice Solution:</p>
-                  </div>
-                  <ul className="text-sm space-y-2">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span><strong>Collect deposit before you start</strong> (50% upfront typical)</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span><strong>Progress payments at milestones</strong> (25/25/50 or custom)</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span><strong>Get paid same day</strong> with card/ACH</span>
-                    </li>
-                  </ul>
-                </div>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
+                    <span className="text-sm">Pre-built templates for your trade</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
+                    <span className="text-sm">Add photos & notes instantly</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
+                    <span className="text-sm">Customer approves digitally</span>
+                  </li>
+                </ul>
               </div>
 
-              {/* Problem 2: Job Site to Invoice Gap */}
-              <div className="bg-card rounded-lg p-8 border-2 border-border hover:border-primary transition-all">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="bg-destructive/10 rounded-full w-12 h-12 flex items-center justify-center">
-                    <Smartphone className="w-6 h-6 text-destructive" />
-                  </div>
-                  <h3 className="text-xl font-bold">The Problem</h3>
+              {/* Feature 2: Get Paid Upfront */}
+              <div className="bg-card rounded-lg p-8 border-2 border-primary/20 hover:border-primary transition-all">
+                <div className="bg-primary/10 rounded-full w-16 h-16 flex items-center justify-center mb-6 mx-auto">
+                  <DollarSign className="w-8 h-8 text-primary" />
                 </div>
-                <p className="text-muted-foreground mb-6 font-medium">
-                  "Job's done, I'm exhausted. Now I gotta go home and spend 2 hours doing paperwork to get paid?"
+                <h3 className="text-2xl font-bold text-center mb-4">Get Paid Upfront</h3>
+                <p className="text-muted-foreground text-center mb-6">
+                  Collect deposits before you start. No more buying materials out of pocket and waiting 60 days.
                 </p>
-                <div className="bg-primary/5 rounded-lg p-4 border-l-4 border-primary">
-                  <div className="flex items-start gap-2 mb-2">
-                    <Zap className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                    <p className="font-semibold text-sm">ProInvoice Solution:</p>
-                  </div>
-                  <ul className="text-sm space-y-2">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span><strong>Create & send invoice from your phone</strong> in 60 seconds</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span><strong>Pre-built templates for your trade</strong> (roofing, plumbing, electrical, etc.)</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span><strong>Client pays instantly</strong> via embedded payment link</span>
-                    </li>
-                  </ul>
-                </div>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-sm">Request 50% deposit (or custom %)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-sm">Accept card & ACH payments</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-sm">Money in account before you start</span>
+                  </li>
+                </ul>
               </div>
 
-              {/* Problem 3: Change Orders Kill Margins */}
-              <div className="bg-card rounded-lg p-8 border-2 border-border hover:border-primary transition-all">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="bg-destructive/10 rounded-full w-12 h-12 flex items-center justify-center">
-                    <FileText className="w-6 h-6 text-destructive" />
-                  </div>
-                  <h3 className="text-xl font-bold">The Problem</h3>
+              {/* Feature 3: Auto-Invoice Progress */}
+              <div className="bg-card rounded-lg p-8 border-2 border-secondary/20 hover:border-secondary transition-all">
+                <div className="bg-secondary/10 rounded-full w-16 h-16 flex items-center justify-center mb-6 mx-auto">
+                  <Receipt className="w-8 h-8 text-secondary-foreground" />
                 </div>
-                <p className="text-muted-foreground mb-6 font-medium">
-                  "Customer asked for extra work. I did it. Now I'm arguing about what was included vs. what wasn't."
+                <h3 className="text-2xl font-bold text-center mb-4">Auto-Invoice Progress</h3>
+                <p className="text-muted-foreground text-center mb-6">
+                  Set up milestone payments. Invoice automatically when you hit each stage. Get paid as you go.
                 </p>
-                <div className="bg-primary/5 rounded-lg p-4 border-l-4 border-primary">
-                  <div className="flex items-start gap-2 mb-2">
-                    <Zap className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                    <p className="font-semibold text-sm">ProInvoice Solution:</p>
-                  </div>
-                  <ul className="text-sm space-y-2">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span><strong>Send change order bid on-site</strong> before you start extra work</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span><strong>Client approves digitally</strong> (no disputes later)</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span><strong>Auto-converts to invoice</strong> when done</span>
-                    </li>
-                  </ul>
-                </div>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-secondary-foreground mt-0.5 flex-shrink-0" />
+                    <span className="text-sm">25/25/50 or custom splits</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-secondary-foreground mt-0.5 flex-shrink-0" />
+                    <span className="text-sm">Auto-send at each milestone</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-secondary-foreground mt-0.5 flex-shrink-0" />
+                    <span className="text-sm">Track what's paid vs. outstanding</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Built for the Field */}
+        <section className="py-20 bg-primary text-primary-foreground">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-4">
+              <div className="inline-flex items-center gap-2 bg-accent/20 rounded-full px-4 py-2 mb-4">
+                <Smartphone className="w-4 h-4 text-accent" />
+                <span className="text-sm font-medium text-accent">Mobile-First Design</span>
+              </div>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+              Built for the Field
+            </h2>
+            <p className="text-xl text-primary-foreground/90 text-center mb-16 max-w-2xl mx-auto">
+              Because you're on job sites, not in an office. ProInvoice works where you work.
+            </p>
+            
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-8 border border-primary-foreground/20">
+                <Smartphone className="w-12 h-12 text-accent mx-auto mb-4" />
+                <h3 className="font-bold text-xl mb-3 text-center">Mobile-First</h3>
+                <p className="text-primary-foreground/80 text-center text-sm">
+                  Works perfectly on your phone. Create bids, send invoices, track payments — all from the job site.
+                </p>
+              </div>
+              
+              <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-8 border border-primary-foreground/20">
+                <DollarSign className="w-12 h-12 text-accent mx-auto mb-4" />
+                <h3 className="font-bold text-xl mb-3 text-center">Deposit Tracking</h3>
+                <p className="text-primary-foreground/80 text-center text-sm">
+                  See exactly what's been paid, what's pending, and what's overdue. Know your cashflow at a glance.
+                </p>
+              </div>
+              
+              <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-8 border border-primary-foreground/20">
+                <Shield className="w-12 h-12 text-accent mx-auto mb-4" />
+                <h3 className="font-bold text-xl mb-3 text-center">Offline Ready</h3>
+                <p className="text-primary-foreground/80 text-center text-sm">
+                  Start bids even without signal. Everything syncs when you're back online. Never miss a beat.
+                </p>
               </div>
             </div>
           </div>
         </section>
 
         {/* Target Personas */}
-        <section className="py-20 bg-muted/30">
+        <section className="py-20 bg-background">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
               Built for the Pros
