@@ -2,49 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Professional Invoice Generator Design System */
+/* Contractor-Grade Design System - Trust & Authority */
 
 @layer base {
   :root {
-    --background: 248 250% 98%;
-    --foreground: 215 28% 17%;
+    --background: 220 14% 96%;
+    --foreground: 221 39% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 28% 17%;
+    --card-foreground: 221 39% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 28% 17%;
+    --popover-foreground: 221 39% 11%;
 
-    /* Warm, soft tones for beauty professionals */
-    --primary: 349 89% 60%;
+    /* Navy (#1A2A42) + Construction Yellow (#F5C518) + Steel Gray (#9AA0A6) */
+    --primary: 215 43% 19%;
     --primary-foreground: 0 0% 100%;
-    --primary-light: 349 89% 95%;
+    --primary-light: 215 43% 95%;
 
-    --secondary: 15 100% 95%;
-    --secondary-foreground: 215 28% 17%;
+    --secondary: 210 7% 61%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 15 100% 92%;
-    --muted-foreground: 215 16.3% 46.9%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 210 8% 45%;
 
-    --accent: 280 85% 65%;
-    --accent-foreground: 0 0% 100%;
-    --accent-light: 280 85% 95%;
+    --accent: 45 90% 53%;
+    --accent-foreground: 221 39% 11%;
+    --accent-light: 45 90% 95%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 96%;
-    --ring: 220 62% 47%;
+    --border: 220 14% 88%;
+    --input: 220 14% 96%;
+    --ring: 226 65% 35%;
 
-    /* Invoice specific colors - warm palette */
-    --invoice-brand: 349 89% 60%;
-    --invoice-accent: 280 85% 65%;
+    /* Invoice specific colors - contractor authority palette */
+    --invoice-brand: 215 43% 19%;
+    --invoice-accent: 45 90% 53%;
     --invoice-success: 142 76% 36%;
     --invoice-warning: 32 95% 44%;
-    --invoice-gray: 215 16.3% 46.9%;
-    --invoice-border: 15 100% 92%;
+    --invoice-gray: 210 7% 61%;
+    --invoice-border: 220 14% 88%;
     --invoice-paper: 0 0% 100%;
+    
+    /* Steel Gray for links and secondary actions */
+    --steel-gray: 210 7% 61%;
 
     /* Shadows for professional depth */
     --shadow-soft: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);

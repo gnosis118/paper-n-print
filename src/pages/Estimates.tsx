@@ -562,16 +562,16 @@ const Estimates: React.FC = () => {
                     {
                       stage: 'sent' as const,
                       label: 'Sent',
-                      timestamp: estimate.sent_at ? new Date(estimate.sent_at) : undefined,
+                      timestamp: undefined,
                       status: estimate.status !== 'draft' ? 'completed' as const : 'pending' as const,
                       description: 'Sent to client',
                     },
                     {
                       stage: 'deposit_paid' as const,
                       label: 'Deposit Paid',
-                      timestamp: estimate.deposit_paid_at ? new Date(estimate.deposit_paid_at) : undefined,
+                      timestamp: undefined,
                       amount: depositAmount,
-                      status: estimate.status === 'deposit_paid' || estimate.status === 'invoiced' || estimate.status === 'paid'
+                      status: estimate.status === 'invoiced'
                         ? 'completed' as const
                         : 'pending' as const,
                       description: 'Deposit received',
@@ -579,19 +579,11 @@ const Estimates: React.FC = () => {
                     {
                       stage: 'invoiced' as const,
                       label: 'Invoiced',
-                      timestamp: estimate.invoiced_at ? new Date(estimate.invoiced_at) : undefined,
-                      status: estimate.status === 'invoiced' || estimate.status === 'paid'
+                      timestamp: undefined,
+                      status: estimate.status === 'invoiced'
                         ? 'completed' as const
                         : 'pending' as const,
                       description: 'Invoice created',
-                    },
-                    {
-                      stage: 'paid' as const,
-                      label: 'Paid',
-                      timestamp: estimate.paid_at ? new Date(estimate.paid_at) : undefined,
-                      amount: estimate.total,
-                      status: estimate.status === 'paid' ? 'completed' as const : 'pending' as const,
-                      description: 'Full payment received',
                     },
                   ];
 
