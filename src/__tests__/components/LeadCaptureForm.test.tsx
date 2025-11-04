@@ -5,7 +5,7 @@ import LeadCaptureForm from '@/components/LeadCaptureForm';
 import { BrowserRouter } from 'react-router-dom';
 
 // Mock the supabase module
-jest.mock('@/lib/supabase', () => ({
+jest.mock('@/integrations/supabase/client', () => ({
   supabase: {
     from: jest.fn(() => ({
       insert: jest.fn().mockResolvedValue({ data: null, error: null }),
@@ -175,7 +175,7 @@ describe('LeadCaptureForm Component', () => {
 
   it('handles submission errors gracefully', async () => {
     // Mock error response
-    jest.mock('@/lib/supabase', () => ({
+    jest.mock('@/integrations/supabase/client', () => ({
       supabase: {
         from: jest.fn(() => ({
           insert: jest.fn().mockResolvedValue({
