@@ -1,28 +1,26 @@
-# 💅 ProInvoice — AI Cashflow Assistant for Beauty Professionals
+# 🔨 ProInvoice — Cashflow Automation for Contractors & Subcontractors
 
 [![Status](https://img.shields.io/badge/status-production%20ready-brightgreen)]()
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-blue)]()
 [![React](https://img.shields.io/badge/React-18.3.1-61dafb)]()
 [![License](https://img.shields.io/badge/license-MIT-green)]()
 
-> Get Paid Without Chasing — Smart invoicing and payment reminders for beauty professionals
+> Finish the Job. Get Paid. No More Waiting 30 Days.
 
 **URL**: https://www.proinvoice.app
 
 ## 🎯 What is ProInvoice?
 
-ProInvoice is a modern invoicing platform built specifically for beauty and personal care professionals. It combines beautiful estimate templates, intelligent payment reminders, lead management, and actionable business insights to help you manage cash flow effortlessly.
+ProInvoice automates bids, deposits, and progress payments for contractors and subcontractors — without the spreadsheets or headaches. Built for independent contractors, subcontractors, and small trade service businesses who need to get paid on time, every time.
 
 ### ✨ Key Features
 
-- 💅 **Service-Specific Templates** — Pre-built templates for hair, nails, lashes, massage, tattoo, and esthetics
-- 🤖 **AI Payment Reminders** — Smart, personalized payment reminders with customizable templates
-- 📱 **Mobile-First Design** — Fully responsive, optimized for phones and tablets
-- 📊 **Analytics Dashboard** — Real-time metrics on conversion rates, revenue, and deposits
-- 💡 **Smart Suggestions** — AI-powered recommendations for follow-ups, upsells, and timing
-- 📈 **Revenue Trends** — Visual charts showing revenue patterns and opportunities
-- 👥 **Lead Management** — Simple CRM to track and manage leads
-- 💳 **Stripe Integration** — Secure payment processing with deposit tracking
+- 🧾 **Job Bids & Change Orders** — Create professional bids in seconds, auto-convert to invoices
+- 💰 **Deposit & Progress Payments** — Collect deposits before work starts, trigger milestone payments automatically
+- 📱 **Mobile-First Design** — Built for the job site, optimized for phones and tablets
+- 📁 **Compliance Docs** — Track licenses, insurance, permits with expiry reminders
+- 📊 **Job Pipeline Dashboard** — Visual tracking from bid to final payment
+- 💳 **Stripe & ACH Integration** — Secure payment processing with deposit tracking
 - ⚡ **Real-Time Updates** — Live data synchronization across all devices
 - 🔒 **Enterprise Security** — Row-level security, encrypted payments, secure authentication
 

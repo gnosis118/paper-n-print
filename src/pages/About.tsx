@@ -11,8 +11,8 @@ export default function About() {
       </Helmet>
 
       <PageLayout
-        title="About ProInvoice - Professional Invoice Generator"
-        description="Learn about ProInvoice, the professional invoice generation platform trusted by thousands of businesses worldwide. Create invoices in 30 seconds with embedded Stripe payments."
+        title="About ProInvoice - Cashflow Automation for Contractors"
+        description="Learn about ProInvoice's mission to help contractors and subcontractors get paid on time without the paperwork hassle."
         canonical="/about"
       >
         <div className="container py-12">
@@ -20,10 +20,10 @@ export default function About() {
             <div className="text-center mb-12">
               <h1 className="text-4xl font-bold mb-4">About ProInvoice</h1>
               <p className="text-xl text-muted-foreground mb-2">
-                Professional invoice & estimate software for beauty professionals
+                Cashflow automation for contractors and subcontractors
               </p>
               <p className="text-lg text-muted-foreground">
-                Perfect for: Hair stylists, nail techs, lash artists, massage therapists, tattoo artists, and estheticians
+                Perfect for: Electricians, plumbers, HVAC, roofing, painting, general contractors, and all trades
               </p>
             </div>
 
@@ -32,8 +32,9 @@ export default function About() {
                 <CardContent className="p-6">
                   <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
                   <p className="text-muted-foreground">
-                    To help beauty professionals get paid faster and focus on what they love—their clients.
-                    We automate deposits, invoices, and payment reminders so you can spend less time on admin.
+                    We believe contractors shouldn't have to wait 30, 60, or 90 days to get paid for their hard work.
+                    ProInvoice automates the paperwork side of the trades—job bids, deposits, progress invoices—so you can
+                    focus on what you do best: building, fixing, and delivering quality work.
                   </p>
                 </CardContent>
               </Card>
@@ -42,12 +43,12 @@ export default function About() {
                 <CardContent className="p-6">
                   <h2 className="text-2xl font-semibold mb-4">Why Choose ProInvoice</h2>
                   <ul className="space-y-2 text-muted-foreground">
-                    <li>• Collect deposits upfront via estimates</li>
-                    <li>• Auto-convert estimates to invoices</li>
-                    <li>• Embedded Stripe payment processing</li>
-                    <li>• AI-powered payment reminders</li>
-                    <li>• Beauty industry templates</li>
-                    <li>• Get paid 3x faster than Wave</li>
+                    <li>• Get deposits before starting work</li>
+                    <li>• Auto-convert bids to invoices</li>
+                    <li>• Progress payment milestones</li>
+                    <li>• Track compliance docs & licenses</li>
+                    <li>• Contractor-specific templates</li>
+                    <li>• Mobile-first job site access</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -58,10 +59,10 @@ export default function About() {
               <Card>
                 <CardContent className="p-6">
                   <p className="text-muted-foreground mb-4">
-                    Join thousands of businesses using ProInvoice to streamline their invoicing process.
+                    Join hundreds of contractors using ProInvoice to get paid faster and manage cashflow.
                   </p>
                   <a href="/get-started" className="text-primary font-semibold hover:underline">
-                    Start your 7-day free trial →
+                    Start your free trial →
                   </a>
                 </CardContent>
               </Card>
