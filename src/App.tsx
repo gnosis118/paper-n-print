@@ -72,6 +72,7 @@ import CarpetCleanerInvoiceTemplate from "./pages/templates/CarpetCleanerInvoice
 import GetStarted from './pages/GetStarted';
 import EstimateTemplates from './pages/EstimateTemplates';
 import Estimate from './pages/Estimate';
+import CRM from './pages/admin/CRM';
 
 // Import estimate templates
 import HVACEstimateTemplate from "./pages/templates/HVACEstimateTemplate";
@@ -231,6 +232,7 @@ const App = () => {
               <Route path="/business-settings" element={<BusinessSettings />} />
               <Route path="/subscription" element={<SubscriptionManagement />} />
               <Route path="/clients" element={<Clients />} />
+              <Route path="/admin/crm" element={<ProtectedRoute><CRM /></ProtectedRoute>} />
               {/* Legacy Template Pages */}
               <Route path="/templates/construction" element={<ConstructionInvoiceTemplate />} />
               <Route path="/templates/consulting" element={<ConsultingInvoiceTemplate />} />

@@ -7,6 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { SubscriptionStatus } from "@/components/SubscriptionStatus";
 import PageLayout from "@/components/PageLayout";
 import { LazyFeatureGrid, LazyTestimonialGrid, LazyComparisonTable } from "@/components/LazyIndex";
+import { LeadCaptureForm } from "@/components/LeadCaptureForm";
 import proInvoiceLogo from '@/assets/proinvoice-logo-new.png';
 import proInvoiceLogoFull from '@/assets/proinvoice-logo-new.png';
 
@@ -100,65 +101,7 @@ const Index = () => {
             </p>
           </div>
 
-          <Card className="border-2 border-primary/20 shadow-lg">
-            <CardContent className="pt-8">
-              <form className="space-y-4" onSubmit={(e) => {
-                e.preventDefault();
-                const formData = new FormData(e.currentTarget);
-                const data = {
-                  name: formData.get('name'),
-                  email: formData.get('email'),
-                  service_type: formData.get('service_type'),
-                };
-                // TODO: Post to /api/leads
-                console.log('Lead captured:', data);
-              }}>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Your Name</label>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Jane Doe"
-                    className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-2">Email Address</label>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="jane@example.com"
-                    className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-2">What's Your Service?</label>
-                  <select
-                    name="service_type"
-                    className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                    required
-                  >
-                    <option value="">Select your service...</option>
-                    <option value="hair_stylist">Hair Stylist</option>
-                    <option value="nail_tech">Nail Technician</option>
-                    <option value="lash_artist">Lash Artist</option>
-                    <option value="massage_therapist">Massage Therapist</option>
-                    <option value="tattoo_artist">Tattoo Artist</option>
-                    <option value="esthetician">Esthetician</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-
-                <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white py-3 text-base font-semibold">
-                  Get Started Free
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
+          <LeadCaptureForm source="homepage" />
         </div>
       </div>
 
