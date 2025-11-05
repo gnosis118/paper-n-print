@@ -79,6 +79,14 @@ import Roofers from './pages/trades/Roofers';
 import Electricians from './pages/trades/Electricians';
 import Painters from './pages/trades/Painters';
 import Landscapers from './pages/trades/Landscapers';
+import HVACContractors from './pages/trades/HVACContractors';
+import GeneralContractors from './pages/trades/GeneralContractors';
+
+// Import feature pages
+import MilestonePayments from './pages/features/MilestonePayments';
+
+// Import guide pages
+import ProtectingCashflow from './pages/guides/ProtectingCashflow';
 
 // Import estimate templates
 import HVACEstimateTemplate from "./pages/templates/HVACEstimateTemplate";
@@ -298,6 +306,14 @@ const App = () => {
               <Route path="/electricians" element={<Electricians />} />
               <Route path="/painters" element={<Painters />} />
               <Route path="/landscapers" element={<Landscapers />} />
+              <Route path="/hvac-contractors" element={<HVACContractors />} />
+              <Route path="/general-contractors" element={<GeneralContractors />} />
+
+              {/* Feature Pages */}
+              <Route path="/features/milestone-payments" element={<MilestonePayments />} />
+
+              {/* Guide Pages */}
+              <Route path="/guides/protecting-cashflow" element={<ProtectingCashflow />} />
 
               {/* Unique Pages Wave Doesn't Have */}
               <Route path="/why-estimates-matter" element={<WhyEstimatesMatter />} />
