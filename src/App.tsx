@@ -84,9 +84,14 @@ import GeneralContractors from './pages/trades/GeneralContractors';
 
 // Import feature pages
 import MilestonePayments from './pages/features/MilestonePayments';
+import ChangeOrderManagement from './pages/features/ChangeOrderManagement';
+import DepositCollection from './pages/features/DepositCollection';
+import ProgressBilling from './pages/features/ProgressBilling';
 
 // Import guide pages
 import ProtectingCashflow from './pages/guides/ProtectingCashflow';
+import HandlingChangeOrders from './pages/guides/HandlingChangeOrders';
+import MultiDayProjects from './pages/guides/MultiDayProjects';
 
 // Import estimate templates
 import HVACEstimateTemplate from "./pages/templates/HVACEstimateTemplate";
@@ -311,9 +316,14 @@ const App = () => {
 
               {/* Feature Pages */}
               <Route path="/features/milestone-payments" element={<MilestonePayments />} />
+              <Route path="/features/change-order-management" element={<ChangeOrderManagement />} />
+              <Route path="/features/deposit-collection" element={<DepositCollection />} />
+              <Route path="/features/progress-billing" element={<ProgressBilling />} />
 
               {/* Guide Pages */}
               <Route path="/guides/protecting-cashflow" element={<ProtectingCashflow />} />
+              <Route path="/guides/handling-change-orders" element={<HandlingChangeOrders />} />
+              <Route path="/guides/multi-day-projects" element={<MultiDayProjects />} />
 
               {/* Unique Pages Wave Doesn't Have */}
               <Route path="/why-estimates-matter" element={<WhyEstimatesMatter />} />
