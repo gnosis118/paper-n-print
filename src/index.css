@@ -19,18 +19,20 @@
     --primary: 214 42% 19%;
     --primary-foreground: 0 0% 100%;
     --primary-light: 214 42% 95%;
+    --primary-dark: 214 42% 15%;
 
     /* Steel Gray (#D6D8DB) for Professional Neutral */
     --secondary: 210 7% 84%;
     --secondary-foreground: 214 42% 19%;
 
     --muted: 210 11% 93%;
-    --muted-foreground: 210 7% 45%;
+    --muted-foreground: 214 20% 35%;
 
     /* Construction Yellow (#F9C80E) for Energy & Action */
     --accent: 48 95% 52%;
     --accent-foreground: 214 42% 19%;
     --accent-light: 48 95% 95%;
+    --accent-dark: 48 95% 35%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
