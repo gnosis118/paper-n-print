@@ -22,6 +22,158 @@ interface RelatedLinksProps {
 const RelatedLinks: React.FC<RelatedLinksProps> = ({ currentPage, maxLinks = 6 }) => {
   // Define related links by page
   const relatedLinksByPage: Record<string, RelatedLink[]> = {
+    '/guides/how-to-get-paid-faster': [
+      {
+        title: 'How to Reduce Late Payments',
+        description: 'Minimize overdue invoices and improve cash flow',
+        url: '/guides/how-to-reduce-late-payments',
+        category: 'Guides',
+      },
+      {
+        title: 'How to Collect Deposits',
+        description: 'Master deposit collection strategies',
+        url: '/guides/how-to-collect-deposits',
+        category: 'Guides',
+      },
+      {
+        title: 'Deposit Collection',
+        description: 'Learn how to collect deposits upfront',
+        url: '/features/deposit-collection',
+        category: 'Features',
+      },
+      {
+        title: 'Protecting Cashflow',
+        description: 'Best practices for contractor cashflow',
+        url: '/guides/protecting-cashflow',
+        category: 'Guides',
+      },
+      {
+        title: 'General Contractors',
+        description: 'Invoicing software for general contractors',
+        url: '/general-contractors',
+        category: 'Trades',
+      },
+      {
+        title: 'HVAC Contractors',
+        description: 'Invoicing software for HVAC contractors',
+        url: '/hvac-contractors',
+        category: 'Trades',
+      },
+    ],
+    '/guides/how-to-reduce-late-payments': [
+      {
+        title: 'How to Get Paid Faster',
+        description: 'Proven strategies to accelerate payment collection',
+        url: '/guides/how-to-get-paid-faster',
+        category: 'Guides',
+      },
+      {
+        title: 'How to Collect Deposits',
+        description: 'Master deposit collection strategies',
+        url: '/guides/how-to-collect-deposits',
+        category: 'Guides',
+      },
+      {
+        title: 'Protecting Cashflow',
+        description: 'Best practices for contractor cashflow',
+        url: '/guides/protecting-cashflow',
+        category: 'Guides',
+      },
+      {
+        title: 'Deposit Collection',
+        description: 'Learn how to collect deposits upfront',
+        url: '/features/deposit-collection',
+        category: 'Features',
+      },
+      {
+        title: 'Progress Billing',
+        description: 'Bill customers as work progresses',
+        url: '/features/progress-billing',
+        category: 'Features',
+      },
+      {
+        title: 'Plumbers',
+        description: 'Invoicing software for plumbers',
+        url: '/plumbers',
+        category: 'Trades',
+      },
+    ],
+    '/guides/how-to-collect-deposits': [
+      {
+        title: 'How to Get Paid Faster',
+        description: 'Proven strategies to accelerate payment collection',
+        url: '/guides/how-to-get-paid-faster',
+        category: 'Guides',
+      },
+      {
+        title: 'How to Reduce Late Payments',
+        description: 'Minimize overdue invoices and improve cash flow',
+        url: '/guides/how-to-reduce-late-payments',
+        category: 'Guides',
+      },
+      {
+        title: 'Deposit Collection',
+        description: 'Learn how to collect deposits upfront',
+        url: '/features/deposit-collection',
+        category: 'Features',
+      },
+      {
+        title: 'Milestone Payments',
+        description: 'Multi-phase invoice tracking',
+        url: '/features/milestone-payments',
+        category: 'Features',
+      },
+      {
+        title: 'Protecting Cashflow',
+        description: 'Best practices for contractor cashflow',
+        url: '/guides/protecting-cashflow',
+        category: 'Guides',
+      },
+      {
+        title: 'Electricians',
+        description: 'Invoicing software for electricians',
+        url: '/electricians',
+        category: 'Trades',
+      },
+    ],
+    '/guides/how-to-manage-multiple-clients': [
+      {
+        title: 'How to Get Paid Faster',
+        description: 'Proven strategies to accelerate payment collection',
+        url: '/guides/how-to-get-paid-faster',
+        category: 'Guides',
+      },
+      {
+        title: 'How to Reduce Late Payments',
+        description: 'Minimize overdue invoices and improve cash flow',
+        url: '/guides/how-to-reduce-late-payments',
+        category: 'Guides',
+      },
+      {
+        title: 'Protecting Cashflow',
+        description: 'Best practices for contractor cashflow',
+        url: '/guides/protecting-cashflow',
+        category: 'Guides',
+      },
+      {
+        title: 'Deposit Collection',
+        description: 'Learn how to collect deposits upfront',
+        url: '/features/deposit-collection',
+        category: 'Features',
+      },
+      {
+        title: 'Progress Billing',
+        description: 'Bill customers as work progresses',
+        url: '/features/progress-billing',
+        category: 'Features',
+      },
+      {
+        title: 'General Contractors',
+        description: 'Invoicing software for general contractors',
+        url: '/general-contractors',
+        category: 'Trades',
+      },
+    ],
     '/hvac-contractors': [
       {
         title: 'General Contractors',
@@ -100,6 +252,24 @@ const RelatedLinks: React.FC<RelatedLinksProps> = ({ currentPage, maxLinks = 6 }
     ],
     '/guides/protecting-cashflow': [
       {
+        title: 'How to Get Paid Faster',
+        description: 'Proven strategies to accelerate payment collection',
+        url: '/guides/how-to-get-paid-faster',
+        category: 'Guides',
+      },
+      {
+        title: 'How to Reduce Late Payments',
+        description: 'Minimize overdue invoices and improve cash flow',
+        url: '/guides/how-to-reduce-late-payments',
+        category: 'Guides',
+      },
+      {
+        title: 'How to Collect Deposits',
+        description: 'Master deposit collection strategies',
+        url: '/guides/how-to-collect-deposits',
+        category: 'Guides',
+      },
+      {
         title: 'Deposit Collection',
         description: 'Learn how to collect deposits upfront',
         url: '/features/deposit-collection',
@@ -112,24 +282,6 @@ const RelatedLinks: React.FC<RelatedLinksProps> = ({ currentPage, maxLinks = 6 }
         category: 'Features',
       },
       {
-        title: 'Milestone Payments',
-        description: 'Multi-phase invoice tracking',
-        url: '/features/milestone-payments',
-        category: 'Features',
-      },
-      {
-        title: 'Handling Change Orders',
-        description: 'Best practices for managing change orders',
-        url: '/guides/handling-change-orders',
-        category: 'Guides',
-      },
-      {
-        title: 'Multi-Day Projects',
-        description: 'Managing multi-day contractor projects',
-        url: '/guides/multi-day-projects',
-        category: 'Guides',
-      },
-      {
         title: 'General Contractors',
         description: 'Invoicing software for general contractors',
         url: '/general-contractors',
@@ -137,6 +289,18 @@ const RelatedLinks: React.FC<RelatedLinksProps> = ({ currentPage, maxLinks = 6 }
       },
     ],
     '/features/milestone-payments': [
+      {
+        title: 'How to Get Paid Faster',
+        description: 'Proven strategies to accelerate payment collection',
+        url: '/guides/how-to-get-paid-faster',
+        category: 'Guides',
+      },
+      {
+        title: 'How to Collect Deposits',
+        description: 'Master deposit collection strategies',
+        url: '/guides/how-to-collect-deposits',
+        category: 'Guides',
+      },
       {
         title: 'Deposit Collection',
         description: 'Learn how to collect deposits upfront',
@@ -154,18 +318,6 @@ const RelatedLinks: React.FC<RelatedLinksProps> = ({ currentPage, maxLinks = 6 }
         description: 'Manage scope changes professionally',
         url: '/features/change-order-management',
         category: 'Features',
-      },
-      {
-        title: 'Protecting Cashflow',
-        description: 'Best practices for contractor cashflow',
-        url: '/guides/protecting-cashflow',
-        category: 'Guides',
-      },
-      {
-        title: 'Multi-Day Projects',
-        description: 'Managing multi-day contractor projects',
-        url: '/guides/multi-day-projects',
-        category: 'Guides',
       },
       {
         title: 'HVAC Contractors',
