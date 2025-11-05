@@ -18,6 +18,9 @@ export default defineConfig(({ mode }) => ({
   build: {
     target: 'esnext',
     minify: mode === 'production' ? 'esbuild' : false,
+    modulePreload: {
+      polyfill: false,
+    },
     rollupOptions: {
       output: {
         manualChunks: (id) => {
