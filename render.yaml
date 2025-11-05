@@ -1,0 +1,104 @@
+services:
+  - type: web
+    name: proinvoice-app
+    runtime: node
+    plan: standard
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: VITE_SUPABASE_URL
+        fromDatabase:
+          name: proinvoice-db
+          property: connectionString
+      - key: VITE_SUPABASE_ANON_KEY
+        sync: false
+      - key: REACT_APP_SENTRY_DSN
+        sync: false
+      - key: REACT_APP_HONEYCOMB_API_KEY
+        sync: false
+      - key: REACT_APP_GOOGLE_SEARCH_CONSOLE_API_KEY
+        sync: false
+      - key: REACT_APP_TWILIO_ACCOUNT_SID
+        sync: false
+      - key: REACT_APP_TWILIO_AUTH_TOKEN
+        sync: false
+      - key: REACT_APP_BASE_URL
+        value: https://proinvoice.app
+      - key: STRIPE_PUBLIC_KEY
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+    healthCheckPath: /
+    preDeployCommand: npm run migrate
+    autoDeploy: true
+    branch: main
+    domains:
+      - proinvoice.app
+      - www.proinvoice.app
+
+  - type: cron
+    name: milestone-reminder-job
+    runtime: node
+    buildCommand: npm install
+    startCommand: node scripts/milestone-reminders.js
+    schedule: "0 9 * * *"
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+
+  - type: cron
+    name: overdue-payment-job
+    runtime: node
+    buildCommand: npm install
+    startCommand: node scripts/check-overdue-payments.js
+    schedule: "0 8 * * *"
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+
+  - type: cron
+    name: sitemap-update-job
+    runtime: node
+    buildCommand: npm install
+    startCommand: node scripts/update-sitemap.js
+    schedule: "0 2 * * 0"
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: GOOGLE_SEARCH_CONSOLE_API_KEY
+        sync: false
+
+databases:
+  - name: proinvoice-db
+    databaseName: proinvoice
+    user: proinvoice_user
+    region: oregon
+    plan: standard
+    postgresMajorVersion: "15"
+
+staticSites:
+  - name: proinvoice-docs
+    buildCommand: npm run build:docs
+    staticPublishPath: ./docs/build
+    envVars:
+      - key: NODE_ENV
+        value: production
+    autoDeploy: true
+    branch: main
+    domains:
+      - docs.proinvoice.app
+
