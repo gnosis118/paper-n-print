@@ -106,7 +106,7 @@ const Index = () => {
               <div className="inline-block mb-4">
                 <span className="bg-[hsl(var(--accent))]/10 text-[hsl(var(--accent-dark))] px-4 py-2 rounded-full text-sm font-semibold inline-flex items-center gap-2">
                   <Zap className="h-4 w-4" />
-                  Speed Up Your Cashflow
+                  Get Paid Before You Drive Home
                 </span>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Everything You Need to Get Paid Fast</h2>
@@ -179,7 +179,7 @@ const Index = () => {
                   </div>
                   <h3 className="text-xl font-semibold mb-2">Mobile-First</h3>
                   <p className="text-white/80">
-                    Works perfectly on your phone. Create bids, send invoices, track payments — all from the job site.
+                    Works perfectly on your phone — even on the job site. Create bids, send invoices, track payments from your truck, ladder, or anywhere you work.
                   </p>
                 </CardContent>
               </Card>
@@ -204,6 +204,103 @@ const Index = () => {
                   <h3 className="text-xl font-semibold mb-2">Offline Ready</h3>
                   <p className="text-white/80">
                     Start bids even without signal. Everything syncs when you're back online. Never miss a beat.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Real Contractor Workflows */}
+        <section className="py-16 bg-gradient-to-b from-background to-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <div className="inline-block mb-4">
+                <span className="bg-[hsl(var(--primary))]/10 text-[hsl(var(--primary))] px-4 py-2 rounded-full text-sm font-semibold inline-flex items-center gap-2">
+                  <Wrench className="h-4 w-4" />
+                  Real Contractor Workflows
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Built for How You Actually Work</h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                Not just invoices — complete job management from bid to final payment.
+              </p>
+            </div>
+
+            {/* Workflow Diagram */}
+            <div className="max-w-4xl mx-auto mb-12">
+              <div className="flex flex-wrap justify-center items-center gap-3 text-sm md:text-base">
+                <div className="bg-[hsl(var(--primary-light))] text-[hsl(var(--primary))] px-4 py-2 rounded-lg font-semibold">
+                  Estimate
+                </div>
+                <span className="text-muted-foreground">→</span>
+                <div className="bg-[hsl(var(--accent-light))] text-[hsl(var(--accent-dark))] px-4 py-2 rounded-lg font-semibold">
+                  Deposit
+                </div>
+                <span className="text-muted-foreground">→</span>
+                <div className="bg-[hsl(var(--primary-light))] text-[hsl(var(--primary))] px-4 py-2 rounded-lg font-semibold">
+                  Start Job
+                </div>
+                <span className="text-muted-foreground">→</span>
+                <div className="bg-[hsl(var(--accent-light))] text-[hsl(var(--accent-dark))] px-4 py-2 rounded-lg font-semibold">
+                  Milestones
+                </div>
+                <span className="text-muted-foreground">→</span>
+                <div className="bg-[hsl(var(--primary-light))] text-[hsl(var(--primary))] px-4 py-2 rounded-lg font-semibold">
+                  Final Invoice
+                </div>
+                <span className="text-muted-foreground">→</span>
+                <div className="bg-green-100 text-green-700 px-4 py-2 rounded-lg font-semibold">
+                  Paid
+                </div>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <Card className="border-2 hover:border-[hsl(var(--primary))] transition-colors">
+                <CardContent className="p-6">
+                  <div className="bg-[hsl(var(--primary))]/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                    <FileCheck className="h-6 w-6 text-[hsl(var(--primary))]" />
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">Milestone Payments</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Break big jobs into stages — excavation, framing, completion — and get paid at each phase.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 hover:border-[hsl(var(--accent))] transition-colors">
+                <CardContent className="p-6">
+                  <div className="bg-[hsl(var(--accent))]/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                    <FileText className="h-6 w-6 text-[hsl(var(--accent-dark))]" />
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">Change Order Management</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Customer wants an upgrade? Send a change order and collect payment instantly — all from your phone.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 hover:border-[hsl(var(--primary))] transition-colors">
+                <CardContent className="p-6">
+                  <div className="bg-[hsl(var(--primary))]/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                    <DollarSign className="h-6 w-6 text-[hsl(var(--primary))]" />
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">Deposit Staging</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Protect cashflow with smart deposits: 30% booking, 40% materials ordered, 30% completion.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 hover:border-[hsl(var(--accent))] transition-colors">
+                <CardContent className="p-6">
+                  <div className="bg-[hsl(var(--accent))]/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                    <TrendingUp className="h-6 w-6 text-[hsl(var(--accent-dark))]" />
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">Progress Billing</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Bill clients as you hit project milestones — no chasing checks, no waiting 30+ days.
                   </p>
                 </CardContent>
               </Card>
@@ -342,6 +439,119 @@ const Index = () => {
               </Button>
               <p className="text-sm text-muted-foreground mt-4">
                 Works in your truck, on the ladder, anywhere you have signal
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Your First Week */}
+        <section className="py-16 bg-[hsl(var(--primary-dark))] text-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <div className="inline-block mb-4">
+                <span className="bg-[hsl(var(--accent))] text-[hsl(var(--primary-dark))] px-4 py-2 rounded-full text-sm font-semibold inline-flex items-center gap-2">
+                  <Check className="h-4 w-4" />
+                  Get Started Fast
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Your First Week With ProInvoice</h2>
+              <p className="text-xl text-white/80 max-w-2xl mx-auto">
+                From setup to getting paid — here's what your first week looks like.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+              <Card className="bg-white/10 border-white/20 backdrop-blur text-white">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="bg-[hsl(var(--accent))] text-[hsl(var(--primary-dark))] w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg">
+                      1-2
+                    </div>
+                    <h3 className="text-lg font-semibold">Setup & Practice</h3>
+                  </div>
+                  <ul className="space-y-2 text-sm text-white/80">
+                    <li className="flex items-start gap-2">
+                      <Check className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                      <span>Set up business profile & upload logo</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                      <span>Create your first estimate (practice run)</span>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/10 border-white/20 backdrop-blur text-white">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="bg-[hsl(var(--accent))] text-[hsl(var(--primary-dark))] w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg">
+                      3-4
+                    </div>
+                    <h3 className="text-lg font-semibold">First Real Job</h3>
+                  </div>
+                  <ul className="space-y-2 text-sm text-white/80">
+                    <li className="flex items-start gap-2">
+                      <Check className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                      <span>Send estimate to a real customer</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                      <span>Collect your first deposit before starting</span>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/10 border-white/20 backdrop-blur text-white">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="bg-[hsl(var(--accent))] text-[hsl(var(--primary-dark))] w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg">
+                      5-6
+                    </div>
+                    <h3 className="text-lg font-semibold">Track & Complete</h3>
+                  </div>
+                  <ul className="space-y-2 text-sm text-white/80">
+                    <li className="flex items-start gap-2">
+                      <Check className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                      <span>Mark milestones as you complete work</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                      <span>Send final invoice & get paid same day</span>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/10 border-white/20 backdrop-blur text-white">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="bg-[hsl(var(--accent))] text-[hsl(var(--primary-dark))] w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg">
+                      7
+                    </div>
+                    <h3 className="text-lg font-semibold">Grow & Scale</h3>
+                  </div>
+                  <ul className="space-y-2 text-sm text-white/80">
+                    <li className="flex items-start gap-2">
+                      <Check className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                      <span>Review cashflow analytics dashboard</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                      <span>See what's pending, paid, and overdue</span>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="text-center mt-12">
+              <Button asChild size="lg" className="bg-[hsl(var(--accent))] text-[hsl(var(--primary-dark))] hover:bg-[hsl(var(--accent))]/90 min-h-[48px] text-lg">
+                <Link to="/auth">Start Your First Week Free</Link>
+              </Button>
+              <p className="text-sm text-white/60 mt-4">
+                No credit card required • Works on any device • Cancel anytime
               </p>
             </div>
           </div>
