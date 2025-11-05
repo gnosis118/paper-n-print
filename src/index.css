@@ -4,15 +4,48 @@
 
 /* Root styles */
 :root {
-  --primary: #1A2C42;
-  --primary-light: #2A3C52;
-  --accent: #F9C80E;
-  --accent-light: #FDD835;
-  --secondary: #D6D8DB;
-  --success: #22c55e;
-  --warning: #f59e0b;
-  --error: #ef4444;
-  --info: #3b82f6;
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 210 50% 18%;
+  --primary-foreground: 210 40% 98%;
+  --primary-light: 210 36% 24%;
+  --primary-dark: 210 60% 12%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 45 93% 52%;
+  --accent-foreground: 210 50% 18%;
+  --accent-light: 48 97% 60%;
+  --accent-dark: 42 89% 45%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 210 50% 18%;
+  --radius: 0.5rem;
+  --invoice-brand: 210 50% 18%;
+  --invoice-accent: 45 93% 52%;
+  --invoice-success: 142.1 76.2% 36.3%;
+  --invoice-warning: 37.7 92.1% 50.2%;
+  --invoice-gray: 215 13.8% 34.1%;
+  --invoice-border: 214.3 31.8% 91.4%;
+  --invoice-paper: 0 0% 100%;
+  --sidebar-background: 0 0% 98%;
+  --sidebar-foreground: 240 5.3% 26.1%;
+  --sidebar-primary: 210 50% 18%;
+  --sidebar-primary-foreground: 0 0% 98%;
+  --sidebar-accent: 240 4.8% 95.9%;
+  --sidebar-accent-foreground: 240 5.9% 10%;
+  --sidebar-border: 220 13% 91%;
+  --sidebar-ring: 210 50% 18%;
+  --shadow-soft: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-medium: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-large: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 * {

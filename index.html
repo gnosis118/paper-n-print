@@ -29,9 +29,10 @@
     ">
     
     <!-- Preload critical resources for better LCP -->
-    <link rel="preload" href="/src/main.tsx" as="script" crossorigin>
-    <link rel="modulepreload" href="/src/main.tsx">
-    <link rel="preload" href="/og-image.webp" as="image">
+    <link rel="modulepreload" href="/src/main.tsx" fetchpriority="high">
+    <link rel="preload" as="style" href="/src/index.css" fetchpriority="high">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2" as="font" type="font/woff2" crossorigin>
     
     <!-- DNS prefetch and preconnect for external resources -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -55,15 +56,20 @@
         padding: 0; 
       }
       
+      html { font-size: 16px; }
+      
       body { 
-        font-family: Inter, system-ui, -apple-system, sans-serif; 
+        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; 
         line-height: 1.6;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        background-color: hsl(248 50% 98%);
-        color: hsl(240 10% 3.9%);
+        background-color: #faf8ff;
+        color: #09090b;
         overflow-x: hidden;
+        contain: layout style paint;
       }
+      
+      #root { isolation: isolate; }
       
       /* Layout essentials - visible immediately for hero section */
       .min-h-screen { min-height: 100vh; }
@@ -77,8 +83,17 @@
       .mx-auto { margin: 0 auto; }
       
       /* Hero gradient background - critical for FCP */
-      .bg-gradient-to-br { 
-        background: linear-gradient(135deg, hsl(220 70% 95%) 0%, hsl(210 100% 97%) 100%);
+      .bg-gradient-to-b { 
+        background: linear-gradient(180deg, #3b82f6 0%, #1e40af 100%);
+      }
+      
+      /* Container utilities */
+      .container { 
+        width: 100%; 
+        max-width: 1280px; 
+        margin: 0 auto; 
+        padding-left: 1rem; 
+        padding-right: 1rem;
       }
       
       /* Typography - hero section fonts for immediate display */
@@ -93,34 +108,52 @@
       
       /* Spacing for hero layout */
       .px-4 { padding-left: 1rem; padding-right: 1rem; }
-      .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
-      .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
-      .py-20 { padding-top: 5rem; padding-bottom: 5rem; }
-      .mb-4 { margin-bottom: 1rem; }
-      .mb-6 { margin-bottom: 1.5rem; }
-      .mb-8 { margin-bottom: 2rem; }
+      .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+      .py-24 { padding-top: 6rem; padding-bottom: 6rem; }
+      .space-y-6 > * + * { margin-top: 1.5rem; }
+      .gap-4 { gap: 1rem; }
+      .gap-2 { gap: 0.5rem; }
+      
+      /* Grid layout */
+      .grid { display: grid; }
+      .lg\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .items-center { align-items: center; }
+      .gap-12 { gap: 3rem; }
       
       /* Buttons for immediate CTA visibility */
       .inline-flex { display: inline-flex; }
+      .inline-block { display: inline-block; }
+      .rounded-full { border-radius: 9999px; }
       .rounded-md { border-radius: 0.375rem; }
-      .bg-primary { background-color: hsl(220 62% 47%); }
-      .hover\\:bg-primary\\/90:hover { background-color: hsl(220 62% 42%); }
-      .transition-colors { transition: color 0.15s, background-color 0.15s; }
+      .bg-primary { background-color: #3b82f6; }
+      button, .btn { 
+        cursor: pointer; 
+        user-select: none;
+        transition: all 0.2s;
+      }
       
       /* Hide non-critical content initially */
       .lazy-load { opacity: 0; transition: opacity 0.3s; }
       .lazy-load.loaded { opacity: 1; }
       
-      /* Responsive hero text */
-      @media (max-width: 768px) {
-        .text-6xl { font-size: 2.25rem; line-height: 2.5rem; }
-        .text-5xl { font-size: 1.875rem; line-height: 2.25rem; }
-        .py-20 { padding-top: 3rem; padding-bottom: 3rem; }
+      /* Responsive utilities */
+      @media (min-width: 768px) {
+        .md\\:text-5xl { font-size: 3rem; line-height: 1.1; }
+        .md\\:py-24 { padding-top: 6rem; padding-bottom: 6rem; }
+      }
+      
+      @media (min-width: 1024px) {
+        .lg\\:text-6xl { font-size: 3.75rem; line-height: 1; }
+        .lg\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+      
+      @media (max-width: 1023px) {
+        .lg\\:grid-cols-2 { grid-template-columns: 1fr; }
       }
     </style>
     
     <!-- Optimize font loading for better FCP -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'; this.onload=null;">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
     
     <!-- Resource hints for critical pages -->
@@ -269,6 +302,7 @@
 
   <body>
     <div id="root"></div>
+    <script type="module" src="/src/main.tsx" fetchpriority="high"></script>
     
     <!-- Crawlable content for search engines -->
     <noscript>
