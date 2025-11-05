@@ -1,0 +1,234 @@
+{
+  "info": {
+    "name": "ProInvoice API",
+    "description": "Complete API testing collection for ProInvoice contractor invoicing platform",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Sign Up",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{supabase_url}}/auth/v1/signup",
+              "host": ["{{supabase_url}}"],
+              "path": ["auth", "v1", "signup"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"contractor@example.com\",\n  \"password\": \"SecurePassword123!\",\n  \"data\": {\n    \"business_name\": \"John's Electrical\",\n    \"full_name\": \"John Doe\"\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{supabase_url}}/auth/v1/token?grant_type=password",
+              "host": ["{{supabase_url}}"],
+              "path": ["auth", "v1", "token"],
+              "query": [
+                {
+                  "key": "grant_type",
+                  "value": "password"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"contractor@example.com\",\n  \"password\": \"SecurePassword123!\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Estimates",
+      "item": [
+        {
+          "name": "Create Estimate",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{supabase_url}}/rest/v1/estimates",
+              "host": ["{{supabase_url}}"],
+              "path": ["rest", "v1", "estimates"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_name\": \"ABC Construction\",\n  \"client_email\": \"contact@abcconstruction.com\",\n  \"number\": \"EST-001\",\n  \"title\": \"Electrical Wiring Installation\",\n  \"items\": [\n    {\n      \"description\": \"Labor\",\n      \"quantity\": 8,\n      \"rate\": 75,\n      \"amount\": 600\n    }\n  ],\n  \"subtotal\": 600,\n  \"tax_rate\": 0.08,\n  \"tax_amount\": 48,\n  \"total\": 648,\n  \"deposit_percentage\": 30,\n  \"deposit_amount\": 194.40,\n  \"status\": \"pending_payment\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Estimate",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{supabase_url}}/rest/v1/estimates?id=eq.{{estimate_id}}",
+              "host": ["{{supabase_url}}"],
+              "path": ["rest", "v1", "estimates"],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "eq.{{estimate_id}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Estimates",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{supabase_url}}/rest/v1/estimates?limit=10",
+              "host": ["{{supabase_url}}"],
+              "path": ["rest", "v1", "estimates"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "Create Checkout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{supabase_url}}/functions/v1/create-checkout",
+              "host": ["{{supabase_url}}"],
+              "path": ["functions", "v1", "create-checkout"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estimateId\": \"{{estimate_id}}\",\n  \"amount\": 19440,\n  \"currency\": \"usd\",\n  \"depositPercentage\": 30\n}"
+            }
+          }
+        },
+        {
+          "name": "Check Subscription",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{supabase_url}}/functions/v1/check-subscription",
+              "host": ["{{supabase_url}}"],
+              "path": ["functions", "v1", "check-subscription"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Webhooks",
+      "item": [
+        {
+          "name": "Stripe Payment Succeeded",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Stripe-Signature",
+                "value": "{{stripe_signature}}"
+              }
+            ],
+            "url": {
+              "raw": "{{supabase_url}}/functions/v1/stripe-webhook",
+              "host": ["{{supabase_url}}"],
+              "path": ["functions", "v1", "stripe-webhook"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"payment_intent.succeeded\",\n  \"data\": {\n    \"object\": {\n      \"id\": \"pi_test123\",\n      \"amount\": 19440,\n      \"currency\": \"usd\",\n      \"status\": \"succeeded\",\n      \"metadata\": {\n        \"estimateId\": \"{{estimate_id}}\"\n      }\n    }\n  }\n}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "supabase_url",
+      "value": "https://hkzrfqpnkvpmsaeluksh.supabase.co"
+    },
+    {
+      "key": "jwt_token",
+      "value": ""
+    },
+    {
+      "key": "estimate_id",
+      "value": ""
+    },
+    {
+      "key": "stripe_signature",
+      "value": ""
+    }
+  ]
+}
+
