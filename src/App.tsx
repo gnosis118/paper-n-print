@@ -92,6 +92,10 @@ import ProgressBilling from './pages/features/ProgressBilling';
 import ProtectingCashflow from './pages/guides/ProtectingCashflow';
 import HandlingChangeOrders from './pages/guides/HandlingChangeOrders';
 import MultiDayProjects from './pages/guides/MultiDayProjects';
+import HowToGetPaidFaster from './pages/guides/HowToGetPaidFaster';
+import HowToReduceLatePayments from './pages/guides/HowToReduceLatePayments';
+import HowToCollectDeposits from './pages/guides/HowToCollectDeposits';
+import HowToManageMultipleClients from './pages/guides/HowToManageMultipleClients';
 
 // Import estimate templates
 import HVACEstimateTemplate from "./pages/templates/HVACEstimateTemplate";
@@ -324,6 +328,10 @@ const App = () => {
               <Route path="/guides/protecting-cashflow" element={<ProtectingCashflow />} />
               <Route path="/guides/handling-change-orders" element={<HandlingChangeOrders />} />
               <Route path="/guides/multi-day-projects" element={<MultiDayProjects />} />
+              <Route path="/guides/how-to-get-paid-faster" element={<HowToGetPaidFaster />} />
+              <Route path="/guides/how-to-reduce-late-payments" element={<HowToReduceLatePayments />} />
+              <Route path="/guides/how-to-collect-deposits" element={<HowToCollectDeposits />} />
+              <Route path="/guides/how-to-manage-multiple-clients" element={<HowToManageMultipleClients />} />
 
               {/* Unique Pages Wave Doesn't Have */}
               <Route path="/why-estimates-matter" element={<WhyEstimatesMatter />} />
