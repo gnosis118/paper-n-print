@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Suspense, lazy } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,163 +7,173 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from "@/hooks/useAuth";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+
+// Critical pages - load immediately
 import Index from "./pages/Index";
-import Invoice from "./pages/Invoice";
-import Templates from "./pages/Templates";
-import InvoiceTemplates from "./pages/InvoiceTemplates";
-import Pricing from "./pages/Pricing";
-import Auth from "./pages/Auth";
-import PaymentSuccess from "./pages/PaymentSuccess";
-import PaymentCanceled from "./pages/PaymentCanceled";
-import Privacy from "./pages/Privacy";
-import Terms from "./pages/Terms";
-import Cookies from "./pages/Cookies";
-import DoNotSell from "./pages/DoNotSell";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Products from "./pages/Products";
-import Blog from "./pages/Blog";
-import Docs from "./pages/Docs";
-import BusinessSettings from "./pages/BusinessSettings";
-import Security from "./pages/Security";
-import Accessibility from "./pages/Accessibility";
-import SubscriptionManagement from "./pages/SubscriptionManagement";
-import EstimateView from './pages/EstimateView';
-import InvoiceView from './pages/InvoiceView';
-import Estimates from './pages/Estimates';
-import Clients from './pages/Clients';
-import NotFound from "@/pages/NotFound";
-import ConstructionInvoiceTemplate from "./pages/templates/Construction";
-import ConsultingInvoiceTemplate from "./pages/templates/Consulting";
-import FreelanceNYCTemplate from "./pages/templates/FreelanceNYC";
-import FreelanceCATemplate from "./pages/templates/FreelanceCA";
-import ProgrammaticSEO from "./pages/templates/ProgrammaticSEO";
+// Lazy load all other pages
+const Invoice = lazy(() => import("./pages/Invoice"));
+const Templates = lazy(() => import("./pages/Templates"));
+const InvoiceTemplates = lazy(() => import("./pages/InvoiceTemplates"));
+const Pricing = lazy(() => import("./pages/Pricing"));
+const Auth = lazy(() => import("./pages/Auth"));
+const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
+const PaymentCanceled = lazy(() => import("./pages/PaymentCanceled"));
+const Privacy = lazy(() => import("./pages/Privacy"));
+const Terms = lazy(() => import("./pages/Terms"));
+const Cookies = lazy(() => import("./pages/Cookies"));
+const DoNotSell = lazy(() => import("./pages/DoNotSell"));
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Products = lazy(() => import("./pages/Products"));
+const Blog = lazy(() => import("./pages/Blog"));
+const Docs = lazy(() => import("./pages/Docs"));
+const BusinessSettings = lazy(() => import("./pages/BusinessSettings"));
+const Security = lazy(() => import("./pages/Security"));
+const Accessibility = lazy(() => import("./pages/Accessibility"));
+const SubscriptionManagement = lazy(() => import("./pages/SubscriptionManagement"));
+const EstimateView = lazy(() => import('./pages/EstimateView'));
+const InvoiceView = lazy(() => import('./pages/InvoiceView'));
+const Estimates = lazy(() => import('./pages/Estimates'));
+const Clients = lazy(() => import('./pages/Clients'));
+const NotFound = lazy(() => import("@/pages/NotFound"));
+const ConstructionInvoiceTemplate = lazy(() => import("./pages/templates/Construction"));
+const ConsultingInvoiceTemplate = lazy(() => import("./pages/templates/Consulting"));
+const FreelanceNYCTemplate = lazy(() => import("./pages/templates/FreelanceNYC"));
+const FreelanceCATemplate = lazy(() => import("./pages/templates/FreelanceCA"));
+const ProgrammaticSEO = lazy(() => import("./pages/templates/ProgrammaticSEO"));
 
-// Import niche invoice templates
-import HVACInvoiceTemplate from "./pages/templates/HVACInvoiceTemplate";
-import LawnCareInvoiceTemplate from "./pages/templates/LawnCareInvoiceTemplate";
-import HandymanInvoiceTemplate from "./pages/templates/HandymanInvoiceTemplate";
-import CleaningInvoiceTemplate from "./pages/templates/CleaningInvoiceTemplate";
-import RoofingInvoiceTemplate from "./pages/templates/RoofingInvoiceTemplate";
-import PlumbingInvoiceTemplate from "./pages/templates/PlumbingInvoiceTemplate";
-import ElectricianInvoiceTemplate from "./pages/templates/ElectricianInvoiceTemplate";
-import FreelanceDesignerInvoiceTemplate from "./pages/templates/FreelanceDesignerInvoiceTemplate";
-import PhotographerInvoiceTemplate from "./pages/templates/PhotographerInvoiceTemplate";
-import VideographerInvoiceTemplate from "./pages/templates/VideographerInvoiceTemplate";
-import PersonalTrainerInvoiceTemplate from "./pages/templates/PersonalTrainerInvoiceTemplate";
-import AutoDetailingInvoiceTemplate from "./pages/templates/AutoDetailingInvoiceTemplate";
-import MobileMechanicInvoiceTemplate from "./pages/templates/MobileMechanicInvoiceTemplate";
-import PestControlInvoiceTemplate from "./pages/templates/PestControlInvoiceTemplate";
-import PressureWashingInvoiceTemplate from "./pages/templates/PressureWashingInvoiceTemplate";
-import LandscaperInvoiceTemplate from "./pages/templates/LandscaperInvoiceTemplate";
-import RealEstatePhotographerInvoiceTemplate from "./pages/templates/RealEstatePhotographerInvoiceTemplate";
-import TattooArtistInvoiceTemplate from "./pages/templates/TattooArtistInvoiceTemplate";
-import MakeupArtistInvoiceTemplate from "./pages/templates/MakeupArtistInvoiceTemplate";
-import HairStylistInvoiceTemplate from "./pages/templates/HairStylistInvoiceTemplate";
-import NotaryInvoiceTemplate from "./pages/templates/NotaryInvoiceTemplate";
-import BookkeepingInvoiceTemplate from "./pages/templates/BookkeepingInvoiceTemplate";
-import DJInvoiceTemplate from "./pages/templates/DJInvoiceTemplate";
-import EventPlannerInvoiceTemplate from "./pages/templates/EventPlannerInvoiceTemplate";
-import CatererInvoiceTemplate from "./pages/templates/CatererInvoiceTemplate";
-import SnowRemovalInvoiceTemplate from "./pages/templates/SnowRemovalInvoiceTemplate";
-import WindowCleaningInvoiceTemplate from "./pages/templates/WindowCleaningInvoiceTemplate";
-import MassageTherapistInvoiceTemplate from "./pages/templates/MassageTherapistInvoiceTemplate";
-import CarpetCleanerInvoiceTemplate from "./pages/templates/CarpetCleanerInvoiceTemplate";
-import GetStarted from './pages/GetStarted';
-import EstimateTemplates from './pages/EstimateTemplates';
-import Estimate from './pages/Estimate';
-import TradesIndex from './pages/trades/TradesIndex';
-import TradePage from './pages/trades/TradePage';
-import Plumbers from './pages/trades/Plumbers';
-import Roofers from './pages/trades/Roofers';
-import Electricians from './pages/trades/Electricians';
-import Painters from './pages/trades/Painters';
-import Landscapers from './pages/trades/Landscapers';
-import HVACContractors from './pages/trades/HVACContractors';
-import GeneralContractors from './pages/trades/GeneralContractors';
+// Import niche invoice templates - lazy loaded
+const HVACInvoiceTemplate = lazy(() => import("./pages/templates/HVACInvoiceTemplate"));
+const LawnCareInvoiceTemplate = lazy(() => import("./pages/templates/LawnCareInvoiceTemplate"));
+const HandymanInvoiceTemplate = lazy(() => import("./pages/templates/HandymanInvoiceTemplate"));
+const CleaningInvoiceTemplate = lazy(() => import("./pages/templates/CleaningInvoiceTemplate"));
+const RoofingInvoiceTemplate = lazy(() => import("./pages/templates/RoofingInvoiceTemplate"));
+const PlumbingInvoiceTemplate = lazy(() => import("./pages/templates/PlumbingInvoiceTemplate"));
+const ElectricianInvoiceTemplate = lazy(() => import("./pages/templates/ElectricianInvoiceTemplate"));
+const FreelanceDesignerInvoiceTemplate = lazy(() => import("./pages/templates/FreelanceDesignerInvoiceTemplate"));
+const PhotographerInvoiceTemplate = lazy(() => import("./pages/templates/PhotographerInvoiceTemplate"));
+const VideographerInvoiceTemplate = lazy(() => import("./pages/templates/VideographerInvoiceTemplate"));
+const PersonalTrainerInvoiceTemplate = lazy(() => import("./pages/templates/PersonalTrainerInvoiceTemplate"));
+const AutoDetailingInvoiceTemplate = lazy(() => import("./pages/templates/AutoDetailingInvoiceTemplate"));
+const MobileMechanicInvoiceTemplate = lazy(() => import("./pages/templates/MobileMechanicInvoiceTemplate"));
+const PestControlInvoiceTemplate = lazy(() => import("./pages/templates/PestControlInvoiceTemplate"));
+const PressureWashingInvoiceTemplate = lazy(() => import("./pages/templates/PressureWashingInvoiceTemplate"));
+const LandscaperInvoiceTemplate = lazy(() => import("./pages/templates/LandscaperInvoiceTemplate"));
+const RealEstatePhotographerInvoiceTemplate = lazy(() => import("./pages/templates/RealEstatePhotographerInvoiceTemplate"));
+const TattooArtistInvoiceTemplate = lazy(() => import("./pages/templates/TattooArtistInvoiceTemplate"));
+const MakeupArtistInvoiceTemplate = lazy(() => import("./pages/templates/MakeupArtistInvoiceTemplate"));
+const HairStylistInvoiceTemplate = lazy(() => import("./pages/templates/HairStylistInvoiceTemplate"));
+const NotaryInvoiceTemplate = lazy(() => import("./pages/templates/NotaryInvoiceTemplate"));
+const BookkeepingInvoiceTemplate = lazy(() => import("./pages/templates/BookkeepingInvoiceTemplate"));
+const DJInvoiceTemplate = lazy(() => import("./pages/templates/DJInvoiceTemplate"));
+const EventPlannerInvoiceTemplate = lazy(() => import("./pages/templates/EventPlannerInvoiceTemplate"));
+const CatererInvoiceTemplate = lazy(() => import("./pages/templates/CatererInvoiceTemplate"));
+const SnowRemovalInvoiceTemplate = lazy(() => import("./pages/templates/SnowRemovalInvoiceTemplate"));
+const WindowCleaningInvoiceTemplate = lazy(() => import("./pages/templates/WindowCleaningInvoiceTemplate"));
+const MassageTherapistInvoiceTemplate = lazy(() => import("./pages/templates/MassageTherapistInvoiceTemplate"));
+const CarpetCleanerInvoiceTemplate = lazy(() => import("./pages/templates/CarpetCleanerInvoiceTemplate"));
+const GetStarted = lazy(() => import('./pages/GetStarted'));
+const EstimateTemplates = lazy(() => import('./pages/EstimateTemplates'));
+const Estimate = lazy(() => import('./pages/Estimate'));
+const TradesIndex = lazy(() => import('./pages/trades/TradesIndex'));
+const TradePage = lazy(() => import('./pages/trades/TradePage'));
+const Plumbers = lazy(() => import('./pages/trades/Plumbers'));
+const Roofers = lazy(() => import('./pages/trades/Roofers'));
+const Electricians = lazy(() => import('./pages/trades/Electricians'));
+const Painters = lazy(() => import('./pages/trades/Painters'));
+const Landscapers = lazy(() => import('./pages/trades/Landscapers'));
+const HVACContractors = lazy(() => import('./pages/trades/HVACContractors'));
+const GeneralContractors = lazy(() => import('./pages/trades/GeneralContractors'));
 
-// Import feature pages
-import MilestonePayments from './pages/features/MilestonePayments';
-import ChangeOrderManagement from './pages/features/ChangeOrderManagement';
-import DepositCollection from './pages/features/DepositCollection';
-import ProgressBilling from './pages/features/ProgressBilling';
+// Import feature pages - lazy loaded
+const MilestonePayments = lazy(() => import('./pages/features/MilestonePayments'));
+const ChangeOrderManagement = lazy(() => import('./pages/features/ChangeOrderManagement'));
+const DepositCollection = lazy(() => import('./pages/features/DepositCollection'));
+const ProgressBilling = lazy(() => import('./pages/features/ProgressBilling'));
 
-// Import guide pages
-import ProtectingCashflow from './pages/guides/ProtectingCashflow';
-import HandlingChangeOrders from './pages/guides/HandlingChangeOrders';
-import MultiDayProjects from './pages/guides/MultiDayProjects';
-import HowToGetPaidFaster from './pages/guides/HowToGetPaidFaster';
-import HowToReduceLatePayments from './pages/guides/HowToReduceLatePayments';
-import HowToCollectDeposits from './pages/guides/HowToCollectDeposits';
-import HowToManageMultipleClients from './pages/guides/HowToManageMultipleClients';
+// Import guide pages - lazy loaded
+const ProtectingCashflow = lazy(() => import('./pages/guides/ProtectingCashflow'));
+const HandlingChangeOrders = lazy(() => import('./pages/guides/HandlingChangeOrders'));
+const MultiDayProjects = lazy(() => import('./pages/guides/MultiDayProjects'));
+const HowToGetPaidFaster = lazy(() => import('./pages/guides/HowToGetPaidFaster'));
+const HowToReduceLatePayments = lazy(() => import('./pages/guides/HowToReduceLatePayments'));
+const HowToCollectDeposits = lazy(() => import('./pages/guides/HowToCollectDeposits'));
+const HowToManageMultipleClients = lazy(() => import('./pages/guides/HowToManageMultipleClients'));
 
-// Import estimate templates
-import HVACEstimateTemplate from "./pages/templates/HVACEstimateTemplate";
-import PlumbingEstimateTemplate from "./pages/templates/PlumbingEstimateTemplate";
-import ConstructionEstimateTemplate from "./pages/templates/ConstructionEstimateTemplate";
-import LandscapingEstimateTemplate from "./pages/templates/LandscapingEstimateTemplate";
-import RoofingEstimateTemplate from "./pages/templates/RoofingEstimateTemplate";
-import CleaningEstimateTemplate from "./pages/templates/CleaningEstimateTemplate";
-import WaveVsProInvoice from './pages/compare/WaveVsProInvoice';
-import InvoiceSimpleVsProInvoice from './pages/compare/InvoiceSimpleVsProInvoice';
-import WhyEstimatesMatter from './pages/WhyEstimatesMatter';
-import DepositCollectionGuide from './pages/DepositCollectionGuide';
-import PaymentSpeedCalculator from './pages/PaymentSpeedCalculator';
+// Import estimate templates - lazy loaded
+const HVACEstimateTemplate = lazy(() => import("./pages/templates/HVACEstimateTemplate"));
+const PlumbingEstimateTemplate = lazy(() => import("./pages/templates/PlumbingEstimateTemplate"));
+const ConstructionEstimateTemplate = lazy(() => import("./pages/templates/ConstructionEstimateTemplate"));
+const LandscapingEstimateTemplate = lazy(() => import("./pages/templates/LandscapingEstimateTemplate"));
+const RoofingEstimateTemplate = lazy(() => import("./pages/templates/RoofingEstimateTemplate"));
+const CleaningEstimateTemplate = lazy(() => import("./pages/templates/CleaningEstimateTemplate"));
+const WaveVsProInvoice = lazy(() => import('./pages/compare/WaveVsProInvoice'));
+const InvoiceSimpleVsProInvoice = lazy(() => import('./pages/compare/InvoiceSimpleVsProInvoice'));
+const WhyEstimatesMatter = lazy(() => import('./pages/WhyEstimatesMatter'));
+const DepositCollectionGuide = lazy(() => import('./pages/DepositCollectionGuide'));
+const PaymentSpeedCalculator = lazy(() => import('./pages/PaymentSpeedCalculator'));
 
-// Import documentation pages
-import CreatingFirstInvoice from './pages/docs/CreatingFirstInvoice';
-import UnderstandingTemplates from './pages/docs/UnderstandingTemplates';
-import AddingLineItems from './pages/docs/AddingLineItems';
-import CustomizingAppearance from './pages/docs/CustomizingAppearance';
-import BusinessProfile from './pages/docs/BusinessProfile';
-import PaymentLinks from './pages/docs/PaymentLinks';
-import AddingClients from './pages/docs/AddingClients';
-import FAQ from './pages/docs/FAQ';
-import FeatureRequests from './pages/docs/FeatureRequests';
-import SystemStatus from './pages/docs/SystemStatus';
-import UploadingLogo from './pages/docs/UploadingLogo';
-import ManagingBusinessInfo from './pages/docs/ManagingBusinessInfo';
-import CustomizingBrandColors from './pages/docs/CustomizingBrandColors';
-import EditingClientInfo from './pages/docs/EditingClientInfo';
-import ClientHistory from './pages/docs/ClientHistory';
-import ManagingContacts from './pages/docs/ManagingContacts';
-import PaymentTerms from './pages/docs/PaymentTerms';
-import ManagingSubscriptions from './pages/docs/ManagingSubscriptions';
-import PaymentSecurity from './pages/docs/PaymentSecurity';
+// Import documentation pages - lazy loaded
+const CreatingFirstInvoice = lazy(() => import('./pages/docs/CreatingFirstInvoice'));
+const UnderstandingTemplates = lazy(() => import('./pages/docs/UnderstandingTemplates'));
+const AddingLineItems = lazy(() => import('./pages/docs/AddingLineItems'));
+const CustomizingAppearance = lazy(() => import('./pages/docs/CustomizingAppearance'));
+const BusinessProfile = lazy(() => import('./pages/docs/BusinessProfile'));
+const PaymentLinks = lazy(() => import('./pages/docs/PaymentLinks'));
+const AddingClients = lazy(() => import('./pages/docs/AddingClients'));
+const FAQ = lazy(() => import('./pages/docs/FAQ'));
+const FeatureRequests = lazy(() => import('./pages/docs/FeatureRequests'));
+const SystemStatus = lazy(() => import('./pages/docs/SystemStatus'));
+const UploadingLogo = lazy(() => import('./pages/docs/UploadingLogo'));
+const ManagingBusinessInfo = lazy(() => import('./pages/docs/ManagingBusinessInfo'));
+const CustomizingBrandColors = lazy(() => import('./pages/docs/CustomizingBrandColors'));
+const EditingClientInfo = lazy(() => import('./pages/docs/EditingClientInfo'));
+const ClientHistory = lazy(() => import('./pages/docs/ClientHistory'));
+const ManagingContacts = lazy(() => import('./pages/docs/ManagingContacts'));
+const PaymentTerms = lazy(() => import('./pages/docs/PaymentTerms'));
+const ManagingSubscriptions = lazy(() => import('./pages/docs/ManagingSubscriptions'));
+const PaymentSecurity = lazy(() => import('./pages/docs/PaymentSecurity'));
 
-// Import all industry-specific invoice templates
-import ConstructionTemplate from "./pages/invoice-templates/Construction";
-import ContractorTemplate from "./pages/invoice-templates/Contractor";
-import PlumberTemplate from "./pages/invoice-templates/Plumber";
-import ElectricianTemplate from "./pages/invoice-templates/Electrician";
-import HVACTemplate from "./pages/invoice-templates/HVAC";
-import RoofingTemplate from "./pages/invoice-templates/Roofing";
-import PaintingTemplate from "./pages/invoice-templates/Painting";
-import HandymanTemplate from "./pages/invoice-templates/Handyman";
-import LandscapingTemplate from "./pages/invoice-templates/Landscaping";
-import CleaningTemplate from "./pages/invoice-templates/Cleaning";
-import WindowCleaningTemplate from "./pages/invoice-templates/WindowCleaning";
-import PestControlTemplate from "./pages/invoice-templates/PestControl";
-import AutoRepairTemplate from "./pages/invoice-templates/AutoRepair";
-import CarDetailingTemplate from "./pages/invoice-templates/CarDetailing";
-import TowingTemplate from "./pages/invoice-templates/Towing";
-import MovingTemplate from "./pages/invoice-templates/Moving";
-import TruckingTemplate from "./pages/invoice-templates/Trucking";
-import CourierTemplate from "./pages/invoice-templates/Courier";
-import PhotographyTemplate from "./pages/invoice-templates/Photography";
-import VideographyTemplate from "./pages/invoice-templates/Videography";
-import GraphicDesignTemplate from "./pages/invoice-templates/GraphicDesign";
-import WebDesignTemplate from "./pages/invoice-templates/WebDesign";
-import MarketingTemplate from "./pages/invoice-templates/Marketing";
-import ConsultingTemplate from "./pages/invoice-templates/Consulting";
-import CateringTemplate from "./pages/invoice-templates/Catering";
-import EventPlannerTemplate from "./pages/invoice-templates/EventPlanner";
-import SalonTemplate from "./pages/invoice-templates/Salon";
-import MassageTemplate from "./pages/invoice-templates/Massage";
-import PersonalTrainerTemplate from "./pages/invoice-templates/PersonalTrainer";
-import TutorTemplate from "./pages/invoice-templates/Tutor";
+// Import all industry-specific invoice templates - lazy loaded
+const ConstructionTemplate = lazy(() => import("./pages/invoice-templates/Construction"));
+const ContractorTemplate = lazy(() => import("./pages/invoice-templates/Contractor"));
+const PlumberTemplate = lazy(() => import("./pages/invoice-templates/Plumber"));
+const ElectricianTemplate = lazy(() => import("./pages/invoice-templates/Electrician"));
+const HVACTemplate = lazy(() => import("./pages/invoice-templates/HVAC"));
+const RoofingTemplate = lazy(() => import("./pages/invoice-templates/Roofing"));
+const PaintingTemplate = lazy(() => import("./pages/invoice-templates/Painting"));
+const HandymanTemplate = lazy(() => import("./pages/invoice-templates/Handyman"));
+const LandscapingTemplate = lazy(() => import("./pages/invoice-templates/Landscaping"));
+const CleaningTemplate = lazy(() => import("./pages/invoice-templates/Cleaning"));
+const WindowCleaningTemplate = lazy(() => import("./pages/invoice-templates/WindowCleaning"));
+const PestControlTemplate = lazy(() => import("./pages/invoice-templates/PestControl"));
+const AutoRepairTemplate = lazy(() => import("./pages/invoice-templates/AutoRepair"));
+const CarDetailingTemplate = lazy(() => import("./pages/invoice-templates/CarDetailing"));
+const TowingTemplate = lazy(() => import("./pages/invoice-templates/Towing"));
+const MovingTemplate = lazy(() => import("./pages/invoice-templates/Moving"));
+const TruckingTemplate = lazy(() => import("./pages/invoice-templates/Trucking"));
+const CourierTemplate = lazy(() => import("./pages/invoice-templates/Courier"));
+const PhotographyTemplate = lazy(() => import("./pages/invoice-templates/Photography"));
+const VideographyTemplate = lazy(() => import("./pages/invoice-templates/Videography"));
+const GraphicDesignTemplate = lazy(() => import("./pages/invoice-templates/GraphicDesign"));
+const WebDesignTemplate = lazy(() => import("./pages/invoice-templates/WebDesign"));
+const MarketingTemplate = lazy(() => import("./pages/invoice-templates/Marketing"));
+const ConsultingTemplate = lazy(() => import("./pages/invoice-templates/Consulting"));
+const CateringTemplate = lazy(() => import("./pages/invoice-templates/Catering"));
+const EventPlannerTemplate = lazy(() => import("./pages/invoice-templates/EventPlanner"));
+const SalonTemplate = lazy(() => import("./pages/invoice-templates/Salon"));
+const MassageTemplate = lazy(() => import("./pages/invoice-templates/Massage"));
+const PersonalTrainerTemplate = lazy(() => import("./pages/invoice-templates/PersonalTrainer"));
+const TutorTemplate = lazy(() => import("./pages/invoice-templates/Tutor"));
 
 const queryClient = new QueryClient();
+
+// Loading component for suspense fallback
+const PageLoader = () => (
+  <div className="flex items-center justify-center min-h-screen">
+    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+  </div>
+);
 
 const App = () => {
   return (
@@ -174,6 +184,7 @@ const App = () => {
             <Toaster />
             <Sonner />
             <BrowserRouter>
+            <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/e/:token" element={<EstimateView />} />
               <Route path="/i/:id" element={<InvoiceView />} />
@@ -340,6 +351,7 @@ const App = () => {
 
               <Route path="*" element={<NotFound />} />
             </Routes>
+            </Suspense>
           </BrowserRouter>
         </TooltipProvider>
       </AuthProvider>

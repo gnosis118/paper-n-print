@@ -20,12 +20,43 @@ export default defineConfig(({ mode }) => ({
     minify: mode === 'production' ? 'esbuild' : false,
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          router: ['react-router-dom'],
-          ui: ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-tabs'],
-          forms: ['react-hook-form', '@hookform/resolvers', 'zod'],
-          utils: ['clsx', 'tailwind-merge', 'class-variance-authority'],
+        manualChunks: (id) => {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'vendor-react';
+            }
+            if (id.includes('react-router-dom')) {
+              return 'vendor-router';
+            }
+            if (id.includes('@radix-ui')) {
+              return 'vendor-ui';
+            }
+            if (id.includes('react-hook-form') || id.includes('zod')) {
+              return 'vendor-forms';
+            }
+            if (id.includes('@tanstack')) {
+              return 'vendor-query';
+            }
+            return 'vendor';
+          }
+          if (id.includes('pages/invoice-templates/')) {
+            return 'invoice-templates';
+          }
+          if (id.includes('pages/templates/')) {
+            return 'templates';
+          }
+          if (id.includes('pages/docs/')) {
+            return 'docs';
+          }
+          if (id.includes('pages/guides/')) {
+            return 'guides';
+          }
+          if (id.includes('pages/features/')) {
+            return 'features';
+          }
+          if (id.includes('pages/trades/')) {
+            return 'trades';
+          }
         },
       },
     },
