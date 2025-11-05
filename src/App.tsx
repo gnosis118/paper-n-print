@@ -74,6 +74,11 @@ import EstimateTemplates from './pages/EstimateTemplates';
 import Estimate from './pages/Estimate';
 import TradesIndex from './pages/trades/TradesIndex';
 import TradePage from './pages/trades/TradePage';
+import Plumbers from './pages/trades/Plumbers';
+import Roofers from './pages/trades/Roofers';
+import Electricians from './pages/trades/Electricians';
+import Painters from './pages/trades/Painters';
+import Landscapers from './pages/trades/Landscapers';
 
 // Import estimate templates
 import HVACEstimateTemplate from "./pages/templates/HVACEstimateTemplate";
@@ -288,6 +293,11 @@ const App = () => {
               {/* Contractor Trades Pages */}
               <Route path="/trades" element={<TradesIndex />} />
               <Route path="/trades/:trade" element={<TradePage />} />
+              <Route path="/plumbers" element={<Plumbers />} />
+              <Route path="/roofers" element={<Roofers />} />
+              <Route path="/electricians" element={<Electricians />} />
+              <Route path="/painters" element={<Painters />} />
+              <Route path="/landscapers" element={<Landscapers />} />
 
               {/* Unique Pages Wave Doesn't Have */}
               <Route path="/why-estimates-matter" element={<WhyEstimatesMatter />} />

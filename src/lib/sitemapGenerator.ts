@@ -75,6 +75,36 @@ export const TRADE_PAGES: SitemapEntry[] = [
     priority: 0.8,
   },
   {
+    loc: 'https://www.proinvoice.app/plumbers',
+    lastmod: new Date().toISOString().split('T')[0],
+    changefreq: 'monthly',
+    priority: 0.8,
+  },
+  {
+    loc: 'https://www.proinvoice.app/roofers',
+    lastmod: new Date().toISOString().split('T')[0],
+    changefreq: 'monthly',
+    priority: 0.8,
+  },
+  {
+    loc: 'https://www.proinvoice.app/electricians',
+    lastmod: new Date().toISOString().split('T')[0],
+    changefreq: 'monthly',
+    priority: 0.8,
+  },
+  {
+    loc: 'https://www.proinvoice.app/painters',
+    lastmod: new Date().toISOString().split('T')[0],
+    changefreq: 'monthly',
+    priority: 0.8,
+  },
+  {
+    loc: 'https://www.proinvoice.app/landscapers',
+    lastmod: new Date().toISOString().split('T')[0],
+    changefreq: 'monthly',
+    priority: 0.8,
+  },
+  {
     loc: 'https://www.proinvoice.app/trades/electricians',
     lastmod: new Date().toISOString().split('T')[0],
     changefreq: 'monthly',
