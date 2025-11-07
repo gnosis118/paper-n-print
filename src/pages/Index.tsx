@@ -38,7 +38,7 @@ const Index = () => {
                   <Button asChild size="lg" className="bg-[hsl(var(--accent))] text-[hsl(var(--primary-dark))] hover:bg-[hsl(var(--accent))]/90 min-h-[48px] text-lg font-semibold">
                     <Link to="/auth">Start Free</Link>
                   </Button>
-                  <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10 min-h-[48px] text-lg">
+                  <Button asChild size="lg" variant="outline" className="border-white/80 bg-transparent text-white hover:bg-white/10 hover:border-white min-h-[48px] text-lg">
                     <Link to="/docs">See How It Works</Link>
                   </Button>
                 </div>
