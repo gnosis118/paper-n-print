@@ -4,17 +4,15 @@ import { Link } from "react-router-dom";
 import { FileText, DollarSign, FileCheck, Smartphone, Shield, Check, Zap, Wrench, Users, Home, TrendingUp } from "lucide-react";
 import { LazyTestimonialGrid } from "@/components/LazyIndex";
 import TrustSection from "@/components/TrustSection";
-import { SEOHeaders } from "@/components/SEOHeaders";
+import PageLayout from "@/components/PageLayout";
 
 const Index = () => {
   return (
-    <>
-      <SEOHeaders
-        title="ProInvoice - Professional Invoicing for Contractors & Tradespeople"
-        description="Create estimates, collect deposits, and get paid automatically when the work's done — all from your phone. Built for contractors, electricians, plumbers, and all trades."
-        canonical="https://proinvoice.lovable.app/"
-      />
-      
+    <PageLayout
+      title="ProInvoice - Professional Invoicing for Contractors & Tradespeople"
+      description="Create estimates, collect deposits, and get paid automatically when the work's done — all from your phone. Built for contractors, electricians, plumbers, and all trades."
+      canonical="https://proinvoice.lovable.app/"
+    >
       <div className="min-h-screen">
         {/* Hero Section */}
         <section className="bg-gradient-to-b from-[hsl(var(--primary))] to-[hsl(var(--primary-dark))] text-white py-16 md:py-24">
@@ -589,7 +587,7 @@ const Index = () => {
           </div>
         </section>
       </div>
-    </>
+    </PageLayout>
   );
 };
 
