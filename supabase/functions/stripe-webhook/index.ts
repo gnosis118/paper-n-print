@@ -7,10 +7,11 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+// Updated credit map for new pricing tiers
 const CREDIT_MAP = {
-  lite: 2,
-  pro: 6, 
-  agency: 15
+  starter: 25,        // 25 jobs/month for Starter ($19/month)
+  pro_crew: Infinity, // Unlimited jobs for Pro Crew ($49/month)
+  contractor_plus: Infinity  // Unlimited jobs for Contractor Plus ($99/month)
 };
 
 const logStep = (step: string, details?: any) => {
@@ -21,10 +22,17 @@ const logStep = (step: string, details?: any) => {
 // Helper to determine tier from price lookup key
 function getTierFromLookupKey(lookupKey: string): string | null {
   if (!lookupKey) return null;
-  
-  if (lookupKey.includes("lite")) return "lite";
-  if (lookupKey.includes("pro")) return "pro";
-  if (lookupKey.includes("agency")) return "agency";
+
+  // New pricing tiers
+  if (lookupKey.includes("starter")) return "starter";
+  if (lookupKey.includes("pro_crew")) return "pro_crew";
+  if (lookupKey.includes("contractor_plus")) return "contractor_plus";
+
+  // Legacy tiers (for existing customers)
+  if (lookupKey.includes("lite")) return "starter";  // Map old lite to starter
+  if (lookupKey.includes("pro") && !lookupKey.includes("pro_crew")) return "pro_crew";  // Map old pro to pro_crew
+  if (lookupKey.includes("agency")) return "contractor_plus";  // Map old agency to contractor_plus
+
   return null;
 }
 

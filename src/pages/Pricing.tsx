@@ -5,13 +5,53 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
+import { toast } from "sonner";
+import { useState } from "react";
 
 const Pricing = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+
+  const handleSubscribe = async (planType: string, billingCycle: string = "monthly") => {
+    // If not logged in, redirect to signup
+    if (!user) {
+      navigate("/get-started");
+      return;
+    }
+
+    setLoadingPlan(planType);
+
+    try {
+      const { data, error } = await supabase.functions.invoke("create-checkout", {
+        body: {
+          plan_type: planType,
+          billing_cycle: billingCycle,
+          product_type: "subscription"
+        }
+      });
+
+      if (error) throw error;
+
+      if (data?.url) {
+        // Redirect to Stripe Checkout
+        window.location.href = data.url;
+      } else {
+        throw new Error("No checkout URL received");
+      }
+    } catch (error) {
+      console.error("Checkout error:", error);
+      toast.error("Failed to start checkout. Please try again.");
+      setLoadingPlan(null);
+    }
+  };
 
   const plans = [
     {
       name: "Starter",
+      planType: "starter",
       description: "For solo tradesmen — quick bids & payments",
       price: "$19",
       period: "/month",
@@ -28,6 +68,7 @@ const Pricing = () => {
     },
     {
       name: "Pro Crew",
+      planType: "pro_crew",
       description: "For small crews managing multiple jobs",
       price: "$49",
       period: "/month",
@@ -46,6 +87,7 @@ const Pricing = () => {
     },
     {
       name: "Contractor Plus",
+      planType: "contractor_plus",
       description: "For GCs managing subs & docs",
       price: "$99",
       period: "/month",
@@ -118,13 +160,14 @@ const Pricing = () => {
                 </CardContent>
                 
                 <CardFooter>
-                  <Button 
+                  <Button
                     className="w-full"
                     variant={plan.popular ? "default" : "outline"}
                     size="lg"
-                    onClick={() => plan.cta === "Contact Sales" ? navigate("/contact") : navigate("/get-started")}
+                    onClick={() => plan.cta === "Contact Sales" ? navigate("/contact") : handleSubscribe(plan.planType)}
+                    disabled={loadingPlan === plan.planType}
                   >
-                    {plan.cta}
+                    {loadingPlan === plan.planType ? "Loading..." : plan.cta}
                   </Button>
                 </CardFooter>
               </Card>

@@ -13,14 +13,22 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-// Direct price ID mapping based on existing Stripe prices
+// NEW PRICE IDS - Updated to match pricing page ($19/$49/$99)
+// TODO: Replace these with actual price IDs after running setup-new-stripe-prices.js
 const PRICE_IDS = {
-  lite_monthly: "price_1SCDIjGpz30x93KjADgoYSMS",      // $9/month
-  lite_annual: "price_1SCDIvGpz30x93KjDmPo4w2a",       // $90/year
-  pro_monthly: "price_1SCDJ4Gpz30x93KjNOLCJgNK",       // $19/month
-  pro_annual: "price_1SCDJFGpz30x93KjrppMsUf7",        // $190/year
-  agency_monthly: "price_1SCDKrGpz30x93KjeKGawyGN",     // $39/month
-  agency_annual: "price_1SCDMRGpz30x93KjRMUamIOP",      // $390/year
+  // Starter Plan - $19/month, $190/year
+  starter_monthly: "REPLACE_WITH_STARTER_MONTHLY_PRICE_ID",      // $19/month
+  starter_annual: "REPLACE_WITH_STARTER_ANNUAL_PRICE_ID",        // $190/year
+
+  // Pro Crew Plan - $49/month, $490/year
+  pro_crew_monthly: "REPLACE_WITH_PRO_CREW_MONTHLY_PRICE_ID",    // $49/month
+  pro_crew_annual: "REPLACE_WITH_PRO_CREW_ANNUAL_PRICE_ID",      // $490/year
+
+  // Contractor Plus Plan - $99/month, $990/year
+  contractor_plus_monthly: "REPLACE_WITH_CONTRACTOR_PLUS_MONTHLY_PRICE_ID",  // $99/month
+  contractor_plus_annual: "REPLACE_WITH_CONTRACTOR_PLUS_ANNUAL_PRICE_ID",    // $990/year
+
+  // Template purchases (keep existing)
   template_onetime: "price_1SCDMZGpz30x93Kj3kh1GXZS",   // $10 one-time
   template_trial: "price_1SCDMkGpz30x93KjqjZ806yi"      // $5 trial
 } as const;
