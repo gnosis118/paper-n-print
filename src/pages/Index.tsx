@@ -228,7 +228,7 @@ const Index = () => {
             {/* Workflow Diagram */}
             <div className="max-w-4xl mx-auto mb-12">
               <div className="flex flex-wrap justify-center items-center gap-3 text-sm md:text-base">
-                <div className="bg-[hsl(var(--primary-light))] text-[hsl(var(--primary))] px-4 py-2 rounded-lg font-semibold">
+                <div className="bg-[hsl(var(--primary-light))] text-white px-4 py-2 rounded-lg font-semibold">
                   Estimate
                 </div>
                 <span className="text-muted-foreground">→</span>
@@ -236,7 +236,7 @@ const Index = () => {
                   Deposit
                 </div>
                 <span className="text-muted-foreground">→</span>
-                <div className="bg-[hsl(var(--primary-light))] text-[hsl(var(--primary))] px-4 py-2 rounded-lg font-semibold">
+                <div className="bg-[hsl(var(--primary-light))] text-white px-4 py-2 rounded-lg font-semibold">
                   Start Job
                 </div>
                 <span className="text-muted-foreground">→</span>
@@ -244,7 +244,7 @@ const Index = () => {
                   Milestones
                 </div>
                 <span className="text-muted-foreground">→</span>
-                <div className="bg-[hsl(var(--primary-light))] text-[hsl(var(--primary))] px-4 py-2 rounded-lg font-semibold">
+                <div className="bg-[hsl(var(--primary-light))] text-white px-4 py-2 rounded-lg font-semibold">
                   Final Invoice
                 </div>
                 <span className="text-muted-foreground">→</span>
