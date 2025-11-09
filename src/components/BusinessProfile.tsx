@@ -158,7 +158,7 @@ export function BusinessProfile() {
             <Building className="h-5 w-5" />
             Business Profile
           </CardTitle>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-foreground/80">
             Manage your business information for invoices and branding
           </p>
         </CardHeader>
@@ -280,14 +280,14 @@ export function BusinessProfile() {
                 disabled={!isPaid}
               />
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-foreground/70">
               This color will be used for invoice branding and accents
             </p>
           </div>
 
           {!isPaid && (
             <div className="bg-muted/50 border rounded-lg p-4">
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-foreground/80">
                 Business profile management is available with paid plans. Upgrade to customize your business information, logo, and branding.
               </p>
             </div>

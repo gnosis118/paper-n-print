@@ -50,6 +50,16 @@ export const EstimateAnalyticsDashboard: React.FC = () => {
     }
   };
 
+  // Calculate metrics
+  const totalEstimates = analytics.totalEstimates;
+  const acceptanceRate = analytics.sentEstimates > 0 
+    ? Math.round((analytics.invoicedEstimates / analytics.sentEstimates) * 100) 
+    : 0;
+  const totalValue = analytics.totalEstimateValue || 0;
+  const avgEstimate = analytics.totalDepositCollected.toLocaleString() || '0';
+  const avgResponseTime = `${analytics.averageTimeToAccept} days` || '0 days';
+  const conversionRate = analytics.conversionRate || 0;
+
   return (
     <div className="space-y-6">
       {/* Key Metrics */}
@@ -58,13 +68,15 @@ export const EstimateAnalyticsDashboard: React.FC = () => {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Estimates</CardTitle>
-            <FileText className="h-4 w-4 text-muted-foreground" />
+            <FileText className="h-4 w-4 text-foreground/60" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{analytics.totalEstimates}</div>
-            <p className="text-xs text-muted-foreground">
+            <div>
+              <p className="text-2xl font-bold">{totalEstimates}</p>
+              <p className="text-xs text-foreground/70">
               {analytics.sentEstimates} pending payment
             </p>
+            </div>
           </CardContent>
         </Card>
 
@@ -72,13 +84,15 @@ export const EstimateAnalyticsDashboard: React.FC = () => {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Conversion Rate</CardTitle>
-            <Target className="h-4 w-4 text-muted-foreground" />
+            <Target className="h-4 w-4 text-foreground/60" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{analytics.conversionRate}%</div>
-            <p className="text-xs text-muted-foreground">
+            <div>
+              <p className="text-2xl font-bold">{acceptanceRate}%</p>
+              <p className="text-xs text-foreground/70">
               {analytics.invoicedEstimates} of {analytics.sentEstimates} converted
             </p>
+            </div>
           </CardContent>
         </Card>
 
@@ -86,13 +100,15 @@ export const EstimateAnalyticsDashboard: React.FC = () => {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Value</CardTitle>
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
+            <DollarSign className="h-4 w-4 text-foreground/60" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">${analytics.totalEstimateValue.toFixed(0)}</div>
-            <p className="text-xs text-muted-foreground">
+            <div>
+              <p className="text-2xl font-bold">${totalValue.toLocaleString()}</p>
+              <p className="text-xs text-foreground/70">
               Across all estimates
             </p>
+            </div>
           </CardContent>
         </Card>
 
@@ -100,13 +116,15 @@ export const EstimateAnalyticsDashboard: React.FC = () => {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Deposits Collected</CardTitle>
-            <TrendingUp className="h-4 w-4 text-muted-foreground" />
+            <TrendingUp className="h-4 w-4 text-foreground/60" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">${analytics.totalDepositCollected.toFixed(0)}</div>
-            <p className="text-xs text-muted-foreground">
+            <div>
+              <p className="text-2xl font-bold">${avgEstimate}</p>
+              <p className="text-xs text-foreground/70">
               From accepted estimates
             </p>
+            </div>
           </CardContent>
         </Card>
 
@@ -114,13 +132,15 @@ export const EstimateAnalyticsDashboard: React.FC = () => {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Avg Time to Accept</CardTitle>
-            <Clock className="h-4 w-4 text-muted-foreground" />
+            <Clock className="h-4 w-4 text-foreground/60" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{analytics.averageTimeToAccept}</div>
-            <p className="text-xs text-muted-foreground">
+            <div>
+              <p className="text-2xl font-bold">{avgResponseTime}</p>
+              <p className="text-xs text-foreground/70">
               Days to payment
             </p>
+            </div>
           </CardContent>
         </Card>
 
@@ -128,13 +148,15 @@ export const EstimateAnalyticsDashboard: React.FC = () => {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Accepted</CardTitle>
-            <CheckCircle className="h-4 w-4 text-muted-foreground" />
+            <CheckCircle className="h-4 w-4 text-foreground/60" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{analytics.acceptedEstimates}</div>
-            <p className="text-xs text-muted-foreground">
+            <div>
+              <p className="text-2xl font-bold">{conversionRate}%</p>
+              <p className="text-xs text-foreground/70">
               Deposits received
             </p>
+            </div>
           </CardContent>
         </Card>
       </div>
@@ -153,7 +175,7 @@ export const EstimateAnalyticsDashboard: React.FC = () => {
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-2xl font-bold">{analytics.estimatesByStatus.sent}</span>
-                <span className="text-xs text-muted-foreground">
+                <span className="text-xs text-foreground/70">
                   ({Math.round((analytics.estimatesByStatus.sent / analytics.totalEstimates) * 100) || 0}%)
                 </span>
               </div>
@@ -166,7 +188,7 @@ export const EstimateAnalyticsDashboard: React.FC = () => {
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-2xl font-bold">{analytics.estimatesByStatus.accepted}</span>
-                <span className="text-xs text-muted-foreground">
+                <span className="text-xs text-foreground/70">
                   ({Math.round((analytics.estimatesByStatus.accepted / analytics.totalEstimates) * 100) || 0}%)
                 </span>
               </div>
@@ -179,7 +201,7 @@ export const EstimateAnalyticsDashboard: React.FC = () => {
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-2xl font-bold">{analytics.estimatesByStatus.invoiced}</span>
-                <span className="text-xs text-muted-foreground">
+                <span className="text-xs text-foreground/70">
                   ({Math.round((analytics.estimatesByStatus.invoiced / analytics.totalEstimates) * 100) || 0}%)
                 </span>
               </div>
@@ -208,7 +230,7 @@ export const EstimateAnalyticsDashboard: React.FC = () => {
                 <div key={estimate.id} className="flex items-center justify-between border-b pb-4 last:border-0">
                   <div>
                     <p className="font-medium">Estimate #{estimate.number}</p>
-                    <p className="text-sm text-muted-foreground">{estimate.client_name}</p>
+                    <p className="text-sm text-foreground/80">{estimate.client_name}</p>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="text-right">
