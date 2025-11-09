@@ -77,17 +77,18 @@ serve(async (req) => {
     
     let event;
     try {
-      event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
+      // ✅ CRITICAL FIX: Use async version for Deno/Edge Functions
+      event = await stripe.webhooks.constructEventAsync(body, signature, webhookSecret);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : String(err);
-      logStep("Webhook signature verification failed", { 
+      logStep("Webhook signature verification failed", {
         error: errorMessage,
         signatureHeader: signature ? "present" : "missing",
         webhookSecret: webhookSecret ? "present" : "missing"
       });
-      return new Response(`Webhook signature verification failed: ${errorMessage}`, { 
+      return new Response(`Webhook signature verification failed: ${errorMessage}`, {
         status: 400,
-        headers: corsHeaders 
+        headers: corsHeaders
       });
     }
     
