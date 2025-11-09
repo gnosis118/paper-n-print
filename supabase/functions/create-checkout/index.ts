@@ -17,16 +17,16 @@ const corsHeaders = {
 // TODO: Replace these with actual price IDs after running setup-new-stripe-prices.js
 const PRICE_IDS = {
   // Starter Plan - $19/month, $190/year
-  starter_monthly: "REPLACE_WITH_STARTER_MONTHLY_PRICE_ID",      // $19/month
-  starter_annual: "REPLACE_WITH_STARTER_ANNUAL_PRICE_ID",        // $190/year
+  starter_monthly: "price_1SRPxLGpz30x93KjrRCrinhs",      // $19/month
+  starter_annual: "price_1SRPxMGpz30x93Kj9M429XfL",        // $190/year
 
   // Pro Crew Plan - $49/month, $490/year
-  pro_crew_monthly: "REPLACE_WITH_PRO_CREW_MONTHLY_PRICE_ID",    // $49/month
-  pro_crew_annual: "REPLACE_WITH_PRO_CREW_ANNUAL_PRICE_ID",      // $490/year
+  pro_crew_monthly: "price_1SRPxMGpz30x93KjfRSUiJ2o",    // $49/month
+  pro_crew_annual: "price_1SRPxNGpz30x93Kj8Yu55kAJ",      // $490/year
 
   // Contractor Plus Plan - $99/month, $990/year
-  contractor_plus_monthly: "REPLACE_WITH_CONTRACTOR_PLUS_MONTHLY_PRICE_ID",  // $99/month
-  contractor_plus_annual: "REPLACE_WITH_CONTRACTOR_PLUS_ANNUAL_PRICE_ID",    // $990/year
+  contractor_plus_monthly: "price_1SRPxNGpz30x93KjisQ70nGa",  // $99/month
+  contractor_plus_annual: "price_1SRPxOGpz30x93Kj34Nsmm6G",    // $990/year
 
   // Template purchases (keep existing)
   template_onetime: "price_1SCDMZGpz30x93Kj3kh1GXZS",   // $10 one-time
