@@ -371,6 +371,60 @@ export type Database = {
         }
         Relationships: []
       }
+      email_logs: {
+        Row: {
+          created_at: string
+          email_type: string
+          error_message: string | null
+          estimate_id: string | null
+          id: string
+          invoice_id: string | null
+          recipient_email: string
+          sent_at: string | null
+          status: string
+          subject: string
+        }
+        Insert: {
+          created_at?: string
+          email_type: string
+          error_message?: string | null
+          estimate_id?: string | null
+          id?: string
+          invoice_id?: string | null
+          recipient_email: string
+          sent_at?: string | null
+          status?: string
+          subject: string
+        }
+        Update: {
+          created_at?: string
+          email_type?: string
+          error_message?: string | null
+          estimate_id?: string | null
+          id?: string
+          invoice_id?: string | null
+          recipient_email?: string
+          sent_at?: string | null
+          status?: string
+          subject?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "email_logs_estimate_id_fkey"
+            columns: ["estimate_id"]
+            isOneToOne: false
+            referencedRelation: "estimates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "email_logs_invoice_id_fkey"
+            columns: ["invoice_id"]
+            isOneToOne: false
+            referencedRelation: "invoices"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       estimates: {
         Row: {
           accepted_at: string | null
@@ -880,6 +934,7 @@ export type Database = {
           invoice_id: string | null
           method: string | null
           status: string | null
+          stripe_event_id: string | null
           stripe_payment_intent: string | null
         }
         Insert: {
@@ -890,6 +945,7 @@ export type Database = {
           invoice_id?: string | null
           method?: string | null
           status?: string | null
+          stripe_event_id?: string | null
           stripe_payment_intent?: string | null
         }
         Update: {
@@ -900,6 +956,7 @@ export type Database = {
           invoice_id?: string | null
           method?: string | null
           status?: string | null
+          stripe_event_id?: string | null
           stripe_payment_intent?: string | null
         }
         Relationships: [
@@ -1113,6 +1170,57 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      webhook_events: {
+        Row: {
+          created_at: string
+          error_message: string | null
+          estimate_id: string | null
+          event_type: string
+          id: string
+          invoice_id: string | null
+          processed_at: string | null
+          status: string
+          stripe_event_id: string
+        }
+        Insert: {
+          created_at?: string
+          error_message?: string | null
+          estimate_id?: string | null
+          event_type: string
+          id?: string
+          invoice_id?: string | null
+          processed_at?: string | null
+          status?: string
+          stripe_event_id: string
+        }
+        Update: {
+          created_at?: string
+          error_message?: string | null
+          estimate_id?: string | null
+          event_type?: string
+          id?: string
+          invoice_id?: string | null
+          processed_at?: string | null
+          status?: string
+          stripe_event_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "webhook_events_estimate_id_fkey"
+            columns: ["estimate_id"]
+            isOneToOne: false
+            referencedRelation: "estimates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "webhook_events_invoice_id_fkey"
+            columns: ["invoice_id"]
+            isOneToOne: false
+            referencedRelation: "invoices"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       weekly_reports: {
         Row: {
