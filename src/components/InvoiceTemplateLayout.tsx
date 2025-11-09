@@ -103,7 +103,7 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
       {/* Breadcrumb */}
       <div className="bg-muted/20 py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <nav className="flex items-center space-x-2 text-sm text-muted-foreground">
+          <nav className="flex items-center space-x-2 text-sm text-foreground/70">
             <Link to="/" className="hover:text-primary">Home</Link>
             <span>/</span>
             <Link to="/invoice-templates" className="hover:text-primary">Invoice Templates</Link>
@@ -149,7 +149,7 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
               <h2 className="text-2xl font-bold text-primary mb-4">
                 Stop Losing Money on {template.title} Projects
               </h2>
-              <p className="text-muted-foreground mb-6">
+              <p className="text-foreground/80 mb-6">
                 {template.description} Our template eliminates common billing mistakes and gets you paid faster with professional formatting and embedded payment processing.
               </p>
               
@@ -195,7 +195,7 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
                 <p className="text-lg font-medium text-primary mb-2">
                   Professional {template.title} Invoice Generator
                 </p>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-foreground/70 text-sm">
                   Industry-specific fields • Automatic calculations • Stripe integration
                 </p>
               </div>
@@ -207,7 +207,7 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
                 </Button>
               </Link>
               
-              <p className="text-xs text-muted-foreground mt-2">
+              <p className="text-xs text-foreground/70 mt-2">
                 No signup required • Free to use • Professional templates
               </p>
             </CardContent>
@@ -224,24 +224,24 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
             <Card className="text-center border-0 bg-white/50">
               <CardContent className="p-6">
                 <div className="text-3xl font-bold text-primary mb-2">3x</div>
-                <p className="text-sm font-medium text-muted-foreground">Faster Payment Collection</p>
-                <p className="text-xs text-muted-foreground mt-2">Average 7 days vs 30+ days</p>
+                <p className="text-sm font-medium text-foreground/80">Faster Payment Collection</p>
+                <p className="text-xs text-foreground/70 mt-2">Average 7 days vs 30+ days</p>
               </CardContent>
             </Card>
 
             <Card className="text-center border-0 bg-white/50">
               <CardContent className="p-6">
                 <div className="text-3xl font-bold text-primary mb-2">70%</div>
-                <p className="text-sm font-medium text-muted-foreground">Fewer Late Payments</p>
-                <p className="text-xs text-muted-foreground mt-2">With embedded payment links</p>
+                <p className="text-sm font-medium text-foreground/80">Fewer Late Payments</p>
+                <p className="text-xs text-foreground/70 mt-2">With embedded payment links</p>
               </CardContent>
             </Card>
 
             <Card className="text-center border-0 bg-white/50">
               <CardContent className="p-6">
                 <div className="text-3xl font-bold text-primary mb-2">30 sec</div>
-                <p className="text-sm font-medium text-muted-foreground">Invoice Creation Time</p>
-                <p className="text-xs text-muted-foreground mt-2">Industry-specific templates</p>
+                <p className="text-sm font-medium text-foreground/80">Invoice Creation Time</p>
+                <p className="text-xs text-foreground/70 mt-2">Industry-specific templates</p>
               </CardContent>
             </Card>
           </div>
@@ -260,7 +260,7 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
                   <Download className="w-6 h-6 text-red-600" />
                 </div>
                 <h3 className="font-semibold mb-2 text-foreground">PDF Template</h3>
-                <p className="text-sm text-muted-foreground mb-4">
+                <p className="text-sm text-foreground/70 mb-4">
                   Fillable PDF with {template.title.toLowerCase()} specific fields
                 </p>
                 <Button 
@@ -280,7 +280,7 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
                   <Download className="w-6 h-6 text-blue-600" />
                 </div>
                 <h3 className="font-semibold mb-2 text-foreground">Word Template</h3>
-                <p className="text-sm text-muted-foreground mb-4">
+                <p className="text-sm text-foreground/70 mb-4">
                   Editable Word document for customization
                 </p>
                 <Button 
@@ -300,7 +300,7 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
                   <Download className="w-6 h-6 text-green-600" />
                 </div>
                 <h3 className="font-semibold mb-3 text-foreground">Excel Template</h3>
-                <p className="text-sm text-muted-foreground mb-4">
+                <p className="text-sm text-foreground/70 mb-4">
                   Spreadsheet with automatic calculations
                 </p>
                 <Button 
@@ -328,7 +328,7 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
                 <h3 className="font-semibold mb-3">
                   How do I create a {template.title.toLowerCase()} invoice?
                 </h3>
-                <p className="text-muted-foreground">
+                <p className="text-foreground/80">
                   Use our free {template.title.toLowerCase()} invoice template above. Simply fill in your business details, add line items specific to {template.title.toLowerCase()} work, and download or send with embedded payment links. Our generator includes industry-specific fields for accurate billing.
                 </p>
               </CardContent>
@@ -339,7 +339,7 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
                 <h3 className="font-semibold mb-3">
                   What should be on a {template.title.toLowerCase()} invoice?
                 </h3>
-                <p className="text-muted-foreground">
+                <p className="text-foreground/80">
                   A {template.title.toLowerCase()} invoice should include: {template.lineItems.slice(0, 3).join(', ')}, payment terms, your business information, and clear descriptions of work performed. Include any industry-specific requirements and compliance details.
                 </p>
               </CardContent>
@@ -350,7 +350,7 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
                 <h3 className="font-semibold mb-3">
                   Can I take deposits or partial payments for {template.title.toLowerCase()} work?
                 </h3>
-                <p className="text-muted-foreground">
+                <p className="text-foreground/80">
                   Yes, our {template.title.toLowerCase()} invoice template supports deposits and partial payments. You can request upfront deposits (commonly {template.paymentTerms.includes('deposit') ? template.paymentTerms : '25-50%'}) and set up milestone-based billing for larger projects.
                 </p>
               </CardContent>

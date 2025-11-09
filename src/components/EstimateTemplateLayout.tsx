@@ -111,7 +111,7 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
       {/* Breadcrumb */}
       <div className="bg-muted/20 py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <nav className="flex items-center space-x-2 text-sm text-muted-foreground">
+          <nav className="flex items-center space-x-2 text-sm text-foreground/70">
             <Link to="/" className="hover:text-primary">Home</Link>
             <span>/</span>
             <Link to="/estimate-templates" className="hover:text-primary">Estimate Templates</Link>
@@ -179,7 +179,7 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
           <div className="max-w-4xl mx-auto">
             <Card className="border-2 border-primary/20 shadow-lg">
               <CardContent className="p-8">
-                <div className="text-sm text-muted-foreground mb-4 text-center">
+                <div className="text-sm text-foreground/70 mb-4 text-center">
                   ✓ Sample with watermark for preview
                 </div>
                 
@@ -188,14 +188,14 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
                   <div className="flex justify-between items-start">
                     <div>
                       <h3 className="text-2xl font-bold text-primary">ESTIMATE</h3>
-                      <p className="text-muted-foreground">Estimate #EST-2024-001</p>
-                      <p className="text-muted-foreground">Date: {new Date().toLocaleDateString()}</p>
-                      <p className="text-muted-foreground">Valid for: 30 days</p>
+                      <p className="text-foreground/70">Estimate #EST-2024-001</p>
+                      <p className="text-foreground/70">Date: {new Date().toLocaleDateString()}</p>
+                      <p className="text-foreground/70">Valid for: 30 days</p>
                     </div>
                     <div className="text-right">
                       <p className="font-semibold">[Your Business Name]</p>
-                      <p className="text-sm text-muted-foreground">[Address]</p>
-                      <p className="text-sm text-muted-foreground">[Phone] • [Email]</p>
+                      <p className="text-sm text-foreground/70">[Address]</p>
+                      <p className="text-sm text-foreground/70">[Phone] • [Email]</p>
                     </div>
                   </div>
                 </div>
@@ -208,7 +208,7 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
                       <span className="font-medium">{template.sampleFields.serviceDescription}</span>
                       <span className="font-semibold">{template.averageAmount}</span>
                     </div>
-                    <p className="text-sm text-muted-foreground mb-3">
+                    <p className="text-sm text-foreground/70 mb-3">
                       {template.sampleFields.rateType}
                     </p>
                     
@@ -231,7 +231,7 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
                     <span>Deposit Required ({template.paymentTerms.split(',')[0]}):</span>
                     <span>$1,425</span>
                   </div>
-                  <p className="text-sm text-muted-foreground mt-2">Payment Terms: {template.paymentTerms}</p>
+                  <p className="text-sm text-foreground/70 mt-2">Payment Terms: {template.paymentTerms}</p>
                 </div>
 
                 {/* Accept Button Preview */}
@@ -239,7 +239,7 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
                   <Button className="w-full" size="lg" disabled>
                     Accept Estimate & Pay Deposit
                   </Button>
-                  <p className="text-xs text-center text-muted-foreground mt-2">
+                  <p className="text-xs text-center text-foreground/70 mt-2">
                     Customer can accept and pay online with credit card, Apple Pay, or ACH
                   </p>
                 </div>
@@ -266,15 +266,15 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
                 <div className="space-y-4">
                   <div>
                     <h4 className="font-semibold text-sm mb-2">Your Business Details</h4>
-                    <p className="text-sm text-muted-foreground">Business name, address, phone, email, and license number (if applicable)</p>
+                    <p className="text-sm text-foreground/70">Business name, address, phone, email, and license number (if applicable)</p>
                   </div>
                   <div>
                     <h4 className="font-semibold text-sm mb-2">Client Information</h4>
-                    <p className="text-sm text-muted-foreground">Client name, project address, contact details, and project scope</p>
+                    <p className="text-sm text-foreground/70">Client name, project address, contact details, and project scope</p>
                   </div>
                   <div>
                     <h4 className="font-semibold text-sm mb-2">Estimate Details</h4>
-                    <p className="text-sm text-muted-foreground">Estimate number, date, validity period, and project timeline</p>
+                    <p className="text-sm text-foreground/70">Estimate number, date, validity period, and project timeline</p>
                   </div>
                 </div>
               </CardContent>
@@ -292,7 +292,7 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
                   {template.lineItems.slice(0, 4).map((item, index) => (
                     <div key={index}>
                       <h4 className="font-semibold text-sm mb-2">{item}</h4>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-sm text-foreground/70">
                         Detailed breakdown with quantities and rates
                       </p>
                     </div>
@@ -336,7 +336,7 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
                   <DollarSign className="w-5 h-5 mr-2 text-green-600" />
                   Online Deposit Collection
                 </h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-foreground/70">
                   Accept deposits instantly via credit card, Apple Pay, Google Pay, or ACH bank transfer. 
                   No more chasing down checks or waiting for wire transfers.
                 </p>
@@ -349,7 +349,7 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
                   <Zap className="w-5 h-5 mr-2 text-primary" />
                   Auto-Convert to Invoice
                 </h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-foreground/70">
                   When a customer accepts your estimate and pays the deposit, it automatically converts 
                   to an invoice with the remaining balance due. Saves you time and reduces errors.
                 </p>
@@ -362,7 +362,7 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
                   <Shield className="w-5 h-5 mr-2 text-blue-600" />
                   Professional Appearance
                 </h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-foreground/70">
                   Stand out from competitors with a polished, industry-specific estimate template. 
                   Add your logo, customize colors, and include your terms and conditions.
                 </p>
@@ -375,7 +375,7 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
                   <Star className="w-5 h-5 mr-2 text-yellow-600" />
                   Mobile-Friendly
                 </h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-foreground/70">
                   Customers can review and accept estimates on any device - desktop, tablet, or mobile. 
                   Works perfectly on-site or from anywhere.
                 </p>
@@ -397,7 +397,7 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
                   <Download className="w-8 h-8 text-red-600" />
                 </div>
                 <h3 className="font-bold mb-2 text-foreground">PDF Template</h3>
-                <p className="text-sm text-muted-foreground mb-4">
+                <p className="text-sm text-foreground/70 mb-4">
                   Fillable PDF format with professional styling
                 </p>
                 <Button 
@@ -416,7 +416,7 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
                   <Download className="w-8 h-8 text-blue-600" />
                 </div>
                 <h3 className="font-bold mb-2 text-foreground">Word Template</h3>
-                <p className="text-sm text-muted-foreground mb-4">
+                <p className="text-sm text-foreground/70 mb-4">
                   Fully editable Microsoft Word document
                 </p>
                 <Button 
@@ -435,7 +435,7 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
                   <Download className="w-8 h-8 text-green-600" />
                 </div>
                 <h3 className="font-bold mb-2 text-foreground">Excel Template</h3>
-                <p className="text-sm text-muted-foreground mb-4">
+                <p className="text-sm text-foreground/70 mb-4">
                   Spreadsheet with automatic calculations
                 </p>
                 <Button 
@@ -461,7 +461,7 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
               <Card key={index}>
                 <CardContent className="p-6">
                   <h3 className="font-bold mb-3 text-lg">{faq.name}</h3>
-                  <p className="text-muted-foreground">{faq.acceptedAnswer.text}</p>
+                  <p className="text-foreground/80">{faq.acceptedAnswer.text}</p>
                 </CardContent>
               </Card>
             ))}
