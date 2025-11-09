@@ -3,7 +3,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { LogoUpload } from "@/components/LogoUpload";
-import { Plus, Trash2, Building, User, FileText, Calculator } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Plus, Trash2, Building, User, FileText, Calculator, HelpCircle } from "lucide-react";
 
 interface InvoiceFormProps {
   data: any;
@@ -29,13 +30,22 @@ const InvoiceForm = ({ data, onUpdate }: InvoiceFormProps) => {
   };
 
   return (
-    <div className="space-y-8">
-      {/* Business Information */}
-      <section className="space-y-4">
-        <div className="flex items-center space-x-2 mb-4">
-          <Building className="w-5 h-5 text-invoice-brand" />
-          <h3 className="text-lg font-semibold">Your Business</h3>
-        </div>
+    <TooltipProvider>
+      <div className="space-y-8">
+        {/* Business Information */}
+        <section className="space-y-4">
+          <div className="flex items-center space-x-2 mb-4">
+            <Building className="w-5 h-5 text-invoice-brand" />
+            <h3 className="text-lg font-semibold">Your Business</h3>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <HelpCircle className="w-4 h-4 text-muted-foreground cursor-help" />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="max-w-xs">This information appears at the top of your invoice. Make sure it's accurate!</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
@@ -254,6 +264,14 @@ const InvoiceForm = ({ data, onUpdate }: InvoiceFormProps) => {
           <div className="flex items-center space-x-2">
             <Calculator className="w-5 h-5 text-invoice-brand" />
             <h3 className="text-lg font-semibold">Line Items</h3>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <HelpCircle className="w-4 h-4 text-muted-foreground cursor-help" />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="max-w-xs">Add each service or product. Quantity × Rate = Total for each line.</p>
+              </TooltipContent>
+            </Tooltip>
           </div>
           <Button onClick={addLineItem} size="sm" variant="outline">
             <Plus className="w-4 h-4 mr-2" />
@@ -320,7 +338,17 @@ const InvoiceForm = ({ data, onUpdate }: InvoiceFormProps) => {
 
       {/* Totals */}
       <section className="space-y-4">
-        <h3 className="text-lg font-semibold">Totals & Adjustments</h3>
+        <div className="flex items-center space-x-2 mb-4">
+          <h3 className="text-lg font-semibold">Totals & Adjustments</h3>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <HelpCircle className="w-4 h-4 text-muted-foreground cursor-help" />
+            </TooltipTrigger>
+            <TooltipContent>
+              <p className="max-w-xs">Add tax rate (%) for automatic calculation. Discount and shipping are optional fixed amounts.</p>
+            </TooltipContent>
+          </Tooltip>
+        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
@@ -420,7 +448,8 @@ const InvoiceForm = ({ data, onUpdate }: InvoiceFormProps) => {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </TooltipProvider>
   );
 };
 

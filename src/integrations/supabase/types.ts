@@ -982,6 +982,7 @@ export type Database = {
           email: string | null
           id: string
           invoice_count: number
+          onboarding_completed: boolean | null
           plan: string
           scan_count: number
           scan_limit: number
@@ -993,6 +994,7 @@ export type Database = {
           email?: string | null
           id: string
           invoice_count?: number
+          onboarding_completed?: boolean | null
           plan?: string
           scan_count?: number
           scan_limit?: number
@@ -1004,6 +1006,7 @@ export type Database = {
           email?: string | null
           id?: string
           invoice_count?: number
+          onboarding_completed?: boolean | null
           plan?: string
           scan_count?: number
           scan_limit?: number

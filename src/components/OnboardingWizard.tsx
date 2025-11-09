@@ -78,15 +78,28 @@ const OnboardingWizard = ({ userId, onComplete }: OnboardingWizardProps) => {
     setCurrentStep(3);
   };
 
-  const handlePaymentSetup = () => {
-    toast.success('Onboarding complete! 🎉');
-    navigate('/invoice', { 
-      state: { 
-        clientName, 
-        serviceDescription 
-      } 
-    });
-    onComplete?.();
+  const handlePaymentSetup = async () => {
+    try {
+      // Mark onboarding as complete
+      const { error } = await supabase
+        .from('profiles')
+        .update({ onboarding_completed: true })
+        .eq('id', userId);
+
+      if (error) throw error;
+
+      toast.success('Onboarding complete! 🎉');
+      navigate('/invoice', { 
+        state: { 
+          clientName, 
+          serviceDescription 
+        } 
+      });
+      onComplete?.();
+    } catch (error) {
+      console.error('Error completing onboarding:', error);
+      toast.error('Failed to complete onboarding');
+    }
   };
 
   return (

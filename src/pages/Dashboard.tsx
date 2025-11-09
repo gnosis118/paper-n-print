@@ -5,11 +5,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { SubscriptionStatus } from "@/components/SubscriptionStatus";
 import PageLayout from "@/components/PageLayout";
 import { useAuth } from "@/hooks/useAuth";
+import { useOnboarding } from "@/hooks/useOnboarding";
+import OnboardingWizard from "@/components/OnboardingWizard";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 
 export default function Dashboard() {
   const { user } = useAuth();
+  const { isOnboardingComplete, isLoading: onboardingLoading, markOnboardingComplete } = useOnboarding();
 
   // Fetch recent invoices
   const { data: invoices = [] } = useQuery({
@@ -49,6 +52,11 @@ export default function Dashboard() {
     },
     enabled: !!user,
   });
+
+  // Show onboarding wizard for new users
+  if (!onboardingLoading && user && !isOnboardingComplete) {
+    return <OnboardingWizard userId={user.id} onComplete={markOnboardingComplete} />;
+  }
 
   return (
     <PageLayout
