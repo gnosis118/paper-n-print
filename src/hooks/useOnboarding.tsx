@@ -20,14 +20,16 @@ export const useOnboarding = () => {
           .from('profiles')
           .select('onboarding_completed')
           .eq('id', user.id)
-          .single();
+          .maybeSingle();
 
         if (error) throw error;
 
-        setIsOnboardingComplete(data?.onboarding_completed ?? false);
+        // If no profile exists or onboarding_completed is false/null, show wizard
+        setIsOnboardingComplete(data?.onboarding_completed === true);
       } catch (error) {
         console.error('Error checking onboarding status:', error);
-        setIsOnboardingComplete(true);
+        // On error, default to showing onboarding for safety
+        setIsOnboardingComplete(false);
       } finally {
         setIsLoading(false);
       }
