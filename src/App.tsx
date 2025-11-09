@@ -318,6 +318,7 @@ const App = () => {
               <Route path="/templates/cleaning-estimate-template" element={<CleaningEstimateTemplate />} />
               
               <Route path="/pricing" element={<Pricing />} />
+              <Route path="/get-started" element={<GetStarted />} />
               <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
               <Route path="/templates/:trade/:location" element={<ProgrammaticSEO />} />
               <Route path="/get-started" element={<GetStarted />} />

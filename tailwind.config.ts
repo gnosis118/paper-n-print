@@ -46,6 +46,10 @@ export default {
           light: "hsl(var(--accent-light))",
           dark: "hsl(var(--accent-dark))",
         },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          light: "hsl(var(--success-light))",
+        },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
