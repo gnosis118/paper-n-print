@@ -122,36 +122,36 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
       </div>
 
       {/* Header */}
-      <div className="bg-gradient-to-br from-primary-light to-accent-light py-16">
+      <div className="bg-gradient-to-br from-primary to-primary-dark py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold text-primary mb-6">
+          <h1 className="text-4xl sm:text-5xl font-bold text-primary-foreground mb-6">
             Free {template.title} Estimate Template
           </h1>
-          <p className="text-xl text-primary/80 mb-8 max-w-4xl mx-auto">
+          <p className="text-xl text-primary-foreground/90 mb-8 max-w-4xl mx-auto">
             Professional {template.title.toLowerCase()} estimate template with online deposit collection. 
             Accept deposits instantly and auto-convert to invoices when accepted.
           </p>
 
           {/* Key Benefits Row */}
           <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <div className="flex items-center space-x-2 bg-white/90 rounded-full px-4 py-2 text-sm font-medium">
+            <div className="flex items-center space-x-2 bg-white rounded-full px-4 py-2 text-sm font-medium shadow-md">
               <Star className="w-4 h-4 text-yellow-500" />
-              <span>Free to Use</span>
+              <span className="text-foreground">Free to Use</span>
             </div>
-            <div className="flex items-center space-x-2 bg-white/90 rounded-full px-4 py-2 text-sm font-medium">
+            <div className="flex items-center space-x-2 bg-white rounded-full px-4 py-2 text-sm font-medium shadow-md">
               <Zap className="w-4 h-4 text-primary" />
-              <span>Online Deposits</span>
+              <span className="text-foreground">Online Deposits</span>
             </div>
-            <div className="flex items-center space-x-2 bg-white/90 rounded-full px-4 py-2 text-sm font-medium">
+            <div className="flex items-center space-x-2 bg-white rounded-full px-4 py-2 text-sm font-medium shadow-md">
               <Shield className="w-4 h-4 text-green-600" />
-              <span>Auto-Convert to Invoice</span>
+              <span className="text-foreground">Auto-Convert to Invoice</span>
             </div>
           </div>
 
           {/* Primary CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/estimates">
-              <Button size="lg" className="text-lg px-8 py-3">
+              <Button size="lg" className="text-lg px-8 py-3 bg-accent hover:bg-accent-dark text-foreground font-semibold shadow-md">
                 <Calculator className="w-5 h-5 mr-2" />
                 Create Estimate Online Free
               </Button>
@@ -159,7 +159,7 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
             <Button 
               size="lg" 
               variant="outline" 
-              className="text-lg px-8 py-3 bg-white/90 hover:bg-white"
+              className="text-lg px-8 py-3 bg-white hover:bg-white border-2 border-white text-foreground font-semibold shadow-md"
               onClick={() => handleDownload('pdf')}
             >
               <Download className="w-5 h-5 mr-2" />
@@ -494,23 +494,23 @@ export const EstimateTemplateLayout: React.FC<EstimateTemplateLayoutProps> = ({ 
         </div>
 
         {/* Final CTA */}
-        <div className="text-center bg-gradient-to-r from-primary to-primary-dark text-white rounded-xl p-12">
+        <div className="text-center bg-gradient-to-r from-primary to-primary-dark text-primary-foreground rounded-xl p-12 shadow-large">
           <h2 className="text-3xl font-bold mb-4">
             Ready to Win More {template.title} Projects?
           </h2>
-          <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+          <p className="text-xl mb-8 text-primary-foreground/95 max-w-2xl mx-auto">
             Create professional estimates, collect deposits online, and get paid faster.
             Start your free trial today - no credit card required.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/estimates">
-              <Button size="lg" variant="secondary" className="text-lg px-8">
+              <Button size="lg" className="text-lg px-8 bg-accent hover:bg-accent-dark text-foreground font-semibold shadow-md">
                 <Calculator className="w-5 h-5 mr-2" />
                 Create Your First Estimate Free
               </Button>
             </Link>
             <Link to="/estimate-templates">
-              <Button size="lg" variant="outline" className="text-lg px-8 bg-white/10 hover:bg-white/20 text-white border-white/30">
+              <Button size="lg" variant="outline" className="text-lg px-8 bg-white hover:bg-white border-2 border-white text-foreground font-semibold shadow-md">
                 View All Templates
               </Button>
             </Link>

@@ -114,28 +114,28 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
       </div>
 
       {/* Header */}
-      <div className="bg-gradient-to-br from-primary-light to-accent-light py-12 sm:py-16">
+      <div className="bg-gradient-to-br from-primary to-primary-dark py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary-foreground mb-4">
             {template.title} Invoice Template
           </h1>
-          <p className="text-lg sm:text-xl text-primary/80 mb-6 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-primary-foreground/90 mb-6 max-w-3xl mx-auto">
             Free PDF, Word & Excel formats. Create professional {template.title.toLowerCase()} invoices in 30 seconds with embedded Stripe checkout. Get paid 3x faster with smart payment reminders.
           </p>
 
           {/* Key Stats */}
           <div className="flex flex-wrap justify-center gap-6 text-sm">
-            <div className="flex items-center space-x-2 bg-white/80 rounded-full px-4 py-2">
+            <div className="flex items-center space-x-2 bg-white rounded-full px-4 py-2 shadow-md">
               <DollarSign className="w-4 h-4 text-primary" />
-              <span>Avg: {template.averageAmount}</span>
+              <span className="text-foreground font-medium">Avg: {template.averageAmount}</span>
             </div>
-            <div className="flex items-center space-x-2 bg-white/80 rounded-full px-4 py-2">
+            <div className="flex items-center space-x-2 bg-white rounded-full px-4 py-2 shadow-md">
               <Clock className="w-4 h-4 text-primary" />
-              <span>{template.paymentTerms}</span>
+              <span className="text-foreground font-medium">{template.paymentTerms}</span>
             </div>
-            <div className="flex items-center space-x-2 bg-white/80 rounded-full px-4 py-2">
+            <div className="flex items-center space-x-2 bg-white rounded-full px-4 py-2 shadow-md">
               <Users className="w-4 h-4 text-primary" />
-              <span>Industry Standard</span>
+              <span className="text-foreground font-medium">Industry Standard</span>
             </div>
           </div>
         </div>
@@ -201,7 +201,7 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
               </div>
               
               <Link to="/invoice">
-                <Button size="lg" className="mr-4 mb-2">
+                <Button size="lg" className="mr-4 mb-2 bg-primary hover:bg-primary-dark text-primary-foreground font-semibold shadow-md">
                   <ArrowRight className="w-4 h-4 mr-2" />
                   Create {template.title} Invoice
                 </Button>
@@ -359,15 +359,15 @@ export const InvoiceTemplateLayout: React.FC<InvoiceTemplateLayoutProps> = ({ te
         </div>
 
         {/* CTA Section */}
-        <div className="text-center bg-primary text-primary-foreground rounded-lg p-8">
+        <div className="text-center bg-gradient-to-br from-primary to-primary-dark text-primary-foreground rounded-lg p-8 shadow-large">
           <h2 className="text-2xl font-bold mb-4">
             Ready to Get Paid Faster?
           </h2>
-          <p className="text-lg opacity-90 mb-6">
-            Join thousands of {template.title.toLowerCase()} professionals using InvoicePro
+          <p className="text-lg text-primary-foreground/95 mb-6">
+            Join thousands of {template.title.toLowerCase()} professionals using ProInvoice
           </p>
           <Link to="/invoice">
-            <Button size="lg" variant="secondary">
+            <Button size="lg" variant="secondary" className="bg-accent hover:bg-accent-dark text-foreground font-semibold shadow-md">
               <FileText className="w-4 h-4 mr-2" />
               Create Your {template.title} Invoice Now
             </Button>
