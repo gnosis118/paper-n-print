@@ -106,13 +106,13 @@ const CookieBanner = () => {
               <h2 id="cookie-banner-title" className="font-semibold text-lg mb-2">
                 We value your privacy
               </h2>
-              <p id="cookie-banner-description" className="text-sm text-muted-foreground mb-4">
+              <p id="cookie-banner-description" className="text-sm text-foreground/90 mb-4">
                 We use cookies and similar technologies to enhance your browsing experience, 
                 provide personalized content, analyze site traffic, and understand where our 
                 visitors are coming from. By clicking "Accept All", you consent to our use 
                 of cookies.
               </p>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-foreground/80">
                 You can manage your preferences at any time in our{' '}
                 <Link 
                   to="/cookies" 
