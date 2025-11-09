@@ -4,17 +4,15 @@ import { Link } from "react-router-dom";
 import { FileText, DollarSign, FileCheck, Smartphone, Shield, Check, Zap, Wrench, Users, Home, TrendingUp } from "lucide-react";
 import { LazyTestimonialGrid } from "@/components/LazyIndex";
 import TrustSection from "@/components/TrustSection";
-import { SEOHeaders } from "@/components/SEOHeaders";
+import PageLayout from "@/components/PageLayout";
 
 const Index = () => {
   return (
-    <>
-      <SEOHeaders
-        title="ProInvoice - Professional Invoicing for Contractors & Tradespeople"
-        description="Create estimates, collect deposits, and get paid automatically when the work's done — all from your phone. Built for contractors, electricians, plumbers, and all trades."
-        canonical="https://proinvoice.lovable.app/"
-      />
-      
+    <PageLayout
+      title="ProInvoice - Professional Invoicing for Contractors & Tradespeople"
+      description="Create estimates, collect deposits, and get paid automatically when the work's done — all from your phone. Built for contractors, electricians, plumbers, and all trades."
+      canonical="https://proinvoice.lovable.app/"
+    >
       <div className="min-h-screen">
         {/* Hero Section */}
         <section className="bg-gradient-to-b from-[hsl(var(--primary))] to-[hsl(var(--primary-dark))] text-white py-16 md:py-24">
@@ -40,7 +38,7 @@ const Index = () => {
                   <Button asChild size="lg" className="bg-[hsl(var(--accent))] text-[hsl(var(--primary-dark))] hover:bg-[hsl(var(--accent))]/90 min-h-[48px] text-lg font-semibold">
                     <Link to="/auth">Start Free</Link>
                   </Button>
-                  <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10 min-h-[48px] text-lg">
+                  <Button asChild size="lg" variant="outline" className="border-white/80 bg-transparent text-white hover:bg-white/10 hover:border-white min-h-[48px] text-lg">
                     <Link to="/docs">See How It Works</Link>
                   </Button>
                 </div>
@@ -230,7 +228,7 @@ const Index = () => {
             {/* Workflow Diagram */}
             <div className="max-w-4xl mx-auto mb-12">
               <div className="flex flex-wrap justify-center items-center gap-3 text-sm md:text-base">
-                <div className="bg-[hsl(var(--primary-light))] text-[hsl(var(--primary))] px-4 py-2 rounded-lg font-semibold">
+                <div className="bg-[hsl(var(--primary-light))] text-white px-4 py-2 rounded-lg font-semibold">
                   Estimate
                 </div>
                 <span className="text-muted-foreground">→</span>
@@ -238,7 +236,7 @@ const Index = () => {
                   Deposit
                 </div>
                 <span className="text-muted-foreground">→</span>
-                <div className="bg-[hsl(var(--primary-light))] text-[hsl(var(--primary))] px-4 py-2 rounded-lg font-semibold">
+                <div className="bg-[hsl(var(--primary-light))] text-white px-4 py-2 rounded-lg font-semibold">
                   Start Job
                 </div>
                 <span className="text-muted-foreground">→</span>
@@ -246,7 +244,7 @@ const Index = () => {
                   Milestones
                 </div>
                 <span className="text-muted-foreground">→</span>
-                <div className="bg-[hsl(var(--primary-light))] text-[hsl(var(--primary))] px-4 py-2 rounded-lg font-semibold">
+                <div className="bg-[hsl(var(--primary-light))] text-white px-4 py-2 rounded-lg font-semibold">
                   Final Invoice
                 </div>
                 <span className="text-muted-foreground">→</span>
@@ -589,7 +587,7 @@ const Index = () => {
           </div>
         </section>
       </div>
-    </>
+    </PageLayout>
   );
 };
 

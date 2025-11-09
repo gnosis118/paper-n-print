@@ -170,8 +170,13 @@ const queryClient = new QueryClient();
 
 // Loading component for suspense fallback
 const PageLoader = () => (
-  <div className="flex items-center justify-center min-h-screen">
-    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+  <div className="flex flex-col items-center justify-center min-h-screen bg-background">
+    <div className="relative">
+      <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary/20 border-t-primary"></div>
+      <div className="mt-4 text-center">
+        <p className="text-sm text-muted-foreground">Loading...</p>
+      </div>
+    </div>
   </div>
 );
 
