@@ -122,11 +122,13 @@ serve(async (req) => {
     );
 
   } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    const errorStack = error instanceof Error ? error.stack : undefined;
     console.error('Error in create-stripe-customer function:', error);
     return new Response(
       JSON.stringify({
-        error: error.message,
-        details: error.stack
+        error: errorMessage,
+        details: errorStack
       }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
