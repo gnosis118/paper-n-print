@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FileText, Plus, Users, DollarSign, TrendingUp } from "lucide-react";
+import { FileText, Plus, Users, DollarSign, TrendingUp, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { SubscriptionStatus } from "@/components/SubscriptionStatus";
@@ -108,6 +108,22 @@ export default function Dashboard() {
             </Card>
           </Link>
 
+          <Link to="/analytics">
+            <Card className="hover:border-primary transition-colors cursor-pointer">
+              <CardContent className="flex items-center gap-4 p-6">
+                <div className="bg-purple-100 dark:bg-purple-900/20 p-3 rounded-full">
+                  <BarChart3 className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">Analytics</p>
+                  <p className="text-2xl font-bold">View</p>
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2">
           <Card>
             <CardContent className="flex items-center gap-4 p-6">
               <div className="bg-green-100 dark:bg-green-900/20 p-3 rounded-full">

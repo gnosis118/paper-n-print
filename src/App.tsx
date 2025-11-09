@@ -75,6 +75,7 @@ const CarpetCleanerInvoiceTemplate = lazy(() => import("./pages/templates/Carpet
 const GetStarted = lazy(() => import('./pages/GetStarted'));
 const EstimateTemplates = lazy(() => import('./pages/EstimateTemplates'));
 const Estimate = lazy(() => import('./pages/Estimate'));
+const Analytics = lazy(() => import('./pages/Analytics'));
 const TradesIndex = lazy(() => import('./pages/trades/TradesIndex'));
 const TradePage = lazy(() => import('./pages/trades/TradePage'));
 const Plumbers = lazy(() => import('./pages/trades/Plumbers'));
@@ -317,6 +318,7 @@ const App = () => {
               <Route path="/templates/cleaning-estimate-template" element={<CleaningEstimateTemplate />} />
               
               <Route path="/pricing" element={<Pricing />} />
+              <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
               <Route path="/templates/:trade/:location" element={<ProgrammaticSEO />} />
               <Route path="/get-started" element={<GetStarted />} />
               <Route path="/estimate-templates" element={<EstimateTemplates />} />
