@@ -138,11 +138,12 @@ serve(async (req) => {
         });
 
       } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : String(error);
         console.error(`Error processing user ${subscription.user_id}:`, error);
         results.push({
           userId: subscription.user_id,
           success: false,
-          error: error.message
+          error: errorMessage
         });
       }
     }
@@ -166,11 +167,13 @@ serve(async (req) => {
     );
 
   } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    const errorStack = error instanceof Error ? error.stack : undefined;
     console.error('Error in backfill-stripe-customers function:', error);
     return new Response(
       JSON.stringify({
-        error: error.message,
-        details: error.stack
+        error: errorMessage,
+        details: errorStack
       }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },

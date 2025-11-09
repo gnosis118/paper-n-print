@@ -1,12 +1,33 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { FileText, DollarSign, FileCheck, Smartphone, Shield, Check, Zap, Wrench, Users, Home, TrendingUp } from "lucide-react";
 import { LazyTestimonialGrid } from "@/components/LazyIndex";
 import TrustSection from "@/components/TrustSection";
 import PageLayout from "@/components/PageLayout";
+import { useAuth } from "@/hooks/useAuth";
+import Dashboard from "./Dashboard";
 
 const Index = () => {
+  const { user, loading } = useAuth();
+
+  // Show loading state
+  if (loading) {
+    return (
+      <PageLayout>
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary/20 border-t-primary"></div>
+        </div>
+      </PageLayout>
+    );
+  }
+
+  // If user is logged in, show dashboard
+  if (user) {
+    return <Dashboard />;
+  }
+
+  // Otherwise show marketing homepage
   return (
     <PageLayout
       title="ProInvoice - Professional Invoicing for Contractors & Tradespeople"
