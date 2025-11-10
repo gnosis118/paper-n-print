@@ -95,8 +95,8 @@ const DashboardNav = () => {
                   "hover:bg-accent hover:text-accent-foreground",
                   "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
                   isActive
-                    ? "bg-primary text-primary-foreground shadow-sm"
-                    : "text-muted-foreground"
+                    ? "bg-primary text-white shadow-md font-semibold"
+                    : "text-foreground hover:text-foreground"
                 )}
                 title={item.description}
               >
@@ -122,8 +122,8 @@ const DashboardNav = () => {
                   "hover:bg-accent hover:text-accent-foreground",
                   "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
                   isActive
-                    ? "bg-primary text-primary-foreground shadow-sm"
-                    : "text-muted-foreground"
+                    ? "bg-primary text-white shadow-md font-semibold"
+                    : "text-foreground hover:text-foreground"
                 )}
                 title={item.description}
               >
@@ -170,8 +170,8 @@ const DashboardNav = () => {
                       "hover:bg-accent hover:text-accent-foreground",
                       "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
                       isActive
-                        ? "bg-primary text-primary-foreground shadow-sm"
-                        : "text-muted-foreground"
+                        ? "bg-primary text-white shadow-md font-semibold"
+                        : "text-foreground hover:text-foreground"
                     )}
                   >
                     <Icon className="h-5 w-5" />

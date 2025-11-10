@@ -13,6 +13,14 @@ import Dashboard from "./Dashboard";
 const Index = () => {
   const { user, loading } = useAuth();
 
+  const scrollToHowItWorks = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const element = document.getElementById('how-it-works');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   // Show loading state
   if (loading) {
     return (
@@ -72,8 +80,13 @@ const Index = () => {
                 <Button asChild size="lg" className="bg-gradient-to-r from-accent to-accent-dark hover:opacity-90 text-white min-h-[56px] text-lg font-bold shadow-xl hover:shadow-2xl transition-all">
                   <Link to="/get-started">Create Your First Invoice</Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="border-2 border-white bg-white/10 backdrop-blur text-white hover:bg-white hover:text-primary min-h-[56px] text-lg font-semibold">
-                  <Link to="#how-it-works">See How It Works</Link>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-2 border-white bg-white/10 backdrop-blur text-white hover:bg-white hover:text-primary min-h-[56px] text-lg font-semibold"
+                  onClick={scrollToHowItWorks}
+                >
+                  See How It Works
                 </Button>
               </div>
               
