@@ -298,8 +298,8 @@ const Privacy = () => {
                 please contact us:
               </p>
               <div className="bg-muted/50 p-6 rounded-lg">
-                <p className="mb-2"><strong>Data Controller:</strong> Gavin Clay</p>
-                <p className="mb-2"><strong>Email:</strong> <a href="mailto:gavin@currencytocurrency.app" className="text-primary hover:underline">gavin@currencytocurrency.app</a></p>
+                <p className="mb-2"><strong>Data Controller:</strong> ProInvoice</p>
+                <p className="mb-2"><strong>Email:</strong> <a href="mailto:support@proinvoice.app" className="text-primary hover:underline">support@proinvoice.app</a></p>
                 <p className="mb-2"><strong>Phone:</strong> <a href="tel:916-969-3705" className="text-primary hover:underline">916-969-3705</a></p>
                 <p className="text-sm text-muted-foreground">
                   For GDPR-related inquiries, you may also contact your local data protection authority.

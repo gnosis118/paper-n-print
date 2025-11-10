@@ -142,8 +142,8 @@ export default function Docs() {
                     >
                       Contact Support →
                     </Link>
-                    <a 
-                      href="mailto:gavin@currencytocurrency.app"
+                    <a
+                      href="mailto:support@proinvoice.app"
                       className="block text-sm text-primary hover:underline"
                     >
                       Email Us Directly →

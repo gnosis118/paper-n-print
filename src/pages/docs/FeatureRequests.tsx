@@ -198,7 +198,7 @@ export default function FeatureRequests() {
                       <Link to="/contact">Submit Feature Request</Link>
                     </Button>
                     <Button variant="outline" asChild>
-                      <a href="mailto:gavin@currencytocurrency.app?subject=Feature Request">Email Feature Idea</a>
+                      <a href="mailto:support@proinvoice.app?subject=Feature Request">Email Feature Idea</a>
                     </Button>
                   </div>
                 </CardContent>
@@ -313,7 +313,7 @@ export default function FeatureRequests() {
                       <Link to="/contact">Join Beta Program</Link>
                     </Button>
                     <Button variant="outline" asChild>
-                      <a href="mailto:gavin@currencytocurrency.app?subject=Subscribe to Updates">Get Updates</a>
+                      <a href="mailto:support@proinvoice.app?subject=Subscribe to Updates">Get Updates</a>
                     </Button>
                   </div>
                 </CardContent>

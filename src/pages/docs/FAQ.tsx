@@ -201,7 +201,7 @@ export default function FAQ() {
                       <Link to="/contact">Contact Support</Link>
                     </Button>
                     <Button variant="outline" asChild>
-                      <a href="mailto:gavin@currencytocurrency.app">Email Us Directly</a>
+                      <a href="mailto:support@proinvoice.app">Email Us Directly</a>
                     </Button>
                   </div>
                 </CardContent>

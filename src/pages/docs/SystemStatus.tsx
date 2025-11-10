@@ -320,7 +320,7 @@ export default function SystemStatus() {
                       <Link to="/contact">Report an Issue</Link>
                     </Button>
                     <Button variant="outline" asChild>
-                      <a href="mailto:gavin@currencytocurrency.app?subject=Subscribe to Status Updates">Get Status Updates</a>
+                      <a href="mailto:support@proinvoice.app?subject=Subscribe to Status Updates">Get Status Updates</a>
                     </Button>
                   </div>
                 </CardContent>
@@ -344,7 +344,7 @@ export default function SystemStatus() {
                     </p>
                     <div className="space-y-2 text-sm">
                       <div>
-                        <strong>Email:</strong> <a href="mailto:gavin@currencytocurrency.app" className="text-red-600 hover:underline">gavin@currencytocurrency.app</a>
+                        <strong>Email:</strong> <a href="mailto:support@proinvoice.app" className="text-red-600 hover:underline">support@proinvoice.app</a>
                       </div>
                       <div>
                         <strong>Subject Line:</strong> "URGENT: Critical System Issue"

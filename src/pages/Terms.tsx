@@ -279,9 +279,9 @@ const Terms = () => {
 
               <h3 className="text-xl font-medium mb-3">11.2 Informal Dispute Resolution</h3>
               <p className="mb-4">
-                Before initiating any formal dispute resolution, you agree to first contact us to attempt 
-                to resolve the dispute informally. Please send a detailed description of your dispute to 
-                <a href="mailto:gavin@currencytocurrency.app" className="text-primary hover:underline ml-1">gavin@currencytocurrency.app</a>.
+                Before initiating any formal dispute resolution, you agree to first contact us to attempt
+                to resolve the dispute informally. Please send a detailed description of your dispute to
+                <a href="mailto:support@proinvoice.app" className="text-primary hover:underline ml-1">support@proinvoice.app</a>.
               </p>
 
               <h3 className="text-xl font-medium mb-3">11.3 Binding Arbitration</h3>
@@ -383,8 +383,8 @@ const Terms = () => {
                 If you have questions about these Terms, please contact us:
               </p>
               <div className="bg-muted/50 p-6 rounded-lg">
-                <p className="mb-2"><strong>Contact:</strong> Gavin Clay</p>
-                <p className="mb-2"><strong>Email:</strong> <a href="mailto:gavin@currencytocurrency.app" className="text-primary hover:underline">gavin@currencytocurrency.app</a></p>
+                <p className="mb-2"><strong>Contact:</strong> ProInvoice</p>
+                <p className="mb-2"><strong>Email:</strong> <a href="mailto:support@proinvoice.app" className="text-primary hover:underline">support@proinvoice.app</a></p>
                 <p className="mb-2"><strong>Phone:</strong> <a href="tel:916-969-3705" className="text-primary hover:underline">916-969-3705</a></p>
               </div>
             </section>

@@ -89,7 +89,7 @@ export default function Contact() {
                     reach out to us via email or phone. We typically respond within 24 hours.
                   </p>
                   <div className="space-y-2 text-sm text-muted-foreground">
-                    <p><strong>Contact Person:</strong> Gavin Clay</p>
+                    <p><strong>Contact:</strong> ProInvoice Support Team</p>
                     <p><strong>Response Time:</strong> Within 24 hours</p>
                     <p><strong>Support Hours:</strong> Monday - Friday, 9 AM - 5 PM PST</p>
                   </div>

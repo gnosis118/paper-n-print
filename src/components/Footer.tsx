@@ -43,14 +43,14 @@ const Footer = () => {
             </p>
             <div className="space-y-2 text-sm text-muted-foreground">
               <div>
-                <strong>Contact:</strong> Gavin Clay
+                <strong>Contact:</strong> ProInvoice Support
               </div>
               <div>
-                <a 
-                  href="mailto:gavin@proinvoice.app" 
+                <a
+                  href="mailto:support@proinvoice.app"
                   className="hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded"
                 >
-                  gavin@proinvoice.app
+                  support@proinvoice.app
                 </a>
               </div>
               <div>

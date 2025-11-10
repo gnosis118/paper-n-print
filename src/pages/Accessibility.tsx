@@ -63,7 +63,7 @@ export default function Accessibility() {
                     If you encounter any accessibility barriers while using ProInvoice, please contact us:
                   </p>
                   <div className="space-y-2 text-sm">
-                    <p><strong>Email:</strong> <a href="mailto:gavin@currencytocurrency.app" className="text-primary hover:underline">gavin@currencytocurrency.app</a></p>
+                    <p><strong>Email:</strong> <a href="mailto:support@proinvoice.app" className="text-primary hover:underline">support@proinvoice.app</a></p>
                     <p><strong>Phone:</strong> <a href="tel:916-969-3705" className="text-primary hover:underline">916-969-3705</a></p>
                   </div>
                 </CardContent>
