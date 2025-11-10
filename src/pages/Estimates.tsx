@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PageLayout from '@/components/PageLayout';
+import DashboardLayout from '@/components/DashboardLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -182,16 +182,16 @@ const Estimates: React.FC = () => {
 
   if (loading) {
     return (
-      <PageLayout title="Estimates - Loading...">
+      <DashboardLayout title="Estimates - Loading...">
         <div className="flex items-center justify-center min-h-96">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
         </div>
-      </PageLayout>
+      </DashboardLayout>
     );
   }
 
   return (
-    <PageLayout title="Estimates" description="Create, manage and send estimates with deposit collection">
+    <DashboardLayout title="Estimates" description="Create, manage and send estimates with deposit collection">
       <div className="container mx-auto px-4 py-8 relative">
         {/* Watermark for non-paid users */}
         {(hasWatermark || isAnonymous) && <Watermark />}
@@ -627,7 +627,7 @@ const Estimates: React.FC = () => {
           </DialogContent>
         </Dialog>
       </div>
-    </PageLayout>
+    </DashboardLayout>
   );
 };
 

@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import PageLayout from "@/components/PageLayout";
+import DashboardLayout from "@/components/DashboardLayout";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
@@ -104,7 +104,7 @@ export default function Analytics() {
   });
 
   return (
-    <PageLayout
+    <DashboardLayout
       title="Analytics - ProInvoice"
       description="View your revenue trends, payment statistics, and client insights"
     >
@@ -264,6 +264,6 @@ export default function Analytics() {
           </Card>
         </div>
       </div>
-    </PageLayout>
+    </DashboardLayout>
   );
 }

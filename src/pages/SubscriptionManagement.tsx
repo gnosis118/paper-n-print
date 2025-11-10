@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { Crown, Settings, CreditCard, AlertTriangle, RefreshCw, ArrowRight, Check } from "lucide-react";
 import { useSubscription } from "@/hooks/useSubscription";
 import { Link } from "react-router-dom";
-import PageLayout from "@/components/PageLayout";
+import DashboardLayout from "@/components/DashboardLayout";
 import { toast } from "sonner";
 
 export default function SubscriptionManagement() {
@@ -90,7 +90,7 @@ export default function SubscriptionManagement() {
   const currentPlanDetails = planDetails[plan as keyof typeof planDetails] || planDetails.free;
 
   return (
-    <PageLayout
+    <DashboardLayout
       title="Subscription Management - Manage Your Plan | InvoicePro"
       description="Manage your subscription, update billing information, change plans, or cancel your subscription."
     >
@@ -298,6 +298,6 @@ export default function SubscriptionManagement() {
           </CardContent>
         </Card>
       </div>
-    </PageLayout>
+    </DashboardLayout>
   );
 }

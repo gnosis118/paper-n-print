@@ -3,7 +3,7 @@ import { FileText, Plus, Users, DollarSign, TrendingUp, BarChart3 } from "lucide
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { SubscriptionStatus } from "@/components/SubscriptionStatus";
-import PageLayout from "@/components/PageLayout";
+import DashboardLayout from "@/components/DashboardLayout";
 import { useAuth } from "@/hooks/useAuth";
 import { useOnboarding } from "@/hooks/useOnboarding";
 import OnboardingWizard from "@/components/OnboardingWizard";
@@ -59,7 +59,7 @@ export default function Dashboard() {
   }
 
   return (
-    <PageLayout
+    <DashboardLayout
       title="Dashboard - ProInvoice"
       description="Manage your invoices, estimates, and subscription"
     >
@@ -241,6 +241,6 @@ export default function Dashboard() {
           </CardContent>
         </Card>
       </div>
-    </PageLayout>
+    </DashboardLayout>
   );
 }

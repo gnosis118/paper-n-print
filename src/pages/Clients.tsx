@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import PageLayout from '@/components/PageLayout';
+import DashboardLayout from '@/components/DashboardLayout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -132,7 +132,7 @@ export default function Clients() {
         <meta name="description" content="Manage your clients and view their invoice history" />
       </Helmet>
 
-      <PageLayout>
+      <DashboardLayout>
         <div className="container py-8">
           {/* Header */}
           <div className="mb-8">
@@ -465,7 +465,7 @@ export default function Clients() {
             )}
           </DialogContent>
         </Dialog>
-      </PageLayout>
+      </DashboardLayout>
     </>
   );
 }
