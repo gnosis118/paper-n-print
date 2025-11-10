@@ -117,6 +117,10 @@ const handlePayment = async (req: Request): Promise<Response> => {
         },
       ],
       mode: "payment",
+      payment_intent_data: {
+        statement_descriptor: "PROINVOICE",
+        statement_descriptor_suffix: "INVOICE"
+      },
       success_url: `${req.headers.get("origin")}/payment-success?invoice_id=${validatedInvoiceId}`,
       cancel_url: `${req.headers.get("origin")}/invoice`,
       metadata: {

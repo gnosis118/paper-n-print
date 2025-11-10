@@ -147,6 +147,10 @@ serve(async (req) => {
         },
       ],
       mode: 'payment',
+      payment_intent_data: {
+        statement_descriptor: "PROINVOICE",
+        statement_descriptor_suffix: "DEPOSIT"
+      },
       success_url: `${req.headers.get("origin")}/e/${token}?success=true`,
       cancel_url: `${req.headers.get("origin")}/e/${token}?canceled=true`,
       metadata: {

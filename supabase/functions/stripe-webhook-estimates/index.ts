@@ -256,6 +256,10 @@ serve(async (req) => {
             },
           ],
           mode: 'payment',
+          payment_intent_data: {
+            statement_descriptor: "PROINVOICE",
+            statement_descriptor_suffix: "BALANCE"
+          },
           success_url: `https://proinvoice.app/invoice/${newInvoice.id}?paid=true`,
           cancel_url: `https://proinvoice.app/invoice/${newInvoice.id}`,
           metadata: {

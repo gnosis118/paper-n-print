@@ -182,7 +182,14 @@ const handleCheckout = async (req: Request): Promise<Response> => {
       ],
       mode,
       allow_promotion_codes: true,
-      success_url: mode === "subscription" 
+      payment_intent_data: mode === "payment" ? {
+        statement_descriptor: "PROINVOICE",
+        statement_descriptor_suffix: "PAYMENT"
+      } : undefined,
+      subscription_data: mode === "subscription" ? {
+        description: "ProInvoice Subscription"
+      } : undefined,
+      success_url: mode === "subscription"
         ? `${req.headers.get("origin")}/payment-success?session_id={CHECKOUT_SESSION_ID}`
         : `${req.headers.get("origin")}/templates?purchased=true&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${req.headers.get("origin")}/pricing`,
