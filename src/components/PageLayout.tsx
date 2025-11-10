@@ -2,7 +2,6 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import Header from './Header';
 import Footer from './Footer';
-import CookieBanner from './CookieBanner';
 import { useGoogleAnalytics } from '@/hooks/useGoogleAnalytics';
 import { SEOHeaders } from './SEOHeaders';
 
@@ -42,7 +41,6 @@ const PageLayout: React.FC<PageLayoutProps> = ({
           {children}
         </main>
         <Footer />
-        <CookieBanner />
       </div>
     </>
   );

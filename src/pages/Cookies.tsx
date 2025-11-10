@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import PageLayout from '@/components/PageLayout';
-import { Button } from '@/components/ui/button';
-import { Switch } from '@/components/ui/switch';
-import { useCookieConsent, CookiePreferences } from '@/components/CookieBanner';
+
+declare global {
+  interface Window {
+    ketch: (command: string, options?: any) => void;
+  }
+}
 
 const Cookies = () => {
-  const { preferences, savePreferences } = useCookieConsent();
-  const [localPreferences, setLocalPreferences] = useState<CookiePreferences>(preferences);
-
-  const handleSave = () => {
-    savePreferences(localPreferences);
-  };
+  useEffect(() => {
+    // Open Ketch preference center when page loads
+    if (typeof window.ketch === 'function') {
+      window.ketch('showPreferences');
+    }
+  }, []);
 
   return (
     <PageLayout
@@ -22,49 +25,46 @@ const Cookies = () => {
         
         <div className="space-y-6">
           <div className="border rounded-lg p-6">
-            <h3 className="text-lg font-semibold mb-2">Strictly Necessary Cookies</h3>
-            <p className="text-muted-foreground mb-4">
-              These cookies are essential for the website to function and cannot be disabled.
+            <h2 className="text-2xl font-semibold mb-4">Manage Your Cookie Preferences</h2>
+            <p className="text-muted-foreground mb-6">
+              We use cookies to enhance your experience on our website. You can manage your cookie preferences using the preference center below.
             </p>
-            <Switch checked={true} disabled />
+            <button
+              onClick={() => {
+                if (typeof window.ketch === 'function') {
+                  window.ketch('showPreferences');
+                }
+              }}
+              className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+            >
+              Open Cookie Preferences
+            </button>
           </div>
 
           <div className="border rounded-lg p-6">
-            <h3 className="text-lg font-semibold mb-2">Functional Cookies</h3>
-            <p className="text-muted-foreground mb-4">
-              These cookies help us remember your preferences and provide enhanced features.
-            </p>
-            <Switch 
-              checked={localPreferences.functional}
-              onCheckedChange={(checked) => setLocalPreferences({...localPreferences, functional: checked})}
-            />
+            <h3 className="text-lg font-semibold mb-2">About Cookies</h3>
+            <div className="space-y-4 text-muted-foreground">
+              <div>
+                <h4 className="font-semibold text-foreground mb-1">Strictly Necessary Cookies</h4>
+                <p>These cookies are essential for the website to function and cannot be disabled.</p>
+              </div>
+              
+              <div>
+                <h4 className="font-semibold text-foreground mb-1">Functional Cookies</h4>
+                <p>These cookies help us remember your preferences and provide enhanced features.</p>
+              </div>
+              
+              <div>
+                <h4 className="font-semibold text-foreground mb-1">Analytics Cookies</h4>
+                <p>These cookies help us understand how visitors interact with our website.</p>
+              </div>
+              
+              <div>
+                <h4 className="font-semibold text-foreground mb-1">Advertising Cookies</h4>
+                <p>These cookies are used to show you relevant advertisements.</p>
+              </div>
+            </div>
           </div>
-
-          <div className="border rounded-lg p-6">
-            <h3 className="text-lg font-semibold mb-2">Analytics Cookies</h3>
-            <p className="text-muted-foreground mb-4">
-              These cookies help us understand how visitors interact with our website.
-            </p>
-            <Switch 
-              checked={localPreferences.analytics}
-              onCheckedChange={(checked) => setLocalPreferences({...localPreferences, analytics: checked})}
-            />
-          </div>
-
-          <div className="border rounded-lg p-6">
-            <h3 className="text-lg font-semibold mb-2">Advertising Cookies</h3>
-            <p className="text-muted-foreground mb-4">
-              These cookies are used to show you relevant advertisements.
-            </p>
-            <Switch 
-              checked={localPreferences.advertising}
-              onCheckedChange={(checked) => setLocalPreferences({...localPreferences, advertising: checked})}
-            />
-          </div>
-
-          <Button onClick={handleSave} className="w-full">
-            Save Preferences
-          </Button>
         </div>
       </div>
     </PageLayout>
