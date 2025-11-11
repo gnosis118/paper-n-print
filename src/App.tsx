@@ -28,6 +28,7 @@ const Products = lazy(() => import("./pages/Products"));
 const Blog = lazy(() => import("./pages/Blog"));
 const Docs = lazy(() => import("./pages/Docs"));
 const BusinessSettings = lazy(() => import("./pages/BusinessSettings"));
+const ProfileSettings = lazy(() => import("./pages/ProfileSettings"));
 const Security = lazy(() => import("./pages/Security"));
 const Accessibility = lazy(() => import("./pages/Accessibility"));
 const SubscriptionManagement = lazy(() => import("./pages/SubscriptionManagement"));
@@ -230,6 +231,7 @@ const App = () => {
               <Route path="/docs/payment-security-compliance" element={<PaymentSecurity />} />
               <Route path="/security" element={<Security />} />
               <Route path="/accessibility" element={<Accessibility />} />
+              <Route path="/profile-settings" element={<ProtectedRoute><ProfileSettings /></ProtectedRoute>} />
               
               {/* Invoice Templates Hub */}
               <Route path="/invoice-templates" element={<InvoiceTemplates />} />

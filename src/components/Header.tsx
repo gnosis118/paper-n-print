@@ -127,6 +127,12 @@ const Header = () => {
                       <span>Business Settings</span>
                     </Link>
                   </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/profile-settings" className="cursor-pointer">
+                      <User className="mr-2 h-4 w-4" />
+                      <span>Profile Settings</span>
+                    </Link>
+                  </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-destructive focus:text-destructive">
                     <LogOut className="mr-2 h-4 w-4" />
@@ -236,7 +242,13 @@ const Header = () => {
                       Business Settings
                     </Button>
                   </Link>
-                  <Button 
+                  <Link to="/profile-settings" onClick={() => setIsMenuOpen(false)}>
+                    <Button variant="ghost" size="sm" className="w-full justify-start">
+                      <User className="mr-2 h-4 w-4" />
+                      Profile Settings
+                    </Button>
+                  </Link>
+                  <Button
                     variant="ghost" 
                     size="sm" 
                     className="w-full justify-start text-destructive hover:text-destructive"
