@@ -6,6 +6,9 @@ import HowItWorks from "@/components/HowItWorks";
 import TemplateGallery from "@/components/TemplateGallery";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import TrustBadges from "@/components/TrustBadges";
+import PricingComparison from "@/components/PricingComparison";
+import WhyProInvoice from "@/components/WhyProInvoice";
+import SocialProof from "@/components/SocialProof";
 import PageLayout from "@/components/PageLayout";
 import { useAuth } from "@/hooks/useAuth";
 import Dashboard from "./Dashboard";
@@ -197,16 +200,25 @@ const Index = () => {
           </div>
         </section>
 
+        {/* Social Proof Stats */}
+        <SocialProof />
+
         {/* How It Works */}
         <div id="how-it-works">
           <HowItWorks />
         </div>
+
+        {/* Why ProInvoice - Differentiation */}
+        <WhyProInvoice />
 
         {/* Template Gallery */}
         <TemplateGallery />
 
         {/* Testimonials */}
         <TestimonialCarousel />
+
+        {/* Pricing Comparison */}
+        <PricingComparison />
 
         {/* Built for the Field */}
         <section className="py-16 md:py-20 bg-muted/20">
