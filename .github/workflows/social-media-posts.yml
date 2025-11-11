@@ -1,0 +1,122 @@
+name: Automated Social Media Posts
+
+on:
+  schedule:
+    # Monday 9:00 AM - Tips
+    - cron: '0 9 * * 1'
+    # Monday 3:00 PM - Stats
+    - cron: '0 15 * * 1'
+    # Tuesday 10:00 AM - Features
+    - cron: '0 10 * * 2'
+    # Tuesday 4:00 PM - Tips
+    - cron: '0 16 * * 2'
+    # Wednesday 9:00 AM - Tips
+    - cron: '0 9 * * 3'
+    # Wednesday 2:00 PM - Testimonials
+    - cron: '0 14 * * 3'
+    # Thursday 10:00 AM - Features
+    - cron: '0 10 * * 4'
+    # Thursday 3:00 PM - Stats
+    - cron: '0 15 * * 4'
+    # Friday 9:00 AM - Testimonials
+    - cron: '0 9 * * 5'
+    # Friday 4:00 PM - Tips
+    - cron: '0 16 * * 5'
+    # Saturday 11:00 AM - Tips
+    - cron: '0 11 * * 6'
+    # Sunday 10:00 AM - Stats
+    - cron: '0 10 * * 0'
+  
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      post_type:
+        description: 'Type of post to create'
+        required: true
+        default: 'tips'
+        type: choice
+        options:
+          - tips
+          - features
+          - testimonials
+          - stats
+
+jobs:
+  post-to-social-media:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+      
+      - name: Determine post type
+        id: post-type
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "type=${{ github.event.inputs.post_type }}" >> $GITHUB_OUTPUT
+          else
+            # Determine type based on schedule
+            HOUR=$(date +%H)
+            DAY=$(date +%u)
+            
+            if [ "$DAY" = "1" ]; then
+              if [ "$HOUR" = "09" ]; then
+                echo "type=tips" >> $GITHUB_OUTPUT
+              else
+                echo "type=stats" >> $GITHUB_OUTPUT
+              fi
+            elif [ "$DAY" = "2" ]; then
+              if [ "$HOUR" = "10" ]; then
+                echo "type=features" >> $GITHUB_OUTPUT
+              else
+                echo "type=tips" >> $GITHUB_OUTPUT
+              fi
+            elif [ "$DAY" = "3" ]; then
+              if [ "$HOUR" = "09" ]; then
+                echo "type=tips" >> $GITHUB_OUTPUT
+              else
+                echo "type=testimonials" >> $GITHUB_OUTPUT
+              fi
+            elif [ "$DAY" = "4" ]; then
+              if [ "$HOUR" = "10" ]; then
+                echo "type=features" >> $GITHUB_OUTPUT
+              else
+                echo "type=stats" >> $GITHUB_OUTPUT
+              fi
+            elif [ "$DAY" = "5" ]; then
+              if [ "$HOUR" = "09" ]; then
+                echo "type=testimonials" >> $GITHUB_OUTPUT
+              else
+                echo "type=tips" >> $GITHUB_OUTPUT
+              fi
+            elif [ "$DAY" = "6" ]; then
+              echo "type=tips" >> $GITHUB_OUTPUT
+            else
+              echo "type=stats" >> $GITHUB_OUTPUT
+            fi
+          fi
+      
+      - name: Call Supabase Edge Function
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          curl -X POST \
+            "${SUPABASE_URL}/functions/v1/social-media-poster" \
+            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "type": "${{ steps.post-type.outputs.type }}",
+              "platforms": ["twitter", "linkedin", "facebook"]
+            }'
+      
+      - name: Log result
+        run: |
+          echo "Posted ${{ steps.post-type.outputs.type }} content to social media"
+          echo "Timestamp: $(date)"
+

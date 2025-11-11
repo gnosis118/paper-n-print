@@ -1,0 +1,12 @@
+name,email,phone,company,address,notes
+John Doe,john.doe@example.com,555-123-4567,Acme Corporation,123 Main Street New York NY 10001,VIP client - priority service
+Jane Smith,jane.smith@techcorp.com,555-234-5678,Tech Solutions Inc,456 Oak Avenue Los Angeles CA 90001,New customer - referred by John
+Michael Johnson,mjohnson@construction.com,555-345-6789,Johnson Construction,789 Pine Road Chicago IL 60601,Large commercial projects
+Sarah Williams,sarah.w@design.studio,555-456-7890,Creative Design Studio,321 Elm Street Miami FL 33101,Monthly retainer client
+Robert Brown,rbrown@plumbing.com,555-567-8901,Brown Plumbing Services,654 Maple Drive Houston TX 77001,Emergency contact available 24/7
+Emily Davis,emily@electricservices.com,555-678-9012,Davis Electric,987 Cedar Lane Phoenix AZ 85001,Licensed electrician - commercial work
+David Martinez,david.m@hvac.pro,555-789-0123,Martinez HVAC Solutions,147 Birch Court Philadelphia PA 19101,Seasonal maintenance contract
+Lisa Anderson,lisa@landscaping.biz,555-890-1234,Anderson Landscaping,258 Spruce Way San Antonio TX 78201,Residential and commercial services
+James Wilson,jwilson@roofing.net,555-901-2345,Wilson Roofing Company,369 Willow Street San Diego CA 92101,Insurance claims specialist
+Jennifer Taylor,jennifer@painting.pro,555-012-3456,Taylor Painting Services,741 Ash Boulevard Dallas TX 75201,Interior and exterior painting
+

@@ -37,6 +37,7 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ClientForm } from '@/components/ClientForm';
+import ClientImport from '@/components/ClientImport';
 import { useClients, Client, ClientWithStats } from '@/hooks/useClients';
 import {
   Users,
@@ -146,10 +147,13 @@ export default function Clients() {
                   Manage your clients and track their invoice history
                 </p>
               </div>
-              <Button onClick={handleCreateClient}>
-                <Plus className="h-4 w-4 mr-2" />
-                Add Client
-              </Button>
+              <div className="flex gap-2">
+                <ClientImport onImportComplete={() => window.location.reload()} />
+                <Button onClick={handleCreateClient}>
+                  <Plus className="h-4 w-4 mr-2" />
+                  Add Client
+                </Button>
+              </div>
             </div>
           </div>
 
