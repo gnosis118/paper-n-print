@@ -35,6 +35,7 @@ const EstimateView = lazy(() => import('./pages/EstimateView'));
 const InvoiceView = lazy(() => import('./pages/InvoiceView'));
 const Estimates = lazy(() => import('./pages/Estimates'));
 const Clients = lazy(() => import('./pages/Clients'));
+const RecurringBilling = lazy(() => import('./pages/RecurringBilling'));
 const NotFound = lazy(() => import("@/pages/NotFound"));
 const ConstructionInvoiceTemplate = lazy(() => import("./pages/templates/Construction"));
 const ConsultingInvoiceTemplate = lazy(() => import("./pages/templates/Consulting"));
@@ -272,6 +273,7 @@ const App = () => {
               <Route path="/business-settings" element={<BusinessSettings />} />
               <Route path="/subscription" element={<SubscriptionManagement />} />
               <Route path="/clients" element={<Clients />} />
+              <Route path="/recurring-billing" element={<RecurringBilling />} />
               {/* Legacy Template Pages */}
               <Route path="/templates/construction" element={<ConstructionInvoiceTemplate />} />
               <Route path="/templates/consulting" element={<ConsultingInvoiceTemplate />} />

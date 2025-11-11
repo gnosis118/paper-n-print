@@ -10,7 +10,8 @@ import {
   CreditCard,
   Package,
   Menu,
-  X
+  X,
+  RefreshCw
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -43,6 +44,12 @@ const DashboardNav = () => {
       href: "/clients",
       icon: Users,
       description: "Manage your clients"
+    },
+    {
+      name: "Recurring",
+      href: "/recurring-billing",
+      icon: RefreshCw,
+      description: "Recurring billing cycles"
     },
     {
       name: "Analytics",
