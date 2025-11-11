@@ -8,34 +8,50 @@ const PricingComparison = () => {
     {
       category: "Core Features",
       items: [
-        { name: "Unlimited Invoices", free: true, pro: true },
-        { name: "Unlimited Clients", free: true, pro: true },
+        { name: "Invoices per Month", free: "3 invoices", pro: "Unlimited" },
+        { name: "Clients", free: "Unlimited", pro: "Unlimited" },
         { name: "Mobile App Access", free: true, pro: true },
         { name: "Email Invoice Delivery", free: true, pro: true },
-        { name: "Payment Links", free: true, pro: true },
-        { name: "Basic Templates", free: true, pro: true },
+        { name: "Payment Links (Stripe)", free: true, pro: true },
+        { name: "Basic Templates", free: "3 templates", pro: "50+ templates" },
       ]
     },
     {
       category: "Advanced Features",
       items: [
         { name: "Estimates/Quotes", free: false, pro: true },
-        { name: "Recurring Billing", free: false, pro: true },
-        { name: "Custom Branding", free: false, pro: true },
-        { name: "Premium Templates", free: false, pro: true },
-        { name: "Client Portal", free: false, pro: true },
-        { name: "Advanced Analytics", free: false, pro: true },
+        { name: "Estimate-to-Invoice Conversion", free: false, pro: true },
+        { name: "Change Orders & Revisions", free: false, pro: true },
+        { name: "Recurring Billing Automation", free: false, pro: true },
+        { name: "Partial/Deposit Invoicing", free: false, pro: true },
+        { name: "Custom Branding & Logo", free: false, pro: true },
+        { name: "Premium Templates (50+)", free: false, pro: true },
+        { name: "Client Portal Access", free: false, pro: true },
+        { name: "Advanced Analytics & Reports", free: false, pro: true },
       ]
     },
     {
       category: "Business Tools",
       items: [
+        { name: "CSV Client Import", free: false, pro: true },
         { name: "Expense Tracking", free: false, pro: true },
-        { name: "Time Tracking", free: false, pro: true },
+        { name: "Time Tracking Integration", free: false, pro: true },
         { name: "Multi-Business Management", free: false, pro: true },
         { name: "Team Collaboration", free: false, pro: true },
-        { name: "Priority Support", free: false, pro: true },
+        { name: "Offline Mode & Sync", free: false, pro: true },
+        { name: "Payment Reminders & Auto-Follow-up", free: false, pro: true },
+        { name: "Priority Support (24/7)", free: false, pro: true },
         { name: "API Access", free: false, pro: true },
+      ]
+    },
+    {
+      category: "Integrations",
+      items: [
+        { name: "Stripe Payments", free: true, pro: true },
+        { name: "QuickBooks Integration", free: false, pro: true },
+        { name: "Xero Integration", free: false, pro: true },
+        { name: "PayPal Integration", free: false, pro: true },
+        { name: "Zapier/Make.com", free: false, pro: true },
       ]
     }
   ];
@@ -77,7 +93,11 @@ const PricingComparison = () => {
               <div className="space-y-3">
                 <div className="flex items-center gap-2 text-sm">
                   <Check className="h-5 w-5 text-success flex-shrink-0" />
-                  <span>Unlimited invoices & clients</span>
+                  <span><strong>3 invoices</strong> per month</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <Check className="h-5 w-5 text-success flex-shrink-0" />
+                  <span>Unlimited clients</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <Check className="h-5 w-5 text-success flex-shrink-0" />
@@ -93,7 +113,7 @@ const PricingComparison = () => {
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <Check className="h-5 w-5 text-success flex-shrink-0" />
-                  <span>Basic templates</span>
+                  <span>3 basic templates</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <X className="h-5 w-5 flex-shrink-0" />
@@ -135,7 +155,19 @@ const PricingComparison = () => {
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <Check className="h-5 w-5 text-success flex-shrink-0" />
-                  <span>Unlimited estimates & quotes</span>
+                  <span><strong>Unlimited invoices</strong> (vs 3/month)</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <Check className="h-5 w-5 text-success flex-shrink-0" />
+                  <span>Estimates → Invoice conversion</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <Check className="h-5 w-5 text-success flex-shrink-0" />
+                  <span>Change orders & revisions</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <Check className="h-5 w-5 text-success flex-shrink-0" />
+                  <span>Partial/deposit invoicing</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <Check className="h-5 w-5 text-success flex-shrink-0" />
@@ -143,31 +175,23 @@ const PricingComparison = () => {
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <Check className="h-5 w-5 text-success flex-shrink-0" />
-                  <span>Custom branding & logo</span>
+                  <span>CSV client import</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <Check className="h-5 w-5 text-success flex-shrink-0" />
-                  <span>Premium templates</span>
+                  <span>50+ premium templates</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <Check className="h-5 w-5 text-success flex-shrink-0" />
-                  <span>Client portal access</span>
+                  <span>QuickBooks & Xero integration</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <Check className="h-5 w-5 text-success flex-shrink-0" />
-                  <span>Advanced analytics & reports</span>
+                  <span>Offline mode & sync</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <Check className="h-5 w-5 text-success flex-shrink-0" />
-                  <span>Expense & time tracking</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <Check className="h-5 w-5 text-success flex-shrink-0" />
-                  <span>Multi-business management</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <Check className="h-5 w-5 text-success flex-shrink-0" />
-                  <span>Priority support</span>
+                  <span>Advanced analytics & cash flow insights</span>
                 </div>
               </div>
             </CardContent>
@@ -200,14 +224,18 @@ const PricingComparison = () => {
                         <tr key={`feature-${categoryIndex}-${featureIndex}`} className="border-t">
                           <td className="p-4 text-sm">{feature.name}</td>
                           <td className="p-4 text-center">
-                            {feature.free ? (
+                            {typeof feature.free === 'string' ? (
+                              <span className="text-sm font-medium">{feature.free}</span>
+                            ) : feature.free ? (
                               <Check className="h-5 w-5 text-success mx-auto" />
                             ) : (
                               <X className="h-5 w-5 text-muted-foreground mx-auto" />
                             )}
                           </td>
                           <td className="p-4 text-center bg-primary/5">
-                            {feature.pro ? (
+                            {typeof feature.pro === 'string' ? (
+                              <span className="text-sm font-medium">{feature.pro}</span>
+                            ) : feature.pro ? (
                               <Check className="h-5 w-5 text-success mx-auto" />
                             ) : (
                               <X className="h-5 w-5 text-muted-foreground mx-auto" />

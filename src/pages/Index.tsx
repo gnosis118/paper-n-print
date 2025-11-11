@@ -9,6 +9,7 @@ import TrustBadges from "@/components/TrustBadges";
 import PricingComparison from "@/components/PricingComparison";
 import WhyProInvoice from "@/components/WhyProInvoice";
 import SocialProof from "@/components/SocialProof";
+import ValueCalculator from "@/components/ValueCalculator";
 import PageLayout from "@/components/PageLayout";
 import { useAuth } from "@/hooks/useAuth";
 import Dashboard from "./Dashboard";
@@ -216,6 +217,9 @@ const Index = () => {
 
         {/* Testimonials */}
         <TestimonialCarousel />
+
+        {/* Value Calculator - ROI */}
+        <ValueCalculator />
 
         {/* Pricing Comparison */}
         <PricingComparison />
