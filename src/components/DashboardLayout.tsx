@@ -39,7 +39,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
       <div className="min-h-screen flex flex-col">
         <Header />
         <DashboardNav />
-        <main className="flex-1 pt-20">
+        <main className="flex-1">
           {children}
         </main>
         <Footer />

@@ -85,7 +85,7 @@ const DashboardNav = () => {
   };
 
   return (
-    <nav className="bg-background border-b sticky top-20 z-40">
+    <nav className="bg-background border-b border-border sticky top-0 z-40 shadow-sm">
       <div className="container mx-auto px-4">
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center space-x-1 overflow-x-auto py-3">
