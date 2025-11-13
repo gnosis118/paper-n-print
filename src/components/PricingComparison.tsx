@@ -21,12 +21,10 @@ const PricingComparison = () => {
       items: [
         { name: "Estimates/Quotes", free: false, pro: true },
         { name: "Estimate-to-Invoice Conversion", free: false, pro: true },
-        { name: "Change Orders & Revisions", free: false, pro: true },
         { name: "Recurring Billing Automation", free: false, pro: true },
         { name: "Partial/Deposit Invoicing", free: false, pro: true },
         { name: "Custom Branding & Logo", free: false, pro: true },
         { name: "Premium Templates (50+)", free: false, pro: true },
-        { name: "Client Portal Access", free: false, pro: true },
         { name: "Advanced Analytics & Reports", free: false, pro: true },
       ]
     },
@@ -34,24 +32,14 @@ const PricingComparison = () => {
       category: "Business Tools",
       items: [
         { name: "CSV Client Import", free: false, pro: true },
-        { name: "Expense Tracking", free: false, pro: true },
-        { name: "Time Tracking Integration", free: false, pro: true },
-        { name: "Multi-Business Management", free: false, pro: true },
-        { name: "Team Collaboration", free: false, pro: true },
         { name: "Offline Mode & Sync", free: false, pro: true },
-        { name: "Payment Reminders & Auto-Follow-up", free: false, pro: true },
         { name: "Priority Support (24/7)", free: false, pro: true },
-        { name: "API Access", free: false, pro: true },
       ]
     },
     {
       category: "Integrations",
       items: [
         { name: "Stripe Payments", free: true, pro: true },
-        { name: "QuickBooks Integration", free: false, pro: true },
-        { name: "Xero Integration", free: false, pro: true },
-        { name: "PayPal Integration", free: false, pro: true },
-        { name: "Zapier/Make.com", free: false, pro: true },
       ]
     }
   ];

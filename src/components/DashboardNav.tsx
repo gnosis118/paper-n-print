@@ -26,7 +26,7 @@ const DashboardNav = () => {
   const navigation = [
     {
       name: "Dashboard",
-      href: "/",
+      href: "/dashboard",
       icon: LayoutDashboard,
       description: "Overview & stats",
       badge: null

@@ -9,7 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Separator } from '@/components/ui/separator';
-import { Plus, Edit, Eye, Send, Copy, Trash2, CheckCircle, Clock, CreditCard } from 'lucide-react';
+import { Plus, Edit, Eye, Send, Copy, Trash2, CheckCircle, Clock, CreditCard, Search } from 'lucide-react';
 import { useEstimates, type Estimate } from '@/hooks/useEstimates';
 import { useToast } from '@/hooks/use-toast';
 import { useFreeUsageTracking } from '@/hooks/useFreeUsageTracking';
@@ -38,6 +38,8 @@ const Estimates: React.FC = () => {
   const [editingEstimate, setEditingEstimate] = useState<Estimate | null>(null);
   const [previewEstimate, setPreviewEstimate] = useState<Estimate | null>(null);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState<string>('all');
   const { hasUsedFree, canUseFree, recordFreeUsage, isAnonymous } = useFreeUsageTracking();
   const { subscribed, hasWatermark } = useSubscription();
   const navigate = useNavigate();
@@ -160,6 +162,17 @@ const Estimates: React.FC = () => {
         return <Badge variant="secondary">{status}</Badge>;
     }
   };
+
+  // Filter estimates based on search and status
+  const filteredEstimates = estimates.filter(estimate => {
+    const matchesSearch = searchQuery === '' ||
+      estimate.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      estimate.number.toLowerCase().includes(searchQuery.toLowerCase());
+
+    const matchesStatus = statusFilter === 'all' || estimate.status === statusFilter;
+
+    return matchesSearch && matchesStatus;
+  });
 
   const copyEstimateLink = (token: string) => {
     const url = `${window.location.origin}/e/${token}`;
@@ -420,20 +433,53 @@ const Estimates: React.FC = () => {
           </TabsList>
 
           <TabsContent value="list" className="space-y-6">
+            {/* Search and Filter */}
+            <div className="flex gap-4 items-center">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Search by title or number..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10"
+                />
+              </div>
+              <Select value={statusFilter} onValueChange={setStatusFilter}>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Filter by status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Statuses</SelectItem>
+                  <SelectItem value="draft">Draft</SelectItem>
+                  <SelectItem value="sent">Sent</SelectItem>
+                  <SelectItem value="accepted">Accepted</SelectItem>
+                  <SelectItem value="invoiced">Invoiced</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
             <div className="grid gap-6">
-              {estimates.length === 0 ? (
+              {filteredEstimates.length === 0 ? (
             <Card>
               <CardContent className="py-16 text-center">
-                <h3 className="text-lg font-semibold mb-2">No estimates yet</h3>
-                <p className="text-muted-foreground mb-4">Create your first estimate to get started</p>
-                <Button onClick={() => setIsDialogOpen(true)}>
-                  <Plus className="w-4 h-4 mr-2" />
-                  Create Estimate
-                </Button>
+                <h3 className="text-lg font-semibold mb-2">
+                  {estimates.length === 0 ? 'No estimates yet' : 'No estimates found'}
+                </h3>
+                <p className="text-muted-foreground mb-4">
+                  {estimates.length === 0
+                    ? 'Create your first estimate to get started'
+                    : 'Try adjusting your search or filter'}
+                </p>
+                {estimates.length === 0 && (
+                  <Button onClick={() => setIsDialogOpen(true)}>
+                    <Plus className="w-4 h-4 mr-2" />
+                    Create Estimate
+                  </Button>
+                )}
               </CardContent>
             </Card>
           ) : (
-            estimates.map((estimate) => (
+            filteredEstimates.map((estimate) => (
               <Card key={estimate.id}>
                 <CardHeader>
                   <div className="flex justify-between items-start">

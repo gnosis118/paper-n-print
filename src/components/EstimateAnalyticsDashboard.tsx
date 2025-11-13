@@ -6,6 +6,7 @@ import { useEstimateAnalytics } from '@/hooks/useEstimateAnalytics';
 import { Skeleton } from '@/components/ui/skeleton';
 import { SmartSuggestionsPanel } from './SmartSuggestionsPanel';
 import { RevenueTrendChart } from './RevenueTrendChart';
+import { AnalyticsExport } from './AnalyticsExport';
 
 export const EstimateAnalyticsDashboard: React.FC = () => {
   const { analytics, loading, error } = useEstimateAnalytics();
@@ -62,6 +63,11 @@ export const EstimateAnalyticsDashboard: React.FC = () => {
 
   return (
     <div className="space-y-6">
+      {/* Export Button */}
+      <div className="flex justify-end">
+        <AnalyticsExport analytics={analytics} />
+      </div>
+
       {/* Key Metrics */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {/* Total Estimates */}

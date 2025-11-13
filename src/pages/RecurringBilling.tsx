@@ -20,6 +20,16 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -64,7 +74,9 @@ interface RecurringBilling {
 export default function RecurringBilling() {
   const { toast } = useToast();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [selectedBilling, setSelectedBilling] = useState<RecurringBilling | null>(null);
+  const [billingToDelete, setBillingToDelete] = useState<RecurringBilling | null>(null);
   const [recurringBillings, setRecurringBillings] = useState<RecurringBilling[]>([]);
 
   const [formData, setFormData] = useState({
@@ -122,12 +134,21 @@ export default function RecurringBilling() {
     });
   };
 
-  const handleDelete = (billing: RecurringBilling) => {
-    toast({
-      title: "Billing cancelled",
-      description: `Recurring billing for ${billing.client_name} has been cancelled`,
-      variant: "destructive",
-    });
+  const handleDeleteClick = (billing: RecurringBilling) => {
+    setBillingToDelete(billing);
+    setIsDeleteDialogOpen(true);
+  };
+
+  const handleDeleteConfirm = () => {
+    if (billingToDelete) {
+      toast({
+        title: "Billing cancelled",
+        description: `Recurring billing for ${billingToDelete.client_name} has been cancelled`,
+        variant: "destructive",
+      });
+      setIsDeleteDialogOpen(false);
+      setBillingToDelete(null);
+    }
   };
 
   const getFrequencyLabel = (frequency: RecurringBilling['frequency']) => {
@@ -313,7 +334,7 @@ export default function RecurringBilling() {
                               <Button
                                 variant="ghost"
                                 size="sm"
-                                onClick={() => handleDelete(billing)}
+                                onClick={() => handleDeleteClick(billing)}
                                 title="Delete"
                               >
                                 <Trash2 className="h-4 w-4 text-red-500" />
@@ -433,6 +454,25 @@ export default function RecurringBilling() {
             </form>
           </DialogContent>
         </Dialog>
+
+        {/* Delete Confirmation Dialog */}
+        <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This will permanently cancel the recurring billing for <strong>{billingToDelete?.client_name}</strong>.
+                This action cannot be undone.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={handleDeleteConfirm} className="bg-red-500 hover:bg-red-600">
+                Delete Billing
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </DashboardLayout>
     </>
   );

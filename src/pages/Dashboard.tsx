@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { FileText, Plus, Users, DollarSign, TrendingUp, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { SubscriptionStatus } from "@/components/SubscriptionStatus";
 import DashboardLayout from "@/components/DashboardLayout";
 import { useAuth } from "@/hooks/useAuth";
@@ -33,7 +34,7 @@ export default function Dashboard() {
   });
 
   // Fetch invoice stats
-  const { data: stats } = useQuery({
+  const { data: stats, isLoading: statsLoading } = useQuery({
     queryKey: ['invoice-stats', user?.id],
     queryFn: async () => {
       if (!user) return null;
@@ -41,13 +42,13 @@ export default function Dashboard() {
         .from('invoices')
         .select('status, total')
         .eq('user_id', user.id);
-      
+
       if (error) throw error;
-      
+
       const total = data?.reduce((sum, inv) => sum + Number(inv.total || 0), 0) || 0;
       const paid = data?.filter(inv => inv.status === 'paid').length || 0;
       const pending = data?.filter(inv => inv.status === 'pending').length || 0;
-      
+
       return { total, paid, pending, count: data?.length || 0 };
     },
     enabled: !!user,
@@ -139,7 +140,11 @@ export default function Dashboard() {
               </div>
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Total Revenue</p>
-                <p className="text-2xl font-bold">${(stats?.total || 0).toFixed(2)}</p>
+                {statsLoading ? (
+                  <Skeleton className="h-8 w-32" />
+                ) : (
+                  <p className="text-2xl font-bold">${(stats?.total || 0).toFixed(2)}</p>
+                )}
               </div>
             </CardContent>
           </Card>
@@ -152,7 +157,11 @@ export default function Dashboard() {
               <CardTitle className="text-sm font-medium">Total Invoices</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats?.count || 0}</div>
+              {statsLoading ? (
+                <Skeleton className="h-8 w-16" />
+              ) : (
+                <div className="text-2xl font-bold">{stats?.count || 0}</div>
+              )}
             </CardContent>
           </Card>
 
@@ -161,7 +170,11 @@ export default function Dashboard() {
               <CardTitle className="text-sm font-medium">Paid Invoices</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-green-600 dark:text-green-400">{stats?.paid || 0}</div>
+              {statsLoading ? (
+                <Skeleton className="h-8 w-16" />
+              ) : (
+                <div className="text-2xl font-bold text-green-600 dark:text-green-400">{stats?.paid || 0}</div>
+              )}
             </CardContent>
           </Card>
 
@@ -170,7 +183,11 @@ export default function Dashboard() {
               <CardTitle className="text-sm font-medium">Pending Invoices</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-amber-600 dark:text-amber-400">{stats?.pending || 0}</div>
+              {statsLoading ? (
+                <Skeleton className="h-8 w-16" />
+              ) : (
+                <div className="text-2xl font-bold text-amber-600 dark:text-amber-400">{stats?.pending || 0}</div>
+              )}
             </CardContent>
           </Card>
         </div>

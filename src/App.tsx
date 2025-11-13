@@ -197,7 +197,7 @@ const App = () => {
               <Route path="/e/:token" element={<EstimateView />} />
               <Route path="/i/:id" element={<InvoiceView />} />
               <Route path="/estimate/new" element={<ProtectedRoute><Estimate /></ProtectedRoute>} />
-              <Route path="/estimates" element={<Estimates />} />
+              <Route path="/estimates" element={<ProtectedRoute><Estimates /></ProtectedRoute>} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/payment-success" element={<PaymentSuccess />} />
               <Route path="/payment-canceled" element={<PaymentCanceled />} />
@@ -270,12 +270,13 @@ const App = () => {
               
               {/* Main Pages */}
               <Route path="/" element={<Index />} />
-              <Route path="/invoice" element={<Invoice />} />
+              <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+              <Route path="/invoice" element={<ProtectedRoute><Invoice /></ProtectedRoute>} />
               <Route path="/templates" element={<Templates />} />
-              <Route path="/business-settings" element={<BusinessSettings />} />
-              <Route path="/subscription" element={<SubscriptionManagement />} />
-              <Route path="/clients" element={<Clients />} />
-              <Route path="/recurring-billing" element={<RecurringBilling />} />
+              <Route path="/business-settings" element={<ProtectedRoute><BusinessSettings /></ProtectedRoute>} />
+              <Route path="/subscription" element={<ProtectedRoute><SubscriptionManagement /></ProtectedRoute>} />
+              <Route path="/clients" element={<ProtectedRoute><Clients /></ProtectedRoute>} />
+              <Route path="/recurring-billing" element={<ProtectedRoute><RecurringBilling /></ProtectedRoute>} />
               {/* Legacy Template Pages */}
               <Route path="/templates/construction" element={<ConstructionInvoiceTemplate />} />
               <Route path="/templates/consulting" element={<ConsultingInvoiceTemplate />} />
@@ -325,7 +326,6 @@ const App = () => {
               <Route path="/get-started" element={<GetStarted />} />
               <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
               <Route path="/templates/:trade/:location" element={<ProgrammaticSEO />} />
-              <Route path="/get-started" element={<GetStarted />} />
               <Route path="/estimate-templates" element={<EstimateTemplates />} />
               <Route path="/compare/wave-vs-proinvoice" element={<WaveVsProInvoice />} />
               <Route path="/compare/invoice-simple-vs-proinvoice" element={<InvoiceSimpleVsProInvoice />} />

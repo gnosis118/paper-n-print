@@ -1,4 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import DashboardLayout from "@/components/DashboardLayout";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -12,7 +13,7 @@ export default function Analytics() {
   const { user } = useAuth();
 
   // Fetch invoice statistics
-  const { data: invoiceStats } = useQuery({
+  const { data: invoiceStats, isLoading: invoiceStatsLoading } = useQuery({
     queryKey: ['invoice-stats', user?.id],
     queryFn: async () => {
       if (!user) return null;
@@ -125,8 +126,17 @@ export default function Analytics() {
               <DollarSign className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">${(invoiceStats?.total || 0).toFixed(2)}</div>
-              <p className="text-xs text-muted-foreground">All time</p>
+              {invoiceStatsLoading ? (
+                <>
+                  <Skeleton className="h-8 w-32 mb-2" />
+                  <Skeleton className="h-4 w-20" />
+                </>
+              ) : (
+                <>
+                  <div className="text-2xl font-bold">${(invoiceStats?.total || 0).toFixed(2)}</div>
+                  <p className="text-xs text-muted-foreground">All time</p>
+                </>
+              )}
             </CardContent>
           </Card>
 
@@ -136,8 +146,17 @@ export default function Analytics() {
               <CheckCircle className="h-4 w-4 text-green-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-green-600">${(invoiceStats?.paid || 0).toFixed(2)}</div>
-              <p className="text-xs text-muted-foreground">{invoiceStats?.paidCount || 0} invoices</p>
+              {invoiceStatsLoading ? (
+                <>
+                  <Skeleton className="h-8 w-32 mb-2" />
+                  <Skeleton className="h-4 w-24" />
+                </>
+              ) : (
+                <>
+                  <div className="text-2xl font-bold text-green-600">${(invoiceStats?.paid || 0).toFixed(2)}</div>
+                  <p className="text-xs text-muted-foreground">{invoiceStats?.paidCount || 0} invoices</p>
+                </>
+              )}
             </CardContent>
           </Card>
 
@@ -147,8 +166,17 @@ export default function Analytics() {
               <Clock className="h-4 w-4 text-amber-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-amber-600">${(invoiceStats?.pending || 0).toFixed(2)}</div>
-              <p className="text-xs text-muted-foreground">{invoiceStats?.pendingCount || 0} invoices</p>
+              {invoiceStatsLoading ? (
+                <>
+                  <Skeleton className="h-8 w-32 mb-2" />
+                  <Skeleton className="h-4 w-24" />
+                </>
+              ) : (
+                <>
+                  <div className="text-2xl font-bold text-amber-600">${(invoiceStats?.pending || 0).toFixed(2)}</div>
+                  <p className="text-xs text-muted-foreground">{invoiceStats?.pendingCount || 0} invoices</p>
+                </>
+              )}
             </CardContent>
           </Card>
 
