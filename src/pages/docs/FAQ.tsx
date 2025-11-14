@@ -45,7 +45,7 @@ export default function FAQ() {
         },
         {
           question: "What payment methods do you support?",
-          answer: "We support credit cards (Visa, MasterCard, American Express), ACH bank transfers, Apple Pay, and Google Pay through our secure Stripe integration."
+          answer: "We support credit and debit cards (Visa, MasterCard, American Express) and ACH bank transfers through our secure Stripe integration."
         },
         {
           question: "When do I get paid?",

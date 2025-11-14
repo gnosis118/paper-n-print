@@ -296,7 +296,7 @@ const EstimateView: React.FC = () => {
                   </div>
 
                   <p className="text-xs text-muted-foreground text-center">
-                    Secure payment powered by Stripe • Card, ACH, Apple Pay & Google Pay accepted
+                    Secure payment powered by Stripe • Cards and ACH bank transfers accepted
                   </p>
                 </div>
               )}

@@ -9,6 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { useState } from "react";
+import { adTracking } from "@/lib/adTracking";
 
 const Pricing = () => {
   const navigate = useNavigate();
@@ -18,10 +19,12 @@ const Pricing = () => {
   const handleSubscribe = async (planType: string, billingCycle: string = "monthly") => {
     // If not logged in, redirect to signup
     if (!user) {
+      adTracking.lead();
       navigate("/get-started");
       return;
     }
 
+    adTracking.lead();
     setLoadingPlan(planType);
 
     try {
@@ -177,7 +180,7 @@ const Pricing = () => {
           {/* FAQ Section */}
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
-            
+
             <div className="space-y-6">
               <div>
                 <h3 className="font-semibold text-lg mb-2">Do I need a credit card to start?</h3>
@@ -185,32 +188,49 @@ const Pricing = () => {
                   Nope. Start with a free trial — send your first bid in 60 seconds. No credit card required.
                 </p>
               </div>
-              
+
               <div>
                 <h3 className="font-semibold text-lg mb-2">Can I change plans later?</h3>
                 <p className="text-muted-foreground">
                   Absolutely. Upgrade or downgrade anytime. Changes take effect immediately.
                 </p>
               </div>
-              
+
+              <div>
+                <h3 className="font-semibold text-lg mb-2">Do you offer a money-back guarantee?</h3>
+                <p className="text-muted-foreground">
+                  Yes. If you upgrade to a paid plan and decide ProInvoice is not a fit within 30 days,
+                  email <a href="mailto:support@proinvoice.app" className="underline">support@proinvoice.app</a> and we'll refund your last subscription payment.
+                </p>
+              </div>
+
               <div>
                 <h3 className="font-semibold text-lg mb-2">What payment methods do you accept?</h3>
                 <p className="text-muted-foreground">
-                  We support all major credit cards, debit cards, and ACH transfers for larger contracts.
+                  We support all major credit and debit cards, plus ACH transfers for larger contracts.
                 </p>
               </div>
-              
+
               <div>
                 <h3 className="font-semibold text-lg mb-2">Is there a setup fee?</h3>
                 <p className="text-muted-foreground">
                   No setup fees, no hidden costs. Just straightforward monthly pricing.
                 </p>
               </div>
-              
+
               <div>
                 <h3 className="font-semibold text-lg mb-2">What if I need to cancel?</h3>
                 <p className="text-muted-foreground">
-                  Cancel anytime — no questions asked, no penalties. We'll miss you though.
+                  Cancel anytime — no questions asked, no penalties. You can manage your subscription directly from your account settings.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-10">
+              <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-6 text-center">
+                <h3 className="text-xl font-semibold mb-2">30-Day Money-Back Guarantee</h3>
+                <p className="text-sm md:text-base text-emerald-900">
+                  Try ProInvoice risk-free. If it's not a fit within 30 days of upgrading, reach out and we'll refund your last subscription payment.
                 </p>
               </div>
             </div>

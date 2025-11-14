@@ -282,7 +282,7 @@ const OnboardingWizard = ({ userId, onComplete }: OnboardingWizardProps) => {
                       </li>
                       <li className="flex items-start gap-2">
                         <Check className="w-4 h-4 text-success mt-0.5" />
-                        <span>Accept credit cards, Apple Pay, and Google Pay</span>
+                        <span>Accept major credit cards and ACH bank transfers via Stripe</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <Check className="w-4 h-4 text-success mt-0.5" />

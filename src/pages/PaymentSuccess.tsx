@@ -7,6 +7,7 @@ import { CheckCircle, FileText, ArrowLeft } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useGoogleAnalytics } from "@/hooks/useGoogleAnalytics";
+import { adTracking } from "@/lib/adTracking";
 
 const PaymentSuccess = () => {
   const [searchParams] = useSearchParams();
@@ -21,6 +22,13 @@ const PaymentSuccess = () => {
     const timer = setTimeout(() => setLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
+
+  // Fire ad conversion pixels on success (generic, no amount available on client)
+  useEffect(() => {
+    if (!loading) {
+      adTracking.purchase();
+    }
+  }, [loading]);
 
   if (loading) {
     return (

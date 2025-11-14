@@ -180,7 +180,7 @@ const HowToCollectDeposits: React.FC = () => {
                 </li>
                 <li className="flex gap-3">
                   <span className="font-bold text-green-600">3.</span>
-                  <span className="text-gray-700">Set up online payment method (Stripe, PayPal, etc.)</span>
+                  <span className="text-gray-700">Set up online payment method (Stripe for cards and bank transfers)</span>
                 </li>
                 <li className="flex gap-3">
                   <span className="font-bold text-green-600">4.</span>

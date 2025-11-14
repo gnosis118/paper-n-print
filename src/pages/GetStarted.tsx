@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import { analytics } from "@/lib/analytics";
 import PageLayout from '@/components/PageLayout';
 import { Zap, Check } from 'lucide-react';
+import TrustBadges from '@/components/TrustBadges';
+import { adTracking } from '@/lib/adTracking';
 
 const GetStarted = () => {
   const [email, setEmail] = useState('');
@@ -20,15 +22,17 @@ const GetStarted = () => {
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!agreeToTerms) {
       toast.error('Please agree to the terms and conditions');
       return;
     }
 
     setIsLoading(true);
-    
+
     try {
+      // Track lead for ads
+      try { adTracking.lead(); } catch {}
       const { error } = await supabase.auth.signUp({
         email,
         password,
@@ -211,7 +215,7 @@ const GetStarted = () => {
                     <div>
                       <h3 className="font-semibold">Online Payments</h3>
                       <p className="text-sm text-muted-foreground">
-                        Stripe, ACH, Apple Pay, Google Pay with QR codes for mobile payments
+                        Online card and ACH payments powered by Stripe, plus QR codes for easy mobile payments
                       </p>
                     </div>
                   </div>
@@ -243,10 +247,10 @@ const GetStarted = () => {
                 <CardContent className="p-6">
                   <h3 className="font-semibold mb-3">Why Contractors Choose ProInvoice</h3>
                   <div className="space-y-2 text-sm text-muted-foreground">
-                    <p>✓ Get paid 3x faster with online deposits</p>
+                    <p>✓ Get paid faster with online deposits and progress payments</p>
                     <p>✓ Reduce no-shows with accepted estimates</p>
                     <p>✓ Professional look that wins more jobs</p>
-                    <p>✓ Works offline - sync when you have signal</p>
+                    <p>✓ 30-day money-back guarantee after you upgrade</p>
                   </div>
                 </CardContent>
               </Card>
@@ -254,6 +258,7 @@ const GetStarted = () => {
           </div>
         </div>
       </div>
+      <TrustBadges />
     </PageLayout>
   );
 };

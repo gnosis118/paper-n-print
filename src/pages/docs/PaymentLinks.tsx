@@ -121,15 +121,6 @@ export default function PaymentLinks() {
                       </ul>
                     </div>
                     <div>
-                      <h3 className="font-semibold mb-3">Digital Wallets</h3>
-                      <ul className="list-disc list-inside space-y-1 text-sm">
-                        <li>Apple Pay (iPhone, iPad, Mac)</li>
-                        <li>Google Pay (Android, Chrome)</li>
-                        <li>Samsung Pay</li>
-                        <li>One-click payment experience</li>
-                      </ul>
-                    </div>
-                    <div>
                       <h3 className="font-semibold mb-3">Bank Transfers (ACH)</h3>
                       <ul className="list-disc list-inside space-y-1 text-sm">
                         <li>Direct bank account payments</li>
@@ -138,16 +129,11 @@ export default function PaymentLinks() {
                         <li>Secure bank-level encryption</li>
                       </ul>
                     </div>
-                    <div>
-                      <h3 className="font-semibold mb-3">Buy Now, Pay Later</h3>
-                      <ul className="list-disc list-inside space-y-1 text-sm">
-                        <li>Afterpay, Klarna integration</li>
-                        <li>Split payments into installments</li>
-                        <li>No additional fees for merchants</li>
-                        <li>Increases conversion rates</li>
-                      </ul>
-                    </div>
                   </div>
+                  <p className="text-xs text-muted-foreground mt-4">
+                    All payments are processed securely via Stripe using industry-standard encryption. Support for
+                    additional payment methods may be added in the future.
+                  </p>
                 </CardContent>
               </Card>
 
@@ -222,12 +208,12 @@ export default function PaymentLinks() {
                     </div>
 
                     <div>
-                      <h3 className="font-semibold mb-2">Mobile Wallet Integration</h3>
+                      <h3 className="font-semibold mb-2">Mobile-Optimized Checkout</h3>
                       <ul className="list-disc list-inside space-y-1 ml-4 text-sm">
-                        <li>Apple Pay with Touch ID/Face ID</li>
-                        <li>Google Pay with biometric authentication</li>
-                        <li>Samsung Pay with Samsung Knox security</li>
-                        <li>One-tap payment completion</li>
+                        <li>Stripe-hosted checkout works on any modern smartphone</li>
+                        <li>Secure card entry with built-in fraud protection</li>
+                        <li>No account required for your customers</li>
+                        <li>Supports cards and ACH payments on mobile</li>
                       </ul>
                     </div>
                   </div>

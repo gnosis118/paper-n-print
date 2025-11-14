@@ -32,11 +32,11 @@ export default function Contact() {
                   <CardTitle>Email</CardTitle>
                 </CardHeader>
                 <CardContent className="text-center">
-                  <a 
-                    href="mailto:gavin@proinvoice.app"
+                  <a
+                    href="mailto:support@proinvoice.app"
                     className="text-primary hover:underline"
                   >
-                    gavin@proinvoice.app
+                    support@proinvoice.app
                   </a>
                   <p className="text-sm text-muted-foreground mt-2">
                     Send us an email anytime

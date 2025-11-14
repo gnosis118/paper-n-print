@@ -4,15 +4,16 @@ import { Link } from "react-router-dom";
 import { FileText, DollarSign, FileCheck, Smartphone, Shield, Check, Zap, Wrench, Phone } from "lucide-react";
 import HowItWorks from "@/components/HowItWorks";
 import TemplateGallery from "@/components/TemplateGallery";
-import TestimonialCarousel from "@/components/TestimonialCarousel";
 import TrustBadges from "@/components/TrustBadges";
 import PricingComparison from "@/components/PricingComparison";
 import WhyProInvoice from "@/components/WhyProInvoice";
 import SocialProof from "@/components/SocialProof";
 import ValueCalculator from "@/components/ValueCalculator";
 import PageLayout from "@/components/PageLayout";
+import ExitIntentModal from "@/components/ExitIntentModal";
 import { useAuth } from "@/hooks/useAuth";
 import Dashboard from "./Dashboard";
+import { adTracking } from "@/lib/adTracking";
 
 const Index = () => {
   const { user, loading } = useAuth();
@@ -58,7 +59,7 @@ const Index = () => {
               backgroundSize: '40px 40px'
             }}></div>
           </div>
-          
+
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center space-y-8">
               <div className="inline-block animate-fadeIn">
@@ -67,22 +68,22 @@ const Index = () => {
                   Built for Service Pros
                 </span>
               </div>
-              
+
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight animate-slideInUp">
                 Get Paid in 30 Seconds
               </h1>
-              
+
               <p className="text-2xl md:text-3xl font-semibold text-white/95">
                 The Fastest Way for Service Pros to Invoice Clients
               </p>
-              
+
               <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
                 Create, send, and get paid instantly from your phone. No accounting headaches — just cash flow.
               </p>
-              
+
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                 <Button asChild size="lg" className="bg-gradient-to-r from-accent to-accent-dark hover:opacity-90 text-white min-h-[56px] text-lg font-bold shadow-xl hover:shadow-2xl transition-all">
-                  <Link to="/get-started">Create Your First Invoice</Link>
+                  <Link to="/get-started" onClick={() => adTracking.lead()}>Create Your First Invoice</Link>
                 </Button>
                 <Button
                   size="lg"
@@ -93,7 +94,7 @@ const Index = () => {
                   See How It Works
                 </Button>
               </div>
-              
+
               <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-white/90 pt-4">
                 <span className="flex items-center gap-2">
                   <Check className="h-5 w-5 text-accent" /> Free to start
@@ -103,6 +104,19 @@ const Index = () => {
                 </span>
                 <span className="flex items-center gap-2">
                   <Check className="h-5 w-5 text-accent" /> Get paid instantly
+                </span>
+              </div>
+
+              {/* Pro plan highlights for ad traffic */}
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-sm text-white/90">
+                <span className="flex items-center gap-2">
+                  <Shield className="h-5 w-5 text-accent" /> Pro: Estimates & Quotes
+                </span>
+                <span className="flex items-center gap-2">
+                  <Shield className="h-5 w-5 text-accent" /> Pro: Deposit collection
+                </span>
+                <span className="flex items-center gap-2">
+                  <Shield className="h-5 w-5 text-accent" /> Pro: Recurring billing
                 </span>
               </div>
 
@@ -160,7 +174,7 @@ const Index = () => {
                 From job site to bank account — no paperwork, no hassle.
               </p>
             </div>
-            
+
             <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
               <Card className="border-2 hover:border-accent transition-all hover:shadow-lg">
                 <CardContent className="p-6">
@@ -173,7 +187,7 @@ const Index = () => {
                   </p>
                 </CardContent>
               </Card>
-              
+
               <Card className="border-2 hover:border-primary transition-all hover:shadow-lg">
                 <CardContent className="p-6">
                   <div className="bg-gradient-to-br from-primary to-primary-dark w-16 h-16 rounded-lg flex items-center justify-center mb-4">
@@ -185,7 +199,7 @@ const Index = () => {
                   </p>
                 </CardContent>
               </Card>
-              
+
               <Card className="border-2 hover:border-success transition-all hover:shadow-lg">
                 <CardContent className="p-6">
                   <div className="bg-gradient-to-br from-success to-success-light w-16 h-16 rounded-lg flex items-center justify-center mb-4">
@@ -215,14 +229,48 @@ const Index = () => {
         {/* Template Gallery */}
         <TemplateGallery />
 
-        {/* Testimonials */}
-        <TestimonialCarousel />
-
         {/* Value Calculator - ROI */}
         <ValueCalculator />
 
         {/* Pricing Comparison */}
         <PricingComparison />
+
+        {/* Top Questions */}
+        <section className="py-16 bg-background">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold mb-3">Have questions before you switch?</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Here are quick answers contractors ask most before moving over from Word, Wave, or QuickBooks.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6 text-left max-w-5xl mx-auto">
+              <div>
+                <h3 className="font-semibold mb-2">Do I need a credit card to start?</h3>
+                <p className="text-sm text-muted-foreground">
+                  Nope. Start with a free trial and send your first bid in under a minute. No card required to test it.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-semibold mb-2">What happens after the trial?</h3>
+                <p className="text-sm text-muted-foreground">
+                  Keep using the free plan for light use, or upgrade to Pro to unlock progress billing and crew features.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-semibold mb-2">Is there a money-back guarantee?</h3>
+                <p className="text-sm text-muted-foreground">
+                  Yes. If you upgrade and ProInvoice isn't a fit within 30 days, email <a href="mailto:support@proinvoice.app" className="underline">support@proinvoice.app</a> and we'll refund your last subscription payment.
+                </p>
+              </div>
+            </div>
+            <div className="text-center mt-8">
+              <Button variant="outline" asChild>
+                <Link to="/docs/faq">See all FAQs</Link>
+              </Button>
+            </div>
+          </div>
+        </section>
 
         {/* Built for the Field */}
         <section className="py-16 md:py-20 bg-muted/20">
@@ -239,7 +287,7 @@ const Index = () => {
                 Because you're on job sites, not in an office. Built for life in the field.
               </p>
             </div>
-            
+
             <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
               <Card className="border-2 hover:border-primary transition-all hover:shadow-lg">
                 <CardContent className="p-6 text-center">
@@ -252,7 +300,7 @@ const Index = () => {
                   </p>
                 </CardContent>
               </Card>
-              
+
               <Card className="border-2 hover:border-accent transition-all hover:shadow-lg">
                 <CardContent className="p-6 text-center">
                   <div className="bg-gradient-to-br from-accent to-accent-dark w-16 h-16 rounded-lg flex items-center justify-center mx-auto mb-4">
@@ -264,7 +312,7 @@ const Index = () => {
                   </p>
                 </CardContent>
               </Card>
-              
+
               <Card className="border-2 hover:border-success transition-all hover:shadow-lg">
                 <CardContent className="p-6 text-center">
                   <div className="bg-gradient-to-br from-success to-success-light w-16 h-16 rounded-lg flex items-center justify-center mx-auto mb-4">
@@ -287,7 +335,7 @@ const Index = () => {
               Ready to Get Paid in 30 Seconds?
             </h2>
             <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Join thousands of service pros who stopped chasing checks and started getting paid instantly.
+              Join service pros who stopped chasing checks and started getting paid faster.
             </p>
             <Button asChild size="lg" className="bg-gradient-to-r from-accent to-accent-dark hover:opacity-90 text-white min-h-[56px] text-lg font-bold shadow-xl">
               <Link to="/get-started">Start Free — No Credit Card Required</Link>
@@ -302,9 +350,14 @@ const Index = () => {
               <span className="flex items-center gap-2">
                 <Check className="h-5 w-5 text-accent" /> Cancel anytime
               </span>
+              <span className="flex items-center gap-2">
+                <Check className="h-5 w-5 text-accent" /> 30-day money-back guarantee after you upgrade
+              </span>
             </div>
           </div>
         </section>
+        <ExitIntentModal />
+
       </div>
     </PageLayout>
   );

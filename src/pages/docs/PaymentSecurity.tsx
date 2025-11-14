@@ -168,8 +168,7 @@ export default function PaymentSecurity() {
                     <li><strong>Credit Cards:</strong> Visa, Mastercard, American Express, Discover</li>
                     <li><strong>Debit Cards:</strong> All major debit card networks</li>
                     <li><strong>ACH/Bank Transfers:</strong> Direct bank account payments</li>
-                    <li><strong>Digital Wallets:</strong> Apple Pay, Google Pay</li>
-                    <li><strong>International Payments:</strong> Multi-currency support</li>
+                    <li><strong>International Payments:</strong> Multi-currency support via Stripe</li>
                   </ul>
                   <div className="bg-blue-50 p-4 rounded-lg mt-4">
                     <p className="text-sm font-medium text-blue-900">💳 Flexible Options</p>

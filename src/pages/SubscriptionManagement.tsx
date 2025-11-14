@@ -7,6 +7,8 @@ import { useSubscription } from "@/hooks/useSubscription";
 import { Link } from "react-router-dom";
 import DashboardLayout from "@/components/DashboardLayout";
 import { toast } from "sonner";
+import { useEffect, useRef } from "react";
+import { adTracking } from "@/lib/adTracking";
 
 export default function SubscriptionManagement() {
   const { 
@@ -88,6 +90,21 @@ export default function SubscriptionManagement() {
   };
 
   const currentPlanDetails = planDetails[plan as keyof typeof planDetails] || planDetails.free;
+
+  // Fire conversion when user is subscribed (one-time per mount)
+  const fired = useRef(false);
+  useEffect(() => {
+    const KEY = 'purchase_tracked_v1';
+    if (subscribed && !fired.current && !sessionStorage.getItem(KEY)) {
+      fired.current = true;
+      sessionStorage.setItem(KEY, '1');
+      let value: number | undefined;
+      if (plan === 'basic') value = 7;
+      else if (plan === 'professional') value = 14;
+      else if (plan === 'enterprise') value = 29;
+      adTracking.purchase({ value, currency: 'USD' });
+    }
+  }, [subscribed, plan]);
 
   return (
     <DashboardLayout

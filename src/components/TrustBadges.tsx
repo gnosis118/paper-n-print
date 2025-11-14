@@ -23,13 +23,13 @@ const TrustBadges = () => {
           </div>
           <div className="flex items-center gap-2 text-foreground/70">
             <Zap className="h-6 w-6 text-accent" />
-            <span className="text-sm font-medium">99.9% Uptime</span>
+            <span className="text-sm font-medium">Fast & reliable performance</span>
           </div>
         </div>
 
         {/* Payment Methods */}
         <div className="mt-6 text-center">
-          <p className="text-xs text-muted-foreground mb-3">Accepts all major payment methods</p>
+          <p className="text-xs text-muted-foreground mb-3">Accepts major cards via Stripe</p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <div className="bg-white px-4 py-2 rounded border shadow-sm">
               <span className="font-bold text-blue-600">VISA</span>
@@ -42,15 +42,6 @@ const TrustBadges = () => {
             </div>
             <div className="bg-white px-4 py-2 rounded border shadow-sm">
               <span className="font-bold text-purple-600">Discover</span>
-            </div>
-            <div className="bg-white px-4 py-2 rounded border shadow-sm">
-              <span className="font-bold text-blue-700">PayPal</span>
-            </div>
-            <div className="bg-white px-4 py-2 rounded border shadow-sm">
-              <span className="font-bold text-green-600">Apple Pay</span>
-            </div>
-            <div className="bg-white px-4 py-2 rounded border shadow-sm">
-              <span className="font-bold text-yellow-600">Google Pay</span>
             </div>
           </div>
         </div>

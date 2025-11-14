@@ -99,7 +99,7 @@ export default function Security() {
                     please contact us:
                   </p>
                   <div className="space-y-2 text-sm">
-                    <p><strong>Security Email:</strong> <a href="mailto:gavin@proinvoice.app" className="text-primary hover:underline">gavin@proinvoice.app</a></p>
+                    <p><strong>Security Email:</strong> <a href="mailto:support@proinvoice.app" className="text-primary hover:underline">support@proinvoice.app</a></p>
                     <p><strong>Phone:</strong> <a href="tel:916-969-3705" className="text-primary hover:underline">916-969-3705</a></p>
                   </div>
                 </CardContent>

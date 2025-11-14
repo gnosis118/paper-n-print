@@ -13,6 +13,7 @@ import { Mail, Lock, User, Chrome, LogOut } from "lucide-react";
 import { enhancedAuthSchema, sanitizeInput } from "@/lib/validation";
 import { z } from "zod";
 import Header from "@/components/Header";
+import { adTracking } from "@/lib/adTracking";
 
 export default function Auth() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -39,6 +40,7 @@ export default function Auth() {
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN' && session?.user) {
+        try { adTracking.signup(); } catch {}
         toast({
           title: "Welcome!",
           description: "You've successfully signed in.",
@@ -92,6 +94,8 @@ export default function Auth() {
       if (isSignUp) {
         // Use sanitized email for sign up
         const sanitizedEmail = sanitizeInput.email(email);
+        // Track lead for ads
+        try { adTracking.lead(); } catch {}
         const { error } = await supabase.auth.signUp({
           email: sanitizedEmail,
           password,

@@ -123,14 +123,14 @@ const Footer = () => {
               © {currentYear} ProInvoice. All rights reserved.
             </p>
             <div className="flex items-center gap-4 text-sm text-muted-foreground">
-              <a 
-                href="mailto:gavin@proinvoice.app"
+              <a
+                href="mailto:support@proinvoice.app"
                 className="hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded"
               >
-                gavin@proinvoice.app
+                support@proinvoice.app
               </a>
               <span>•</span>
-              <a 
+              <a
                 href="tel:916-969-3705"
                 className="hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded"
               >
@@ -155,7 +155,7 @@ const Footer = () => {
               "@type": "ContactPoint",
               "telephone": "+1-916-969-3705",
               "contactType": "customer service",
-              "email": "gavin@proinvoice.app",
+              "email": "support@proinvoice.app",
               "availableLanguage": "English"
             },
             "sameAs": [

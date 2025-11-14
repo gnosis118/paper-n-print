@@ -156,8 +156,8 @@ const HowToGetPaidFaster: React.FC = () => {
               <ul className="space-y-2 text-gray-700">
                 <li>✓ Credit/debit card (Stripe)</li>
                 <li>✓ Bank transfer (ACH)</li>
-                <li>✓ Digital wallets (Apple Pay, Google Pay)</li>
                 <li>✓ Payment links (send via email/text)</li>
+                <li>✓ Clear payment terms on every invoice</li>
               </ul>
             </section>
 

@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from "@/hooks/useAuth";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import AdPixels from "./components/AdPixels";
 
 // Critical pages - load immediately
 import Index from "./pages/Index";
@@ -43,6 +44,7 @@ const ConsultingInvoiceTemplate = lazy(() => import("./pages/templates/Consultin
 const FreelanceNYCTemplate = lazy(() => import("./pages/templates/FreelanceNYC"));
 const FreelanceCATemplate = lazy(() => import("./pages/templates/FreelanceCA"));
 const ProgrammaticSEO = lazy(() => import("./pages/templates/ProgrammaticSEO"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
 
 // Import niche invoice templates - lazy loaded
 const HVACInvoiceTemplate = lazy(() => import("./pages/templates/HVACInvoiceTemplate"));
@@ -186,6 +188,7 @@ const PageLoader = () => (
 const App = () => {
   return (
     <HelmetProvider>
+      <AdPixels />
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <TooltipProvider>
@@ -232,10 +235,10 @@ const App = () => {
               <Route path="/security" element={<Security />} />
               <Route path="/accessibility" element={<Accessibility />} />
               <Route path="/profile-settings" element={<ProtectedRoute><ProfileSettings /></ProtectedRoute>} />
-              
+
               {/* Invoice Templates Hub */}
               <Route path="/invoice-templates" element={<InvoiceTemplates />} />
-              
+
               {/* Industry-Specific Invoice Templates */}
               <Route path="/invoice-template/construction" element={<ConstructionTemplate />} />
               <Route path="/invoice-template/contractor" element={<ContractorTemplate />} />
@@ -267,7 +270,7 @@ const App = () => {
               <Route path="/invoice-template/massage" element={<MassageTemplate />} />
               <Route path="/invoice-template/personal-trainer" element={<PersonalTrainerTemplate />} />
               <Route path="/invoice-template/tutor" element={<TutorTemplate />} />
-              
+
               {/* Main Pages */}
               <Route path="/" element={<Index />} />
               <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
@@ -282,7 +285,7 @@ const App = () => {
               <Route path="/templates/consulting" element={<ConsultingInvoiceTemplate />} />
               <Route path="/templates/freelance-nyc" element={<FreelanceNYCTemplate />} />
               <Route path="/templates/freelance-california" element={<FreelanceCATemplate />} />
-              
+
               {/* Niche Template Pages */}
               <Route path="/templates/hvac-invoice-template" element={<HVACInvoiceTemplate />} />
               <Route path="/templates/lawn-care-invoice-template" element={<LawnCareInvoiceTemplate />} />
@@ -313,7 +316,7 @@ const App = () => {
               <Route path="/templates/window-cleaning-invoice-template" element={<WindowCleaningInvoiceTemplate />} />
               <Route path="/templates/massage-therapist-invoice-template" element={<MassageTherapistInvoiceTemplate />} />
               <Route path="/templates/carpet-cleaner-invoice-template" element={<CarpetCleanerInvoiceTemplate />} />
-              
+
               {/* Estimate Template Pages */}
               <Route path="/templates/hvac-estimate-template" element={<HVACEstimateTemplate />} />
               <Route path="/templates/plumbing-estimate-template" element={<PlumbingEstimateTemplate />} />
@@ -321,7 +324,7 @@ const App = () => {
               <Route path="/templates/landscaping-estimate-template" element={<LandscapingEstimateTemplate />} />
               <Route path="/templates/roofing-estimate-template" element={<RoofingEstimateTemplate />} />
               <Route path="/templates/cleaning-estimate-template" element={<CleaningEstimateTemplate />} />
-              
+
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/get-started" element={<GetStarted />} />
               <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
@@ -334,6 +337,8 @@ const App = () => {
               <Route path="/trades" element={<TradesIndex />} />
               <Route path="/trades/:trade" element={<TradePage />} />
               <Route path="/plumbers" element={<Plumbers />} />
+              <Route path="/lp/:trade" element={<TradePage />} />
+
               <Route path="/roofers" element={<Roofers />} />
               <Route path="/electricians" element={<Electricians />} />
               <Route path="/painters" element={<Painters />} />

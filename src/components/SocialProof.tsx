@@ -1,58 +1,39 @@
-import { Users, DollarSign, FileText, TrendingUp, Star, Clock } from "lucide-react";
+import { Users, DollarSign, FileText, Clock } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
 const SocialProof = () => {
   const stats = [
     {
       icon: Users,
-      value: "15,000+",
+      value: "Built for",
       label: "Service Professionals",
-      description: "Trust ProInvoice daily",
+      description: "Designed specifically for trades and field service businesses",
       color: "from-blue-500 to-blue-600"
     },
     {
       icon: DollarSign,
-      value: "$12M+",
-      label: "Processed This Month",
-      description: "In invoice payments",
+      value: "Faster",
+      label: "Payments",
+      description: "Collect deposits online instead of waiting for checks",
       color: "from-success to-success-light"
     },
     {
       icon: FileText,
-      value: "250,000+",
-      label: "Invoices Sent",
-      description: "Last 30 days",
+      value: "Less",
+      label: "Paperwork",
+      description: "Turn approved estimates into invoices in a couple of taps",
       color: "from-primary to-primary-dark"
     },
     {
       icon: Clock,
-      value: "2.3 hrs",
-      label: "Saved Per Week",
-      description: "Average time saved",
+      value: "More",
+      label: "Time On-Site",
+      description: "Spend less time chasing admin and more time on paid work",
       color: "from-accent to-accent-dark"
     }
   ];
 
-  const reviews = [
-    {
-      platform: "Google",
-      rating: 4.9,
-      count: "2,400+ reviews",
-      quote: "Best invoicing app for contractors"
-    },
-    {
-      platform: "Trustpilot",
-      rating: 4.8,
-      count: "1,800+ reviews",
-      quote: "Simple and gets the job done"
-    },
-    {
-      platform: "App Store",
-      rating: 4.9,
-      count: "3,200+ reviews",
-      quote: "Finally, an app that works on-site"
-    }
-  ];
+
 
   const industries = [
     { name: "Plumbers", icon: "🔧" },
@@ -87,37 +68,6 @@ const SocialProof = () => {
           })}
         </div>
 
-        {/* Reviews Section */}
-        <div className="max-w-5xl mx-auto mb-16">
-          <h3 className="text-2xl md:text-3xl font-bold text-center mb-8">
-            Rated Excellent by Service Pros
-          </h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            {reviews.map((review, index) => (
-              <Card key={index} className="border-2 hover:shadow-lg transition-all">
-                <CardContent className="p-6 text-center">
-                  <div className="font-bold text-lg mb-2">{review.platform}</div>
-                  <div className="flex items-center justify-center gap-1 mb-2">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`w-5 h-5 ${
-                          i < Math.floor(review.rating)
-                            ? "fill-accent text-accent"
-                            : "fill-muted text-muted"
-                        }`}
-                      />
-                    ))}
-                    <span className="ml-2 font-bold">{review.rating}</span>
-                  </div>
-                  <div className="text-sm text-muted-foreground mb-3">{review.count}</div>
-                  <p className="text-sm italic">"{review.quote}"</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-
         {/* Industries Section */}
         <div className="max-w-4xl mx-auto">
           <h3 className="text-2xl md:text-3xl font-bold text-center mb-8">
@@ -146,9 +96,9 @@ const SocialProof = () => {
                 <div className="text-xs text-muted-foreground">Always available when you need it</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-primary mb-2">24/7</div>
-                <div className="text-sm font-semibold mb-1">Support</div>
-                <div className="text-xs text-muted-foreground">Real humans, not bots</div>
+                <div className="text-3xl font-bold text-primary mb-2">M–F</div>
+                <div className="text-sm font-semibold mb-1">Support Hours</div>
+                <div className="text-xs text-muted-foreground">Real humans, 9 AM – 5 PM PST</div>
               </div>
               <div>
                 <div className="text-3xl font-bold text-primary mb-2">256-bit</div>
@@ -159,21 +109,11 @@ const SocialProof = () => {
           </div>
         </div>
 
-        {/* Bottom Quote */}
+        {/* Bottom Message */}
         <div className="max-w-3xl mx-auto mt-16 text-center">
-          <blockquote className="text-xl md:text-2xl font-medium italic text-muted-foreground">
-            "I tried Wave, FreshBooks, and QuickBooks. ProInvoice is the only one that actually works 
-            the way I work. I'm on job sites, not behind a desk."
-          </blockquote>
-          <div className="mt-4 flex items-center justify-center gap-3">
-            <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-lg">TR</span>
-            </div>
-            <div className="text-left">
-              <div className="font-semibold">Tom Rodriguez</div>
-              <div className="text-sm text-muted-foreground">Licensed Electrician, Phoenix AZ</div>
-            </div>
-          </div>
+          <p className="text-xl md:text-2xl font-medium text-muted-foreground">
+            ProInvoice is built for busy service pros who spend more time on job sites than behind a desk.
+          </p>
         </div>
       </div>
     </section>

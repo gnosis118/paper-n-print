@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import PageLayout from '@/components/PageLayout';
 import { Helmet } from 'react-helmet-async';
+import { adTracking } from '@/lib/adTracking';
 
 const TRADE_DETAILS: Record<string, any> = {
   electricians: {
@@ -170,7 +171,7 @@ export const TradePage: React.FC = () => {
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             {details.description}
           </p>
-          <Link to="/auth/signup">
+          <Link to="/get-started" onClick={() => { try { adTracking.lead(); } catch {} }}>
             <Button size="lg">Start Your Free Bid</Button>
           </Link>
         </section>
@@ -225,7 +226,7 @@ export const TradePage: React.FC = () => {
           <p className="text-muted-foreground">
             Join hundreds of {trade} using ProInvoice to get paid faster
           </p>
-          <Link to="/auth/signup">
+          <Link to="/get-started" onClick={() => { try { adTracking.lead(); } catch {} }}>
             <Button size="lg">Start Your Free Bid Now</Button>
           </Link>
         </section>
