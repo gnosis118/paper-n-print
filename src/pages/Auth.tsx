@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
@@ -20,6 +21,7 @@ export default function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [agreeToTerms, setAgreeToTerms] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   
@@ -81,12 +83,21 @@ export default function Auth() {
 
   const handleEmailAuth = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
+    if (isSignUp && !agreeToTerms) {
+      toast({
+        title: "Please agree to the terms",
+        description: "You must agree to the Terms of Service and Privacy Policy to create an account.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     if (!validateForm()) {
       console.log('Form validation failed:', errors);
       return;
     }
-    
+
     setLoading(true);
     console.log('Starting auth process:', { isSignUp, email: email.substring(0, 5) + '...' });
 
@@ -337,9 +348,29 @@ export default function Auth() {
                   </div>
                   {errors.confirmPassword && <p className="text-sm text-destructive">{errors.confirmPassword}</p>}
                 </div>
-                
+
+                <div className="flex items-start space-x-2">
+                  <Checkbox
+                    id="terms"
+                    checked={agreeToTerms}
+                    onCheckedChange={(checked) => setAgreeToTerms(!!checked)}
+                  />
+                  <div className="text-sm leading-none">
+                    <label htmlFor="terms" className="cursor-pointer">
+                      I agree to the{" "}
+                      <Link to="/terms" className="text-primary hover:underline" target="_blank">
+                        Terms of Service
+                      </Link>{" "}
+                      and{" "}
+                      <Link to="/privacy" className="text-primary hover:underline" target="_blank">
+                        Privacy Policy
+                      </Link>
+                    </label>
+                  </div>
+                </div>
+
                 <Button type="submit" className="w-full" disabled={loading}>
-                  {loading ? "Creating account..." : "Create Account"}
+                  {loading ? "Creating account..." : "Start Free Trial"}
                 </Button>
               </form>
             </TabsContent>

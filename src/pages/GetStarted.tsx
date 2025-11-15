@@ -174,11 +174,11 @@ const GetStarted = () => {
                     </div>
                   </div>
 
-                  <Button 
-                    type="submit" 
-                    className="w-full" 
-                    size="lg" 
-                    disabled={isLoading || !agreeToTerms}
+                  <Button
+                    type="submit"
+                    className="w-full"
+                    size="lg"
+                    disabled={isLoading}
                   >
                     {isLoading ? 'Creating Account...' : 'Start Free Trial'}
                   </Button>
